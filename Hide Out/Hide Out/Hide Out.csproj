@@ -76,6 +76,12 @@
     <Content Include="Content\green.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\pond.png" />
+    <Content Include="Content\bush.png" />
+    <Content Include="Content\trashCan.png" />
+    <Content Include="Content\trees.png" />
+    <Content Include="Content\waterBottle.png" />
+    <Content Include="Content\waterFountain.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

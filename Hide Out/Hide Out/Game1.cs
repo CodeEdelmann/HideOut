@@ -20,10 +20,14 @@ namespace Hide_Out
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        #region Controllers
         PlayerController playerController;
         ItemController itemController;
         NPCController npcController;
         ObstacleController obstacleController;
+        #endregion
+
 
         public Game1()
             : base()
@@ -41,7 +45,11 @@ namespace Hide_Out
         protected override void Initialize()
         {
             Player firstPlayer = new Player();
+            
             playerController = new PlayerController(firstPlayer);
+            npcController = new NPCController();
+            itemController = new ItemController();
+            obstacleController = new ObstacleController();
 
             base.Initialize();
         }
@@ -76,6 +84,9 @@ namespace Hide_Out
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            playerController.Update();
+            npcController.UpdateNPCs();
 
             // TODO: Add your update logic here
 

@@ -12,10 +12,16 @@ namespace Hide_Out.Controllers
     class PlayerController
     {
         Player thePlayer;
+        Texture2D playerTexture;
 
-        public PlayerController(Player player)
+        public PlayerController()
         {
-            this.thePlayer = player;
+
+        }
+
+        public void CreatePlayer()
+        {
+            //set thePlayer to a newly created player object
         }
 
         public void Update()

@@ -24,6 +24,7 @@ namespace Hide_Out
         ItemController itemController;
         NPCController npcController;
         ObstacleController obstacleController;
+        BasicEffect basicEffect;
 
         public Game1()
             : base()
@@ -43,6 +44,8 @@ namespace Hide_Out
             Player firstPlayer = new Player();
             playerController = new PlayerController(firstPlayer);
 
+            npcController = new NPCController();
+
             base.Initialize();
         }
 
@@ -56,6 +59,12 @@ namespace Hide_Out
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            npcController.LoadNPCContent(Content);
+
+            //Initialization for basicEffect
+            basicEffect = new BasicEffect(GraphicsDevice);
+            basicEffect.VertexColorEnabled = true;
+            basicEffect.LightingEnabled = false;
         }
 
         /// <summary>
@@ -78,6 +87,7 @@ namespace Hide_Out
                 Exit();
 
             // TODO: Add your update logic here
+            npcController.UpdateNPCs();
 
             base.Update(gameTime);
         }
@@ -90,7 +100,24 @@ namespace Hide_Out
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //This block of code is a necessary ritual for the FOVs.  Just leave it be.
+            GraphicsDevice.BlendState = BlendState.Opaque;
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
+            Matrix projection = Matrix.CreateOrthographicOffCenter(0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, 0, 0, 1);
+            Matrix halfPixelOffset = Matrix.CreateTranslation(-0.5f, -0.5f, 0);
+            basicEffect.World = Matrix.Identity;
+            basicEffect.View = Matrix.Identity;
+            basicEffect.Projection = halfPixelOffset * projection;
+            basicEffect.VertexColorEnabled = true;
+            GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+
+            npcController.DrawFOVs(GraphicsDevice, basicEffect);
+
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            npcController.DrawNPCs(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -50,6 +50,11 @@ namespace Hide_Out.Entities
             return vision.CanSee(rect);
         }
 
+        public VertexPositionColor[] getFieldOfViewTriangle()
+        {
+            return 
+        }
+
         private Vector2 Normalize(Vector2 v)
         {
             float distance = Distance(v, new Vector2(0, 0));

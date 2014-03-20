@@ -63,5 +63,10 @@ namespace Hide_Out.Controllers
                 //todo: call itemController's add item
             }
         }
+
+        public void drawPlayer(SpriteBatch sb)
+        {
+            sb.Draw(thePlayer.sprite, thePlayer.rectangle, Color.White);
+        }
     }
 }

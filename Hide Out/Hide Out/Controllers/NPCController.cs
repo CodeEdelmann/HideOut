@@ -6,12 +6,14 @@ using System.Text;
 using Hide_Out.Entities;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace Hide_Out.Controllers
 {
     class NPCController
     {
         public List<NPC> npcs { get; set; }
+        private Texture2D policeTexture;
 
         public NPCController()
         {
@@ -64,6 +66,21 @@ namespace Hide_Out.Controllers
             foreach (NPC npc in this.npcs)
             {
                 sb.Draw(npc.sprite, npc.rectangle, Color.White);
+            }
+        }
+
+        public void LoadNPCContent(ContentManager cm)
+        {
+            //Start by loading all textures
+            //policeTexture = cm.Load<Texture2D>("");  //When sprite is added, uncomment this line and put name of file in between quotes
+            
+            //Then assign textures to NPCs depending on their tag
+            foreach (NPC npc in this.npcs)
+            {
+                switch (npc.tag)
+                {
+                    case NPCType.Police: npc.sprite = policeTexture; break;
+                }
             }
         }
     }

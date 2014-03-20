@@ -46,7 +46,7 @@ namespace Hide_Out.Controllers
             if (thePlayer.Items.Count < 3)
             {
                 thePlayer.Items.Add(item);
-                item.Position = new Vector2(-1, -1);
+                item.position = new Vector2(-1, -1);
                 //todo: set item to not be drawn
             }
         }

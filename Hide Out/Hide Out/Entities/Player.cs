@@ -26,8 +26,8 @@ namespace Hide_Out.Entities
             this.CurrentHunger = currentHunger;
             this.MaxHunger = maxHunger;
             this.Items = new List<Item>();
-            this.Position = new Vector2(x, y);
-            this.Sprite = sprite;
+            this.position = new Vector2(x, y);
+            this.sprite = sprite;
         }
 
         public Player(int maxSpeed, int maxThirst, int maxHunger)
@@ -50,31 +50,35 @@ namespace Hide_Out.Entities
 
         public void moveRight()
         {
-            this.Position += new Vector2(this.CurrentSpeed, 0);
+            this.position += new Vector2(this.CurrentSpeed, 0);
         }
 
         public void moveLeft()
         {
-            this.Position += new Vector2(-1 * this.CurrentSpeed, 0);
+            this.position += new Vector2(-1 * this.CurrentSpeed, 0);
         }
 
         public void moveUp()
         {
-            this.Position += new Vector2(0, this.CurrentSpeed);
+            this.position += new Vector2(0, this.CurrentSpeed);
         }
 
         public void moveDown()
         {
-            this.Position += new Vector2(0, -1 * this.CurrentSpeed);
+            this.position += new Vector2(0, -1 * this.CurrentSpeed);
         }
 
         public override string ToString()
         {
-            return base.ToString() +
+            string retVal = base.ToString() +
                 "Speed: " + this.CurrentSpeed + " / " + this.MaxSpeed + "\n" +
                 "Thirst: " + this.CurrentThirst + " / " + this.MaxThirst + "\n" +
-                "Hunger: " + this.CurrentHunger + " / " + this.MaxHunger + "\n" +
-                "Items: " + this.Items;
+                "Hunger: " + this.CurrentHunger + " / " + this.MaxHunger + "\n";
+            foreach (Item item in this.Items)
+            {
+                retVal += "Item: " + item + "\n";
+            }
+            return retVal;
         }
     }
 }

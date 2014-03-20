@@ -9,9 +9,26 @@ namespace Hide_Out.Controllers
 {
     class NPCController
     {
-        public void UpdateNPCs(List<NPC> npcs)
+        public List<NPC> npcs { get; set; }
+
+        public NPCController()
         {
-            foreach (NPC npc in npcs)
+            npcs = new List<NPC>();
+        }
+
+        public void addNPC(NPC npc)
+        {
+            npcs.Add(npc);
+        }
+
+        public void removeNPC(NPC npc)
+        {
+            npcs.Remove(npc);
+        }
+
+        public void UpdateNPCs()
+        {
+            foreach (NPC npc in this.npcs)
             {
                 UpdateNPC(npc);
             }

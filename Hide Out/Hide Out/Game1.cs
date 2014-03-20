@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using Hide_Out.Entities;
+using Hide_Out.Controllers;
 #endregion
 
 namespace Hide_Out
@@ -19,6 +20,10 @@ namespace Hide_Out
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        PlayerController playerController;
+        ItemController itemController;
+        NPCController npcController;
+        ObstacleController obstacleController;
 
         public Game1()
             : base()
@@ -35,7 +40,8 @@ namespace Hide_Out
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Player firstPlayer = new Player();
+            playerController = new PlayerController(firstPlayer);
 
             base.Initialize();
         }

@@ -52,7 +52,7 @@ namespace Hide_Out.Entities
 
         public VertexPositionColor[] getFieldOfViewTriangle()
         {
-            return 
+            return vision.getFieldOfViewTriangle();
         }
 
         private Vector2 Normalize(Vector2 v)

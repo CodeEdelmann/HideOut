@@ -22,6 +22,7 @@ namespace Hide_Out.Controllers
         public void CreatePlayer()
         {
             //set thePlayer to a newly created player object
+            thePlayer = new Player();
         }
 
         public void Update()

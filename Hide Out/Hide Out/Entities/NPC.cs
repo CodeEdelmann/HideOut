@@ -70,5 +70,14 @@ namespace Hide_Out.Entities
         {
             return (float)Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
         }
+
+        public override string ToString()
+        {
+            string retVal = base.ToString() +
+                "Type: " + this.tag + "\n" +
+                "Vision: " + this.vision + "\n" +
+                "Speed: " + this.speed + "\n";
+            return retVal;
+        }
     }
 }

@@ -20,11 +20,19 @@ namespace Hide_Out.Controllers
 
         }
 
-        public void CreatePlayer(Vector2 newPosition)
+        public void CreatePlayer(Vector2 position)
         {
             //set thePlayer to a newly created player object
             thePlayer = new Player();
-            thePlayer.position = newPosition;
+            thePlayer.CurrentSpeed = 10;
+            thePlayer.MaxSpeed = 10;
+            thePlayer.CurrentThirst = 10;
+            thePlayer.MaxThirst = 10;
+            thePlayer.CurrentHunger = 10;
+            thePlayer.MaxHunger = 10;
+            thePlayer.Items = new List<Item>();
+            thePlayer.position = position;
+            thePlayer.sprite = playerTexture;
         }
 
         public void Update()
@@ -81,10 +89,10 @@ namespace Hide_Out.Controllers
         public void LoadPlayerContent(ContentManager cm)
         {
             //Start by loading all textures
-            //policeTexture = cm.Load<Texture2D>("");  //When sprite is added, uncomment this line and put name of file in between quotes
+            playerTexture = cm.Load<Texture2D>("player");
 
             //Then assign textures to NPCs depending on their tag
-
+            playerTexture = cm.Load<Texture2D>("player");
             thePlayer.sprite = playerTexture; 
             
         }

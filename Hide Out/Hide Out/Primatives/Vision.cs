@@ -17,13 +17,16 @@ namespace Hide_Out.Primatives
         {
             get
             {
-                return viewAngle;
+                return this.viewAngle;
             }
             set
             {
-                if (value < 0) value = 0;
-                else if (value > maxViewAngle) value = maxViewAngle;
-                else viewAngle = value;
+                if (value < 0) 
+                    this.viewAngle = 0;
+                else if (value > maxViewAngle) 
+                    this.viewAngle = maxViewAngle;
+                else 
+                    this.viewAngle = value;
             }
         }
 
@@ -33,11 +36,11 @@ namespace Hide_Out.Primatives
         {
             get
             {
-                return viewDirection;
+                return this.viewDirection;
             }
             set
             {
-                viewDirection = Normalize(value);
+                this.viewDirection = Normalize(value);
             }
         }
         public Color viewColor { get; set; }

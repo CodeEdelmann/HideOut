@@ -17,33 +17,7 @@ namespace Hide_Out.Entities
         public int MaxHunger { get; set; }
         public List<Item> Items { get; set; }
 
-        public Player(int x, int y, Texture2D sprite, int currentSpeed, int maxSpeed, int currentThirst, int maxThirst, int currentHunger, int maxHunger)
-        {
-            this.CurrentSpeed = currentSpeed;
-            this.MaxSpeed = MaxSpeed;
-            this.CurrentThirst = currentThirst;
-            this.MaxThirst = maxThirst;
-            this.CurrentHunger = currentHunger;
-            this.MaxHunger = maxHunger;
-            this.Items = new List<Item>();
-            this.position = new Vector2(x, y);
-            this.sprite = sprite;
-        }
-
-        public Player(int maxSpeed, int maxThirst, int maxHunger)
-            : this(0, 0, null, maxSpeed, maxSpeed, maxThirst, maxThirst, maxHunger, maxHunger)
-        {
-
-        }
-
-        public Player(int x, int y, Texture2D sprite) 
-            : this(x, y, sprite, 10, 10, 10, 10, 10, 10)
-        {
-            
-        }
-
         public Player() 
-            : this(0, 0, null)
         {
 
         }

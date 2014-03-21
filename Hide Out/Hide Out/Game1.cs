@@ -41,9 +41,18 @@ namespace Hide_Out
         /// </summary>
         protected override void Initialize()
         {
-            Player firstPlayer = new Player();
-
             npcController = new NPCController();
+            playerController = new PlayerController();
+            itemController = new ItemController();
+            obstacleController = new ObstacleController();
+
+            playerController.CreatePlayer(new Vector2(200, 200));
+            obstacleController.createObstacle(ObstacleType.Bush, new Vector2(50, 50));
+            obstacleController.createObstacle(ObstacleType.Fountain, new Vector2(500, 100));
+            obstacleController.createObstacle(ObstacleType.Pond, new Vector2(100, 500));
+            obstacleController.createObstacle(ObstacleType.Tree, new Vector2(400, 300));
+            //npcController.createNPC(NPCType.Police, new Vector2(800, 200));
+
 
             base.Initialize();
         }
@@ -59,6 +68,9 @@ namespace Hide_Out
 
             // TODO: use this.Content to load your game content here
             npcController.LoadNPCContent(Content);
+            obstacleController.LoadObstacleContent(Content);
+            playerController.LoadPlayerContent(Content);
+            itemController.loadItemContent(Content);
 
             //Initialization for basicEffect
             basicEffect = new BasicEffect(GraphicsDevice);
@@ -115,7 +127,10 @@ namespace Hide_Out
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+            obstacleController.drawObstacles(spriteBatch);
+            itemController.drawItems(spriteBatch);
             npcController.DrawNPCs(spriteBatch);
+            playerController.drawPlayer(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

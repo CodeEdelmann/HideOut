@@ -41,9 +41,6 @@ namespace Hide_Out
         /// </summary>
         protected override void Initialize()
         {
-            Player firstPlayer = new Player();
-            playerController = new PlayerController(firstPlayer);
-
             npcController = new NPCController();
 
             base.Initialize();

@@ -15,6 +15,11 @@ namespace Hide_Out.Entities
         public int speed { get; set; }
         public NPCType tag { get; set; }
 
+        public NPC()
+        {
+
+        }
+
         public NPC(NPCType type, Vector2 pos, Vector2 facing, Texture2D spr)
         {
             position = pos;

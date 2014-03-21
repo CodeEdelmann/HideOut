@@ -51,7 +51,7 @@ namespace Hide_Out
             obstacleController.createObstacle(ObstacleType.Fountain, new Vector2(500, 100));
             obstacleController.createObstacle(ObstacleType.Pond, new Vector2(100, 500));
             obstacleController.createObstacle(ObstacleType.Tree, new Vector2(400, 300));
-            //npcController.createNPC(NPCType.Police, new Vector2(800, 200));
+            npcController.createNPC(NPCType.Police, new Vector2(800, 200));
 
 
             base.Initialize();
@@ -94,6 +94,7 @@ namespace Hide_Out
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+               
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -101,6 +102,7 @@ namespace Hide_Out
             npcController.UpdateNPCs();
 
             base.Update(gameTime);
+            
         }
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace Hide_Out
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //This block of code is a necessary ritual for the FOVs.  Just leave it be.
@@ -134,6 +137,7 @@ namespace Hide_Out
             spriteBatch.End();
 
             base.Draw(gameTime);
+            
         }
     }
 }

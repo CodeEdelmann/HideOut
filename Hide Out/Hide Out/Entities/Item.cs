@@ -54,7 +54,7 @@ namespace Hide_Out.Entities
                 "Position: X - " + position.X + " Y - " + position.Y + "\n" + 
                 "Expiration: " + expirationTime + "\n" + 
                 "Visibility: " + isVisible + "\n" +
-                "PickUp" + canPickUp + "\n";
+                "PickUp: " + canPickUp + "\n";
         }
 
     }

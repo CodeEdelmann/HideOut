@@ -27,24 +27,27 @@ namespace Hide_Out.Controllers
         {
             Obstacle obstacle = new Obstacle();
             obstacle.position = pos;
-            obstacle.sprite = null;
             obstacle.tag = type;
             obstacle.rectangle = new Rectangle((int)pos.X, (int)pos.Y, 100, 100);
             switch (type)
             {
                 case ObstacleType.Bush:
+                    obstacle.sprite = bushTexture;
                     obstacle.CanOverlapWith = true;
                     obstacle.CanSeeThrough = false;
                     break;
                 case ObstacleType.Tree:
+                    obstacle.sprite = treeTexture;
                     obstacle.CanOverlapWith = false;
                     obstacle.CanSeeThrough = false;
                     break;
                 case ObstacleType.Fountain:
+                    obstacle.sprite = fountainTexture;
                     obstacle.CanOverlapWith = false;
                     obstacle.CanSeeThrough = true;
                     break;
                 case ObstacleType.Pond:
+                    obstacle.sprite = pondTexture;
                     obstacle.CanOverlapWith = false;
                     obstacle.CanSeeThrough = true;
                     break;

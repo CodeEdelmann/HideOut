@@ -14,6 +14,7 @@ namespace Hide_Out.Controllers
     {
         public Player thePlayer;
         private Texture2D playerTexture;
+        private static readonly int SPRITE_SIZE = 50;
 
         public PlayerController()
         {
@@ -32,6 +33,7 @@ namespace Hide_Out.Controllers
             thePlayer.MaxHunger = 10;
             thePlayer.Items = new List<Item>();
             thePlayer.position = position;
+            thePlayer.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             thePlayer.sprite = playerTexture;
         }
 
@@ -56,6 +58,8 @@ namespace Hide_Out.Controllers
             {
                 thePlayer.moveDown();
             }
+
+            Console.WriteLine(thePlayer);
         }
 
         public void pickupItem(Item item)
@@ -83,16 +87,15 @@ namespace Hide_Out.Controllers
 
         public void drawPlayer(SpriteBatch sb)
         {
-            sb.Draw(thePlayer.sprite, thePlayer.rectangle, Color.White);
+            sb.Draw(thePlayer.sprite, thePlayer.drawRectangle, Color.White);
         }
 
         public void LoadPlayerContent(ContentManager cm)
         {
             //Start by loading all textures
-            playerTexture = cm.Load<Texture2D>("player");
+            playerTexture = cm.Load<Texture2D>("player.png");
 
             //Then assign textures to NPCs depending on their tag
-            playerTexture = cm.Load<Texture2D>("player");
             thePlayer.sprite = playerTexture; 
             
         }

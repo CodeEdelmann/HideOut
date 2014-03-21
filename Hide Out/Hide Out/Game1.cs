@@ -46,12 +46,14 @@ namespace Hide_Out
             itemController = new ItemController();
             obstacleController = new ObstacleController();
 
-            playerController.CreatePlayer(new Vector2(200, 200));
-            obstacleController.createObstacle(ObstacleType.Bush, new Vector2(50, 50));
-            obstacleController.createObstacle(ObstacleType.Fountain, new Vector2(500, 100));
-            obstacleController.createObstacle(ObstacleType.Pond, new Vector2(100, 500));
-            obstacleController.createObstacle(ObstacleType.Tree, new Vector2(400, 300));
-            //npcController.createNPC(NPCType.Police, new Vector2(800, 200));
+            playerController.CreatePlayer(new Vector2(100, 100));
+            //obstacleController.createObstacle(ObstacleType.Bush, new Vector2(50, 50));
+            //obstacleController.createObstacle(ObstacleType.Fountain, new Vector2(500, 100));
+            //obstacleController.createObstacle(ObstacleType.Pond, new Vector2(100, 500));
+            //obstacleController.createObstacle(ObstacleType.Tree, new Vector2(400, 300));
+            //itemController.createItem(ItemType.Apple, new Vector2(60, 60));
+            //itemController.createItem(ItemType.CandyBar, new Vector2(600, 200));
+            npcController.createNPC(NPCType.Police, new Vector2(800, 200));
 
 
             base.Initialize();
@@ -99,6 +101,8 @@ namespace Hide_Out
 
             // TODO: Add your update logic here
             npcController.UpdateNPCs();
+            playerController.Update();
+            itemController.updateItems();
 
             base.Update(gameTime);
         }

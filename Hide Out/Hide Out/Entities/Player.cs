@@ -34,12 +34,12 @@ namespace Hide_Out.Entities
 
         public void moveUp()
         {
-            this.position += new Vector2(0, this.CurrentSpeed);
+            this.position += new Vector2(0, -1 * this.CurrentSpeed);
         }
 
         public void moveDown()
         {
-            this.position += new Vector2(0, -1 * this.CurrentSpeed);
+            this.position += new Vector2(0, this.CurrentSpeed);
         }
 
         public override string ToString()

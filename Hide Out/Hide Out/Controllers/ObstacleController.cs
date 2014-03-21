@@ -28,7 +28,7 @@ namespace Hide_Out.Controllers
             Obstacle obstacle = new Obstacle();
             obstacle.position = pos;
             obstacle.tag = type;
-            obstacle.rectangle = new Rectangle((int)pos.X, (int)pos.Y, 100, 100);
+            obstacle.rectangleBounds = new Point(100, 100);
             switch (type)
             {
                 case ObstacleType.Bush:
@@ -69,7 +69,7 @@ namespace Hide_Out.Controllers
         {
             foreach (Obstacle obstacle in this.obstacles)
             {
-                sb.Draw(obstacle.sprite, obstacle.rectangle, Color.White);
+                sb.Draw(obstacle.sprite, obstacle.drawRectangle, Color.White);
             }
         }
 

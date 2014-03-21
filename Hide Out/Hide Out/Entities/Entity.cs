@@ -11,7 +11,15 @@ namespace Hide_Out.Entities
     abstract class Entity
     {
         public Vector2 position { get; set; }
-        public Rectangle rectangle { get; set; } //Needed for intersection/collision checks
+
+        public Point rectangleBounds { get; set; }
+        public Rectangle drawRectangle
+        {
+            get
+            {
+                return new Rectangle((int)position.X, (int)position.Y, rectangleBounds.X, rectangleBounds.Y);
+            }
+        }
         public Texture2D sprite { get; set; }
         public Entity()
         {

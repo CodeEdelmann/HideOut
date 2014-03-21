@@ -10,7 +10,7 @@ namespace Hide_Out.Entities
     class Player : Entity
     {
         public int CurrentSpeed { get; set; }
-        public int MaxSpeed { get; set; }
+        public int BaseSpeed { get; set; }
         public int CurrentThirst { get; set; }
         public int MaxThirst { get; set; }
         public int CurrentHunger { get; set; }
@@ -45,7 +45,7 @@ namespace Hide_Out.Entities
         public override string ToString()
         {
             string retVal = base.ToString() +
-                "Speed: " + this.CurrentSpeed + " / " + this.MaxSpeed + "\n" +
+                "Speed: " + this.CurrentSpeed + " / " + this.BaseSpeed + "\n" +
                 "Thirst: " + this.CurrentThirst + " / " + this.MaxThirst + "\n" +
                 "Hunger: " + this.CurrentHunger + " / " + this.MaxHunger + "\n";
             foreach (Item item in this.Items)

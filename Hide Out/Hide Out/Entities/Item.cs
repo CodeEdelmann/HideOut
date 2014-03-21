@@ -14,6 +14,9 @@ namespace Hide_Out.Entities
         public bool canPickUp { get; set; }
         public int expirationTime { get; set; }
         public bool isVisible { get; set; }
+        public int waterValue { get; set; }
+        public int foodValue { get; set; }
+        public int speedValue { get; set; }
 
         public Item()
         {

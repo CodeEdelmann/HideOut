@@ -34,6 +34,7 @@ namespace Hide_Out.Controllers
         public void createItem(ItemType type, Vector2 pos)
         {
             Item item = new Item();
+            item.tag = type;
             item.position = pos;
             item.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             item.isVisible = true;
@@ -43,12 +44,15 @@ namespace Hide_Out.Controllers
             {
                 case ItemType.WaterBottle:
                     item.sprite = waterBottleTexture;
+                    item.waterValue = 5;
                     break;
                 case ItemType.CandyBar:
                     item.sprite = candyBarTexture;
+                    item.speedValue = 10;
                     break;
                 case ItemType.Apple:
                     item.sprite = appleTexture;
+                    item.foodValue = 5;
                     break;
             }
 

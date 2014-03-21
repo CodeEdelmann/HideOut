@@ -25,8 +25,8 @@ namespace Hide_Out.Controllers
         {
             //set thePlayer to a newly created player object
             thePlayer = new Player();
-            thePlayer.CurrentSpeed = 10;
-            thePlayer.MaxSpeed = 10;
+            thePlayer.CurrentSpeed = 5;
+            thePlayer.BaseSpeed = 5;
             thePlayer.CurrentThirst = 10;
             thePlayer.MaxThirst = 10;
             thePlayer.CurrentHunger = 10;

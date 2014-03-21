@@ -34,6 +34,7 @@ namespace Hide_Out.Controllers
         public void createItem(ItemType type, Vector2 pos)
         {
             Item item = new Item();
+            item.tag = type;
             item.position = pos;
             item.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             item.isVisible = true;

@@ -29,8 +29,8 @@ namespace Hide_Out.Entities
         {
             return base.ToString() +
                 "Position: X - " + position.X + " Y - " + position.Y + "\n" +
-                "Width: " + rectangle.Width + "\n" +
-                "Height: " + rectangle.Height + "\n";
+                "Width: " + this.rectangleBounds.X + "\n" +
+                "Height: " + this.rectangleBounds.Y + "\n";
         }
     }
 }

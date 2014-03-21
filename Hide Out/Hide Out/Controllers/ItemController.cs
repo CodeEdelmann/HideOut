@@ -18,6 +18,8 @@ namespace Hide_Out.Controllers
         private Texture2D waterBottleTexture;
         private Texture2D appleTexture;
         private Texture2D candyBarTexture;
+        private static readonly int SPRITE_SIZE = 25;
+        private static readonly int DRAWS_PER_MINUTE = 3600;
 
         public ItemController()
         {
@@ -29,9 +31,28 @@ namespace Hide_Out.Controllers
             activeItems.Add(item);
         }
 
-        public void createItem(ItemType type, Vector2 pos, int currentTime)
+        public void createItem(ItemType type, Vector2 pos)
         {
-            activeItems.Add(new Item(type, pos, currentTime));
+            Item item = new Item();
+            item.position = pos;
+            item.rectangle = new Rectangle((int)pos.X, (int)pos.Y, SPRITE_SIZE, SPRITE_SIZE);
+            item.isVisible = true;
+            item.canPickUp = true;
+            item.expirationTime = DRAWS_PER_MINUTE;
+            switch (type)
+            {
+                case ItemType.WaterBottle:
+                    item.sprite = waterBottleTexture;
+                    break;
+                case ItemType.CandyBar:
+                    item.sprite = candyBarTexture;
+                    break;
+                case ItemType.Apple:
+                    item.sprite = appleTexture;
+                    break;
+            }
+
+            activeItems.Add(item);
         }
 
         public void removeItem(Item item)

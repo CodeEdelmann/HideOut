@@ -43,12 +43,15 @@ namespace Hide_Out.Controllers
             {
                 case ItemType.WaterBottle:
                     item.sprite = waterBottleTexture;
+                    item.waterValue = 5;
                     break;
                 case ItemType.CandyBar:
                     item.sprite = candyBarTexture;
+                    item.speedValue = 10;
                     break;
                 case ItemType.Apple:
                     item.sprite = appleTexture;
+                    item.foodValue = 5;
                     break;
             }
 

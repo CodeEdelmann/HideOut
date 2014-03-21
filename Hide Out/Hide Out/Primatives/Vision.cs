@@ -22,11 +22,9 @@ namespace Hide_Out.Primatives
             set
             {
                 if (value < 0) 
-                    this.viewAngle = 0;
+                    value = 0;
                 else if (value > maxViewAngle) 
-                    this.viewAngle = maxViewAngle;
-                else 
-                    this.viewAngle = value;
+                    value = maxViewAngle;
             }
         }
 
@@ -40,7 +38,7 @@ namespace Hide_Out.Primatives
             }
             set
             {
-                this.viewDirection = Normalize(value);
+                value = Normalize(value);
             }
         }
         public Color viewColor { get; set; }

@@ -58,8 +58,6 @@ namespace Hide_Out.Controllers
             {
                 thePlayer.moveDown();
             }
-
-            Console.WriteLine(thePlayer);
         }
 
         public void pickupItem(Item item)

@@ -53,7 +53,7 @@ namespace Hide_Out
             //obstacleController.createObstacle(ObstacleType.Tree, new Vector2(400, 300));
             //itemController.createItem(ItemType.Apple, new Vector2(60, 60));
             //itemController.createItem(ItemType.CandyBar, new Vector2(600, 200));
-            npcController.createNPC(NPCType.Police, new Vector2(800, 200));
+            //npcController.createNPC(NPCType.Police, new Vector2(800, 200));
 
 
             base.Initialize();

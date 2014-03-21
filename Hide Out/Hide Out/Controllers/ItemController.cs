@@ -71,10 +71,8 @@ namespace Hide_Out.Controllers
         public void loadItemContent(ContentManager cm)
         {
             waterBottleTexture = cm.Load<Texture2D>("waterBottle.png");
-
-            //Sprites not yet added
-            //candyBarTexture = cm.Load<Texture2D>("waterBottle.png");  
-            //appleTexture = cm.Load<Texture2D>("");
+            candyBarTexture = cm.Load<Texture2D>("candybar.png");  
+            appleTexture = cm.Load<Texture2D>("apple.png");
 
             foreach (Item item in this.activeItems)
             {

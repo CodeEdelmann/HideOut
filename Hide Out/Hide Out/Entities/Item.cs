@@ -19,6 +19,7 @@ namespace Hide_Out.Entities
         public Item(ItemType type, Vector2 pos, int currentTime, bool visible, int lifeTime)
         {
             position = pos;
+            rectangle = new Rectangle((int)pos.X, (int)pos.Y, 25, 25);
             tag = type;
             expirationTime = currentTime + lifeTime;
             isVisible = visible;
@@ -28,6 +29,7 @@ namespace Hide_Out.Entities
         public Item(ItemType type, Vector2 pos, int currentTime)
         {
             position = pos;
+            rectangle = new Rectangle((int)pos.X, (int)pos.Y, 25, 25);
             tag = type;
             expirationTime = currentTime + DRAWS_PER_MINUTE;
             isVisible = true;

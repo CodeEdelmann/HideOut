@@ -7,25 +7,31 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Hide_Out.Entities
 {
-    enum ItemType { WaterBottle, CandyBar }; 
+    enum ItemType { WaterBottle, Apple, CandyBar }; 
     class Item : Entity
     {
+        private static readonly int DRAWS_PER_MINUTE = 3600;
         public ItemType tag { get; set; }
         public bool canPickUp { get; set; }
         public int expirationTime { get; set; }
-        public int time { get; set; }
         public bool isVisible { get; set; }
 
-        public Item(ItemType type, Vector2 pos, Texture2D spr, int lifeTime, bool visible, int currentTime)
+        public Item(ItemType type, Vector2 pos, int currentTime, bool visible, int lifeTime)
         {
             position = pos;
-            sprite = spr;
             tag = type;
-            time = currentTime;
-            expirationTime = time + lifeTime;
+            expirationTime = currentTime + lifeTime;
             isVisible = visible;
             canPickUp = true;
-            sprite = spr;
+        }
+
+        public Item(ItemType type, Vector2 pos, int currentTime)
+        {
+            position = pos;
+            tag = type;
+            expirationTime = currentTime + DRAWS_PER_MINUTE;
+            isVisible = true;
+            canPickUp = true;
         }
 
         public void pickUp()
@@ -34,9 +40,9 @@ namespace Hide_Out.Entities
             isVisible = false;
         }
 
-        public void updateTime(int currentTime)
+        public void updateTime()
         {
-            time = time + (currentTime - time);
+            expirationTime--;
         }
 
     }

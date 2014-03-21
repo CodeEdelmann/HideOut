@@ -13,34 +13,39 @@ namespace Hide_Out.Primatives
 
         public float viewDistance { get; set; }
 
+        private double _viewAngle { get; set; }
         public double viewAngle
         {
             get
             {
-                return this.viewAngle;
+                return this._viewAngle;
             }
             set
             {
                 if (value < 0) 
-                    value = 0;
+                    _viewAngle = 0;
                 else if (value > maxViewAngle) 
-                    value = maxViewAngle;
+                    _viewAngle = maxViewAngle;
+                else 
+                    _viewAngle = value;
             }
         }
 
         public Rectangle parentLocation { get; set; }
 
+        private Vector2 _viewDirection { get; set; }
         public Vector2 viewDirection
         {
             get
             {
-                return this.viewDirection;
+                return this._viewDirection;
             }
             set
             {
-                value = Normalize(value);
+                this._viewDirection = Normalize(value);
             }
         }
+
         public Color viewColor { get; set; }
 
         public Vision(Rectangle pLoc, float vDis, double vAng, Vector2 vDir, Color vCol)

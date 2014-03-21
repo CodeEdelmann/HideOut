@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 #endregion
 
-namespace Hide_Out
+namespace HideOut
 {
 #if WINDOWS || LINUX
     /// <summary>
@@ -18,7 +18,7 @@ namespace Hide_Out
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new HideOutGame())
                 game.Run();
         }
     }

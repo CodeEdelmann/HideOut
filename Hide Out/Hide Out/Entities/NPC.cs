@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Hide_Out.Primatives;
+using HideOut.Primitives;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Hide_Out.Entities
+namespace HideOut.Entities
 {
     public enum NPCType { Police, Bird, Squirrel, Child };
     class NPC : Entity
@@ -54,9 +54,9 @@ namespace Hide_Out.Entities
             return vision.CanSee(rect);
         }
 
-        public VertexPositionColor[] getFieldOfViewTriangle()
+        public VertexPositionColor[] GetFieldOfViewTriangle()
         {
-            return vision.getFieldOfViewTriangle();
+            return vision.GetFieldOfViewTriangle();
         }
 
         private Vector2 Normalize(Vector2 v)

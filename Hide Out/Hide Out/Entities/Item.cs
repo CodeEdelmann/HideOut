@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Hide_Out.Entities
+namespace HideOut.Entities
 {
     enum ItemType { WaterBottle, Apple, CandyBar }; 
     class Item : Entity
@@ -22,13 +22,13 @@ namespace Hide_Out.Entities
         {
         }
 
-        public void pickUp()
+        public void PickUp()
         {
             canPickUp = false;
             isVisible = false;
         }
 
-        public void updateTime()
+        public void UpdateTime()
         {
             expirationTime--;
         }

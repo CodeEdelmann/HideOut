@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Hide_Out.Entities;
+using HideOut.Entities;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace Hide_Out.Controllers
+namespace HideOut.Controllers
 {
     class ObstacleController
     {
@@ -17,59 +17,60 @@ namespace Hide_Out.Controllers
         private Texture2D treeTexture;
         private Texture2D fountainTexture;
         private Texture2D pondTexture;
+        private static readonly int SPRITE_SIZE = 75;
 
         public ObstacleController()
         {
             obstacles = new List<Obstacle>();
         }
 
-        public void createObstacle(ObstacleType type, Vector2 pos)
+        public void CreateObstacle(ObstacleType type, Vector2 pos)
         {
             Obstacle obstacle = new Obstacle();
             obstacle.position = pos;
             obstacle.tag = type;
-            obstacle.rectangleBounds = new Point(100, 100);
+            obstacle.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             switch (type)
             {
                 case ObstacleType.Bush:
                     obstacle.sprite = bushTexture;
-                    obstacle.CanOverlapWith = true;
-                    obstacle.CanSeeThrough = false;
+                    obstacle.canOverlapWith = true;
+                    obstacle.canSeeThrough = false;
                     break;
                 case ObstacleType.Tree:
                     obstacle.sprite = treeTexture;
-                    obstacle.CanOverlapWith = false;
-                    obstacle.CanSeeThrough = false;
+                    obstacle.canOverlapWith = false;
+                    obstacle.canSeeThrough = false;
                     break;
                 case ObstacleType.Fountain:
                     obstacle.sprite = fountainTexture;
-                    obstacle.CanOverlapWith = false;
-                    obstacle.CanSeeThrough = true;
+                    obstacle.canOverlapWith = false;
+                    obstacle.canSeeThrough = true;
                     break;
                 case ObstacleType.Pond:
                     obstacle.sprite = pondTexture;
-                    obstacle.CanOverlapWith = false;
-                    obstacle.CanSeeThrough = true;
+                    obstacle.canOverlapWith = false;
+                    obstacle.canSeeThrough = true;
                     break;
             }
-            this.addObstacle(obstacle);
+            this.AddObstacle(obstacle);
         }
 
-        public void addObstacle(Obstacle obstacle)
+        public void AddObstacle(Obstacle obstacle)
         {
             obstacles.Add(obstacle);
         }
 
-        public void removeObstacle(Obstacle obstacle)
+        public void RemoveObstacle(Obstacle obstacle)
         {
             obstacles.Remove(obstacle);
         }
 
-        public void UpdateObstacles()
+        public void Update()
         {
         }
 
-        public void drawObstacles(SpriteBatch sb)
+        public void Draw(SpriteBatch sb)
         {
             foreach (Obstacle obstacle in this.obstacles)
             {
@@ -77,7 +78,7 @@ namespace Hide_Out.Controllers
             }
         }
 
-        public void LoadObstacleContent(ContentManager cm)
+        public void LoadContent(ContentManager cm)
         {
             bushTexture = cm.Load<Texture2D>("bush.png");
             treeTexture = cm.Load<Texture2D>("trees.png");

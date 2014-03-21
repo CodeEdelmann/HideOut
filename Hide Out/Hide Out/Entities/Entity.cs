@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace Hide_Out.Entities
+namespace HideOut.Entities
 {
     abstract class Entity
     {

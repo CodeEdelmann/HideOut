@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Hide_Out.Entities;
-using Hide_Out.Primatives;
+using HideOut.Entities;
+using HideOut.Primitives;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace Hide_Out.Controllers
+namespace HideOut.Controllers
 {
     class NPCController
     {
         public List<NPC> npcs { get; set; }
         private Texture2D policeTexture;
+        private static readonly int SPRITE_SIZE = 50;
 
         public NPCController()
         {
             npcs = new List<NPC>();
         }
 
-        public void addNPC(NPC npc)
+        public void AddNPC(NPC npc)
         {
             npcs.Add(npc);
         }
 
-        public void createNPC(NPCType tag, Vector2 position)
+        public void CreateNPC(NPCType tag, Vector2 position)
         {
             NPC npc = new NPC();
             npc.tag = tag;
@@ -35,20 +36,20 @@ namespace Hide_Out.Controllers
             {
                 case NPCType.Police:
                     npc.sprite = policeTexture;
-                    npc.rectangleBounds = new Point(100, 100);
+                    npc.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
                     npc.vision = new Vision(npc.drawRectangle, 500.0f, .25, new Vector2(0, 0), Color.Red);
                     npc.speed = 10;
                     break;
             }
-            this.addNPC(npc);
+            this.AddNPC(npc);
         }
 
-        public void removeNPC(NPC npc)
+        public void RemoveNPC(NPC npc)
         {
             npcs.Remove(npc);
         }
 
-        public bool UpdateNPCs(Rectangle playerRectangle)
+        public bool Update(Rectangle playerRectangle)
         {
             foreach (NPC npc in this.npcs)
             {
@@ -77,12 +78,12 @@ namespace Hide_Out.Controllers
                 foreach(EffectPass pass in bs.CurrentTechnique.Passes)
                 {
                     pass.Apply();
-                    gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.getFieldOfViewTriangle(), 0, 1);
+                    gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangle(), 0, 1);
                 }
             }
         }
 
-        public void DrawNPCs(SpriteBatch sb)
+        public void Draw(SpriteBatch sb)
         {
             foreach (NPC npc in this.npcs)
             {
@@ -90,7 +91,7 @@ namespace Hide_Out.Controllers
             }
         }
 
-        public void LoadNPCContent(ContentManager cm)
+        public void LoadContent(ContentManager cm)
         {
             //Start by loading all textures
             policeTexture = cm.Load<Texture2D>("police"); 

@@ -47,9 +47,14 @@ namespace Hide_Out.Entities
             expirationTime--;
         }
 
-        public override string toString()
+        public override string ToString()
         {
-            return "" + tag + position + expirationTime + isVisible + canPickUp;
+            return base.ToString() +
+                "Type: " + tag + "\n" +
+                "Position: X - " + position.X + " Y - " + position.Y + "\n" + 
+                "Expiration: " + expirationTime + "\n" + 
+                "Visibility: " + isVisible + "\n" +
+                "PickUp" + canPickUp + "\n";
         }
 
     }

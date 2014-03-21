@@ -21,9 +21,9 @@ namespace Hide_Out.Entities
         public override string ToString()
         {
             string retVal = base.ToString() +
-                "Type: " + this.tag +
-                "Overlap: " + this.CanOverlapWith +
-                "See: " + this.CanSeeThrough;
+                "Type: " + this.tag + "\n" +
+                "Overlap: " + this.CanOverlapWith + "\n" +
+                "See: " + this.CanSeeThrough + "\n";
             return retVal;
         }
     }

@@ -188,5 +188,14 @@ namespace Hide_Out.Primatives
             while (angle >= MathHelper.TwoPi) angle -= MathHelper.TwoPi;
             return angle;
         }
+
+        public override string ToString()
+        {
+            string retVal = base.ToString() +
+                "Distance: " + this.viewDistance + "\n" +
+                "Angle: " + this.viewAngle + "\n" +
+                "Direction: X - " + this.viewDirection.X + " Y - " + this.viewDirection.Y + "\n";
+            return retVal;
+        }
     }
 }

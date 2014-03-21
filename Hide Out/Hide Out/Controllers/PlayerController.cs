@@ -6,23 +6,25 @@ using Hide_Out.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace Hide_Out.Controllers
 {
     class PlayerController
     {
-        Player thePlayer;
-        Texture2D playerTexture;
+        public Player thePlayer;
+        private Texture2D playerTexture;
 
         public PlayerController()
         {
 
         }
 
-        public void CreatePlayer()
+        public void CreatePlayer(Vector2 newPosition)
         {
             //set thePlayer to a newly created player object
             thePlayer = new Player();
+            thePlayer.position = newPosition;
         }
 
         public void Update()
@@ -75,5 +77,18 @@ namespace Hide_Out.Controllers
         {
             sb.Draw(thePlayer.sprite, thePlayer.rectangle, Color.White);
         }
+
+        public void LoadPlayerContent(ContentManager cm)
+        {
+            //Start by loading all textures
+            //policeTexture = cm.Load<Texture2D>("");  //When sprite is added, uncomment this line and put name of file in between quotes
+
+            //Then assign textures to NPCs depending on their tag
+
+            thePlayer.sprite = playerTexture; 
+            
+        }
+
+
     }
 }

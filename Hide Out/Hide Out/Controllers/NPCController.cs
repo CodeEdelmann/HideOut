@@ -36,7 +36,7 @@ namespace Hide_Out.Controllers
                 case NPCType.Police:
                     npc.sprite = policeTexture;
                     npc.rectangleBounds = new Point(100, 100);
-                    npc.vision = new Vision(npc.drawRectangle, 50.0f, 1, new Vector2(0, 0), Color.Red);
+                    npc.vision = new Vision(npc.drawRectangle, 500.0f, .25, new Vector2(0, 0), Color.Red);
                     npc.speed = 10;
                     break;
             }
@@ -48,23 +48,26 @@ namespace Hide_Out.Controllers
             npcs.Remove(npc);
         }
 
-        public void UpdateNPCs()
+        public bool UpdateNPCs(Rectangle playerRectangle)
         {
             foreach (NPC npc in this.npcs)
             {
-                UpdateNPC(npc);
+                if(UpdateNPC(npc, playerRectangle)) return true;
             }
+            return false;
         }
 
-        public void UpdateNPC(NPC npc)
+        public bool UpdateNPC(NPC npc, Rectangle playerRectangle)
         {
             switch (npc.tag)
             {
                 case NPCType.Police:
-                    npc.Move(npc.vision.viewDirection);
-                    npc.Rotate(.05);
+                    //npc.Move(npc.vision.viewDirection);
+                    if (npc.CanSee(playerRectangle)) return true;
+                    npc.Rotate(.01);
                     break;
             }
+            return false;
         }
 
         public void DrawFOVs(GraphicsDevice gd, BasicEffect bs)

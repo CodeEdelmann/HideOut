@@ -100,7 +100,11 @@ namespace Hide_Out
                 Exit();
 
             // TODO: Add your update logic here
-            npcController.UpdateNPCs();
+            if (npcController.UpdateNPCs(playerController.thePlayer.drawRectangle))
+            {
+                Console.WriteLine("You lose!  Good day!");
+                Exit();
+            }
             playerController.Update();
             itemController.updateItems();
 

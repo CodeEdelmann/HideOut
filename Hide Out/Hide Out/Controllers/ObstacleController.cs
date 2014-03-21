@@ -65,6 +65,10 @@ namespace Hide_Out.Controllers
             obstacles.Remove(obstacle);
         }
 
+        public void UpdateObstacles()
+        {
+        }
+
         public void drawObstacles(SpriteBatch sb)
         {
             foreach (Obstacle obstacle in this.obstacles)

@@ -24,5 +24,13 @@ namespace Hide_Out.Entities
         public Entity()
         {
         }
+
+        public override string ToString()
+        {
+            return base.ToString() +
+                "Position: X - " + position.X + " Y - " + position.Y + "\n" +
+                "Width: " + rectangle.Width + "\n" +
+                "Height: " + rectangle.Height + "\n";
+        }
     }
 }

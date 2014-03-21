@@ -35,7 +35,7 @@ namespace Hide_Out.Controllers
         {
             Item item = new Item();
             item.position = pos;
-            item.rectangle = new Rectangle((int)pos.X, (int)pos.Y, SPRITE_SIZE, SPRITE_SIZE);
+            item.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             item.isVisible = true;
             item.canPickUp = true;
             item.expirationTime = DRAWS_PER_MINUTE;
@@ -85,7 +85,7 @@ namespace Hide_Out.Controllers
         {
             foreach (Item item in this.activeItems)
             {
-                sb.Draw(item.sprite, item.rectangle, Color.White);
+                sb.Draw(item.sprite, item.drawRectangle, Color.White);
             }
         }
 

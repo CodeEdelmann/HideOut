@@ -128,5 +128,60 @@ namespace HideOut.Controllers
             return retVal;
         }
 
+        public void Remove(Entity e)
+        {
+            if (e is Item)
+            {
+                foreach (Tile tile in e.tiles)
+                {
+                    tile.items.Remove((Item)e);
+                }
+                e.tiles.Clear();
+            }
+            else if (e is Obstacle)
+            {
+                foreach (Tile tile in e.tiles)
+                {
+                    tile.obstacles.Remove((Obstacle)e);
+                }
+                e.tiles.Clear();
+            }
+            else if (e is NPC)
+            {
+                foreach (Tile tile in e.tiles)
+                {
+                    tile.npcs.Remove((NPC)e);
+                }
+                e.tiles.Clear();
+            }
+        }
+
+        public void Add(Entity e)
+        {
+            List<Tile> tiles = this.GetNearbyTiles(e.drawRectangle);
+            foreach(Tile tile in tiles)
+            {
+                if (e is Item)
+                {
+                    tile.items.Add((Item)e);
+                }
+                else if (e is Obstacle)
+                {
+                    tile.obstacles.Add((Obstacle)e);
+                }
+                else if (e is NPC)
+                {
+                    tile.npcs.Add((NPC)e);
+                }
+            }
+        }
+
+        public void Update(Entity e)
+        {
+            this.Remove(e);
+            this.Add(e);
+        }
+
+        
     }
 }

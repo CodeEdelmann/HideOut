@@ -47,12 +47,10 @@ namespace HideOut.Controllers
             if (keyboard.IsKeyDown(Keys.Right))
             {
                 thePlayer.MoveRight();
-
             }
             if (keyboard.IsKeyDown(Keys.Up))
             {
                 thePlayer.MoveUp();
-
             }
             if (keyboard.IsKeyDown(Keys.Down))
             {

@@ -24,6 +24,7 @@ namespace HideOut
         ItemController itemController;
         NPCController npcController;
         ObstacleController obstacleController;
+        EntityGenerationController entityGenerationController;
         BasicEffect basicEffect;
 
         public HideOutGame()
@@ -45,6 +46,7 @@ namespace HideOut
             playerController = new PlayerController();
             itemController = new ItemController();
             obstacleController = new ObstacleController();
+            entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
 
             playerController.CreatePlayer(new Vector2(100, 100));
             obstacleController.CreateObstacle(ObstacleType.Bush, new Vector2(50, 50));
@@ -52,7 +54,7 @@ namespace HideOut
             obstacleController.CreateObstacle(ObstacleType.Pond, new Vector2(100, 300));
             obstacleController.CreateObstacle(ObstacleType.Tree, new Vector2(400, 300));
             itemController.CreateItem(ItemType.Apple, new Vector2(60, 60));
-            //itemController.createItem(ItemType.CandyBar, new Vector2(600, 200));
+            itemController.CreateItem(ItemType.CandyBar, new Vector2(600, 200));
             npcController.CreateNPC(NPCType.Police, new Vector2(200, 200));
 
 
@@ -107,6 +109,8 @@ namespace HideOut
             }
             playerController.Update();
             itemController.Update();
+            obstacleController.Update();
+            entityGenerationController.Update();
 
             base.Update(gameTime);
         }

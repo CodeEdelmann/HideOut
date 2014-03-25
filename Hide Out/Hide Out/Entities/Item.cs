@@ -18,7 +18,7 @@ namespace HideOut.Entities
         public int foodValue { get; set; }
         public int speedValue { get; set; }
 
-        public Item()
+        public Item() : base()
         {
         }
 

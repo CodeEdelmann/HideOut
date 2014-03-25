@@ -14,7 +14,7 @@ namespace HideOut.Entities
         public Boolean canSeeThrough { get; set; }
         public ObstacleType tag { get; set; }
 
-        public Obstacle()
+        public Obstacle() : base()
         {
         }
 

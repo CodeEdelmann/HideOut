@@ -17,7 +17,7 @@ namespace HideOut.Entities
         public int maxHunger { get; set; }
         public List<Item> items { get; set; }
 
-        public Player() 
+        public Player() : base()
         {
 
         }

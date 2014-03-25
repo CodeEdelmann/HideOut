@@ -15,7 +15,7 @@ namespace HideOut.Entities
         public int speed { get; set; }
         public NPCType tag { get; set; }
 
-        public NPC()
+        public NPC() : base()
         {
 
         }

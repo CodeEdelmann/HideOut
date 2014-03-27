@@ -14,7 +14,7 @@ namespace HideOut.Controllers
     {
         public Player thePlayer;
         private Texture2D playerTexture;
-        private static readonly int SPRITE_SIZE = 50;
+        public static readonly int SPRITE_SIZE = 50;
 
         public PlayerController()
         {

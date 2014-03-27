@@ -7,16 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
-using Hide_Out.Entities;
-using Hide_Out.Controllers;
+using HideOut.Entities;
+using HideOut.Controllers;
 #endregion
 
-namespace Hide_Out
+namespace HideOut
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Game
+    public class HideOutGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -24,9 +24,10 @@ namespace Hide_Out
         ItemController itemController;
         NPCController npcController;
         ObstacleController obstacleController;
+        EntityGenerationController entityGenerationController;
         BasicEffect basicEffect;
 
-        public Game1()
+        public HideOutGame()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -45,15 +46,16 @@ namespace Hide_Out
             playerController = new PlayerController();
             itemController = new ItemController();
             obstacleController = new ObstacleController();
+            entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
 
             playerController.CreatePlayer(new Vector2(100, 100));
-            obstacleController.createObstacle(ObstacleType.Bush, new Vector2(50, 50));
-            obstacleController.createObstacle(ObstacleType.Fountain, new Vector2(500, 100));
-            obstacleController.createObstacle(ObstacleType.Pond, new Vector2(100, 300));
-            obstacleController.createObstacle(ObstacleType.Tree, new Vector2(400, 300));
-            itemController.createItem(ItemType.Apple, new Vector2(60, 60));
-            //itemController.createItem(ItemType.CandyBar, new Vector2(600, 200));
-            npcController.createNPC(NPCType.Police, new Vector2(200, 200));
+            obstacleController.CreateObstacle(ObstacleType.Bush, new Vector2(50, 50));
+            obstacleController.CreateObstacle(ObstacleType.Fountain, new Vector2(500, 100));
+            obstacleController.CreateObstacle(ObstacleType.Pond, new Vector2(100, 300));
+            obstacleController.CreateObstacle(ObstacleType.Tree, new Vector2(400, 300));
+            itemController.CreateItem(ItemType.Apple, new Vector2(60, 60));
+            itemController.CreateItem(ItemType.CandyBar, new Vector2(600, 200));
+            npcController.CreateNPC(NPCType.Police, new Vector2(200, 200));
 
 
             base.Initialize();
@@ -69,10 +71,10 @@ namespace Hide_Out
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            npcController.LoadNPCContent(Content);
-            obstacleController.LoadObstacleContent(Content);
-            playerController.LoadPlayerContent(Content);
-            itemController.loadItemContent(Content);
+            npcController.LoadContent(Content);
+            obstacleController.LoadContent(Content);
+            playerController.LoadContent(Content);
+            itemController.LoadContent(Content);
 
             //Initialization for basicEffect
             basicEffect = new BasicEffect(GraphicsDevice);
@@ -100,13 +102,15 @@ namespace Hide_Out
                 Exit();
 
             // TODO: Add your update logic here
-            if (npcController.UpdateNPCs(playerController.thePlayer.drawRectangle))
+            if (npcController.Update(playerController.thePlayer.drawRectangle))
             {
                 Console.WriteLine("You lose!  Good day!");
                 Exit();
             }
             playerController.Update();
-            itemController.updateItems();
+            itemController.Update();
+            obstacleController.Update();
+            entityGenerationController.Update();
 
             base.Update(gameTime);
         }
@@ -135,10 +139,10 @@ namespace Hide_Out
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            obstacleController.drawObstacles(spriteBatch);
-            itemController.drawItems(spriteBatch);
-            npcController.DrawNPCs(spriteBatch);
-            playerController.drawPlayer(spriteBatch);
+            obstacleController.Draw(spriteBatch);
+            itemController.Draw(spriteBatch);
+            npcController.Draw(spriteBatch);
+            playerController.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Hide_Out.Entities;
+using HideOut.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 
-namespace Hide_Out.Controllers
+namespace HideOut.Controllers
 {
     class PlayerController
     {
@@ -25,13 +25,13 @@ namespace Hide_Out.Controllers
         {
             //set thePlayer to a newly created player object
             thePlayer = new Player();
-            thePlayer.CurrentSpeed = 5;
-            thePlayer.BaseSpeed = 5;
-            thePlayer.CurrentThirst = 10;
-            thePlayer.MaxThirst = 10;
-            thePlayer.CurrentHunger = 10;
-            thePlayer.MaxHunger = 10;
-            thePlayer.Items = new List<Item>();
+            thePlayer.currentSpeed = 5;
+            thePlayer.baseSpeed = 5;
+            thePlayer.currentThirst = 10;
+            thePlayer.maxThirst = 10;
+            thePlayer.currentHunger = 10;
+            thePlayer.maxHunger = 10;
+            thePlayer.items = new List<Item>();
             thePlayer.position = position;
             thePlayer.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             thePlayer.sprite = playerTexture;
@@ -42,53 +42,51 @@ namespace Hide_Out.Controllers
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Left))
             {
-                thePlayer.moveLeft();
+                thePlayer.MoveLeft();
             }
             if (keyboard.IsKeyDown(Keys.Right))
             {
-                thePlayer.moveRight();
-
+                thePlayer.MoveRight();
             }
             if (keyboard.IsKeyDown(Keys.Up))
             {
-                thePlayer.moveUp();
-
+                thePlayer.MoveUp();
             }
             if (keyboard.IsKeyDown(Keys.Down))
             {
-                thePlayer.moveDown();
+                thePlayer.MoveDown();
             }
         }
 
-        public void pickupItem(Item item)
+        public void PickupItem(Item item)
         {
-            if (thePlayer.Items.Count < 3)
+            if (thePlayer.items.Count < 3)
             {
-                thePlayer.Items.Add(item);
+                thePlayer.items.Add(item);
                 item.position = new Vector2(-1, -1);
                 //todo: set item to not be drawn
             }
         }
 
-        public void dropItem(Item item)
+        public void DropItem(Item item)
         {
-            thePlayer.Items.Remove(item);
+            thePlayer.items.Remove(item);
         }
 
-        public void useItem(int index)
+        public void UseItem(int index)
         {
-            if (index >= 0 && index < thePlayer.Items.Count)
+            if (index >= 0 && index < thePlayer.items.Count)
             {
                 //todo: call itemController's add item
             }
         }
 
-        public void drawPlayer(SpriteBatch sb)
+        public void Draw(SpriteBatch sb)
         {
             sb.Draw(thePlayer.sprite, thePlayer.drawRectangle, Color.White);
         }
 
-        public void LoadPlayerContent(ContentManager cm)
+        public void LoadContent(ContentManager cm)
         {
             //Start by loading all textures
             playerTexture = cm.Load<Texture2D>("player.png");

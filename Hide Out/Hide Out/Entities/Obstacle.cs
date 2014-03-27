@@ -5,16 +5,16 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Hide_Out.Entities
+namespace HideOut.Entities
 {
     enum ObstacleType { Bush, Tree, Fountain, Pond };
     class Obstacle : Entity
     {
-        public Boolean CanOverlapWith { get; set; }
-        public Boolean CanSeeThrough { get; set; }
+        public Boolean canOverlapWith { get; set; }
+        public Boolean canSeeThrough { get; set; }
         public ObstacleType tag { get; set; }
 
-        public Obstacle()
+        public Obstacle() : base()
         {
         }
 
@@ -22,8 +22,8 @@ namespace Hide_Out.Entities
         {
             string retVal = base.ToString() +
                 "Type: " + this.tag + "\n" +
-                "Overlap: " + this.CanOverlapWith + "\n" +
-                "See: " + this.CanSeeThrough + "\n";
+                "Overlap: " + this.canOverlapWith + "\n" +
+                "See: " + this.canSeeThrough + "\n";
             return retVal;
         }
     }

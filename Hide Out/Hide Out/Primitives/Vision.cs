@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Hide_Out.Primatives
+namespace HideOut.Primitives
 {
     class Vision
     {
@@ -57,7 +57,7 @@ namespace Hide_Out.Primatives
             viewColor = vCol;
         }
 
-        public VertexPositionColor[] getFieldOfViewTriangle()
+        public VertexPositionColor[] GetFieldOfViewTriangle()
         {
             VertexPositionColor[] fieldOfVision = new VertexPositionColor[3];
 
@@ -69,7 +69,7 @@ namespace Hide_Out.Primatives
             fieldOfVision[0].Position = new Vector3(parentLocation.X + parentLocation.Width / 2, parentLocation.Y + parentLocation.Height / 2, 0);
 
             //Indices 1 and 2 indicate the farthest points of view on the left and right sides, respectively, of the Searcher
-            double theta = getTheta();
+            double theta = GetTheta();
             fieldOfVision[1].Position = new Vector3((float)(viewDistance * Math.Cos(theta + viewAngle)) + fieldOfVision[0].Position.X,
                 (float)(viewDistance * Math.Sin(theta + viewAngle)) + fieldOfVision[0].Position.Y,
                 0);
@@ -82,13 +82,13 @@ namespace Hide_Out.Primatives
 
         public void Rotate(double angle) //positive to turn left, negative to turn right
         {
-            double theta = getTheta();
+            double theta = GetTheta();
             viewDirection = new Vector2((float)Math.Cos(theta + angle), (float)Math.Sin(theta + angle));
         }
 
         public bool CanSee(Rectangle being)
         {
-            VertexPositionColor[] viewTriangle = getFieldOfViewTriangle();
+            VertexPositionColor[] viewTriangle = GetFieldOfViewTriangle();
 
             for (int i = 0; i < 3; i++)
             {
@@ -111,7 +111,7 @@ namespace Hide_Out.Primatives
 
         private bool IsPointInViewTriangle(Point p)
         {
-            VertexPositionColor[] viewTriangle = getFieldOfViewTriangle();
+            VertexPositionColor[] viewTriangle = GetFieldOfViewTriangle();
 
             float px = p.X;
             float py = p.Y;
@@ -140,7 +140,7 @@ namespace Hide_Out.Primatives
             }
         }
 
-        private double getTheta()
+        private double GetTheta()
         {
             //Vector2 unitV = Normalize(viewDirection); //not necessary if we know it's normalized every time it's set
 

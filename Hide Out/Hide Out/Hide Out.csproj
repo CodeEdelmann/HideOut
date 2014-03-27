@@ -8,7 +8,7 @@
     <ProjectGuid>{ECDA6787-7D49-44F6-8203-A16F2954186B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hide_Out</RootNamespace>
+    <RootNamespace>HideOut</RootNamespace>
     <AssemblyName>Hide Out</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,6 +35,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CollisionController.cs" />
+    <Compile Include="Controllers\TileController.cs" />
+    <Compile Include="Controllers\EntityGenerationController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\NPCController.cs" />
     <Compile Include="Controllers\ObstacleController.cs" />
@@ -44,8 +47,9 @@
     <Compile Include="Entities\NPC.cs" />
     <Compile Include="Entities\Obstacle.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Game1.cs" />
-    <Compile Include="Primatives\Vision.cs" />
+    <Compile Include="HideOutGame.cs" />
+    <Compile Include="Primitives\Tile.cs" />
+    <Compile Include="Primitives\Vision.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,7 +80,9 @@
     <Content Include="Content\black.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\boss.png" />
+    <Content Include="Content\boss.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\candybar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

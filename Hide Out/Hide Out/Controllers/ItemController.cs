@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-using Hide_Out.Entities;
+using HideOut.Entities;
 
-namespace Hide_Out.Controllers
+namespace HideOut.Controllers
 {
     class ItemController
     {
@@ -26,12 +26,12 @@ namespace Hide_Out.Controllers
             activeItems = new List<Item>();
         }
 
-        public void addItem(Item item)
+        public void AddItem(Item item)
         {
             activeItems.Add(item);
         }
 
-        public void createItem(ItemType type, Vector2 pos)
+        public void CreateItem(ItemType type, Vector2 pos)
         {
             Item item = new Item();
             item.tag = type;
@@ -56,23 +56,23 @@ namespace Hide_Out.Controllers
                     break;
             }
 
-            activeItems.Add(item);
+            this.AddItem(item);
         }
 
-        public void removeItem(Item item)
+        public void RemoveItem(Item item)
         {
             activeItems.Remove(item);
         }
 
-        public void clearItems()
+        public void ClearItems()
         {
             activeItems.Clear();
         }
 
-        public void updateItems()
+        public void Update()
         {
             foreach (Item item in this.activeItems){
-                item.updateTime();
+                item.UpdateTime();
                 if (item.expirationTime <= 0)
                 {
                     activeItems.Remove(item);
@@ -80,12 +80,12 @@ namespace Hide_Out.Controllers
             }
         }
 
-        public void pickUp(Item item)
+        public void PickUp(Item item)
         {
             activeItems.Remove(item);
         }
 
-        public void drawItems(SpriteBatch sb)
+        public void Draw(SpriteBatch sb)
         {
             foreach (Item item in this.activeItems)
             {
@@ -93,7 +93,7 @@ namespace Hide_Out.Controllers
             }
         }
 
-        public void loadItemContent(ContentManager cm)
+        public void LoadContent(ContentManager cm)
         {
             waterBottleTexture = cm.Load<Texture2D>("waterBottle.png");
             candyBarTexture = cm.Load<Texture2D>("candybar.png");  

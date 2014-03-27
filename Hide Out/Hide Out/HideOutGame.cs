@@ -49,7 +49,7 @@ namespace HideOut
             entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
 
             XMLReadWrite.read("world.xml", playerController, obstacleController, itemController, npcController);
-
+            XMLReadWrite.write("world.xml", playerController, obstacleController, itemController, npcController);
 
             base.Initialize();
         }

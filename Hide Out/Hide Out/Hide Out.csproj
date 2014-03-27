@@ -35,6 +35,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="XMLReadWrite.cs" />
+    <Compile Include="Controllers\ObstacleInteractionController.cs" />
     <Compile Include="Controllers\CollisionController.cs" />
     <Compile Include="Controllers\TileController.cs" />
     <Compile Include="Controllers\EntityGenerationController.cs" />
@@ -120,6 +122,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="world.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

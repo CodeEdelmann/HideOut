@@ -100,6 +100,7 @@ namespace HideOut
                         break;
                 }
             }
+            reader.Close();
         }
         public static void write(String fname, PlayerController pc, ObstacleController oc, ItemController ic, NPCController nc)
         {
@@ -111,7 +112,7 @@ namespace HideOut
                 writer.WriteStartElement("player");
                 writer.WriteAttributeString("X", Convert.ToString(pc.thePlayer.position.X));
                 writer.WriteAttributeString("Y", Convert.ToString(pc.thePlayer.position.Y));
-                writer.WriteEndElement();
+                writer.WriteFullEndElement();
 
                 foreach (Obstacle o in oc.obstacles)
                 {
@@ -135,7 +136,7 @@ namespace HideOut
                             break;
                     }
                     writer.WriteName(type);
-                    writer.WriteEndElement();
+                    writer.WriteFullEndElement();
                 }
 
                 foreach (Item i in ic.activeItems)
@@ -157,7 +158,7 @@ namespace HideOut
                             break;
                     }
                     writer.WriteName(type);
-                    writer.WriteEndElement();
+                    writer.WriteFullEndElement();
                 }
 
                 foreach (NPC n in nc.npcs)
@@ -182,11 +183,12 @@ namespace HideOut
                             break;
                     }
                     writer.WriteName(type);
-                    writer.WriteEndElement();
+                    writer.WriteFullEndElement();
                 }
 
-                writer.WriteEndElement();
+                writer.WriteFullEndElement();
             }
+            writer.Close();
         }
     }
 }

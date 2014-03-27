@@ -25,7 +25,12 @@ namespace HideOut
         NPCController npcController;
         ObstacleController obstacleController;
         EntityGenerationController entityGenerationController;
+        TileController tileController;
+        CollisionController collisionController;
         BasicEffect basicEffect;
+        private static readonly int GAME_WIDTH = 1000;
+        private static readonly int GAME_HEIGHT = 1000;
+
 
         public HideOutGame()
             : base()
@@ -47,6 +52,8 @@ namespace HideOut
             itemController = new ItemController();
             obstacleController = new ObstacleController();
             entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
+            tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
+            collisionController = new CollisionController(tileController);
 
             XMLReadWrite.read("world.xml", playerController, obstacleController, itemController, npcController);
             XMLReadWrite.write("world.xml", playerController, obstacleController, itemController, npcController);

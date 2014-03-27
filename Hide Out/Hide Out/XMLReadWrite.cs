@@ -20,7 +20,7 @@ namespace HideOut
             String type = "";
             int xPos = -1;
             int yPos = -1;
-            while (this.reader.Read())
+            while (reader.Read())
             {
                 switch (reader.NodeType)
                 {
@@ -40,7 +40,7 @@ namespace HideOut
                         }
                         break;
                     case XmlNodeType.Text:
-                        type = reader.Name;
+                        type = reader.Value;
                         break;
                     case XmlNodeType.EndElement:
                         switch (entity)

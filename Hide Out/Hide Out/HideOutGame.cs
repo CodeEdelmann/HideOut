@@ -48,14 +48,7 @@ namespace HideOut
             obstacleController = new ObstacleController();
             entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
 
-            playerController.CreatePlayer(new Vector2(100, 100));
-            obstacleController.CreateObstacle(ObstacleType.Bush, new Vector2(50, 50));
-            obstacleController.CreateObstacle(ObstacleType.Fountain, new Vector2(500, 100));
-            obstacleController.CreateObstacle(ObstacleType.Pond, new Vector2(100, 300));
-            obstacleController.CreateObstacle(ObstacleType.Tree, new Vector2(400, 300));
-            itemController.CreateItem(ItemType.Apple, new Vector2(60, 60));
-            itemController.CreateItem(ItemType.CandyBar, new Vector2(600, 200));
-            npcController.CreateNPC(NPCType.Police, new Vector2(200, 200));
+            XMLReadWrite.read("world.xml", playerController, obstacleController, itemController, npcController);
 
 
             base.Initialize();

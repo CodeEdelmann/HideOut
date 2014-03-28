@@ -64,6 +64,8 @@ namespace HideOut.Controllers
             {
                 thePlayer.items.Add(item);
                 item.position = new Vector2(-1, -1);
+                item.isVisible = false;
+                item.canPickUp = false;
                 //todo: set item to not be drawn
             }
         }
@@ -78,6 +80,25 @@ namespace HideOut.Controllers
             if (index >= 0 && index < thePlayer.items.Count)
             {
                 //todo: call itemController's add item
+                Item item = thePlayer.items[index];
+                switch (item.tag)
+                {
+                    case ItemType.WaterBottle:
+                        thePlayer.currentThirst += item.waterValue;
+                        if (thePlayer.currentThirst > thePlayer.maxThirst)
+                            thePlayer.currentThirst = thePlayer.maxThirst;
+                        break;
+                    //implementing CandyBar - which affects speed - will be more difficult
+                    case ItemType.Apple:
+                        thePlayer.currentHunger += item.foodValue;
+                        if (thePlayer.currentHunger > thePlayer.maxHunger)
+                            thePlayer.currentHunger = thePlayer.maxHunger;
+                        break; 
+
+                }
+
+                thePlayer.items.Remove(item);
+                
             }
         }
 

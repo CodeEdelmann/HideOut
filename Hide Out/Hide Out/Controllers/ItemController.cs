@@ -19,7 +19,7 @@ namespace HideOut.Controllers
         private Texture2D appleTexture;
         private Texture2D candyBarTexture;
         private static readonly int SPRITE_SIZE = 25;
-        private static readonly int DRAWS_PER_MINUTE = 3600;
+        private static readonly int DRAWS_PER_MINUTE = 900;
 
         public ItemController()
         {
@@ -71,11 +71,13 @@ namespace HideOut.Controllers
 
         public void Update()
         {
-            foreach (Item item in this.activeItems){
+            List<Item> updating = this.activeItems;
+            foreach (Item item in updating)
+            {
                 item.UpdateTime();
                 if (item.expirationTime <= 0)
                 {
-                    activeItems.Remove(item);
+                    RemoveItem(item);
                 }
             }
         }

@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Controllers\CollisionController.cs" />
+    <Compile Include="Controllers\ObstacleInteractionController.cs" />
     <Compile Include="Controllers\TileController.cs" />
     <Compile Include="Controllers\EntityGenerationController.cs" />
     <Compile Include="Controllers\ItemController.cs" />

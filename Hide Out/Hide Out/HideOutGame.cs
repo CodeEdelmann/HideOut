@@ -29,17 +29,21 @@ namespace HideOut
         CollisionController collisionController;
         XMLController xmlController;
         BasicEffect basicEffect;
-        private static readonly int GAME_WIDTH = 1280;
-        private static readonly int GAME_HEIGHT = 720;
+        public static readonly int GAME_WIDTH = 1000;
+        public static readonly int GAME_HEIGHT = 1000;
+        public static readonly int SCREEN_WIDTH = 800;
+        public static readonly int SCREEN_HEIGHT = 500;
+        public static int SCREEN_OFFSET_X = 0;
+        public static int SCREEN_OFFSET_Y = 0;
 
 
         public HideOutGame()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = GAME_WIDTH;
-            graphics.PreferredBackBufferHeight = GAME_HEIGHT;
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
+            graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
         }
 
         /// <summary>
@@ -51,14 +55,17 @@ namespace HideOut
         protected override void Initialize()
         {
             graphics.ApplyChanges();
-            
+
             npcController = new NPCController();
             playerController = new PlayerController();
             itemController = new ItemController();
             obstacleController = new ObstacleController();
             entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
+
             tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
             collisionController = new CollisionController(tileController);
+            playerController.collisionController = collisionController;
+            tileController.InitializeEntities();
 
             xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
             xmlController.read();
@@ -107,7 +114,7 @@ namespace HideOut
                 Exit();
 
             // TODO: Add your update logic here
-            if (npcController.Update(playerController.thePlayer.drawRectangle))
+            if (npcController.Update(playerController.thePlayer.screenRectangle))
             {
                 Console.WriteLine("You lose!  Good day!");
                 Exit();

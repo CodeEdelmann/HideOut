@@ -37,7 +37,7 @@ namespace HideOut.Controllers
                 case NPCType.Police:
                     npc.sprite = policeTexture;
                     npc.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
-                    npc.vision = new Vision(npc.drawRectangle, 500.0f, .25, new Vector2(0, 0), Color.Red);
+                    npc.vision = new Vision(npc.worldRectangle, 500.0f, .25, new Vector2(0, 0), Color.Red);
                     npc.speed = 10;
                     break;
             }
@@ -87,7 +87,7 @@ namespace HideOut.Controllers
         {
             foreach (NPC npc in this.npcs)
             {
-                sb.Draw(npc.sprite, npc.drawRectangle, Color.White);
+                sb.Draw(npc.sprite, npc.screenRectangle, Color.White);
             }
         }
 

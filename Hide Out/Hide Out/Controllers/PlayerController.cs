@@ -15,6 +15,7 @@ namespace HideOut.Controllers
         public Player thePlayer;
         private Texture2D playerTexture;
         public static readonly int SPRITE_SIZE = 50;
+        public CollisionController collisionController { set; get; }
 
         public PlayerController()
         {
@@ -43,19 +44,48 @@ namespace HideOut.Controllers
             if (keyboard.IsKeyDown(Keys.Left))
             {
                 thePlayer.MoveLeft();
+                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.X < 0)
+                {
+                    thePlayer.MoveRight();
+                }
             }
             if (keyboard.IsKeyDown(Keys.Right))
             {
                 thePlayer.MoveRight();
+                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.X + SPRITE_SIZE > HideOutGame.GAME_WIDTH)
+                {
+                    thePlayer.MoveLeft();
+                }
             }
             if (keyboard.IsKeyDown(Keys.Up))
             {
                 thePlayer.MoveUp();
+                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.Y < 0)
+                {
+                    thePlayer.MoveDown();
+                }
             }
             if (keyboard.IsKeyDown(Keys.Down))
             {
                 thePlayer.MoveDown();
+                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.Y + SPRITE_SIZE > HideOutGame.GAME_HEIGHT)
+                {
+                    thePlayer.MoveUp();
+                }
             }
+            this.UpdateScreenOffsets();
+        }
+
+        public void UpdateScreenOffsets()
+        {
+            HideOutGame.SCREEN_OFFSET_X = (int)
+                Math.Min(
+                Math.Max(this.thePlayer.position.X - HideOutGame.SCREEN_WIDTH / 2, 0), 
+                HideOutGame.GAME_WIDTH - HideOutGame.SCREEN_WIDTH);
+            HideOutGame.SCREEN_OFFSET_Y = (int)
+                Math.Min(
+                Math.Max(this.thePlayer.position.Y - HideOutGame.SCREEN_HEIGHT / 2, 0),
+                HideOutGame.GAME_HEIGHT - HideOutGame.SCREEN_HEIGHT);
         }
 
         public void PickupItem(Item item)
@@ -83,7 +113,7 @@ namespace HideOut.Controllers
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(thePlayer.sprite, thePlayer.drawRectangle, Color.White);
+            sb.Draw(thePlayer.sprite, thePlayer.screenRectangle, Color.White);
         }
 
         public void LoadContent(ContentManager cm)

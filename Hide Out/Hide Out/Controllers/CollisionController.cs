@@ -22,7 +22,7 @@ namespace HideOut.Controllers
             List<Item> nearbyItems = tileController.GetNearbyItems(rectangle);
             foreach(Item i in nearbyItems)
             {
-                if(rectangle.Intersects(i.drawRectangle))
+                if (rectangle.Intersects(i.worldRectangle))
                 {
                     retVal.Add(i);
                 }
@@ -36,7 +36,7 @@ namespace HideOut.Controllers
             List<Obstacle> nearbyObstacles = tileController.GetNearbyObstacles(rectangle);
             foreach (Obstacle i in nearbyObstacles)
             {
-                if (rectangle.Intersects(i.drawRectangle))
+                if (!i.canOverlapWith && rectangle.Intersects(i.worldRectangle))
                 {
                     retVal.Add(i);
                 }

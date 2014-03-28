@@ -44,7 +44,7 @@ namespace HideOut.Controllers
         {
             foreach (Item item in itemController.activeItems)
             {
-                List<Tile> tiles = this.GetNearbyTiles(item.drawRectangle);
+                List<Tile> tiles = this.GetNearbyTiles(item.screenRectangle);
                 foreach (Tile tile in tiles)
                 {
                     tile.items.Add(item);
@@ -54,7 +54,7 @@ namespace HideOut.Controllers
 
             foreach (Obstacle obstacle in obstacleController.obstacles)
             {
-                List<Tile> tiles = this.GetNearbyTiles(obstacle.drawRectangle);
+                List<Tile> tiles = this.GetNearbyTiles(obstacle.screenRectangle);
                 foreach (Tile tile in tiles)
                 {
                     tile.obstacles.Add(obstacle);
@@ -64,7 +64,7 @@ namespace HideOut.Controllers
 
             foreach (NPC npc in npcController.npcs)
             {
-                List<Tile> tiles = this.GetNearbyTiles(npc.drawRectangle);
+                List<Tile> tiles = this.GetNearbyTiles(npc.screenRectangle);
                 foreach (Tile tile in tiles)
                 {
                     tile.npcs.Add(npc);
@@ -76,11 +76,11 @@ namespace HideOut.Controllers
         private List<Tile> GetNearbyTiles(Rectangle rectangle)
         {
             List<Tile> retVal = new List<Tile>();
-            int row = rectangle.X / tileSize;
-            int col = rectangle.Y / tileSize;
+            int row = Math.Max(rectangle.X / tileSize, 0);
+            int col = Math.Max(rectangle.Y / tileSize, 0);
 
-            int row2 = (rectangle.X + rectangle.Width) / tileSize;
-            int col2 = (rectangle.Y + rectangle.Height) / tileSize;
+            int row2 = Math.Min((rectangle.X + rectangle.Width) / tileSize, this.tiles.Count - 1);
+            int col2 = Math.Min((rectangle.Y + rectangle.Height) / tileSize, this.tiles.Count - 1);
 
             for (int r = row; r <= row2; r++)
             {
@@ -158,7 +158,7 @@ namespace HideOut.Controllers
 
         public void Add(Entity e)
         {
-            List<Tile> tiles = this.GetNearbyTiles(e.drawRectangle);
+            List<Tile> tiles = this.GetNearbyTiles(e.screenRectangle);
             foreach(Tile tile in tiles)
             {
                 if (e is Item)

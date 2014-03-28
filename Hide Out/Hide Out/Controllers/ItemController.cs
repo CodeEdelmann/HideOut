@@ -89,7 +89,7 @@ namespace HideOut.Controllers
         {
             foreach (Item item in this.activeItems)
             {
-                sb.Draw(item.sprite, item.drawRectangle, Color.White);
+                sb.Draw(item.sprite, item.screenRectangle, Color.White);
             }
         }
 

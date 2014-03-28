@@ -14,7 +14,15 @@ namespace HideOut.Entities
         public Vector2 position { get; set; }
         public Point rectangleBounds { get; set; }
         public List<Tile> tiles;
-        public Rectangle drawRectangle
+        public Rectangle screenRectangle
+        {
+            get
+            {
+                return new Rectangle((int)position.X - HideOutGame.SCREEN_OFFSET_X, (int)position.Y - HideOutGame.SCREEN_OFFSET_Y, rectangleBounds.X, rectangleBounds.Y);
+            }
+        }
+
+        public Rectangle worldRectangle
         {
             get
             {

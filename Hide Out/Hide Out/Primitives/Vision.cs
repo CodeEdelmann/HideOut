@@ -66,7 +66,7 @@ namespace HideOut.Primitives
             fieldOfVision[2].Color = viewColor;
 
             //Index 0 is located at the center of the rectangle
-            fieldOfVision[0].Position = new Vector3(parentLocation.X + parentLocation.Width / 2, parentLocation.Y + parentLocation.Height / 2, 0);
+            fieldOfVision[0].Position = new Vector3(parentLocation.X + parentLocation.Width / 2 - HideOutGame.SCREEN_OFFSET_X, parentLocation.Y + parentLocation.Height / 2 - HideOutGame.SCREEN_OFFSET_Y, 0);
 
             //Indices 1 and 2 indicate the farthest points of view on the left and right sides, respectively, of the Searcher
             double theta = GetTheta();

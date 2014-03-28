@@ -27,8 +27,8 @@ namespace HideOut.Entities
             tag = type;
             switch (type) {
                 case NPCType.Police:
-                    vision = new Vision(this.drawRectangle, 50.0f, 1, facing, Color.Red);
-                    speed = 10;
+                    vision = new Vision(this.screenRectangle, 50.0f, 1, facing, Color.Red);
+                    speed = 1;
                     break;
             }
         }
@@ -37,11 +37,11 @@ namespace HideOut.Entities
         {
             Vector2 normVec = Normalize(direction);
             position += normVec*speed;
-            Rectangle tempRec = this.drawRectangle;
+            Rectangle tempRec = this.screenRectangle;
             tempRec.X = (int) position.X;
             tempRec.Y = (int) position.Y;
             Vision tempVis = vision;
-            tempVis.parentLocation = this.drawRectangle;
+            tempVis.parentLocation = this.screenRectangle;
         }
 
         public void Rotate(double angle) //positive to turn left, negative to turn right

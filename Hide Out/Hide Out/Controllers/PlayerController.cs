@@ -14,7 +14,8 @@ namespace HideOut.Controllers
     {
         public Player thePlayer;
         private Texture2D playerTexture;
-        private static readonly int SPRITE_SIZE = 50;
+        public static readonly int SPRITE_SIZE = 50;
+        public CollisionController collisionController { set; get; }
 
         public PlayerController()
         {
@@ -43,19 +44,48 @@ namespace HideOut.Controllers
             if (keyboard.IsKeyDown(Keys.Left))
             {
                 thePlayer.MoveLeft(gameTime);
+                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.X < 0)
+                {
+                    thePlayer.MoveRight(gameTime);
+                }
             }
             if (keyboard.IsKeyDown(Keys.Right))
             {
                 thePlayer.MoveRight(gameTime);
+                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.X + SPRITE_SIZE > HideOutGame.GAME_WIDTH)
+                {
+                    thePlayer.MoveLeft(gameTime);
+                }
             }
             if (keyboard.IsKeyDown(Keys.Up))
             {
                 thePlayer.MoveUp(gameTime);
+                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.Y < 0)
+                {
+                    thePlayer.MoveDown(gameTime);
+                }
             }
             if (keyboard.IsKeyDown(Keys.Down))
             {
                 thePlayer.MoveDown(gameTime);
+                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.Y + SPRITE_SIZE > HideOutGame.GAME_HEIGHT)
+                {
+                    thePlayer.MoveUp(gameTime);
+                }
             }
+            this.UpdateScreenOffsets();
+        }
+
+        public void UpdateScreenOffsets()
+        {
+            HideOutGame.SCREEN_OFFSET_X = (int)
+                Math.Min(
+                Math.Max(this.thePlayer.position.X - HideOutGame.SCREEN_WIDTH / 2, 0), 
+                HideOutGame.GAME_WIDTH - HideOutGame.SCREEN_WIDTH);
+            HideOutGame.SCREEN_OFFSET_Y = (int)
+                Math.Min(
+                Math.Max(this.thePlayer.position.Y - HideOutGame.SCREEN_HEIGHT / 2, 0),
+                HideOutGame.GAME_HEIGHT - HideOutGame.SCREEN_HEIGHT);
         }
 
         public void PickupItem(Item item)
@@ -64,6 +94,8 @@ namespace HideOut.Controllers
             {
                 thePlayer.items.Add(item);
                 item.position = new Vector2(-1, -1);
+                item.isVisible = false;
+                item.canPickUp = false;
                 //todo: set item to not be drawn
             }
         }
@@ -78,12 +110,31 @@ namespace HideOut.Controllers
             if (index >= 0 && index < thePlayer.items.Count)
             {
                 //todo: call itemController's add item
+                Item item = thePlayer.items[index];
+                switch (item.tag)
+                {
+                    case ItemType.WaterBottle:
+                        thePlayer.currentThirst += item.waterValue;
+                        if (thePlayer.currentThirst > thePlayer.maxThirst)
+                            thePlayer.currentThirst = thePlayer.maxThirst;
+                        break;
+                    //implementing CandyBar - which affects speed - will be more difficult
+                    case ItemType.Apple:
+                        thePlayer.currentHunger += item.foodValue;
+                        if (thePlayer.currentHunger > thePlayer.maxHunger)
+                            thePlayer.currentHunger = thePlayer.maxHunger;
+                        break; 
+
+                }
+
+                thePlayer.items.Remove(item);
+                
             }
         }
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(thePlayer.sprite, thePlayer.drawRectangle, Color.White);
+            sb.Draw(thePlayer.sprite, thePlayer.screenRectangle, Color.White);
         }
 
         public void LoadContent(ContentManager cm)

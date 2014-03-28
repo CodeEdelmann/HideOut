@@ -37,42 +37,42 @@ namespace HideOut.Controllers
                 MouseState mouseState = Mouse.GetState();
                 if (newState.IsKeyDown(Keys.P) && !oldState.IsKeyDown(Keys.P))
                 {
-                    npcController.CreateNPC(Entities.NPCType.Police, new Vector2(mouseState.X, mouseState.Y));
+                    npcController.CreateNPC(Entities.NPCType.Police, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
                 else if (newState.IsKeyDown(Keys.A) && !oldState.IsKeyDown(Keys.A))
                 {
-                    itemController.CreateItem(Entities.ItemType.Apple, new Vector2(mouseState.X, mouseState.Y));
+                    itemController.CreateItem(Entities.ItemType.Apple, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
                 else if (newState.IsKeyDown(Keys.C) && !oldState.IsKeyDown(Keys.C))
                 {
-                    itemController.CreateItem(Entities.ItemType.CandyBar, new Vector2(mouseState.X, mouseState.Y));
+                    itemController.CreateItem(Entities.ItemType.CandyBar, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
                 else if (newState.IsKeyDown(Keys.W) && !oldState.IsKeyDown(Keys.W))
                 {
-                    itemController.CreateItem(Entities.ItemType.WaterBottle, new Vector2(mouseState.X, mouseState.Y));
+                    itemController.CreateItem(Entities.ItemType.WaterBottle, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
                 else if (newState.IsKeyDown(Keys.B) && !oldState.IsKeyDown(Keys.B))
                 {
-                    obstacleController.CreateObstacle(Entities.ObstacleType.Bush, new Vector2(mouseState.X, mouseState.Y));
+                    obstacleController.CreateObstacle(Entities.ObstacleType.Bush, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
                 else if (newState.IsKeyDown(Keys.T) && !oldState.IsKeyDown(Keys.T))
                 {
-                    obstacleController.CreateObstacle(Entities.ObstacleType.Tree, new Vector2(mouseState.X, mouseState.Y));
+                    obstacleController.CreateObstacle(Entities.ObstacleType.Tree, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
                 else if (newState.IsKeyDown(Keys.F) && !oldState.IsKeyDown(Keys.F))
                 {
-                    obstacleController.CreateObstacle(Entities.ObstacleType.Fountain, new Vector2(mouseState.X, mouseState.Y));
+                    obstacleController.CreateObstacle(Entities.ObstacleType.Fountain, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
                 else if (newState.IsKeyDown(Keys.N) && !oldState.IsKeyDown(Keys.N))
                 {
-                    obstacleController.CreateObstacle(Entities.ObstacleType.Pond, new Vector2(mouseState.X, mouseState.Y));
+                    obstacleController.CreateObstacle(Entities.ObstacleType.Pond, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
             }

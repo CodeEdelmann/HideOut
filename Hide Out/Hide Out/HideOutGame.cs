@@ -25,13 +25,24 @@ namespace HideOut
         NPCController npcController;
         ObstacleController obstacleController;
         EntityGenerationController entityGenerationController;
+        TileController tileController;
+        CollisionController collisionController;
+        XMLController xmlController;
         BasicEffect basicEffect;
-        FontRenderer _fontRenderer;
+        public static readonly int GAME_WIDTH = 1000;
+        public static readonly int GAME_HEIGHT = 1000;
+        public static readonly int SCREEN_WIDTH = 800;
+        public static readonly int SCREEN_HEIGHT = 500;
+        public static int SCREEN_OFFSET_X = 0;
+        public static int SCREEN_OFFSET_Y = 0;
+
         public HideOutGame()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";            
+            Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
+            graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
         }
 
         /// <summary>
@@ -42,21 +53,21 @@ namespace HideOut
         /// </summary>
         protected override void Initialize()
         {
+            graphics.ApplyChanges();
+
             npcController = new NPCController();
             playerController = new PlayerController();
             itemController = new ItemController();
             obstacleController = new ObstacleController();
             entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
 
-            playerController.CreatePlayer(new Vector2(100, 100));
-            obstacleController.CreateObstacle(ObstacleType.Bush, new Vector2(50, 50));
-            obstacleController.CreateObstacle(ObstacleType.Fountain, new Vector2(500, 100));
-            obstacleController.CreateObstacle(ObstacleType.Pond, new Vector2(100, 300));
-            obstacleController.CreateObstacle(ObstacleType.Tree, new Vector2(400, 300));
-            itemController.CreateItem(ItemType.Apple, new Vector2(60, 60));
-            itemController.CreateItem(ItemType.CandyBar, new Vector2(600, 200));
-            npcController.CreateNPC(NPCType.Police, new Vector2(200, 200));
+            xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
+            xmlController.read();
 
+            tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
+            tileController.InitializeEntities();
+            collisionController = new CollisionController(tileController);
+            playerController.collisionController = collisionController;
 
 
 
@@ -125,7 +136,7 @@ namespace HideOut
                 Exit();
 
             // TODO: Add your update logic here
-            if (npcController.Update(playerController.thePlayer.drawRectangle))
+            if (npcController.Update(playerController.thePlayer.screenRectangle))
             {
                 Console.WriteLine("You lose!  Good day!");
                 Exit();
@@ -134,6 +145,7 @@ namespace HideOut
             itemController.Update(gameTime);
             obstacleController.Update(gameTime);
             entityGenerationController.Update(gameTime);
+            xmlController.Update();
 
             base.Update(gameTime);
         }

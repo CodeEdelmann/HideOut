@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="FontRenderer.cs" />
     <Compile Include="Controllers\CollisionController.cs" />
+    <Compile Include="Controllers\ObstacleInteractionController.cs" />
     <Compile Include="Controllers\TileController.cs" />
     <Compile Include="Controllers\EntityGenerationController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Primitives\Vision.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\XMLController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
@@ -121,6 +123,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="world.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

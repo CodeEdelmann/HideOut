@@ -62,13 +62,13 @@ namespace HideOut
             obstacleController = new ObstacleController();
             entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
 
+            xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
+            xmlController.read();
+
             tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
             tileController.InitializeEntities();
             collisionController = new CollisionController(tileController);
             playerController.collisionController = collisionController;
-
-            xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
-            xmlController.read();
 
             base.Initialize();
         }

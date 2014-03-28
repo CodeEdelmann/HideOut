@@ -71,14 +71,19 @@ namespace HideOut.Controllers
 
         public void Update(GameTime gameTime)
         {
-            List<Item> updating = this.activeItems;
-            foreach (Item item in updating)
+            List<Item> toRemove = new List<Item>();
+            foreach (Item item in this.activeItems)
             {
                 item.UpdateTime();
                 if (item.expirationTime <= 0)
                 {
-                    RemoveItem(item);
+                    toRemove.Add(item);
                 }
+            }
+
+            foreach (Item item in toRemove)
+            {
+                this.RemoveItem(item);
             }
         }
 

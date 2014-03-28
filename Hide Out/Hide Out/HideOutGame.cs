@@ -63,9 +63,9 @@ namespace HideOut
             entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
 
             tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
+            tileController.InitializeEntities();
             collisionController = new CollisionController(tileController);
             playerController.collisionController = collisionController;
-            tileController.InitializeEntities();
 
             xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
             xmlController.read();

@@ -44,7 +44,7 @@ namespace HideOut.Controllers
             if (keyboard.IsKeyDown(Keys.Left))
             {
                 thePlayer.MoveLeft(gameTime);
-                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.X < 0)
+                if (collisionController.IllegalMove(this.thePlayer))
                 {
                     thePlayer.MoveRight(gameTime);
                 }
@@ -52,7 +52,7 @@ namespace HideOut.Controllers
             if (keyboard.IsKeyDown(Keys.Right))
             {
                 thePlayer.MoveRight(gameTime);
-                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.X + SPRITE_SIZE > HideOutGame.GAME_WIDTH)
+                if (collisionController.IllegalMove(this.thePlayer))
                 {
                     thePlayer.MoveLeft(gameTime);
                 }
@@ -60,7 +60,7 @@ namespace HideOut.Controllers
             if (keyboard.IsKeyDown(Keys.Up))
             {
                 thePlayer.MoveUp(gameTime);
-                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.Y < 0)
+                if (collisionController.IllegalMove(this.thePlayer))
                 {
                     thePlayer.MoveDown(gameTime);
                 }
@@ -68,7 +68,7 @@ namespace HideOut.Controllers
             if (keyboard.IsKeyDown(Keys.Down))
             {
                 thePlayer.MoveDown(gameTime);
-                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.Y + SPRITE_SIZE > HideOutGame.GAME_HEIGHT)
+                if (collisionController.IllegalMove(this.thePlayer))
                 {
                     thePlayer.MoveUp(gameTime);
                 }

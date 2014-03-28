@@ -60,22 +60,21 @@ namespace HideOut
             itemController = new ItemController();
             obstacleController = new ObstacleController();
             entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
+            tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
+
+            npcController.tileController = tileController;
+            itemController.tileController = tileController;
+            obstacleController.tileController = tileController;
+
+            collisionController = new CollisionController(tileController);
+            playerController.collisionController = collisionController;
 
             xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
             xmlController.read();
 
-            tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
-            tileController.InitializeEntities();
-            collisionController = new CollisionController(tileController);
-            playerController.collisionController = collisionController;
-
-
-
            // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");
            // var fontFile = FontLoader.Load(fontFilePath);
            // var fontTexture = Content.Load<Texture2D>("CourierNew32_0.png");
-
-
 
             base.Initialize();
         }

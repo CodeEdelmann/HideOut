@@ -15,6 +15,7 @@ namespace HideOut.Controllers
     {
 
         public List<Item> activeItems { get; set; }
+        public TileController tileController { get; set; }
         private Texture2D waterBottleTexture;
         private Texture2D appleTexture;
         private Texture2D candyBarTexture;
@@ -29,6 +30,7 @@ namespace HideOut.Controllers
         public void AddItem(Item item)
         {
             activeItems.Add(item);
+            tileController.Add(item);
         }
 
         public void CreateItem(ItemType type, Vector2 pos)
@@ -62,6 +64,7 @@ namespace HideOut.Controllers
         public void RemoveItem(Item item)
         {
             activeItems.Remove(item);
+            tileController.Remove(item);
         }
 
         public void ClearItems()

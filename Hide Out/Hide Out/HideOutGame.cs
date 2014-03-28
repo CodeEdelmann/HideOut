@@ -27,16 +27,19 @@ namespace HideOut
         EntityGenerationController entityGenerationController;
         TileController tileController;
         CollisionController collisionController;
+        XMLController xmlController;
         BasicEffect basicEffect;
-        private static readonly int GAME_WIDTH = 1000;
-        private static readonly int GAME_HEIGHT = 1000;
+        private static readonly int GAME_WIDTH = 1280;
+        private static readonly int GAME_HEIGHT = 720;
 
 
         public HideOutGame()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";            
+            graphics.PreferredBackBufferWidth = GAME_WIDTH;
+            graphics.PreferredBackBufferHeight = GAME_HEIGHT;
+            Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -47,6 +50,8 @@ namespace HideOut
         /// </summary>
         protected override void Initialize()
         {
+            graphics.ApplyChanges();
+            
             npcController = new NPCController();
             playerController = new PlayerController();
             itemController = new ItemController();
@@ -55,8 +60,8 @@ namespace HideOut
             tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
             collisionController = new CollisionController(tileController);
 
-            XMLReadWrite.read("world.xml", playerController, obstacleController, itemController, npcController);
-            XMLReadWrite.write("world.xml", playerController, obstacleController, itemController, npcController);
+            xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
+            xmlController.read();
 
             base.Initialize();
         }
@@ -111,6 +116,7 @@ namespace HideOut
             itemController.Update();
             obstacleController.Update();
             entityGenerationController.Update();
+            xmlController.Update();
 
             base.Update(gameTime);
         }

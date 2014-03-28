@@ -4,20 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using HideOut.Controllers;
 using HideOut.Entities;
 
 namespace HideOut
 {
-    class XMLReadWrite
+    class XMLController
     {
-        private static XmlTextReader reader;
-        private static XmlWriter writer;
-        public static void read(String fname, PlayerController pc, ObstacleController oc, ItemController ic, NPCController nc)
+        XmlTextReader reader;
+        XmlWriter writer;
+        PlayerController pc;
+        ObstacleController oc;
+        ItemController ic;
+        NPCController nc;
+        string read_fname;
+        string write_fname;
+        KeyboardState oldState;
+        bool isListening;
+        public XMLController(string read_fname, string write_fname, PlayerController pc, ObstacleController oc, ItemController ic, NPCController nc)
         {
-            reader = new XmlTextReader(fname);
-            String entity = "";
-            String type = "";
+            this.read_fname = read_fname;
+            this.write_fname = write_fname;
+            this.pc = pc;
+            this.oc = oc;
+            this.ic = ic;
+            this.nc = nc;
+            oldState = Keyboard.GetState();
+            isListening = false;
+        }
+        public void read()
+        {
+            this.reader = new XmlTextReader(read_fname);
+            string entity = "";
+            string type = "";
             int xPos = -1;
             int yPos = -1;
             while (reader.Read())
@@ -46,22 +66,22 @@ namespace HideOut
                         switch (entity)
                         {
                             case "player":
-                                pc.CreatePlayer(new Vector2(xPos, yPos));
+                                this.pc.CreatePlayer(new Vector2(xPos, yPos));
                                 break;
                             case "obstacle":
                                 switch (type)
                                 {
                                     case "Bush":
-                                        oc.CreateObstacle(ObstacleType.Bush, new Vector2(xPos, yPos));
+                                        this.oc.CreateObstacle(ObstacleType.Bush, new Vector2(xPos, yPos));
                                         break;
                                     case "Fountain":
-                                        oc.CreateObstacle(ObstacleType.Fountain, new Vector2(xPos, yPos));
+                                        this.oc.CreateObstacle(ObstacleType.Fountain, new Vector2(xPos, yPos));
                                         break;
                                     case "Pond":
-                                        oc.CreateObstacle(ObstacleType.Pond, new Vector2(xPos, yPos));
+                                        this.oc.CreateObstacle(ObstacleType.Pond, new Vector2(xPos, yPos));
                                         break;
                                     case "Tree":
-                                        oc.CreateObstacle(ObstacleType.Tree, new Vector2(xPos, yPos));
+                                        this.oc.CreateObstacle(ObstacleType.Tree, new Vector2(xPos, yPos));
                                         break;
                                 }
                                 break;
@@ -69,13 +89,13 @@ namespace HideOut
                                 switch (type)
                                 {
                                     case "Apple":
-                                        ic.CreateItem(ItemType.Apple, new Vector2(xPos, yPos));
+                                        this.ic.CreateItem(ItemType.Apple, new Vector2(xPos, yPos));
                                         break;
                                     case "CandyBar":
-                                        ic.CreateItem(ItemType.CandyBar, new Vector2(xPos, yPos));
+                                        this.ic.CreateItem(ItemType.CandyBar, new Vector2(xPos, yPos));
                                         break;
                                     case "WaterBottle":
-                                        ic.CreateItem(ItemType.WaterBottle, new Vector2(xPos, yPos));
+                                        this.ic.CreateItem(ItemType.WaterBottle, new Vector2(xPos, yPos));
                                         break;
                                 }
                                 break;
@@ -83,16 +103,16 @@ namespace HideOut
                                 switch (type)
                                 {
                                     case "Police":
-                                        nc.CreateNPC(NPCType.Police, new Vector2(xPos, yPos));
+                                        this.nc.CreateNPC(NPCType.Police, new Vector2(xPos, yPos));
                                         break;
                                     case "Bird":
-                                        nc.CreateNPC(NPCType.Bird, new Vector2(xPos, yPos));
+                                        this.nc.CreateNPC(NPCType.Bird, new Vector2(xPos, yPos));
                                         break;
                                     case "Squirrel":
-                                        nc.CreateNPC(NPCType.Squirrel, new Vector2(xPos, yPos));
+                                        this.nc.CreateNPC(NPCType.Squirrel, new Vector2(xPos, yPos));
                                         break;
                                     case "Child":
-                                        nc.CreateNPC(NPCType.Child, new Vector2(xPos, yPos));
+                                        this.nc.CreateNPC(NPCType.Child, new Vector2(xPos, yPos));
                                         break;
                                 }
                                 break;
@@ -102,24 +122,24 @@ namespace HideOut
             }
             reader.Close();
         }
-        public static void write(String fname, PlayerController pc, ObstacleController oc, ItemController ic, NPCController nc)
+        public void write()
         {
-            using (writer = XmlWriter.Create(fname))
+            using (this.writer = XmlWriter.Create(write_fname))
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("world");
 
                 writer.WriteStartElement("player");
-                writer.WriteAttributeString("X", Convert.ToString(pc.thePlayer.position.X));
-                writer.WriteAttributeString("Y", Convert.ToString(pc.thePlayer.position.Y));
+                writer.WriteAttributeString("X", Convert.ToString(this.pc.thePlayer.position.X));
+                writer.WriteAttributeString("Y", Convert.ToString(this.pc.thePlayer.position.Y));
                 writer.WriteFullEndElement();
 
-                foreach (Obstacle o in oc.obstacles)
+                foreach (Obstacle o in this.oc.obstacles)
                 {
                     writer.WriteStartElement("obstacle");
                     writer.WriteAttributeString("X", Convert.ToString(o.position.X));
                     writer.WriteAttributeString("Y", Convert.ToString(o.position.Y));
-                    String type = "";
+                    string type = "";
                     switch (o.tag)
                     {
                         case ObstacleType.Bush:
@@ -139,12 +159,12 @@ namespace HideOut
                     writer.WriteFullEndElement();
                 }
 
-                foreach (Item i in ic.activeItems)
+                foreach (Item i in this.ic.activeItems)
                 {
                     writer.WriteStartElement("item");
                     writer.WriteAttributeString("X", Convert.ToString(i.position.X));
                     writer.WriteAttributeString("Y", Convert.ToString(i.position.Y));
-                    String type = "";
+                    string type = "";
                     switch (i.tag)
                     {
                         case ItemType.Apple:
@@ -161,12 +181,12 @@ namespace HideOut
                     writer.WriteFullEndElement();
                 }
 
-                foreach (NPC n in nc.npcs)
+                foreach (NPC n in this.nc.npcs)
                 {
                     writer.WriteStartElement("npc");
                     writer.WriteAttributeString("X", Convert.ToString(n.position.X));
                     writer.WriteAttributeString("Y", Convert.ToString(n.position.Y));
-                    String type = "";
+                    string type = "";
                     switch (n.tag)
                     {
                         case NPCType.Bird:
@@ -189,6 +209,23 @@ namespace HideOut
                 writer.WriteFullEndElement();
             }
             writer.Close();
+        }
+        public void Update()
+        {
+            KeyboardState newState = Keyboard.GetState();
+
+            if (newState.IsKeyDown(Keys.LeftControl) && !oldState.IsKeyDown(Keys.LeftControl))
+            {
+                isListening = !isListening;
+            }
+            if (isListening)
+            {
+                if (newState.IsKeyDown(Keys.S) && !oldState.IsKeyDown(Keys.S))
+                {
+                    this.write();
+                    isListening = false;
+                }
+            }
         }
     }
 }

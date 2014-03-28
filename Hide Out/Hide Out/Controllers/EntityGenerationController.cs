@@ -24,7 +24,7 @@ namespace HideOut.Controllers
             obstacleController = oc;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
 

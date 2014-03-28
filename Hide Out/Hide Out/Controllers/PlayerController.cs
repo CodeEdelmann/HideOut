@@ -37,24 +37,24 @@ namespace HideOut.Controllers
             thePlayer.sprite = playerTexture;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Left))
             {
-                thePlayer.MoveLeft();
+                thePlayer.MoveLeft(gameTime);
             }
             if (keyboard.IsKeyDown(Keys.Right))
             {
-                thePlayer.MoveRight();
+                thePlayer.MoveRight(gameTime);
             }
             if (keyboard.IsKeyDown(Keys.Up))
             {
-                thePlayer.MoveUp();
+                thePlayer.MoveUp(gameTime);
             }
             if (keyboard.IsKeyDown(Keys.Down))
             {
-                thePlayer.MoveDown();
+                thePlayer.MoveDown(gameTime);
             }
         }
 

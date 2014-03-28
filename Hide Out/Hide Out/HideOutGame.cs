@@ -26,7 +26,7 @@ namespace HideOut
         ObstacleController obstacleController;
         EntityGenerationController entityGenerationController;
         BasicEffect basicEffect;
-
+        FontRenderer _fontRenderer;
         public HideOutGame()
             : base()
         {
@@ -58,6 +58,14 @@ namespace HideOut
             npcController.CreateNPC(NPCType.Police, new Vector2(200, 200));
 
 
+
+
+           // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");
+           // var fontFile = FontLoader.Load(fontFilePath);
+           // var fontTexture = Content.Load<Texture2D>("CourierNew32_0.png");
+
+
+
             base.Initialize();
         }
 
@@ -80,6 +88,9 @@ namespace HideOut
             basicEffect = new BasicEffect(GraphicsDevice);
             basicEffect.VertexColorEnabled = true;
             basicEffect.LightingEnabled = false;
+
+
+           //_fontRenderer = new FontRenderer(fontFile, <Texture2D>("player.png"));
         }
 
         /// <summary>
@@ -91,6 +102,15 @@ namespace HideOut
             // TODO: Unload any non ContentManager content here
         }
 
+        /*
+        public static FontFile Load(Stream stream)
+        {
+            XmlSerializer deserializer = new XmlSerializer(typeof(FontFile));
+            FontFile file = (FontFile)deserializer.Deserialize(stream);
+            return file;
+        }
+        */
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -98,6 +118,9 @@ namespace HideOut
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+            //Console.WriteLine("Time: " + gameTime.ElapsedGameTime.TotalMilliseconds);
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -107,10 +130,10 @@ namespace HideOut
                 Console.WriteLine("You lose!  Good day!");
                 Exit();
             }
-            playerController.Update();
-            itemController.Update();
-            obstacleController.Update();
-            entityGenerationController.Update();
+            playerController.Update(gameTime);
+            itemController.Update(gameTime);
+            obstacleController.Update(gameTime);
+            entityGenerationController.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -143,7 +166,18 @@ namespace HideOut
             itemController.Draw(spriteBatch);
             npcController.Draw(spriteBatch);
             playerController.Draw(spriteBatch);
+
+
+
+            //_fontRenderer.DrawText(spriteBatch, 50, 50, "Hello World!");
+
+
+
             spriteBatch.End();
+
+
+            
+
 
             base.Draw(gameTime);
         }

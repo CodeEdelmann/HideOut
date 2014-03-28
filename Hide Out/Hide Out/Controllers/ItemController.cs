@@ -69,7 +69,7 @@ namespace HideOut.Controllers
             activeItems.Clear();
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             foreach (Item item in this.activeItems){
                 item.UpdateTime();

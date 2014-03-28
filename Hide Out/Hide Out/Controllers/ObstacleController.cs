@@ -66,7 +66,7 @@ namespace HideOut.Controllers
             obstacles.Remove(obstacle);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
         }
 

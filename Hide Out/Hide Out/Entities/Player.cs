@@ -27,22 +27,22 @@ namespace HideOut.Entities
         public void MoveRight(GameTime gameTime)
         {
             
-            this.position += new Vector2(this.currentSpeed * modd / gameTime.ElapsedGameTime.Milliseconds, 0);
+            this.position += new Vector2(this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
         }
 
         public void MoveLeft(GameTime gameTime)
         {
-            this.position += new Vector2(-1 * this.currentSpeed * modd / gameTime.ElapsedGameTime.Milliseconds, 0);
+            this.position += new Vector2(-1 * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
         }
 
         public void MoveUp(GameTime gameTime)
         {
-            this.position += new Vector2(0, -1 * this.currentSpeed * modd / gameTime.ElapsedGameTime.Milliseconds);
+            this.position += new Vector2(0, -1 * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 
         public void MoveDown(GameTime gameTime)
         {
-            this.position += new Vector2(0, this.currentSpeed * modd / gameTime.ElapsedGameTime.Milliseconds);
+            this.position += new Vector2(0, this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 
         public override string ToString()

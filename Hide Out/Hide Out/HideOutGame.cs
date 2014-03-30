@@ -54,20 +54,7 @@ namespace HideOut
         protected override void Initialize()
         {
             graphics.ApplyChanges();
-
-            npcController = new NPCController();
-            playerController = new PlayerController();
-            itemController = new ItemController();
-            obstacleController = new ObstacleController();
-            entityGenerationController= new EntityGenerationController(itemController, npcController, obstacleController);
-            tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
-
-            npcController.tileController = tileController;
-            itemController.tileController = tileController;
-            obstacleController.tileController = tileController;
-
-            collisionController = new CollisionController(tileController);
-            playerController.collisionController = collisionController;
+            this.InitializeControllers();
 
             xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
             xmlController.read();
@@ -77,6 +64,23 @@ namespace HideOut
            // var fontTexture = Content.Load<Texture2D>("CourierNew32_0.png");
 
             base.Initialize();
+        }
+
+        private void InitializeControllers()
+        {
+            npcController = new NPCController();
+            playerController = new PlayerController();
+            itemController = new ItemController();
+            obstacleController = new ObstacleController();
+            entityGenerationController = new EntityGenerationController(itemController, npcController, obstacleController);
+            tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
+            collisionController = new CollisionController(tileController);
+
+            npcController.tileController = tileController;
+            itemController.tileController = tileController;
+            obstacleController.tileController = tileController;
+            playerController.itemController = itemController;
+            playerController.collisionController = collisionController;
         }
 
         /// <summary>

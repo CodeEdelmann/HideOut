@@ -97,6 +97,9 @@ namespace HideOut
                                     case "WaterBottle":
                                         this.ic.CreateItem(ItemType.WaterBottle, new Vector2(xPos, yPos));
                                         break;
+                                    case "Coin":
+                                        this.ic.CreateItem(ItemType.Coin, new Vector2(xPos, yPos));
+                                        break;
                                 }
                                 break;
                             case "npc":
@@ -175,6 +178,9 @@ namespace HideOut
                             break;
                         case ItemType.WaterBottle:
                             type = "WaterBottle";
+                            break;
+                        case ItemType.Coin:
+                            type = "Coin";
                             break;
                     }
                     writer.WriteName(type);

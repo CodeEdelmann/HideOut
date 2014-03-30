@@ -50,6 +50,11 @@ namespace HideOut.Controllers
                     itemController.CreateItem(Entities.ItemType.CandyBar, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
+                else if (newState.IsKeyDown(Keys.O) && !oldState.IsKeyDown(Keys.O))
+                {
+                    itemController.CreateItem(Entities.ItemType.Coin, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
+                    isListening = false;
+                }
                 else if (newState.IsKeyDown(Keys.W) && !oldState.IsKeyDown(Keys.W))
                 {
                     itemController.CreateItem(Entities.ItemType.WaterBottle, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));

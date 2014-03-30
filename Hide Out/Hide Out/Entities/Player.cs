@@ -17,7 +17,6 @@ namespace HideOut.Entities
         public int currentHunger { get; set; }
         public int maxHunger { get; set; }
         public bool isVisible { get; set; }
-        public List<Item> items { get; set; }
 
         public Player() : base()
         {
@@ -51,10 +50,7 @@ namespace HideOut.Entities
                 "Speed: " + this.currentSpeed + " / " + this.baseSpeed + "\n" +
                 "Thirst: " + this.currentThirst + " / " + this.maxThirst + "\n" +
                 "Hunger: " + this.currentHunger + " / " + this.maxHunger + "\n";
-            foreach (Item item in this.items)
-            {
-                retVal += "Item: " + item + "\n";
-            }
+
             return retVal;
         }
     }

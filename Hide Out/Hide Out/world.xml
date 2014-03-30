@@ -8,4 +8,6 @@
   <item X="60" Y="60">Apple</item>
   <item X="600" Y="200">CandyBar</item>
   <npc X="200" Y="200">Police</npc>
+  <item X ="800" Y ="800">Coin</item>
+  <item X ="200" Y="250">Coin</item>
 </world>

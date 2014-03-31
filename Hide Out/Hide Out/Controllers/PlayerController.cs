@@ -40,6 +40,8 @@ namespace HideOut.Controllers
 
         public void Update(GameTime gameTime)
         {
+            thePlayer.UpdateState(gameTime);
+
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Left))
             {
@@ -78,6 +80,15 @@ namespace HideOut.Controllers
             foreach(Item i in items)
             {
                 this.PickupItem(i);
+            }
+
+            if (collisionController.IsHidden(thePlayer))
+            {
+                thePlayer.isVisible = false;
+            }
+            else
+            {
+                thePlayer.isVisible = true;
             }
 
             this.UpdateScreenOffsets();

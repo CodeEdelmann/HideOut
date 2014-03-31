@@ -18,7 +18,7 @@ namespace HideOut
         ObstacleController oc;
         ItemController ic;
         NPCController nc;
-        string read_fname;
+        public string read_fname { get; set; }
         string write_fname;
         KeyboardState oldState;
         bool isListening;

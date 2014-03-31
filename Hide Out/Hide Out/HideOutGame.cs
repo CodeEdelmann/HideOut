@@ -28,6 +28,7 @@ namespace HideOut
         EntityGenerationController entityGenerationController;
         TileController tileController;
         CollisionController collisionController;
+        LevelController levelController;
         XMLController xmlController;
         BasicEffect basicEffect;
 
@@ -60,7 +61,7 @@ namespace HideOut
             graphics.ApplyChanges();
             this.InitializeControllers();
 
-            xmlController = new XMLController("Content/Levels/world.xml", "Content/Levels/save.xml", playerController, obstacleController, itemController, npcController);
+            xmlController = new XMLController("Content/Levels/1.xml", "Content/Levels/save.xml", playerController, obstacleController, itemController, npcController);
             xmlController.read();
 
            // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");
@@ -78,6 +79,7 @@ namespace HideOut
             playerController = new PlayerController();
             itemController = new ItemController();
             obstacleController = new ObstacleController();
+            levelController = new LevelController();
             entityGenerationController = new EntityGenerationController(itemController, npcController, obstacleController);
             tileController = new TileController(itemController, npcController, obstacleController, MAX_GAME_HEIGHT, MAX_GAME_WIDTH, PlayerController.SPRITE_SIZE);
             collisionController = new CollisionController(tileController);
@@ -87,6 +89,11 @@ namespace HideOut
             obstacleController.tileController = tileController;
             playerController.itemController = itemController;
             playerController.collisionController = collisionController;
+            levelController.itemController = itemController;
+            levelController.obstacleController = obstacleController;
+            levelController.playerController = playerController;
+            levelController.npcController = npcController;
+            levelController.tileController = tileController;
         }
 
         /// <summary>
@@ -163,6 +170,7 @@ namespace HideOut
             itemController.Update(gameTime);
             obstacleController.Update(gameTime);
             entityGenerationController.Update(gameTime);
+            levelController.Update();
             displayController.Update(gameTime);
             xmlController.Update();
 

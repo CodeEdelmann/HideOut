@@ -10,6 +10,7 @@ namespace HideOut.Entities
     class Player : Entity
     {
         float modd = 16.6666F;
+        private readonly int decrement = 300;
         public int currentSpeed { get; set; }
         public int baseSpeed { get; set; }
         public int currentThirst { get; set; }
@@ -42,6 +43,19 @@ namespace HideOut.Entities
         public void MoveDown(GameTime gameTime)
         {
             this.position += new Vector2(0, this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
+        }
+
+        public void UpdateState(GameTime gameTime)
+        {
+            if (gameTime.ElapsedGameTime.Milliseconds % decrement == 0)
+            {
+                this.currentThirst--;
+                this.currentHunger--;
+                if(currentHunger == 0 || currentThirst == 0)
+                {
+                    //DO SOMETHING
+                }
+            }
         }
 
         public override string ToString()

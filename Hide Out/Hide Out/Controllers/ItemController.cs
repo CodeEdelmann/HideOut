@@ -20,10 +20,12 @@ namespace HideOut.Controllers
         private Texture2D candyBarTexture;
         private Texture2D coinTexture;
         private static readonly int SPRITE_SIZE = 25;
+        public int numCoins { get; set; }
 
         public ItemController()
         {
             activeItems = new List<Item>();
+            numCoins = 0;
         }
 
         public void AddItem(Item item)
@@ -56,6 +58,7 @@ namespace HideOut.Controllers
                     break;
                 case ItemType.Coin:
                     item.sprite = coinTexture;
+                    numCoins++;
                     break;
             }
 
@@ -66,6 +69,8 @@ namespace HideOut.Controllers
         {
             activeItems.Remove(item);
             tileController.Remove(item);
+            if (item.tag == ItemType.Coin)
+                numCoins--;
         }
 
         public void ClearItems()

@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Controllers\DisplayController.cs" />
+    <Compile Include="Controllers\LevelController.cs" />
     <Compile Include="FontRenderer.cs" />
     <Compile Include="Controllers\CollisionController.cs" />
     <Compile Include="Controllers\ObstacleInteractionController.cs" />

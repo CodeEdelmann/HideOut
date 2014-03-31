@@ -61,8 +61,9 @@ namespace HideOut
             graphics.ApplyChanges();
             this.InitializeControllers();
 
-            xmlController = new XMLController("Content/Levels/1.xml", "Content/Levels/save.xml", playerController, obstacleController, itemController, npcController);
-            xmlController.read();
+            xmlController.write_fname = "Content/Levels/save.xml";
+            xmlController.read_fname = "Content/Levels/1.xml";
+            levelController.InitializeLevel(1);
 
            // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");
            // var fontFile = FontLoader.Load(fontFilePath);
@@ -80,18 +81,41 @@ namespace HideOut
             obstacleController = new ObstacleController();
             levelController = new LevelController();
             entityGenerationController = new EntityGenerationController();
-            tileController = new TileController(itemController, npcController, obstacleController, MAX_GAME_HEIGHT, MAX_GAME_WIDTH, PlayerController.SPRITE_SIZE);
-            collisionController = new CollisionController(tileController);
+            xmlController = new XMLController();
+            tileController = new TileController();
+            collisionController = new CollisionController();
 
+            //set collision controller
+            collisionController.tileController = tileController;
+
+            //set entity generation controller
             entityGenerationController.itemController = itemController;
             entityGenerationController.npcController = npcController;
             entityGenerationController.obstacleController = obstacleController;
 
+            //set xmlController
+            xmlController.playerController = playerController;
+            xmlController.npcController = npcController;
+            xmlController.obstacleController = obstacleController;
+            xmlController.itemController = itemController;
+
+            //set tile controller
+            tileController.itemController = itemController;
+            tileController.npcController = npcController;
+            tileController.obstacleController = obstacleController;
+            tileController.max_game_height = MAX_GAME_HEIGHT;
+            tileController.max_game_width = MAX_GAME_WIDTH;
+            tileController.tileSize = PlayerController.SPRITE_SIZE;
             npcController.tileController = tileController;
             itemController.tileController = tileController;
             obstacleController.tileController = tileController;
+            tileController.InitializeTiles();
+
+            //set player controller
             playerController.itemController = itemController;
             playerController.collisionController = collisionController;
+
+            //set level controller
             levelController.itemController = itemController;
             levelController.obstacleController = obstacleController;
             levelController.playerController = playerController;

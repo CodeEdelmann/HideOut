@@ -11,29 +11,38 @@ namespace HideOut.Controllers
 {
     class TileController
     {
-        public int height { get; set; }
-        public int width { get; set; }
+        public int max_game_height { get; set; }
+        public int max_game_width { get; set; }
         public int tileSize { get; set; }
-        ItemController itemController;
-        ObstacleController obstacleController;
-        NPCController npcController;
+        public ItemController itemController { get; set; }
+        public ObstacleController obstacleController { get; set; }
+        public NPCController npcController { get; set; }
 
         List<List<Tile>> tiles;
-        public TileController(ItemController ic, NPCController nc, ObstacleController oc, int gameHeight, int gameWidth, int playerSize)
+
+        public TileController()
+        {
+
+        }
+        public TileController(ItemController ic, NPCController nc, ObstacleController oc, int gameHeight, int gameWidth, int playerSize) : this()
         {
             itemController = ic;
             obstacleController = oc;
             npcController = nc;
-            this.height = gameHeight;
-            this.width = gameWidth;
+            this.max_game_height = gameHeight;
+            this.max_game_width = gameWidth;
             this.tileSize = playerSize;
+        }
+
+        public void InitializeTiles()
+        {
             tiles = new List<List<Tile>>();
-            for (int x = 0; x < width; x += playerSize)
+            for (int x = 0; x < max_game_width; x += tileSize)
             {
                 List<Tile> row = new List<Tile>();
-                for (int y = 0; y < height; y+= playerSize)
+                for (int y = 0; y < max_game_height; y += tileSize)
                 {
-                    row.Add(new Tile(x, y, playerSize, playerSize));
+                    row.Add(new Tile(x, y, tileSize, tileSize));
                 }
                 tiles.Add(row);
             }

@@ -44,6 +44,7 @@ namespace HideOut.Controllers
         {
             string newFileName = PATH + level.ToString() + ".xml";
             xmlController.read_fname = newFileName;
+            xmlController.read();
         }
     }
 }

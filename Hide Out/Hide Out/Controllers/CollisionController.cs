@@ -10,10 +10,10 @@ namespace HideOut.Controllers
 {
     class CollisionController
     {
-        TileController tileController;
-        public CollisionController(TileController tileController)
+        public TileController tileController { get; set; }
+        public CollisionController()
         {
-            this.tileController = tileController;
+
         }
 
         public bool IllegalMove(Entity e)

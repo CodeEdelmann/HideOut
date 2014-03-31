@@ -74,15 +74,18 @@ namespace HideOut
         private void InitializeControllers()
         {
             displayController = new DisplayController();
-
             npcController = new NPCController();
             playerController = new PlayerController();
             itemController = new ItemController();
             obstacleController = new ObstacleController();
             levelController = new LevelController();
-            entityGenerationController = new EntityGenerationController(itemController, npcController, obstacleController);
+            entityGenerationController = new EntityGenerationController();
             tileController = new TileController(itemController, npcController, obstacleController, MAX_GAME_HEIGHT, MAX_GAME_WIDTH, PlayerController.SPRITE_SIZE);
             collisionController = new CollisionController(tileController);
+
+            entityGenerationController.itemController = itemController;
+            entityGenerationController.npcController = npcController;
+            entityGenerationController.obstacleController = obstacleController;
 
             npcController.tileController = tileController;
             itemController.tileController = tileController;
@@ -94,6 +97,7 @@ namespace HideOut
             levelController.playerController = playerController;
             levelController.npcController = npcController;
             levelController.tileController = tileController;
+            levelController.xmlController = xmlController;
         }
 
         /// <summary>

@@ -12,13 +12,18 @@ namespace HideOut.Controllers
     {
         KeyboardState oldState;
         bool isListening;
-        ItemController itemController;
-        NPCController npcController;
-        ObstacleController obstacleController;
-        public EntityGenerationController(ItemController ic, NPCController nc, ObstacleController oc)
+        public ItemController itemController { get; set; }
+        public NPCController npcController { get; set; }
+        public ObstacleController obstacleController { get; set; }
+
+        public EntityGenerationController()
         {
             oldState = Keyboard.GetState();
             isListening = false;
+        }
+
+        public EntityGenerationController(ItemController ic, NPCController nc, ObstacleController oc) : this()
+        {
             itemController = ic;
             npcController = nc;
             obstacleController = oc;

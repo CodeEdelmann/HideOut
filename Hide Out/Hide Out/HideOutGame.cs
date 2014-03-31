@@ -165,7 +165,7 @@ namespace HideOut
                 Exit();
 
             // TODO: Add your update logic here
-            if (npcController.Update(playerController.thePlayer.collisionRectangle, obstacleController.obstacles))
+            if (npcController.Update(playerController.thePlayer, obstacleController.obstacles))
             {
                 Console.WriteLine("You lose!  Good day!");
                 Exit();

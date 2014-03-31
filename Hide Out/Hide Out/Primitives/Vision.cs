@@ -111,18 +111,20 @@ namespace HideOut.Primitives
             viewDirection = new Vector2((float)Math.Cos(theta + angle), (float)Math.Sin(theta + angle));
         }
 
-        public bool CanSeePlayer(Rectangle being, List<Obstacle> visibleObstacles)
+        public bool CanSeePlayer(Player player, List<Obstacle> visibleObstacles)
         {
+            if (!player.isVisible) return false;
+
             VertexPositionColor[] viewTriangle = GetFieldOfViewTriangle();
 
             double theta = GetTheta();
             double minFOVAngle = theta - viewAngle;
             double maxFOVAngle = theta + viewAngle;
 
-            double topLeftAngle = Math.Tan((being.Y - viewTriangle[0].Position.Y) / (being.X - viewTriangle[0].Position.X));
-            double topRightAngle = Math.Tan((being.Y - viewTriangle[0].Position.Y) / ((being.X + being.Width) - viewTriangle[0].Position.X));
-            double bottomLeftAngle = Math.Tan(((being.Y + being.Height) - viewTriangle[0].Position.Y) / (being.X - viewTriangle[0].Position.X));
-            double bottomRightAngle = Math.Tan(((being.Y + being.Height) - viewTriangle[0].Position.Y) / ((being.X + being.Width) - viewTriangle[0].Position.X));
+            double topLeftAngle = Math.Tan((player.collisionRectangle.Y - viewTriangle[0].Position.Y) / (player.collisionRectangle.X - viewTriangle[0].Position.X));
+            double topRightAngle = Math.Tan((player.collisionRectangle.Y - viewTriangle[0].Position.Y) / ((player.collisionRectangle.X + player.collisionRectangle.Width) - viewTriangle[0].Position.X));
+            double bottomLeftAngle = Math.Tan(((player.collisionRectangle.Y + player.collisionRectangle.Height) - viewTriangle[0].Position.Y) / (player.collisionRectangle.X - viewTriangle[0].Position.X));
+            double bottomRightAngle = Math.Tan(((player.collisionRectangle.Y + player.collisionRectangle.Height) - viewTriangle[0].Position.Y) / ((player.collisionRectangle.X + player.collisionRectangle.Width) - viewTriangle[0].Position.X));
 
             double minPlayerAngle = Math.Min(Math.Min(topLeftAngle, topRightAngle), Math.Min(bottomLeftAngle, bottomRightAngle));
             double maxPlayerAngle = Math.Max(Math.Max(topLeftAngle, topRightAngle), Math.Max(bottomLeftAngle, bottomRightAngle));
@@ -134,6 +136,9 @@ namespace HideOut.Primitives
             while (minPlayerAngle > MathHelper.TwoPi) minPlayerAngle -= MathHelper.TwoPi;
             while (maxPlayerAngle < 0) maxPlayerAngle += MathHelper.TwoPi;
             while (maxPlayerAngle > MathHelper.TwoPi) maxPlayerAngle -= MathHelper.TwoPi;
+
+            minPlayerAngle += 4 * MathHelper.TwoPi;
+            maxPlayerAngle += 4 * MathHelper.TwoPi;
 
             foreach (Obstacle obs in visibleObstacles)
             {
@@ -153,12 +158,21 @@ namespace HideOut.Primitives
                 while (maxObstacleAngle < 0) maxObstacleAngle += MathHelper.TwoPi;
                 while (maxObstacleAngle > MathHelper.TwoPi) maxObstacleAngle -= MathHelper.TwoPi;
 
+                minObstacleAngle += 4 * MathHelper.TwoPi;
+                maxObstacleAngle += 4 * MathHelper.TwoPi;
+
                 //Check mindistance between player and obstacle; onward to false condition if obstacle is closer
-                //Compare angles; also account for boundary case along 0/2pi line
-                if (minObstacleAngle <= minPlayerAngle && maxObstacleAngle >= maxPlayerAngle) return false;
+                if (minObstacleAngle <= minPlayerAngle && maxObstacleAngle >= maxPlayerAngle)
+                {
+                    /*if (Distance(new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y), 
+                        new Vector2(((float)(obs.worldRectangle.X + obs.worldRectangle.Width))/2, ((float)(obs.worldRectangle.Y + obs.worldRectangle.Height))/2)) <
+                        Distance(new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y), 
+                        new Vector2(((float)(being.X + being.Width))/2, ((float)(being.Y + being.Height))/2))) return false;*/
+                    return false;
+                }
             }
 
-            return CanSee(being);
+            return CanSee(player.collisionRectangle);
         }
 
         public bool CanSee(Rectangle being)

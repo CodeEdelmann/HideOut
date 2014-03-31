@@ -117,6 +117,12 @@ namespace HideOut.Controllers
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(thePlayer.sprite, thePlayer.screenRectangle, Color.White);
+
+            //Rectangle source = new Rectangle(0, 0, 50, 50);
+
+            //sb.Draw(thePlayer.sprite, thePlayer.screenRectangle, source, Color.White);
+
+            
         }
 
         public void LoadContent(ContentManager cm)

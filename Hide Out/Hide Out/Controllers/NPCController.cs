@@ -53,7 +53,7 @@ namespace HideOut.Controllers
             tileController.Remove(npc);
         }
 
-        public bool Update(Rectangle playerRectangle, List<Obstacle> obstacles)
+        public bool Update(Player player, List<Obstacle> obstacles)
         {
             foreach (NPC npc in this.npcs)
             {
@@ -62,14 +62,14 @@ namespace HideOut.Controllers
                 {
                     if(npc.CanSee(obs.collisionRectangle) && !obs.canSeeThrough) visibleObstacles.Add(obs);
                 }
-                if(UpdateNPC(npc, playerRectangle, visibleObstacles)) return true;
+                if(UpdateNPC(npc, player, visibleObstacles)) return true;
             }
             return false;
         }
 
-        public bool UpdateNPC(NPC npc, Rectangle playerRectangle, List<Obstacle> visibleObstacles)
+        public bool UpdateNPC(NPC npc, Player player, List<Obstacle> visibleObstacles)
         {   
-            if (npc.CanSeePlayer(playerRectangle, visibleObstacles)) return true;
+            if (npc.CanSeePlayer(player, visibleObstacles)) return true;
             switch (npc.tag)
             {
                 case NPCType.Police:

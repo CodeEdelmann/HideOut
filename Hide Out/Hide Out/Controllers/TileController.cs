@@ -164,14 +164,17 @@ namespace HideOut.Controllers
                 if (e is Item)
                 {
                     tile.items.Add((Item)e);
+                    e.tiles.Add(tile);
                 }
                 else if (e is Obstacle)
                 {
                     tile.obstacles.Add((Obstacle)e);
+                    e.tiles.Add(tile);
                 }
                 else if (e is NPC)
                 {
                     tile.npcs.Add((NPC)e);
+                    e.tiles.Add(tile);
                 }
             }
         }
@@ -180,6 +183,19 @@ namespace HideOut.Controllers
         {
             this.Remove(e);
             this.Add(e);
+        }
+
+        public void ClearTiles()
+        {
+            foreach (List<Tile> l in tiles)
+            {
+                foreach (Tile t in l)
+                {
+                    t.items.Clear();
+                    t.npcs.Clear();
+                    t.obstacles.Clear();
+                }
+            }
         }
 
         

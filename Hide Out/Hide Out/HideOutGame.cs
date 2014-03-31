@@ -18,6 +18,7 @@ namespace HideOut
     /// </summary>
     public class HideOutGame : Game
     {
+        DisplayController displayController;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         PlayerController playerController;
@@ -30,8 +31,11 @@ namespace HideOut
         LevelController levelController;
         XMLController xmlController;
         BasicEffect basicEffect;
-        public static readonly int GAME_WIDTH = 1000;
-        public static readonly int GAME_HEIGHT = 1000;
+
+        public static readonly int MAX_GAME_WIDTH = 5000;
+        public static readonly int MAX_GAME_HEIGHT = 5000;
+        public static int GAME_WIDTH = 1000;
+        public static int GAME_HEIGHT = 1000;
         public static readonly int SCREEN_WIDTH = 800;
         public static readonly int SCREEN_HEIGHT = 500;
         public static int SCREEN_OFFSET_X = 0;
@@ -57,7 +61,7 @@ namespace HideOut
             graphics.ApplyChanges();
             this.InitializeControllers();
 
-            xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
+            xmlController = new XMLController("Content/Levels/world.xml", "Content/Levels/save.xml", playerController, obstacleController, itemController, npcController);
             xmlController.read();
 
            // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");
@@ -69,13 +73,15 @@ namespace HideOut
 
         private void InitializeControllers()
         {
+            displayController = new DisplayController();
+
             npcController = new NPCController();
             playerController = new PlayerController();
             itemController = new ItemController();
             obstacleController = new ObstacleController();
             levelController = new LevelController();
             entityGenerationController = new EntityGenerationController(itemController, npcController, obstacleController);
-            tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
+            tileController = new TileController(itemController, npcController, obstacleController, MAX_GAME_HEIGHT, MAX_GAME_WIDTH, PlayerController.SPRITE_SIZE);
             collisionController = new CollisionController(tileController);
 
             npcController.tileController = tileController;
@@ -99,7 +105,13 @@ namespace HideOut
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //testing for text display
+         
+
+
+
             // TODO: use this.Content to load your game content here
+            displayController.LoadContent(Content);
             npcController.LoadContent(Content);
             obstacleController.LoadContent(Content);
             playerController.LoadContent(Content);
@@ -109,6 +121,9 @@ namespace HideOut
             basicEffect = new BasicEffect(GraphicsDevice);
             basicEffect.VertexColorEnabled = true;
             basicEffect.LightingEnabled = false;
+
+
+            displayController.addDisplay(10, 100, "Hello world 1");
 
 
            //_fontRenderer = new FontRenderer(fontFile, <Texture2D>("player.png"));
@@ -156,6 +171,7 @@ namespace HideOut
             obstacleController.Update(gameTime);
             entityGenerationController.Update(gameTime);
             levelController.Update();
+            displayController.Update(gameTime);
             xmlController.Update();
 
             base.Update(gameTime);
@@ -190,6 +206,7 @@ namespace HideOut
             npcController.Draw(spriteBatch);
             playerController.Draw(spriteBatch);
 
+            displayController.Draw(spriteBatch);
 
 
             //_fontRenderer.DrawText(spriteBatch, 50, 50, "Hello World!");

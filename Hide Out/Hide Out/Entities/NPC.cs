@@ -49,9 +49,9 @@ namespace HideOut.Entities
             vision.Rotate(angle);
         }
 
-        public bool CanSeePlayer(Rectangle rect, List<Obstacle> visibleObstacles)
+        public bool CanSeePlayer(Player player, List<Obstacle> visibleObstacles)
         {
-            return vision.CanSeePlayer(rect, visibleObstacles);
+            return vision.CanSeePlayer(player, visibleObstacles);
         }
 
         public bool CanSee(Rectangle rect)

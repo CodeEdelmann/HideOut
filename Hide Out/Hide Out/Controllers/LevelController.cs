@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace HideOut.Controllers
 {
@@ -22,14 +23,15 @@ namespace HideOut.Controllers
             currentLevel = 1;
         }
 
-        public void Update()
+        public bool Update()
         {
             if (itemController.numCoins <= 0)
             {
                 currentLevel++;
                 ClearLevel();
-                InitializeLevel(currentLevel);
+                return InitializeLevel(currentLevel);
             }
+            return true;
         }
 
         public void ClearLevel()
@@ -40,11 +42,19 @@ namespace HideOut.Controllers
             tileController.ClearTiles();
         }
 
-        public void InitializeLevel(int level)
+        public bool InitializeLevel(int level)
         {
             string newFileName = PATH + level.ToString() + ".xml";
-            xmlController.read_fname = newFileName;
-            xmlController.read();
+            if(File.Exists(newFileName))
+            {
+                xmlController.read_fname = newFileName;
+                xmlController.read();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

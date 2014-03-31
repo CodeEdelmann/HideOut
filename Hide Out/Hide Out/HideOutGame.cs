@@ -32,6 +32,8 @@ namespace HideOut
         XMLController xmlController;
         BasicEffect basicEffect;
 
+        public static readonly bool CHEAT_MODE = false;
+
         public static readonly int MAX_GAME_WIDTH = 5000;
         public static readonly int MAX_GAME_HEIGHT = 5000;
         public static int GAME_WIDTH = 1000;
@@ -189,16 +191,24 @@ namespace HideOut
                 Exit();
 
             // TODO: Add your update logic here
-            if (npcController.Update(playerController.thePlayer, obstacleController.obstacles))
+            if (npcController.Update(playerController.thePlayer, obstacleController.obstacles) && !CHEAT_MODE)
             {
+                //TODO: show losing screen
                 Console.WriteLine("You lose!  Good day!");
                 Exit();
             }
+
+            if (!levelController.Update())
+            {
+                //TODO: show winning screen
+                Console.WriteLine("You win!  Good day!");
+                Exit();
+            }
+
             playerController.Update(gameTime);
             itemController.Update(gameTime);
             obstacleController.Update(gameTime);
             entityGenerationController.Update(gameTime);
-            levelController.Update();
             displayController.Update(gameTime);
             xmlController.Update();
 

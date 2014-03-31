@@ -62,5 +62,18 @@ namespace HideOut.Controllers
             }
             return retVal;
         }
+
+        public bool IsHidden(Player p)
+        {
+            List<Obstacle> nearbyObstacles = tileController.GetNearbyObstacles(p.worldRectangle);
+            foreach(Obstacle i in nearbyObstacles)
+            {
+                if(i.canOverlapWith && i.worldRectangle.Contains(p.worldRectangle))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

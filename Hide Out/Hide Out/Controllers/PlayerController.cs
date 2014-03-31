@@ -82,6 +82,15 @@ namespace HideOut.Controllers
                 this.PickupItem(i);
             }
 
+            if (collisionController.IsHidden(thePlayer))
+            {
+                thePlayer.isVisible = false;
+            }
+            else
+            {
+                thePlayer.isVisible = true;
+            }
+
             this.UpdateScreenOffsets();
         }
 

@@ -7,6 +7,8 @@ namespace HideOut.Controllers
 {
     class LevelController
     {
+        public static readonly string PATH = "Content/Levels/";
+        public XMLController xmlController { get; set; }
         public PlayerController playerController { get; set; }
         public NPCController npcController { get; set; }
         public ItemController itemController { get; set; }
@@ -40,7 +42,8 @@ namespace HideOut.Controllers
 
         public void InitializeLevel(int level)
         {
-
+            string newFileName = PATH + level.ToString() + ".xml";
+            xmlController.read_fname = newFileName;
         }
     }
 }

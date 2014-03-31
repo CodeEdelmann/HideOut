@@ -61,7 +61,7 @@ namespace HideOut
             graphics.ApplyChanges();
             this.InitializeControllers();
 
-            xmlController = new XMLController("Content/Levels/world.xml", "Content/Levels/save.xml", playerController, obstacleController, itemController, npcController);
+            xmlController = new XMLController("Content/Levels/1.xml", "Content/Levels/save.xml", playerController, obstacleController, itemController, npcController);
             xmlController.read();
 
            // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");

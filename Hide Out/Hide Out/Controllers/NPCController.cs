@@ -53,22 +53,27 @@ namespace HideOut.Controllers
             tileController.Remove(npc);
         }
 
-        public bool Update(Rectangle playerRectangle)
+        public bool Update(Rectangle playerRectangle, List<Obstacle> obstacles)
         {
             foreach (NPC npc in this.npcs)
             {
-                if(UpdateNPC(npc, playerRectangle)) return true;
+                List<Obstacle> visibleObstacles = new List<Obstacle>();
+                foreach (Obstacle obs in obstacles)
+                {
+                    if(npc.CanSee(obs.collisionRectangle) && !obs.canSeeThrough) visibleObstacles.Add(obs);
+                }
+                if(UpdateNPC(npc, playerRectangle, visibleObstacles)) return true;
             }
             return false;
         }
 
-        public bool UpdateNPC(NPC npc, Rectangle playerRectangle)
-        {
+        public bool UpdateNPC(NPC npc, Rectangle playerRectangle, List<Obstacle> visibleObstacles)
+        {   
+            if (npc.CanSeePlayer(playerRectangle, visibleObstacles)) return true;
             switch (npc.tag)
             {
                 case NPCType.Police:
                     //npc.Move(npc.vision.viewDirection);
-                    if (npc.CanSee(playerRectangle)) return true;
                     npc.Rotate(.01);
                     break;
             }
@@ -82,7 +87,7 @@ namespace HideOut.Controllers
                 foreach(EffectPass pass in bs.CurrentTechnique.Passes)
                 {
                     pass.Apply();
-                    gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangle(), 0, 1);
+                    gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangleToDraw(), 0, 1);
                 }
             }
         }

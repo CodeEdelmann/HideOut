@@ -49,6 +49,11 @@ namespace HideOut.Entities
             vision.Rotate(angle);
         }
 
+        public bool CanSeePlayer(Rectangle rect, List<Obstacle> visibleObstacles)
+        {
+            return vision.CanSeePlayer(rect, visibleObstacles);
+        }
+
         public bool CanSee(Rectangle rect)
         {
             return vision.CanSee(rect);
@@ -57,6 +62,11 @@ namespace HideOut.Entities
         public VertexPositionColor[] GetFieldOfViewTriangle()
         {
             return vision.GetFieldOfViewTriangle();
+        }
+
+        public VertexPositionColor[] GetFieldOfViewTriangleToDraw()
+        {
+            return vision.GetFieldOfViewTriangleToDraw();
         }
 
         private Vector2 Normalize(Vector2 v)

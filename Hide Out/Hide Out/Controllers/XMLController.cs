@@ -22,7 +22,12 @@ namespace HideOut
         string write_fname;
         KeyboardState oldState;
         bool isListening;
-        public XMLController(string read_fname, string write_fname, PlayerController pc, ObstacleController oc, ItemController ic, NPCController nc)
+        public XMLController()
+        {
+            oldState = Keyboard.GetState();
+            isListening = false;
+        }
+        public XMLController(string read_fname, string write_fname, PlayerController pc, ObstacleController oc, ItemController ic, NPCController nc) : this()
         {
             this.read_fname = read_fname;
             this.write_fname = write_fname;
@@ -30,13 +35,10 @@ namespace HideOut
             this.oc = oc;
             this.ic = ic;
             this.nc = nc;
-            oldState = Keyboard.GetState();
-            isListening = false;
         }
         public void read()
         {
             this.reader = new XmlTextReader(read_fname);
-            string entity = "";
             string type = "";
             int xPos = -1;
             int yPos = -1;
@@ -45,7 +47,6 @@ namespace HideOut
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        entity = reader.Name;
                         while (reader.MoveToNextAttribute())
                         {
                             switch (reader.Name)
@@ -58,17 +59,20 @@ namespace HideOut
                                     break;
                             }
                         }
-                        break;
-                    case XmlNodeType.Text:
-                        type = reader.Value;
-                        break;
-                    case XmlNodeType.EndElement:
-                        switch (entity)
+                        switch (reader.Name)
                         {
                             case "world":
                                 HideOutGame.GAME_WIDTH = xPos;
                                 HideOutGame.GAME_HEIGHT = yPos;
                                 break;
+                        }
+                        break;
+                    case XmlNodeType.Text:
+                        type = reader.Value;
+                        break;
+                    case XmlNodeType.EndElement:
+                        switch (reader.Name)
+                        {
                             case "player":
                                 this.pc.CreatePlayer(new Vector2(xPos, yPos));
                                 break;

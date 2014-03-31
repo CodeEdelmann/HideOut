@@ -40,6 +40,8 @@ namespace HideOut.Controllers
 
         public void Update(GameTime gameTime)
         {
+            thePlayer.UpdateState(gameTime);
+
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Left))
             {

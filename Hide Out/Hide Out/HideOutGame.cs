@@ -30,8 +30,11 @@ namespace HideOut
         CollisionController collisionController;
         XMLController xmlController;
         BasicEffect basicEffect;
-        public static readonly int GAME_WIDTH = 1000;
-        public static readonly int GAME_HEIGHT = 1000;
+
+        public static readonly int MAX_GAME_WIDTH = 5000;
+        public static readonly int MAX_GAME_HEIGHT = 5000;
+        public static int GAME_WIDTH = 1000;
+        public static int GAME_HEIGHT = 1000;
         public static readonly int SCREEN_WIDTH = 800;
         public static readonly int SCREEN_HEIGHT = 500;
         public static int SCREEN_OFFSET_X = 0;
@@ -57,7 +60,7 @@ namespace HideOut
             graphics.ApplyChanges();
             this.InitializeControllers();
 
-            xmlController = new XMLController("world.xml", "save.xml", playerController, obstacleController, itemController, npcController);
+            xmlController = new XMLController("Content/Levels/world.xml", "Content/Levels/save.xml", playerController, obstacleController, itemController, npcController);
             xmlController.read();
 
            // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");
@@ -76,7 +79,7 @@ namespace HideOut
             itemController = new ItemController();
             obstacleController = new ObstacleController();
             entityGenerationController = new EntityGenerationController(itemController, npcController, obstacleController);
-            tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
+            tileController = new TileController(itemController, npcController, obstacleController, MAX_GAME_HEIGHT, MAX_GAME_WIDTH, PlayerController.SPRITE_SIZE);
             collisionController = new CollisionController(tileController);
 
             npcController.tileController = tileController;

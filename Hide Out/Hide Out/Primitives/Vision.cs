@@ -68,6 +68,29 @@ namespace HideOut.Primitives
             fieldOfVision[2].Color = viewColor;
 
             //Index 0 is located at the center of the rectangle
+            fieldOfVision[0].Position = new Vector3(parentLocation.X + parentLocation.Width / 2, parentLocation.Y + parentLocation.Height / 2, 0);
+
+            //Indices 1 and 2 indicate the farthest points of view on the left and right sides, respectively, of the Searcher
+            double theta = GetTheta();
+            fieldOfVision[1].Position = new Vector3((float)(viewDistance * Math.Cos(theta + viewAngle)) + fieldOfVision[0].Position.X,
+                (float)(viewDistance * Math.Sin(theta + viewAngle)) + fieldOfVision[0].Position.Y,
+                0);
+            fieldOfVision[2].Position = new Vector3((float)(viewDistance * Math.Cos(theta - viewAngle)) + fieldOfVision[0].Position.X,
+                (float)(viewDistance * Math.Sin(theta - viewAngle)) + fieldOfVision[0].Position.Y
+                , 0);
+
+            return fieldOfVision;
+        }
+
+        public VertexPositionColor[] GetFieldOfViewTriangleToDraw()
+        {
+            VertexPositionColor[] fieldOfVision = new VertexPositionColor[3];
+
+            fieldOfVision[0].Color = viewColor;
+            fieldOfVision[1].Color = viewColor;
+            fieldOfVision[2].Color = viewColor;
+
+            //Index 0 is located at the center of the rectangle
             fieldOfVision[0].Position = new Vector3(parentLocation.X + parentLocation.Width / 2 - HideOutGame.SCREEN_OFFSET_X, parentLocation.Y + parentLocation.Height / 2 - HideOutGame.SCREEN_OFFSET_Y, 0);
 
             //Indices 1 and 2 indicate the farthest points of view on the left and right sides, respectively, of the Searcher
@@ -132,7 +155,7 @@ namespace HideOut.Primitives
 
                 //Check mindistance between player and obstacle; onward to false condition if obstacle is closer
                 //Compare angles; also account for boundary case along 0/2pi line
-                if (minObstacleAngle < minPlayerAngle && maxObstacleAngle > maxPlayerAngle) return false;
+                if (minObstacleAngle <= minPlayerAngle && maxObstacleAngle >= maxPlayerAngle) return false;
             }
 
             return CanSee(being);

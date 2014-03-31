@@ -60,7 +60,7 @@ namespace HideOut.Controllers
                 List<Obstacle> visibleObstacles = new List<Obstacle>();
                 foreach (Obstacle obs in obstacles)
                 {
-                    if(npc.CanSee(obs.screenRectangle) && !obs.canSeeThrough) visibleObstacles.Add(obs);
+                    if(npc.CanSee(obs.collisionRectangle) && !obs.canSeeThrough) visibleObstacles.Add(obs);
                 }
                 if(UpdateNPC(npc, playerRectangle, visibleObstacles)) return true;
             }
@@ -87,7 +87,7 @@ namespace HideOut.Controllers
                 foreach(EffectPass pass in bs.CurrentTechnique.Passes)
                 {
                     pass.Apply();
-                    gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangle(), 0, 1);
+                    gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangleToDraw(), 0, 1);
                 }
             }
         }

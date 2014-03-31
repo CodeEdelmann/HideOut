@@ -64,6 +64,11 @@ namespace HideOut.Entities
             return vision.GetFieldOfViewTriangle();
         }
 
+        public VertexPositionColor[] GetFieldOfViewTriangleToDraw()
+        {
+            return vision.GetFieldOfViewTriangleToDraw();
+        }
+
         private Vector2 Normalize(Vector2 v)
         {
             float distance = Distance(v, new Vector2(0, 0));

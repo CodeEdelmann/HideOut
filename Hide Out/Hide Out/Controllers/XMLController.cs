@@ -65,6 +65,10 @@ namespace HideOut
                     case XmlNodeType.EndElement:
                         switch (entity)
                         {
+                            case "world":
+                                HideOutGame.GAME_WIDTH = xPos;
+                                HideOutGame.GAME_HEIGHT = yPos;
+                                break;
                             case "player":
                                 this.pc.CreatePlayer(new Vector2(xPos, yPos));
                                 break;
@@ -131,17 +135,19 @@ namespace HideOut
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("world");
+                writer.WriteAttributeString("X", Convert.ToString(HideOutGame.GAME_WIDTH));
+                writer.WriteAttributeString("Y", Convert.ToString(HideOutGame.GAME_HEIGHT));
 
                 writer.WriteStartElement("player");
-                writer.WriteAttributeString("X", Convert.ToString(this.pc.thePlayer.position.X));
-                writer.WriteAttributeString("Y", Convert.ToString(this.pc.thePlayer.position.Y));
+                writer.WriteAttributeString("X", Convert.ToString((int)this.pc.thePlayer.position.X));
+                writer.WriteAttributeString("Y", Convert.ToString((int)this.pc.thePlayer.position.Y));
                 writer.WriteFullEndElement();
 
                 foreach (Obstacle o in this.oc.obstacles)
                 {
                     writer.WriteStartElement("obstacle");
-                    writer.WriteAttributeString("X", Convert.ToString(o.position.X));
-                    writer.WriteAttributeString("Y", Convert.ToString(o.position.Y));
+                    writer.WriteAttributeString("X", Convert.ToString((int)o.position.X));
+                    writer.WriteAttributeString("Y", Convert.ToString((int)o.position.Y));
                     string type = "";
                     switch (o.tag)
                     {
@@ -165,8 +171,8 @@ namespace HideOut
                 foreach (Item i in this.ic.activeItems)
                 {
                     writer.WriteStartElement("item");
-                    writer.WriteAttributeString("X", Convert.ToString(i.position.X));
-                    writer.WriteAttributeString("Y", Convert.ToString(i.position.Y));
+                    writer.WriteAttributeString("X", Convert.ToString((int)i.position.X));
+                    writer.WriteAttributeString("Y", Convert.ToString((int)i.position.Y));
                     string type = "";
                     switch (i.tag)
                     {
@@ -190,8 +196,8 @@ namespace HideOut
                 foreach (NPC n in this.nc.npcs)
                 {
                     writer.WriteStartElement("npc");
-                    writer.WriteAttributeString("X", Convert.ToString(n.position.X));
-                    writer.WriteAttributeString("Y", Convert.ToString(n.position.Y));
+                    writer.WriteAttributeString("X", Convert.ToString((int)n.position.X));
+                    writer.WriteAttributeString("Y", Convert.ToString((int)n.position.Y));
                     string type = "";
                     switch (n.tag)
                     {

@@ -27,6 +27,7 @@ namespace HideOut
         EntityGenerationController entityGenerationController;
         TileController tileController;
         CollisionController collisionController;
+        LevelController levelController;
         XMLController xmlController;
         BasicEffect basicEffect;
         public static readonly int GAME_WIDTH = 1000;
@@ -72,6 +73,7 @@ namespace HideOut
             playerController = new PlayerController();
             itemController = new ItemController();
             obstacleController = new ObstacleController();
+            levelController = new LevelController();
             entityGenerationController = new EntityGenerationController(itemController, npcController, obstacleController);
             tileController = new TileController(itemController, npcController, obstacleController, GAME_HEIGHT, GAME_WIDTH, PlayerController.SPRITE_SIZE);
             collisionController = new CollisionController(tileController);
@@ -81,6 +83,11 @@ namespace HideOut
             obstacleController.tileController = tileController;
             playerController.itemController = itemController;
             playerController.collisionController = collisionController;
+            levelController.itemController = itemController;
+            levelController.obstacleController = obstacleController;
+            levelController.playerController = playerController;
+            levelController.npcController = npcController;
+            levelController.tileController = tileController;
         }
 
         /// <summary>
@@ -148,6 +155,7 @@ namespace HideOut
             itemController.Update(gameTime);
             obstacleController.Update(gameTime);
             entityGenerationController.Update(gameTime);
+            levelController.Update();
             xmlController.Update();
 
             base.Update(gameTime);

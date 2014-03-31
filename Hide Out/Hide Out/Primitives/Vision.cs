@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
+using HideOut.Entities;
 
 namespace HideOut.Primitives
 {
@@ -84,6 +86,56 @@ namespace HideOut.Primitives
         {
             double theta = GetTheta();
             viewDirection = new Vector2((float)Math.Cos(theta + angle), (float)Math.Sin(theta + angle));
+        }
+
+        public bool CanSeePlayer(Rectangle being, List<Obstacle> visibleObstacles)
+        {
+            VertexPositionColor[] viewTriangle = GetFieldOfViewTriangle();
+
+            double theta = GetTheta();
+            double minFOVAngle = theta - viewAngle;
+            double maxFOVAngle = theta + viewAngle;
+
+            double topLeftAngle = Math.Tan((being.Y - viewTriangle[0].Position.Y) / (being.X - viewTriangle[0].Position.X));
+            double topRightAngle = Math.Tan((being.Y - viewTriangle[0].Position.Y) / ((being.X + being.Width) - viewTriangle[0].Position.X));
+            double bottomLeftAngle = Math.Tan(((being.Y + being.Height) - viewTriangle[0].Position.Y) / (being.X - viewTriangle[0].Position.X));
+            double bottomRightAngle = Math.Tan(((being.Y + being.Height) - viewTriangle[0].Position.Y) / ((being.X + being.Width) - viewTriangle[0].Position.X));
+
+            double minPlayerAngle = Math.Min(Math.Min(topLeftAngle, topRightAngle), Math.Min(bottomLeftAngle, bottomRightAngle));
+            double maxPlayerAngle = Math.Max(Math.Max(topLeftAngle, topRightAngle), Math.Max(bottomLeftAngle, bottomRightAngle));
+
+            if (minPlayerAngle < minFOVAngle) minPlayerAngle = minFOVAngle;
+            if (maxPlayerAngle > maxFOVAngle) maxPlayerAngle = maxFOVAngle;
+
+            while (minPlayerAngle < 0) minPlayerAngle += MathHelper.TwoPi;
+            while (minPlayerAngle > MathHelper.TwoPi) minPlayerAngle -= MathHelper.TwoPi;
+            while (maxPlayerAngle < 0) maxPlayerAngle += MathHelper.TwoPi;
+            while (maxPlayerAngle > MathHelper.TwoPi) maxPlayerAngle -= MathHelper.TwoPi;
+
+            foreach (Obstacle obs in visibleObstacles)
+            {
+                topLeftAngle = Math.Tan((obs.worldRectangle.Y - viewTriangle[0].Position.Y) / (obs.worldRectangle.X - viewTriangle[0].Position.X));
+                topRightAngle = Math.Tan((obs.worldRectangle.Y - viewTriangle[0].Position.Y) / ((obs.worldRectangle.X + obs.worldRectangle.Width) - viewTriangle[0].Position.X));
+                bottomLeftAngle = Math.Tan(((obs.worldRectangle.Y + obs.worldRectangle.Height) - viewTriangle[0].Position.Y) / (obs.worldRectangle.X - viewTriangle[0].Position.X));
+                bottomRightAngle = Math.Tan(((obs.worldRectangle.Y + obs.worldRectangle.Height) - viewTriangle[0].Position.Y) / ((obs.worldRectangle.X + obs.worldRectangle.Width) - viewTriangle[0].Position.X));
+
+                double minObstacleAngle = Math.Min(Math.Min(topLeftAngle, topRightAngle), Math.Min(bottomLeftAngle, bottomRightAngle));
+                double maxObstacleAngle = Math.Max(Math.Max(topLeftAngle, topRightAngle), Math.Max(bottomLeftAngle, bottomRightAngle));
+
+                if (minObstacleAngle < minFOVAngle) minObstacleAngle = minFOVAngle;
+                if (maxObstacleAngle > maxFOVAngle) maxObstacleAngle = maxFOVAngle;
+
+                while (minObstacleAngle < 0) minObstacleAngle += MathHelper.TwoPi;
+                while (minObstacleAngle > MathHelper.TwoPi) minObstacleAngle -= MathHelper.TwoPi;
+                while (maxObstacleAngle < 0) maxObstacleAngle += MathHelper.TwoPi;
+                while (maxObstacleAngle > MathHelper.TwoPi) maxObstacleAngle -= MathHelper.TwoPi;
+
+                //Check mindistance between player and obstacle; onward to false condition if obstacle is closer
+                //Compare angles; also account for boundary case along 0/2pi line
+                if (minObstacleAngle < minPlayerAngle && maxObstacleAngle > maxPlayerAngle) return false;
+            }
+
+            return CanSee(being);
         }
 
         public bool CanSee(Rectangle being)

@@ -24,7 +24,7 @@ namespace HideOut.Controllers
             obstacleController = oc;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
 
@@ -48,6 +48,11 @@ namespace HideOut.Controllers
                 else if (newState.IsKeyDown(Keys.C) && !oldState.IsKeyDown(Keys.C))
                 {
                     itemController.CreateItem(Entities.ItemType.CandyBar, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
+                    isListening = false;
+                }
+                else if (newState.IsKeyDown(Keys.O) && !oldState.IsKeyDown(Keys.O))
+                {
+                    itemController.CreateItem(Entities.ItemType.Coin, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }
                 else if (newState.IsKeyDown(Keys.W) && !oldState.IsKeyDown(Keys.W))

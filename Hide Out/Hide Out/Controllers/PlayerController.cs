@@ -16,6 +16,7 @@ namespace HideOut.Controllers
         private Texture2D playerTexture;
         public static readonly int SPRITE_SIZE = 50;
         public CollisionController collisionController { set; get; }
+        public ItemController itemController { get; set; }
 
         public PlayerController()
         {
@@ -32,47 +33,53 @@ namespace HideOut.Controllers
             thePlayer.maxThirst = 10;
             thePlayer.currentHunger = 10;
             thePlayer.maxHunger = 10;
-            thePlayer.items = new List<Item>();
             thePlayer.position = position;
             thePlayer.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             thePlayer.sprite = playerTexture;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Left))
             {
-                thePlayer.MoveLeft();
-                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.X < 0)
+                thePlayer.MoveLeft(gameTime);
+                if (collisionController.IllegalMove(this.thePlayer))
                 {
-                    thePlayer.MoveRight();
+                    thePlayer.MoveRight(gameTime);
                 }
             }
             if (keyboard.IsKeyDown(Keys.Right))
             {
-                thePlayer.MoveRight();
-                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.X + SPRITE_SIZE > HideOutGame.GAME_WIDTH)
+                thePlayer.MoveRight(gameTime);
+                if (collisionController.IllegalMove(this.thePlayer))
                 {
-                    thePlayer.MoveLeft();
+                    thePlayer.MoveLeft(gameTime);
                 }
             }
             if (keyboard.IsKeyDown(Keys.Up))
             {
-                thePlayer.MoveUp();
-                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.Y < 0)
+                thePlayer.MoveUp(gameTime);
+                if (collisionController.IllegalMove(this.thePlayer))
                 {
-                    thePlayer.MoveDown();
+                    thePlayer.MoveDown(gameTime);
                 }
             }
             if (keyboard.IsKeyDown(Keys.Down))
             {
-                thePlayer.MoveDown();
-                if (collisionController.GetCollidingObstacles(thePlayer.worldRectangle).Count > 0 || thePlayer.position.Y + SPRITE_SIZE > HideOutGame.GAME_HEIGHT)
+                thePlayer.MoveDown(gameTime);
+                if (collisionController.IllegalMove(this.thePlayer))
                 {
-                    thePlayer.MoveUp();
+                    thePlayer.MoveUp(gameTime);
                 }
             }
+
+            List<Item> items = collisionController.GetCollidingItems(thePlayer);
+            foreach(Item i in items)
+            {
+                this.PickupItem(i);
+            }
+
             this.UpdateScreenOffsets();
         }
 
@@ -90,46 +97,21 @@ namespace HideOut.Controllers
 
         public void PickupItem(Item item)
         {
-            if (thePlayer.items.Count < 3)
+            switch (item.tag)
             {
-                thePlayer.items.Add(item);
-                item.position = new Vector2(-1, -1);
-                item.isVisible = false;
-                item.canPickUp = false;
-                //todo: set item to not be drawn
+                case ItemType.WaterBottle:
+                    thePlayer.currentThirst += item.waterValue;
+                    if (thePlayer.currentThirst > thePlayer.maxThirst)
+                        thePlayer.currentThirst = thePlayer.maxThirst;
+                    break;
+                //implementing CandyBar - which affects speed - will be more difficult
+                case ItemType.Apple:
+                    thePlayer.currentHunger += item.foodValue;
+                    if (thePlayer.currentHunger > thePlayer.maxHunger)
+                        thePlayer.currentHunger = thePlayer.maxHunger;
+                    break;
             }
-        }
-
-        public void DropItem(Item item)
-        {
-            thePlayer.items.Remove(item);
-        }
-
-        public void UseItem(int index)
-        {
-            if (index >= 0 && index < thePlayer.items.Count)
-            {
-                //todo: call itemController's add item
-                Item item = thePlayer.items[index];
-                switch (item.tag)
-                {
-                    case ItemType.WaterBottle:
-                        thePlayer.currentThirst += item.waterValue;
-                        if (thePlayer.currentThirst > thePlayer.maxThirst)
-                            thePlayer.currentThirst = thePlayer.maxThirst;
-                        break;
-                    //implementing CandyBar - which affects speed - will be more difficult
-                    case ItemType.Apple:
-                        thePlayer.currentHunger += item.foodValue;
-                        if (thePlayer.currentHunger > thePlayer.maxHunger)
-                            thePlayer.currentHunger = thePlayer.maxHunger;
-                        break; 
-
-                }
-
-                thePlayer.items.Remove(item);
-                
-            }
+            itemController.RemoveItem(item);
         }
 
         public void Draw(SpriteBatch sb)

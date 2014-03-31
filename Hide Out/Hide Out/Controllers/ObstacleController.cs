@@ -13,6 +13,8 @@ namespace HideOut.Controllers
     class ObstacleController
     {
         public List<Obstacle> obstacles { get; set; }
+        public TileController tileController { get; set; }
+
         private Texture2D bushTexture;
         private Texture2D treeTexture;
         private Texture2D fountainTexture;
@@ -59,14 +61,16 @@ namespace HideOut.Controllers
         public void AddObstacle(Obstacle obstacle)
         {
             obstacles.Add(obstacle);
+            tileController.Add(obstacle);
         }
 
         public void RemoveObstacle(Obstacle obstacle)
         {
             obstacles.Remove(obstacle);
+            tileController.Remove(obstacle);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
         }
 

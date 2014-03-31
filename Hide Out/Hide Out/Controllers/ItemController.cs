@@ -13,13 +13,13 @@ namespace HideOut.Controllers
 {
     class ItemController
     {
-
         public List<Item> activeItems { get; set; }
+        public TileController tileController { get; set; }
         private Texture2D waterBottleTexture;
         private Texture2D appleTexture;
         private Texture2D candyBarTexture;
+        private Texture2D coinTexture;
         private static readonly int SPRITE_SIZE = 25;
-        private static readonly int DRAWS_PER_MINUTE = 900;
 
         public ItemController()
         {
@@ -29,6 +29,7 @@ namespace HideOut.Controllers
         public void AddItem(Item item)
         {
             activeItems.Add(item);
+            tileController.Add(item);
         }
 
         public void CreateItem(ItemType type, Vector2 pos)
@@ -39,7 +40,6 @@ namespace HideOut.Controllers
             item.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             item.isVisible = true;
             item.canPickUp = true;
-            item.expirationTime = DRAWS_PER_MINUTE;
             switch (type)
             {
                 case ItemType.WaterBottle:
@@ -54,6 +54,9 @@ namespace HideOut.Controllers
                     item.sprite = appleTexture;
                     item.foodValue = 5;
                     break;
+                case ItemType.Coin:
+                    item.sprite = coinTexture;
+                    break;
             }
 
             this.AddItem(item);
@@ -62,6 +65,7 @@ namespace HideOut.Controllers
         public void RemoveItem(Item item)
         {
             activeItems.Remove(item);
+            tileController.Remove(item);
         }
 
         public void ClearItems()
@@ -69,17 +73,9 @@ namespace HideOut.Controllers
             activeItems.Clear();
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            List<Item> updating = this.activeItems;
-            foreach (Item item in updating)
-            {
-                item.UpdateTime();
-                if (item.expirationTime <= 0)
-                {
-                    RemoveItem(item);
-                }
-            }
+
         }
 
         public void PickUp(Item item)
@@ -100,6 +96,7 @@ namespace HideOut.Controllers
             waterBottleTexture = cm.Load<Texture2D>("waterBottle.png");
             candyBarTexture = cm.Load<Texture2D>("candybar.png");  
             appleTexture = cm.Load<Texture2D>("apple.png");
+            coinTexture = cm.Load<Texture2D>("coin.png");
 
             foreach (Item item in this.activeItems)
             {
@@ -115,6 +112,10 @@ namespace HideOut.Controllers
                     
                     case ItemType.CandyBar:
                         item.sprite = candyBarTexture;
+                        break;
+
+                    case ItemType.Coin:
+                        item.sprite = coinTexture;
                         break;
                 }
 

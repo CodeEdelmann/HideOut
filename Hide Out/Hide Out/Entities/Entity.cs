@@ -11,6 +11,7 @@ namespace HideOut.Entities
 {
     abstract class Entity
     {
+        public static readonly float HITBOX_SCALE = 0.8F;
         public Vector2 position { get; set; }
         public Point rectangleBounds { get; set; }
         public List<Tile> tiles;
@@ -29,6 +30,18 @@ namespace HideOut.Entities
                 return new Rectangle((int)position.X, (int)position.Y, rectangleBounds.X, rectangleBounds.Y);
             }
         }
+
+        public Rectangle collisionRectangle
+        {
+            get
+            {
+                return new Rectangle((int)(position.X + rectangleBounds.X * (1 - HITBOX_SCALE) / 2),
+                                     (int)(position.Y + rectangleBounds.Y * (1 - HITBOX_SCALE) / 2),
+                                     (int)(rectangleBounds.X * HITBOX_SCALE),
+                                     (int)(rectangleBounds.Y * HITBOX_SCALE));
+            }
+        }
+
         public Texture2D sprite { get; set; }
         public Entity()
         {

@@ -14,6 +14,8 @@ namespace HideOut.Controllers
     class NPCController
     {
         public List<NPC> npcs { get; set; }
+        public TileController tileController { get; set; }
+
         private Texture2D policeTexture;
         private static readonly int SPRITE_SIZE = 50;
 
@@ -25,6 +27,7 @@ namespace HideOut.Controllers
         public void AddNPC(NPC npc)
         {
             npcs.Add(npc);
+            tileController.Add(npc);
         }
 
         public void CreateNPC(NPCType tag, Vector2 position)
@@ -47,6 +50,7 @@ namespace HideOut.Controllers
         public void RemoveNPC(NPC npc)
         {
             npcs.Remove(npc);
+            tileController.Remove(npc);
         }
 
         public bool Update(Rectangle playerRectangle, List<Obstacle> obstacles)

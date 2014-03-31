@@ -9,6 +9,7 @@ namespace HideOut.Entities
 {
     class Player : Entity
     {
+        float modd = 16.6666F;
         public int currentSpeed { get; set; }
         public int baseSpeed { get; set; }
         public int currentThirst { get; set; }
@@ -16,31 +17,31 @@ namespace HideOut.Entities
         public int currentHunger { get; set; }
         public int maxHunger { get; set; }
         public bool isVisible { get; set; }
-        public List<Item> items { get; set; }
 
         public Player() : base()
         {
 
         }
 
-        public void MoveRight()
+        public void MoveRight(GameTime gameTime)
         {
-            this.position += new Vector2(this.currentSpeed, 0);
+            
+            this.position += new Vector2(this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
         }
 
-        public void MoveLeft()
+        public void MoveLeft(GameTime gameTime)
         {
-            this.position += new Vector2(-1 * this.currentSpeed, 0);
+            this.position += new Vector2(-1 * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
         }
 
-        public void MoveUp()
+        public void MoveUp(GameTime gameTime)
         {
-            this.position += new Vector2(0, -1 * this.currentSpeed);
+            this.position += new Vector2(0, -1 * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 
-        public void MoveDown()
+        public void MoveDown(GameTime gameTime)
         {
-            this.position += new Vector2(0, this.currentSpeed);
+            this.position += new Vector2(0, this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 
         public override string ToString()
@@ -49,10 +50,7 @@ namespace HideOut.Entities
                 "Speed: " + this.currentSpeed + " / " + this.baseSpeed + "\n" +
                 "Thirst: " + this.currentThirst + " / " + this.maxThirst + "\n" +
                 "Hunger: " + this.currentHunger + " / " + this.maxHunger + "\n";
-            foreach (Item item in this.items)
-            {
-                retVal += "Item: " + item + "\n";
-            }
+
             return retVal;
         }
     }

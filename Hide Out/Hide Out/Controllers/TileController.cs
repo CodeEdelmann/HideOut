@@ -158,7 +158,7 @@ namespace HideOut.Controllers
 
         public void Add(Entity e)
         {
-            List<Tile> tiles = this.GetNearbyTiles(e.screenRectangle);
+            List<Tile> tiles = this.GetNearbyTiles(e.worldRectangle);
             foreach(Tile tile in tiles)
             {
                 if (e is Item)

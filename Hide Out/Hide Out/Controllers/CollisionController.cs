@@ -75,5 +75,18 @@ namespace HideOut.Controllers
             }
             return false;
         }
+
+        public bool NearFountain(Player p)
+        {
+            List<Obstacle> nearbyObstacles = tileController.GetNearbyObstacles(p.worldRectangle);
+            foreach (Obstacle i in nearbyObstacles)
+            {
+                if(i.tag == ObstacleType.Fountain && i.worldRectangle.Intersects(p.worldRectangle)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

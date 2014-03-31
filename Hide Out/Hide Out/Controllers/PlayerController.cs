@@ -91,6 +91,11 @@ namespace HideOut.Controllers
                 thePlayer.isVisible = true;
             }
 
+            if (collisionController.NearFountain(thePlayer))
+            {
+                //Todo (SYNDEY): Update Player's thirst
+            }
+
             this.UpdateScreenOffsets();
         }
 

@@ -44,6 +44,7 @@ namespace HideOut.Controllers
 
         public bool InitializeLevel(int level)
         {
+            currentLevel = level;
             string newFileName = PATH + level.ToString() + ".xml";
             if(File.Exists(newFileName))
             {

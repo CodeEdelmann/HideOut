@@ -35,6 +35,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\LevelController.cs" />
     <Compile Include="FontRenderer.cs" />
     <Compile Include="Controllers\CollisionController.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Entities\Obstacle.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="HideOutGame.cs" />
+    <Compile Include="Primitives\Display.cs" />
     <Compile Include="Primitives\Tile.cs" />
     <Compile Include="Primitives\Vision.cs" />
     <Compile Include="Program.cs" />
@@ -79,6 +81,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\apple.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\basicFont.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\black.png">

@@ -113,13 +113,18 @@ namespace HideOut.Primitives
 
         public bool CanSeePlayer(Player player, List<Obstacle> visibleObstacles)
         {
-            if (!player.isVisible) return false;
+            if (!player.isVisible || !CanSee(player.collisionRectangle)) return false;
 
             VertexPositionColor[] viewTriangle = GetFieldOfViewTriangle();
 
             double theta = GetTheta();
             double minFOVAngle = theta - viewAngle;
             double maxFOVAngle = theta + viewAngle;
+
+            while (minFOVAngle < 0) minFOVAngle += MathHelper.TwoPi;
+            while (minFOVAngle > MathHelper.TwoPi) minFOVAngle -= MathHelper.TwoPi;
+            while (maxFOVAngle < 0) maxFOVAngle += MathHelper.TwoPi;
+            while (maxFOVAngle > MathHelper.TwoPi) maxFOVAngle -= MathHelper.TwoPi;
 
             double topLeftAngle = Math.Tan((player.collisionRectangle.Y - viewTriangle[0].Position.Y) / (player.collisionRectangle.X - viewTriangle[0].Position.X));
             double topRightAngle = Math.Tan((player.collisionRectangle.Y - viewTriangle[0].Position.Y) / ((player.collisionRectangle.X + player.collisionRectangle.Width) - viewTriangle[0].Position.X));
@@ -129,16 +134,24 @@ namespace HideOut.Primitives
             double minPlayerAngle = Math.Min(Math.Min(topLeftAngle, topRightAngle), Math.Min(bottomLeftAngle, bottomRightAngle));
             double maxPlayerAngle = Math.Max(Math.Max(topLeftAngle, topRightAngle), Math.Max(bottomLeftAngle, bottomRightAngle));
 
-            if (minPlayerAngle < minFOVAngle) minPlayerAngle = minFOVAngle;
-            if (maxPlayerAngle > maxFOVAngle) maxPlayerAngle = maxFOVAngle;
+            if (minPlayerAngle < MathHelper.PiOver4 && maxPlayerAngle > MathHelper.TwoPi - MathHelper.PiOver4)
+            {
+                if (topLeftAngle > MathHelper.TwoPi - MathHelper.PiOver4) topLeftAngle -= MathHelper.TwoPi;
+                if (topRightAngle > MathHelper.TwoPi - MathHelper.PiOver4) topRightAngle -= MathHelper.TwoPi;
+                if (bottomLeftAngle > MathHelper.TwoPi - MathHelper.PiOver4) bottomLeftAngle -= MathHelper.TwoPi;
+                if (bottomRightAngle > MathHelper.TwoPi - MathHelper.PiOver4) bottomRightAngle -= MathHelper.TwoPi;
+
+                minPlayerAngle = Math.Min(Math.Min(topLeftAngle, topRightAngle), Math.Min(bottomLeftAngle, bottomRightAngle));
+                maxPlayerAngle = Math.Max(Math.Max(topLeftAngle, topRightAngle), Math.Max(bottomLeftAngle, bottomRightAngle));
+            }
 
             while (minPlayerAngle < 0) minPlayerAngle += MathHelper.TwoPi;
             while (minPlayerAngle > MathHelper.TwoPi) minPlayerAngle -= MathHelper.TwoPi;
             while (maxPlayerAngle < 0) maxPlayerAngle += MathHelper.TwoPi;
             while (maxPlayerAngle > MathHelper.TwoPi) maxPlayerAngle -= MathHelper.TwoPi;
 
-            minPlayerAngle += 4 * MathHelper.TwoPi;
-            maxPlayerAngle += 4 * MathHelper.TwoPi;
+            if (minPlayerAngle < minFOVAngle) minPlayerAngle = minFOVAngle;
+            if (maxPlayerAngle > maxFOVAngle) maxPlayerAngle = maxFOVAngle;
 
             foreach (Obstacle obs in visibleObstacles)
             {
@@ -150,29 +163,45 @@ namespace HideOut.Primitives
                 double minObstacleAngle = Math.Min(Math.Min(topLeftAngle, topRightAngle), Math.Min(bottomLeftAngle, bottomRightAngle));
                 double maxObstacleAngle = Math.Max(Math.Max(topLeftAngle, topRightAngle), Math.Max(bottomLeftAngle, bottomRightAngle));
 
-                if (minObstacleAngle < minFOVAngle) minObstacleAngle = minFOVAngle;
-                if (maxObstacleAngle > maxFOVAngle) maxObstacleAngle = maxFOVAngle;
+                if (minObstacleAngle < MathHelper.PiOver4 && maxObstacleAngle > MathHelper.TwoPi - MathHelper.PiOver4)
+                {
+                    if (topLeftAngle > MathHelper.TwoPi - MathHelper.PiOver4) topLeftAngle -= MathHelper.TwoPi;
+                    if (topRightAngle > MathHelper.TwoPi - MathHelper.PiOver4) topRightAngle -= MathHelper.TwoPi;
+                    if (bottomLeftAngle > MathHelper.TwoPi - MathHelper.PiOver4) bottomLeftAngle -= MathHelper.TwoPi;
+                    if (bottomRightAngle > MathHelper.TwoPi - MathHelper.PiOver4) bottomRightAngle -= MathHelper.TwoPi;
+
+                    minObstacleAngle = Math.Min(Math.Min(topLeftAngle, topRightAngle), Math.Min(bottomLeftAngle, bottomRightAngle));
+                    maxObstacleAngle = Math.Max(Math.Max(topLeftAngle, topRightAngle), Math.Max(bottomLeftAngle, bottomRightAngle));
+                }
 
                 while (minObstacleAngle < 0) minObstacleAngle += MathHelper.TwoPi;
                 while (minObstacleAngle > MathHelper.TwoPi) minObstacleAngle -= MathHelper.TwoPi;
                 while (maxObstacleAngle < 0) maxObstacleAngle += MathHelper.TwoPi;
                 while (maxObstacleAngle > MathHelper.TwoPi) maxObstacleAngle -= MathHelper.TwoPi;
 
-                minObstacleAngle += 4 * MathHelper.TwoPi;
-                maxObstacleAngle += 4 * MathHelper.TwoPi;
+                if (minObstacleAngle < minFOVAngle) minObstacleAngle = minFOVAngle;
+                if (maxObstacleAngle > maxFOVAngle) maxObstacleAngle = maxFOVAngle;
 
                 //Check mindistance between player and obstacle; onward to false condition if obstacle is closer
                 if (minObstacleAngle <= minPlayerAngle && maxObstacleAngle >= maxPlayerAngle)
                 {
-                    /*if (Distance(new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y), 
-                        new Vector2(((float)(obs.worldRectangle.X + obs.worldRectangle.Width))/2, ((float)(obs.worldRectangle.Y + obs.worldRectangle.Height))/2)) <
-                        Distance(new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y), 
-                        new Vector2(((float)(being.X + being.Width))/2, ((float)(being.Y + being.Height))/2))) return false;*/
-                    return false;
+                    double topLeftPlayerDistance = Distance(new Vector2(player.collisionRectangle.X, player.collisionRectangle.Y), new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y));
+                    double topRightPlayerDistance = Distance(new Vector2(player.collisionRectangle.X + player.collisionRectangle.Width, player.collisionRectangle.Y), new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y));
+                    double bottomLeftPlayerDistance = Distance(new Vector2(player.collisionRectangle.X, player.collisionRectangle.Y + player.collisionRectangle.Height), new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y));
+                    double bottomRightPlayerDistance = Distance(new Vector2(player.collisionRectangle.X + player.collisionRectangle.Width, player.collisionRectangle.Y + player.collisionRectangle.Height), new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y));
+                    double minPlayerDistance = Math.Min(Math.Min(topLeftPlayerDistance, topRightPlayerDistance), Math.Min(bottomLeftPlayerDistance, bottomRightPlayerDistance));
+
+                    double topLeftObstacleDistance = Distance(new Vector2(obs.worldRectangle.X, obs.worldRectangle.Y), new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y));
+                    double topRightObstacleDistance = Distance(new Vector2(obs.worldRectangle.X + obs.worldRectangle.Width, obs.worldRectangle.Y), new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y));
+                    double bottomLeftObstacleDistance = Distance(new Vector2(obs.worldRectangle.X, obs.worldRectangle.Y + obs.worldRectangle.Height), new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y));
+                    double bottomRightObstacleDistance = Distance(new Vector2(obs.worldRectangle.X + obs.worldRectangle.Width, obs.worldRectangle.Y + obs.worldRectangle.Height), new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y));
+                    double minObstacleDistance = Math.Min(Math.Min(topLeftObstacleDistance, topRightObstacleDistance), Math.Min(bottomLeftObstacleDistance, bottomRightObstacleDistance));
+
+                    if (minPlayerDistance > minObstacleDistance) return false;
                 }
             }
 
-            return CanSee(player.collisionRectangle);
+            return true;
         }
 
         public bool CanSee(Rectangle being)

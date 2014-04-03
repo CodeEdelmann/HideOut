@@ -124,6 +124,9 @@ namespace HideOut
             levelController.npcController = npcController;
             levelController.tileController = tileController;
             levelController.xmlController = xmlController;
+
+            //set npc controller
+            npcController.collisionController = collisionController;
         }
 
         /// <summary>
@@ -191,7 +194,7 @@ namespace HideOut
                 Exit();
 
             // TODO: Add your update logic here
-            if (npcController.Update(playerController.thePlayer, obstacleController.obstacles) && !CHEAT_MODE)
+            if (npcController.Update(playerController.thePlayer, obstacleController.obstacles, gameTime) && !CHEAT_MODE)
             {
                 //TODO: show losing screen
                 Console.WriteLine("You lose!  Good day!");

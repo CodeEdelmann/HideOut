@@ -71,7 +71,7 @@ namespace HideOut.Controllers
 
             for (int i = 0; i < thirst; i++)
             {
-                sb.Draw(thirstTexture, new Rectangle(20 * i, 50, 20, 20), Color.White);
+                sb.Draw(thirstTexture, new Rectangle(20 * i, 25, 20, 20), Color.White);
             }
 
 

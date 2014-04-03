@@ -19,7 +19,15 @@ namespace HideOut.Controllers
         private Texture2D appleTexture;
         private Texture2D candyBarTexture;
         private Texture2D coinTexture;
-        private static readonly int SPRITE_SIZE = 25;
+        private static readonly int APPLE_SPRITE_SIZE_X = 25;
+        private static readonly int APPLE_SPRITE_SIZE_Y = 25;
+        private static readonly int WATER_BOTTLE_SPRITE_SIZE_X = 8;
+        private static readonly int WATER_BOTTLE_SPRITE_SIZE_Y = 25;
+        private static readonly int CANDY_BAR_SPRITE_SIZE_X = 25;
+        private static readonly int CANDY_BAR_SPRITE_SIZE_Y = 8;
+        private static readonly int COIN_SPRITE_SIZE_X = 25;
+        private static readonly int COIN_SPRITE_SIZE_Y = 25;
+
         public int numCoins { get; set; }
 
         public ItemController()
@@ -39,7 +47,6 @@ namespace HideOut.Controllers
             Item item = new Item();
             item.tag = type;
             item.position = pos;
-            item.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             item.isVisible = true;
             item.canPickUp = true;
             switch (type)
@@ -47,18 +54,22 @@ namespace HideOut.Controllers
                 case ItemType.WaterBottle:
                     item.sprite = waterBottleTexture;
                     item.waterValue = 5;
+                    item.rectangleBounds = new Point(WATER_BOTTLE_SPRITE_SIZE_X, WATER_BOTTLE_SPRITE_SIZE_Y);
                     break;
                 case ItemType.CandyBar:
                     item.sprite = candyBarTexture;
                     item.speedValue = 10;
+                    item.rectangleBounds = new Point(CANDY_BAR_SPRITE_SIZE_X, CANDY_BAR_SPRITE_SIZE_Y);
                     break;
                 case ItemType.Apple:
                     item.sprite = appleTexture;
                     item.foodValue = 5;
+                    item.rectangleBounds = new Point(APPLE_SPRITE_SIZE_X, APPLE_SPRITE_SIZE_Y);
                     break;
                 case ItemType.Coin:
                     item.sprite = coinTexture;
                     numCoins++;
+                    item.rectangleBounds = new Point(COIN_SPRITE_SIZE_X, COIN_SPRITE_SIZE_Y);
                     break;
             }
 

@@ -43,6 +43,9 @@ namespace HideOut
         public static int SCREEN_OFFSET_X = 0;
         public static int SCREEN_OFFSET_Y = 0;
 
+
+
+        bool mobile = true;
         public HideOutGame()
             : base()
         {
@@ -153,7 +156,7 @@ namespace HideOut
             basicEffect.LightingEnabled = false;
 
 
-            displayController.addDisplay(10, 100, "Hello world 1");
+            //displayController.addDisplay(10, 100, "Hello world 1");
 
 
            //_fontRenderer = new FontRenderer(fontFile, <Texture2D>("player.png"));
@@ -195,17 +198,17 @@ namespace HideOut
             {
                 //TODO: show losing screen
                 Console.WriteLine("You lose!  Good day!");
-                Exit();
+                displayController.hasLost = true;//Exit();
             }
 
             if (!levelController.Update())
             {
                 //TODO: show winning screen
                 Console.WriteLine("You win!  Good day!");
-                Exit();
+                displayController.hasWon = true;// GetHashCode//Exit();
             }
 
-            playerController.Update(gameTime);
+            playerController.Update(gameTime, mobile);
             itemController.Update(gameTime);
             obstacleController.Update(gameTime);
             entityGenerationController.Update(gameTime);
@@ -245,6 +248,7 @@ namespace HideOut
             playerController.Draw(spriteBatch);
 
             displayController.Draw(spriteBatch);
+            displayController.drawStats(playerController.thePlayer.currentHunger, playerController.thePlayer.currentThirst, spriteBatch);
 
 
             //_fontRenderer.DrawText(spriteBatch, 50, 50, "Hello World!");

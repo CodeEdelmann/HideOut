@@ -38,62 +38,66 @@ namespace HideOut.Controllers
             thePlayer.sprite = playerTexture;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, bool mobile)
         {
             thePlayer.UpdateState(gameTime);
 
             KeyboardState keyboard = Keyboard.GetState();
-            if (keyboard.IsKeyDown(Keys.Left))
+
+            if (mobile)
             {
-                thePlayer.MoveLeft(gameTime);
-                if (collisionController.IllegalMove(this.thePlayer))
-                {
-                    thePlayer.MoveRight(gameTime);
-                }
-            }
-            if (keyboard.IsKeyDown(Keys.Right))
-            {
-                thePlayer.MoveRight(gameTime);
-                if (collisionController.IllegalMove(this.thePlayer))
+                if (keyboard.IsKeyDown(Keys.Left))
                 {
                     thePlayer.MoveLeft(gameTime);
+                    if (collisionController.IllegalMove(this.thePlayer))
+                    {
+                        thePlayer.MoveRight(gameTime);
+                    }
                 }
-            }
-            if (keyboard.IsKeyDown(Keys.Up))
-            {
-                thePlayer.MoveUp(gameTime);
-                if (collisionController.IllegalMove(this.thePlayer))
+                if (keyboard.IsKeyDown(Keys.Right))
                 {
-                    thePlayer.MoveDown(gameTime);
+                    thePlayer.MoveRight(gameTime);
+                    if (collisionController.IllegalMove(this.thePlayer))
+                    {
+                        thePlayer.MoveLeft(gameTime);
+                    }
                 }
-            }
-            if (keyboard.IsKeyDown(Keys.Down))
-            {
-                thePlayer.MoveDown(gameTime);
-                if (collisionController.IllegalMove(this.thePlayer))
+                if (keyboard.IsKeyDown(Keys.Up))
                 {
                     thePlayer.MoveUp(gameTime);
+                    if (collisionController.IllegalMove(this.thePlayer))
+                    {
+                        thePlayer.MoveDown(gameTime);
+                    }
                 }
-            }
+                if (keyboard.IsKeyDown(Keys.Down))
+                {
+                    thePlayer.MoveDown(gameTime);
+                    if (collisionController.IllegalMove(this.thePlayer))
+                    {
+                        thePlayer.MoveUp(gameTime);
+                    }
+                }
 
-            List<Item> items = collisionController.GetCollidingItems(thePlayer);
-            foreach(Item i in items)
-            {
-                this.PickupItem(i);
-            }
+                List<Item> items = collisionController.GetCollidingItems(thePlayer);
+                foreach (Item i in items)
+                {
+                    this.PickupItem(i);
+                }
 
-            if (collisionController.IsHidden(thePlayer))
-            {
-                thePlayer.isVisible = false;
-            }
-            else
-            {
-                thePlayer.isVisible = true;
-            }
+                if (collisionController.IsHidden(thePlayer))
+                {
+                    thePlayer.isVisible = false;
+                }
+                else
+                {
+                    thePlayer.isVisible = true;
+                }
 
-            if (collisionController.NearFountain(thePlayer))
-            {
-                //Todo (SYNDEY): Update Player's thirst
+                if (collisionController.NearFountain(thePlayer))
+                {
+                    //Todo (SYNDEY): Update Player's thirst
+                }
             }
 
             this.UpdateScreenOffsets();

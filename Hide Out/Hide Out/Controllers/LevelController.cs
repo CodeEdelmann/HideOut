@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace HideOut.Controllers
 {
@@ -23,7 +25,7 @@ namespace HideOut.Controllers
             currentLevel = 1;
         }
 
-        public bool Update()
+        public int Update()
         {
             if (itemController.numCoins <= 0)
             {
@@ -31,7 +33,7 @@ namespace HideOut.Controllers
                 ClearLevel();
                 return InitializeLevel(currentLevel);
             }
-            return true;
+            return 0; // continue level
         }
 
         public void ClearLevel()
@@ -42,19 +44,19 @@ namespace HideOut.Controllers
             tileController.ClearTiles();
         }
 
-        public bool InitializeLevel(int level)
+        public int InitializeLevel(int level)
         {
             currentLevel = level;
             string newFileName = PATH + level.ToString() + ".xml";
-            if(File.Exists(newFileName))
+            if (File.Exists(newFileName))
             {
                 xmlController.read_fname = newFileName;
                 xmlController.read();
-                return true;
+                return 1; // load next level
             }
             else
             {
-                return false;
+                return 2; // last level, you win
             }
         }
     }

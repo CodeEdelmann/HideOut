@@ -12,7 +12,8 @@ namespace HideOut.Entities
     class NPC : Entity
     {
         public Vision vision { get; set; }
-        public int speed { get; set; }
+        public float moveSpeed { get; set; }
+        public double rotateSpeed { get; set; }
         public NPCType tag { get; set; }
 
         public NPC() : base()
@@ -28,25 +29,40 @@ namespace HideOut.Entities
             switch (type) {
                 case NPCType.Police:
                     vision = new Vision(this.screenRectangle, 50.0f, 1, facing, Color.Red);
-                    speed = 1;
+                    rotateSpeed = .001;
+                    moveSpeed = 5.0f;
                     break;
             }
         }
 
-        public void Move(Vector2 direction)
+        public void MoveForward(GameTime gameTime)
         {
-            Vector2 normVec = Normalize(direction);
-            position += normVec*speed;
-            Rectangle tempRec = this.screenRectangle;
-            tempRec.X = (int) position.X;
-            tempRec.Y = (int) position.Y;
+            Vector2 normVec = Normalize(vision.viewDirection);
+
+            if(!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += normVec*moveSpeed*gameTime.ElapsedGameTime.Milliseconds;
+
             Vision tempVis = vision;
-            tempVis.parentLocation = this.screenRectangle;
+            tempVis.parentLocation = this.worldRectangle;
+            vision = tempVis;
         }
 
-        public void Rotate(double angle) //positive to turn left, negative to turn right
+        public void MoveBackward(GameTime gameTime)
         {
-            vision.Rotate(angle);
+            Vector2 normVec = Normalize(vision.viewDirection);
+            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += -1*normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+            Vision tempVis = vision;
+            tempVis.parentLocation = this.worldRectangle;
+            vision = tempVis;
+        }
+
+        public void RotateLeft(GameTime gameTime) //positive to turn left, negative to turn right
+        {
+            vision.Rotate(rotateSpeed*gameTime.ElapsedGameTime.Milliseconds);
+        }
+
+        public void RotateRight(GameTime gameTime) //positive to turn left, negative to turn right
+        {
+            vision.Rotate(-1 * rotateSpeed * gameTime.ElapsedGameTime.Milliseconds);
         }
 
         public bool CanSeePlayer(Player player, List<Obstacle> visibleObstacles)
@@ -85,7 +101,7 @@ namespace HideOut.Entities
             string retVal = base.ToString() +
                 "Type: " + this.tag + "\n" +
                 "Vision: " + this.vision + "\n" +
-                "Speed: " + this.speed + "\n";
+                "Speed: " + this.moveSpeed + "\n";
             return retVal;
         }
     }

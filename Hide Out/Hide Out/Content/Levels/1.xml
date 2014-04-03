@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <world X="800" Y="800">
-  <player X="100" Y="100"></player>
+  <player X="500" Y="500"></player>
   <obstacle X="50" Y="50">Bush</obstacle>
   <obstacle X="500" Y="100">Fountain</obstacle>
   <obstacle X="100" Y="300">Pond</obstacle>

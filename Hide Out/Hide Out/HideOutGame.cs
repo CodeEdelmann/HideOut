@@ -43,7 +43,8 @@ namespace HideOut
         public static int SCREEN_OFFSET_X = 0;
         public static int SCREEN_OFFSET_Y = 0;
 
-
+        public static bool isPaused = false;
+        public static KeyboardState pauseState;
 
         bool mobile = true;
         public HideOutGame()
@@ -187,7 +188,18 @@ namespace HideOut
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
+            pauseState = Keyboard.GetState();
+            if (isPaused)
+            {
+                if (pauseState.IsKeyDown(Keys.Enter))
+                {
+                    isPaused = false;
+                    if (displayController.hasWon == true || displayController.hasLost == true)
+                        Exit();
+                }
+                else
+                    return;
+            }
             //Console.WriteLine("Time: " + gameTime.ElapsedGameTime.TotalMilliseconds);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -196,16 +208,27 @@ namespace HideOut
             // TODO: Add your update logic here
             if (npcController.Update(playerController.thePlayer, obstacleController.obstacles) && !CHEAT_MODE)
             {
+                isPaused = true;
                 //TODO: show losing screen
                 Console.WriteLine("You lose!  Good day!");
                 displayController.hasLost = true;//Exit();
             }
 
-            if (!levelController.Update())
+            switch (levelController.Update())
             {
-                //TODO: show winning screen
-                Console.WriteLine("You win!  Good day!");
-                displayController.hasWon = true;// GetHashCode//Exit();
+                case 0:
+                    if(pauseState.IsKeyDown(Keys.Enter))
+                        isPaused = false;
+                    break;
+                case 1:
+                    isPaused = true;
+                    break;
+                case 2:
+                    isPaused = true;
+                    //TODO: show winning screen
+                    Console.WriteLine("You win!  Good day!");
+                    displayController.hasWon = true;// GetHashCode//Exit();
+                    break;
             }
 
             playerController.Update(gameTime, mobile);

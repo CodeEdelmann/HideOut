@@ -35,6 +35,8 @@ namespace HideOut.Controllers
         public bool hasLost = false;
         public bool hasWon = false;
 
+        private Color backgroundColor = Color.CornflowerBlue;
+
         public void lose()
         {
             hasLost = true;
@@ -97,18 +99,22 @@ namespace HideOut.Controllers
              yOffset = 2;
              xOffset = 4;
 
-
+            int wid = 200;
+            int len = 200;
+            int xPos = HideOutGame.SCREEN_WIDTH / 2 - wid / 2;
+            int yPos = HideOutGame.SCREEN_HEIGHT / 2 - len / 2;
+            int offset = 25;
              if (hasLost)
              {
-                 sb.Draw(loseGameTexture, new Rectangle(0, 0, 100, 100), Color.White);
-                 displayString("Game Over", 0, 0, sb);
+                 sb.Draw(loseGameTexture, new Rectangle(xPos, yPos, wid, len), Color.White);
+                 displayString("Game Over", xPos, yPos - offset, sb, backgroundColor);
              }
              else
              {
                  if (hasWon)
                  {
-                     sb.Draw(winGameTexture, new Rectangle(0, 0, 100, 100), Color.White);
-                     displayString("Congratulations!", 0, 0, sb);
+                     sb.Draw(winGameTexture, new Rectangle(xPos, yPos, wid, len), Color.White);
+                     displayString("Congratulations!", xPos, yPos - offset, sb, backgroundColor);
                  }
              }
 
@@ -120,12 +126,12 @@ namespace HideOut.Controllers
             for (int i = 0; i < displays.Count(); i++)
             {
                 String currentString = displays[i].text;
-                displayString(currentString, displays[i].x, displays[i].y, sb);
+                displayString(currentString, displays[i].x, displays[i].y, sb, backgroundColor);
                 
             }
 
         }
-        public void displayString(String currentString, int xPos, int yPos, SpriteBatch sb)
+        public void displayString(String currentString, int xPos, int yPos, SpriteBatch sb, Color c)
         {
 
             for (int ii = 0; ii < currentString.Length; ii++)
@@ -153,7 +159,7 @@ namespace HideOut.Controllers
                         yOffset = 1;//hard coded as caps right now
                         xOffset = result - 1;//for letters
 
-                        sb.Draw(fontTexture, new Rectangle(xPosition, yPosition, xSize, ySize), new Rectangle(2 + (xSize * xOffset), 1 + (ySize * yOffset), xSize, ySize), Color.White);
+                        sb.Draw(fontTexture, new Rectangle(xPosition, yPosition, xSize, ySize), new Rectangle(2 + (xSize * xOffset), 1 + (ySize * yOffset), xSize, ySize), c);
 
 
                     }
@@ -169,7 +175,7 @@ namespace HideOut.Controllers
                                 yOffset = 2;//numbers
                                 xOffset = result;//for numbers
 
-                                sb.Draw(fontTexture, new Rectangle(xPosition, yPosition, xSize, ySize), new Rectangle(2 + (xSize * xOffset), 1 + (ySize * yOffset), xSize, ySize), Color.White);
+                                sb.Draw(fontTexture, new Rectangle(xPosition, yPosition, xSize, ySize), new Rectangle(2 + (xSize * xOffset), 1 + (ySize * yOffset), xSize, ySize), c);
                             }
                         }
                         else

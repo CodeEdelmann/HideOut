@@ -30,7 +30,7 @@ namespace HideOut.Entities
                 case NPCType.Police:
                     vision = new Vision(this.screenRectangle, 50.0f, 1, facing, Color.Red);
                     rotateSpeed = .001;
-                    moveSpeed = 1.0f;
+                    moveSpeed = 5.0f;
                     break;
             }
         }

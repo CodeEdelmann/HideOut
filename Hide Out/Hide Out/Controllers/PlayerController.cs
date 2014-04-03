@@ -38,9 +38,9 @@ namespace HideOut.Controllers
             thePlayer.sprite = playerTexture;
         }
 
-        public void Update(GameTime gameTime, bool mobile)
+        public bool Update(GameTime gameTime, bool mobile)
         {
-            thePlayer.UpdateState(gameTime);
+            bool retVal = thePlayer.UpdateState(gameTime);
 
             KeyboardState keyboard = Keyboard.GetState();
 
@@ -101,6 +101,7 @@ namespace HideOut.Controllers
             }
 
             this.UpdateScreenOffsets();
+            return retVal;
         }
 
         public void UpdateScreenOffsets()

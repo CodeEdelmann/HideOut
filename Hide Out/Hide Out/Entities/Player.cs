@@ -45,7 +45,7 @@ namespace HideOut.Entities
             this.position += new Vector2(0, this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 
-        public void UpdateState(GameTime gameTime)
+        public bool UpdateState(GameTime gameTime)
         {
             this.decrement += gameTime.ElapsedGameTime.Milliseconds;
             if (this.decrement >= 5000)
@@ -56,9 +56,11 @@ namespace HideOut.Entities
                 if (this.currentHunger == 0 || this.currentThirst == 0)
                 {
                     Console.Write("out of thirst/stamina!");
+                    return true;
                 }
                 this.decrement = 0;
             }
+            return false;
 
         }
 

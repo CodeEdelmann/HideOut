@@ -234,7 +234,13 @@ namespace HideOut
                     break;
             }
 
-            playerController.Update(gameTime, mobile);
+            if (playerController.Update(gameTime, mobile))
+            {
+                isPaused = true;
+                Console.WriteLine("You lose!  Good day!");
+                displayController.hasLost = true;
+            }
+
             itemController.Update(gameTime);
             obstacleController.Update(gameTime);
             entityGenerationController.Update(gameTime);

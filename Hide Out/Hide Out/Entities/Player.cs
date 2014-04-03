@@ -10,7 +10,7 @@ namespace HideOut.Entities
     class Player : Entity
     {
         float modd = 16.6666F;
-        private int decrement = 300;
+        private int decrement = 0;
         public int currentSpeed { get; set; }
         public int baseSpeed { get; set; }
         public int currentThirst { get; set; }
@@ -47,17 +47,19 @@ namespace HideOut.Entities
 
         public void UpdateState(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.Milliseconds - this.decrement >= 1)
+            this.decrement += gameTime.ElapsedGameTime.Milliseconds;
+            if (this.decrement >= 5000)
             {
-                this.decrement += this.decrement;
                 this.currentThirst--;
                 this.currentHunger--;
                 Console.Write("Current GameTime: " + gameTime.ElapsedGameTime.Seconds + " Thirst: " + this.currentThirst + " Hunger: " + this.currentHunger);
-                if(this.currentHunger == 0 || this.currentThirst == 0)
+                if (this.currentHunger == 0 || this.currentThirst == 0)
                 {
                     Console.Write("out of thirst/stamina!");
                 }
+                this.decrement = 0;
             }
+
         }
 
         public override string ToString()

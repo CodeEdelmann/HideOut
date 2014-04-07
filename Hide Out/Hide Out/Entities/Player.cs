@@ -65,10 +65,10 @@ namespace HideOut.Entities
             {
                 this.currentThirst--;
                 this.currentHunger--;
-                Console.Write("Current GameTime: " + gameTime.ElapsedGameTime.Seconds + " Thirst: " + this.currentThirst + " Hunger: " + this.currentHunger);
+                //Console.Write("Current GameTime: " + gameTime.ElapsedGameTime.Seconds + " Thirst: " + this.currentThirst + " Hunger: " + this.currentHunger);
                 if (this.currentHunger == 0 || this.currentThirst == 0)
                 {
-                    Console.Write("out of thirst/stamina!");
+                  //  Console.Write("out of thirst/stamina!");
                     return true;
                 }
                 this.decrement = 0;

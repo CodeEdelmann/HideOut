@@ -125,7 +125,9 @@ namespace HideOut.Controllers
                     if (thePlayer.currentThirst > thePlayer.maxThirst)
                         thePlayer.currentThirst = thePlayer.maxThirst;
                     break;
-                //implementing CandyBar - which affects speed - will be more difficult
+                case ItemType.CandyBar:
+                    thePlayer.currentSpeed += item.speedValue;
+                    break;
                 case ItemType.Apple:
                     thePlayer.currentHunger += item.foodValue;
                     if (thePlayer.currentHunger > thePlayer.maxHunger)

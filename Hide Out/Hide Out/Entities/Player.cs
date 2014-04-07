@@ -11,6 +11,7 @@ namespace HideOut.Entities
     {
         float modd = 16.6666F;
         private int decrement = 0;
+        private int speedDec = 0;
         public int currentSpeed { get; set; }
         public int baseSpeed { get; set; }
         public int currentThirst { get; set; }
@@ -47,7 +48,19 @@ namespace HideOut.Entities
 
         public bool UpdateState(GameTime gameTime)
         {
+            //Current decrements hard coded in; can shift with testing and adapt for readonly constants
             this.decrement += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (this.currentSpeed > this.baseSpeed)
+            {
+                this.speedDec += gameTime.ElapsedGameTime.Milliseconds;
+                if (speedDec >= 1000)
+                {
+                    currentSpeed--;
+                    speedDec = 0;
+                }
+            }
+
             if (this.decrement >= 5000)
             {
                 this.currentThirst--;

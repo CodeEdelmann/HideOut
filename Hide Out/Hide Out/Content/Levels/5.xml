@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<world X="1000" Y="1000">
+  <player X="900" Y="900"></player>
+  <npc X="500" Y="500">Police</npc>
+  <item X="100" Y="100">Coin</item>
+  <item X="200" Y="200">Coin</item>
+  <item X="800" Y="800">Coin</item>
+</world>

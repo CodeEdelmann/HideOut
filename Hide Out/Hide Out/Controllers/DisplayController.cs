@@ -34,6 +34,8 @@ namespace HideOut.Controllers
         Rectangle sizingRectangle;
         public bool hasLost = false;
         public bool hasWon = false;
+        public bool displayLevel = false;
+        public int level = 1;
 
         private Color backgroundColor = Color.CornflowerBlue;
 
@@ -104,6 +106,11 @@ namespace HideOut.Controllers
             int xPos = HideOutGame.SCREEN_WIDTH / 2 - wid / 2;
             int yPos = HideOutGame.SCREEN_HEIGHT / 2 - len / 2;
             int offset = 25;
+
+            if (displayLevel)
+            {
+                displayString("Level " + this.level.ToString(), xPos, yPos - offset, sb, backgroundColor);
+            }
              if (hasLost)
              {
                  sb.Draw(loseGameTexture, new Rectangle(xPos, yPos, wid, len), Color.White);

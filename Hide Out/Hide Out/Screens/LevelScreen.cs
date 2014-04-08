@@ -37,12 +37,13 @@ namespace HideOut.Screens
         public static int GAME_HEIGHT = 1000;
         public static int CURRENT_LEVEL = 1;
 
-        public static bool isPaused = false;
+        public bool isPaused { get; set; }
         public static KeyboardState pauseState;
         bool mobile = true;
 
         public override void Initialize()
         {
+            isPaused = false;
             CURRENT_LEVEL = ReadLevel();
             this.InitializeControllers();
 
@@ -55,6 +56,7 @@ namespace HideOut.Screens
 
         public void InitializeLevel()
         {
+            CURRENT_LEVEL = ReadLevel();
             levelController.InitializeLevel(CURRENT_LEVEL);
         }
 
@@ -116,6 +118,7 @@ namespace HideOut.Screens
                 if (pauseState.IsKeyDown(Keys.Enter))
                 {
                     isPaused = false;
+                    displayController.displayLevel = false;
                     if (displayController.hasWon == true || displayController.hasLost == true)
                     {
                         displayController.hasLost = false;
@@ -153,12 +156,19 @@ namespace HideOut.Screens
                 case 1:
                     CURRENT_LEVEL = levelController.currentLevel;
                     isPaused = true;
+                    displayController.displayLevel = true;
+                    displayController.level = levelController.currentLevel;
                     break;
                 case 2:
                     CURRENT_LEVEL = levelController.currentLevel;
                     isPaused = true;
                     //TODO: show winning screen
                     Console.WriteLine("You win!  Good day!");
+                    try
+                    {
+                        File.Delete("Content\\Levels\\savestate.txt");
+                    }
+                    catch { }
                     displayController.hasWon = true;// GetHashCode//Exit();
                     break;
             }

@@ -48,7 +48,7 @@ namespace HideOut.Controllers
             {
                 if (e is Player)
                 {
-                    if (!i.canOverlapWith && e.collisionRectangle.Intersects(i.worldRectangle))
+                    if (!i.canOverlapWith && e.collisionRectangle.Intersects(i.collisionRectangle))
                     {
                         retVal.Add(i);
                     }

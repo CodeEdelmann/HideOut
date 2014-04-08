@@ -11,7 +11,7 @@ namespace HideOut.Entities
 {
     abstract class Entity
     {
-        public static readonly float HITBOX_SCALE = 0.8F;
+        public static readonly float HITBOX_SCALE = 0.9F;
         public Vector2 position { get; set; }
         public Point rectangleBounds { get; set; }
         public List<Tile> tiles;

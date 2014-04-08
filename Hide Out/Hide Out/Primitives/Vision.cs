@@ -173,6 +173,31 @@ namespace HideOut.Primitives
             viewDistance = (float) Math.Sqrt(closestDistance);
         }
 
+        public bool IntersectsWithPlayer(Player player, List<Obstacle> obstacles)
+        {
+            double theta = GetTheta();
+            Vector2 p1 = new Vector2(parentLocation.X + parentLocation.Width / 2, parentLocation.Y + parentLocation.Height / 2);
+            Vector2 p2 = new Vector2((float)(viewDistance * Math.Cos(theta + viewAngle)) + p1.X,
+                (float)(viewDistance * Math.Sin(theta + viewAngle)) + p1.Y);
+
+            Rectangle rec = player.collisionRectangle;
+            Vector2 v1 = new Vector2(rec.X, rec.Y);
+            Vector2 v2 = new Vector2(rec.X + rec.Width, rec.Y);
+            Vector2 v3 = new Vector2(rec.X + rec.Width, rec.Y + rec.Height);
+            Vector2 v4 = new Vector2(rec.X, rec.Y + rec.Height);
+
+            Vector2 top = Intersects(p1, p2, v1, v2);
+            Vector2 right = Intersects(p1, p2, v2, v3);
+            Vector2 bottom = Intersects(p1, p2, v3, v4);
+            Vector2 left = Intersects(p1, p2, v4, v1);
+
+            if (top.X >= 0 || right.X >= 0 || bottom.X >= 0 || left.X >= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool CanSeePlayer(Player player, List<Obstacle> visibleObstacles)
         {
             if (!player.isVisible || !CanSee(player.collisionRectangle)) return false;

@@ -41,7 +41,7 @@ namespace HideOut.Controllers
                 case NPCType.Police:
                     npc.sprite = policeTexture;
                     npc.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
-                    int numVisions = 50;
+                    int numVisions = 100;
                     float maxWidth = .5f;
                     float viewWidth = maxWidth / numVisions;
                     float viewDistance = 500.0f;
@@ -71,7 +71,7 @@ namespace HideOut.Controllers
                 List<Obstacle> visibleObstacles = new List<Obstacle>();
                 foreach (Obstacle obs in obstacles)
                 {
-                    if(npc.CanSee(obs.collisionRectangle) && !obs.canSeeThrough) visibleObstacles.Add(obs);
+                    if(!obs.canSeeThrough) visibleObstacles.Add(obs);
                 }
                 foreach (Vision vision in npc.visions)
                 {

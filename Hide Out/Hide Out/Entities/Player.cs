@@ -9,6 +9,7 @@ namespace HideOut.Entities
 {
     class Player : Entity
     {
+        public static readonly float PLAYER_HITBOX_SCALE = 0.6F;
         float modd = 16.6666F;
         private int decrement = 0;
         private int speedDec = 0;
@@ -19,6 +20,17 @@ namespace HideOut.Entities
         public int currentHunger { get; set; }
         public int maxHunger { get; set; }
         public bool isVisible { get; set; }
+
+        public Rectangle collisionRectangle
+        {
+            get
+            {
+                return new Rectangle((int)(position.X + rectangleBounds.X * (1 - PLAYER_HITBOX_SCALE) / 2),
+                                     (int)(position.Y + rectangleBounds.Y * (1 - PLAYER_HITBOX_SCALE) / 2),
+                                     (int)(rectangleBounds.X * PLAYER_HITBOX_SCALE),
+                                     (int)(rectangleBounds.Y * PLAYER_HITBOX_SCALE));
+            }
+        }
 
         public Player() : base()
         {

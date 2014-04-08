@@ -72,7 +72,12 @@ namespace HideOut.Entities
 
         public bool CanSeePlayer(Player player, List<Obstacle> visibleObstacles)
         {
-            return vision.CanSeePlayer(player, visibleObstacles);
+            foreach(Vision v in this.visions)
+            {
+                if (v.IntersectsWithPlayer(player, visibleObstacles))
+                    return true;
+            }
+            return false;
         }
 
         public bool CanSee(Rectangle rect)

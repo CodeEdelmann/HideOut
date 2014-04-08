@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using HideOut.Controllers;
 using HideOut.Entities;
+using HideOut.Screens;
 
 namespace HideOut
 {
@@ -62,8 +63,8 @@ namespace HideOut
                         switch (reader.Name)
                         {
                             case "world":
-                                HideOutGame.GAME_WIDTH = xPos;
-                                HideOutGame.GAME_HEIGHT = yPos;
+                                LevelScreen.GAME_WIDTH = xPos;
+                                LevelScreen.GAME_HEIGHT = yPos;
                                 break;
                         }
                         break;
@@ -139,8 +140,8 @@ namespace HideOut
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("world");
-                writer.WriteAttributeString("X", Convert.ToString(HideOutGame.GAME_WIDTH));
-                writer.WriteAttributeString("Y", Convert.ToString(HideOutGame.GAME_HEIGHT));
+                writer.WriteAttributeString("X", Convert.ToString(LevelScreen.GAME_WIDTH));
+                writer.WriteAttributeString("Y", Convert.ToString(LevelScreen.GAME_HEIGHT));
 
                 writer.WriteStartElement("player");
                 writer.WriteAttributeString("X", Convert.ToString((int)this.playerController.thePlayer.position.X));

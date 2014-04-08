@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HideOut.Entities;
+using HideOut.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -109,11 +110,11 @@ namespace HideOut.Controllers
             HideOutGame.SCREEN_OFFSET_X = (int)
                 Math.Min(
                 Math.Max(this.thePlayer.position.X - HideOutGame.SCREEN_WIDTH / 2, 0), 
-                HideOutGame.GAME_WIDTH - HideOutGame.SCREEN_WIDTH);
+                LevelScreen.GAME_WIDTH - HideOutGame.SCREEN_WIDTH);
             HideOutGame.SCREEN_OFFSET_Y = (int)
                 Math.Min(
                 Math.Max(this.thePlayer.position.Y - HideOutGame.SCREEN_HEIGHT / 2, 0),
-                HideOutGame.GAME_HEIGHT - HideOutGame.SCREEN_HEIGHT);
+                LevelScreen.GAME_HEIGHT - HideOutGame.SCREEN_HEIGHT);
         }
 
         public void PickupItem(Item item)

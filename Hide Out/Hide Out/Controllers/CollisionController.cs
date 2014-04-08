@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using HideOut.Entities;
 using HideOut.Primitives;
+using HideOut.Screens;
 using Microsoft.Xna.Framework;
 
 namespace HideOut.Controllers
@@ -20,9 +21,9 @@ namespace HideOut.Controllers
         {
             return this.GetCollidingObstacles(e).Count > 0 ||
                 e.position.X < 0 ||
-                e.position.X + e.rectangleBounds.X > HideOutGame.GAME_WIDTH ||
+                e.position.X + e.rectangleBounds.X > LevelScreen.GAME_WIDTH ||
                 e.position.Y < 0 ||
-                e.position.Y + e.rectangleBounds.Y > HideOutGame.GAME_HEIGHT;
+                e.position.Y + e.rectangleBounds.Y > LevelScreen.GAME_HEIGHT;
         }
 
         public List<Item> GetCollidingItems(Entity e)

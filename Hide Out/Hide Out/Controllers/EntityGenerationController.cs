@@ -86,6 +86,8 @@ namespace HideOut.Controllers
                     isListening = false;
                 }
             }
+
+            oldState = newState;
         }
     }
 }

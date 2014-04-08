@@ -16,6 +16,7 @@ namespace HideOut.Controllers
         public Player thePlayer;
         private Texture2D playerTexture;
         public static readonly int SPRITE_SIZE = 50;
+        private int fountainSpeed = 1000;
         public CollisionController collisionController { set; get; }
         public ItemController itemController { get; set; }
 
@@ -95,9 +96,14 @@ namespace HideOut.Controllers
                     thePlayer.isVisible = true;
                 }
 
-                if (collisionController.NearFountain(thePlayer))
+                if (collisionController.NearFountain(thePlayer) && thePlayer.currentThirst < thePlayer.maxThirst)
                 {
-                    //Todo (SYNDEY): Update Player's thirst
+                    fountainSpeed -= gameTime.ElapsedGameTime.Milliseconds;
+                    if (fountainSpeed <= 0)
+                    {
+                        thePlayer.currentThirst++;
+                        fountainSpeed = 1000;
+                    }
                 }
             }
 
@@ -126,7 +132,9 @@ namespace HideOut.Controllers
                     if (thePlayer.currentThirst > thePlayer.maxThirst)
                         thePlayer.currentThirst = thePlayer.maxThirst;
                     break;
-                //implementing CandyBar - which affects speed - will be more difficult
+                case ItemType.CandyBar:
+                    thePlayer.currentSpeed += item.speedValue;
+                    break;
                 case ItemType.Apple:
                     thePlayer.currentHunger += item.foodValue;
                     if (thePlayer.currentHunger > thePlayer.maxHunger)

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<world X="1000" Y="1000">
+
+  <npc X="600" Y="400">Police</npc>
+  <player X="500" Y="500"></player>
+
+
+
+
+  <item X="700" Y="500">Coin</item>
+
+  <obstacle X="600" Y="300">Bush</obstacle>
+
+  <obstacle X="500" Y="400">Bush</obstacle>
+
+  <obstacle X="400" Y="500">Bush</obstacle>
+  <obstacle X="500" Y="600">Bush</obstacle>
+  <obstacle X="600" Y="600">Bush</obstacle>
+  <obstacle X="700" Y="600">Bush</obstacle>
+  
+  <obstacle X="700" Y="400">Bush</obstacle>
+</world>

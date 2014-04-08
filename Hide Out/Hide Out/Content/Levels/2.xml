@@ -1,8 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <world X="1000" Y="1000">
-  <player X="900" Y="900"></player>
-  <npc X="500" Y="500">Police</npc>
-  <item X="100" Y="100">Coin</item>
-  <item X="200" Y="200">Coin</item>
-  <item X="800" Y="800">Coin</item>
+  <obstacle X="500" Y="600">Tree</obstacle>
+
+  <obstacle X="400" Y="500">Tree</obstacle>
+  <obstacle X="600" Y="500">Tree</obstacle>
+
+  <obstacle X="400" Y="400">Tree</obstacle>
+  <obstacle X="600" Y="400">Tree</obstacle>
+
+  <obstacle X="400" Y="300">Tree</obstacle>
+  <obstacle X="600" Y="300">Tree</obstacle>
+
+  <obstacle X="400" Y="200">Tree</obstacle>
+  <obstacle X="600" Y="200">Tree</obstacle>
+
+  <obstacle X="400" Y="100">Tree</obstacle>
+  <obstacle X="600" Y="100">Tree</obstacle>
+
+
+  <obstacle X="400" Y="0">Tree</obstacle>
+
+  <obstacle X="800" Y="0">Tree</obstacle>
+  <obstacle X="800" Y="100">Tree</obstacle>
+  <obstacle X="800" Y="200">Tree</obstacle>
+  <obstacle X="800" Y="300">Tree</obstacle>
+  <obstacle X="800" Y="400">Tree</obstacle>
+  <obstacle X="800" Y="500">Tree</obstacle>
+  <obstacle X="800" Y="600">Tree</obstacle>
+  <obstacle X="700" Y="700">Tree</obstacle>
+  <obstacle X="600" Y="800">Tree</obstacle>
+
+  <obstacle X="500" Y="800">Tree</obstacle>
+
+  <obstacle X="400" Y="800">Tree</obstacle>
+
+
+  <obstacle X="300" Y="700">Tree</obstacle>
+
+  <obstacle X="300" Y="600">Tree</obstacle>
+ 
+  
+
+  <player X="500" Y="500"></player>
+
+
+ 
+  
+  <item X="400" Y="600">Coin</item>
+  <item X="400" Y="700">Apple</item>
+  <obstacle X="500" Y="-600">Tree</obstacle>
 </world>

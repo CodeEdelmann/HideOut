@@ -14,6 +14,7 @@ namespace HideOut.Primitives
         private static double maxViewAngle = MathHelper.PiOver4;
 
         public float viewDistance { get; set; }
+        public float maxViewDistance { get; set; }
 
         private double _viewAngle { get; set; }
         public double viewAngle
@@ -54,6 +55,7 @@ namespace HideOut.Primitives
         {
             parentLocation = pLoc;
             viewDistance = vDis;
+            maxViewDistance = vDis;
             viewAngle = vAng;
             viewDirection = vDir;
             viewColor = vCol;
@@ -109,6 +111,66 @@ namespace HideOut.Primitives
         {
             double theta = GetTheta();
             viewDirection = new Vector2((float)Math.Cos(theta + angle), (float)Math.Sin(theta + angle));
+        }
+
+        public static Vector2 Intersects(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2)
+        {
+            Vector2 b = a2 - a1;
+            Vector2 d = b2 - b1;
+            var bDotDPerp = b.X * d.Y - b.Y * d.X;
+
+            // if b dot d == 0, it means the lines are parallel so have infinite intersection points
+            if (bDotDPerp == 0)
+                return new Vector2(-1000, -1000);
+
+            Vector2 c = b1 - a1;
+            var t = (c.X * d.Y - c.Y * d.X) / bDotDPerp;
+            if (t < 0 || t > 1)
+            {
+                return new Vector2(-1000, -1000);
+            }
+
+            var u = (c.X * b.Y - c.Y * b.X) / bDotDPerp;
+            if (u < 0 || u > 1)
+            {
+                return new Vector2(-1000, -1000);
+            }
+
+            return a1 + t * b;
+        }
+
+        public float DistanceSquared(Vector2 p1, Vector2 p2)
+        {
+            return (p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y);
+        }
+
+        public void Update(List<Obstacle> obstacles)
+        {
+            double theta = GetTheta();
+            Vector2 p1 = new Vector2(parentLocation.X + parentLocation.Width / 2, parentLocation.Y + parentLocation.Height / 2);
+            Vector2 p2 = new Vector2((float)(maxViewDistance * Math.Cos(theta + viewAngle)) + p1.X,
+                (float)(maxViewDistance * Math.Sin(theta + viewAngle)) + p1.Y);
+         
+            float closestDistance = maxViewDistance*maxViewDistance;
+            foreach (Obstacle obs in obstacles)
+            {
+                Rectangle rec = obs.collisionRectangle;
+                Vector2 v1 = new Vector2(rec.X, rec.Y);
+                Vector2 v2 = new Vector2(rec.X + rec.Width, rec.Y);
+                Vector2 v3 = new Vector2(rec.X + rec.Width, rec.Y + rec.Height);
+                Vector2 v4 = new Vector2(rec.X, rec.Y + rec.Height);
+
+                Vector2 top = Intersects(p1, p2, v1, v2);
+                Vector2 right = Intersects(p1, p2, v2, v3);
+                Vector2 bottom = Intersects(p1, p2, v3, v4);
+                Vector2 left = Intersects(p1, p2, v4, v1);
+
+                closestDistance = Math.Min(closestDistance, DistanceSquared(p1, top));
+                closestDistance = Math.Min(closestDistance, DistanceSquared(p1, right));
+                closestDistance = Math.Min(closestDistance, DistanceSquared(p1, bottom));
+                closestDistance = Math.Min(closestDistance, DistanceSquared(p1, left));
+            }
+            viewDistance = (float) Math.Sqrt(closestDistance);
         }
 
         public bool CanSeePlayer(Player player, List<Obstacle> visibleObstacles)

@@ -41,8 +41,17 @@ namespace HideOut.Controllers
                 case NPCType.Police:
                     npc.sprite = policeTexture;
                     npc.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
-                    npc.vision = new Vision(npc.worldRectangle, 500.0f, .25, new Vector2(0, 0), Color.Red);
-                    npc.rotateSpeed = .0016;
+                    int numVisions = 50;
+                    float maxWidth = .5f;
+                    float viewWidth = maxWidth / numVisions;
+                    float viewDistance = 500.0f;
+                    for (int i = 0; i < numVisions; i++)
+                    {
+                        float angle = (i - numVisions/2) * viewWidth;
+                        npc.visions.Add(new Vision(npc.worldRectangle, viewDistance, viewWidth / 2, new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)), Color.Red));
+                    }
+                    npc.vision = new Vision(npc.worldRectangle, viewDistance, maxWidth / 2, new Vector2(1, 0), Color.Red);
+                    npc.rotateSpeed = .0006;
                     npc.moveSpeed = 0.08f;
                     break;
             }
@@ -63,6 +72,10 @@ namespace HideOut.Controllers
                 foreach (Obstacle obs in obstacles)
                 {
                     if(npc.CanSee(obs.collisionRectangle) && !obs.canSeeThrough) visibleObstacles.Add(obs);
+                }
+                foreach (Vision vision in npc.visions)
+                {
+                    vision.Update(visibleObstacles);
                 }
                 if(UpdateNPC(npc, player, visibleObstacles, gameTime)) return true;
             }
@@ -87,11 +100,15 @@ namespace HideOut.Controllers
         {
             foreach (NPC npc in this.npcs)
             {
-                foreach(EffectPass pass in bs.CurrentTechnique.Passes)
+                foreach (EffectPass pass in bs.CurrentTechnique.Passes)
                 {
-                    pass.Apply();
-                    gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangleToDraw(), 0, 1);
-                }
+                    foreach(Vision v in npc.visions){
+                        pass.Apply();
+                        gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, v.GetFieldOfViewTriangleToDraw(), 0, 1);
+                    }
+                    //pass.Apply();
+                    //gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangleToDraw(), 0, 1);
+                }            
             }
         }
 

@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using HideOut.Controllers;
 using HideOut.Entities;
+using System.IO;
 
 namespace HideOut.Screens
 {
@@ -24,7 +25,7 @@ namespace HideOut.Screens
         EntityGenerationController entityGenerationController;
         TileController tileController;
         CollisionController collisionController;
-        LevelController levelController;
+        public LevelController levelController { get; set; }
         XMLController xmlController;
         BasicEffect basicEffect;
 
@@ -34,6 +35,7 @@ namespace HideOut.Screens
         public static readonly int MAX_GAME_HEIGHT = 5000;
         public static int GAME_WIDTH = 1000;
         public static int GAME_HEIGHT = 1000;
+        public static int CURRENT_LEVEL = 1;
 
         public static bool isPaused = false;
         public static KeyboardState pauseState;
@@ -41,17 +43,44 @@ namespace HideOut.Screens
 
         public override void Initialize()
         {
+            CURRENT_LEVEL = ReadLevel();
             Type = "LevelScreen";
             this.InitializeControllers();
 
             xmlController.write_fname = "Content/Levels/save.xml";
-            xmlController.read_fname = "Content/Levels/1.xml";
-            levelController.InitializeLevel(1);
-
+            InitializeLevel();
             // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");
             // var fontFile = FontLoader.Load(fontFilePath);
             // var fontTexture = Content.Load<Texture2D>("CourierNew32_0.png");
         }
+
+        public void InitializeLevel()
+        {
+            levelController.InitializeLevel(CURRENT_LEVEL);
+        }
+
+        public int ReadLevel()
+        {
+            if (!File.Exists("Content\\Levels\\savestate.txt"))
+            {
+                return 1;
+            }
+
+            string text = System.IO.File.ReadAllText("Content\\Levels\\savestate.txt");
+
+            int level;
+            try
+            {
+                level = Int32.Parse(text);
+            }
+            catch
+            {
+                level = 1;
+            }
+
+            return level;
+        }
+
         public override void LoadContent(GraphicsDevice gd, ContentManager cm)
         {
             // Create a new SpriteBatch, which can be used to draw textures.

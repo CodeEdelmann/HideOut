@@ -86,6 +86,7 @@ namespace HideOut.Controllers
 
         public void ClearItems()
         {
+            numCoins = 0;
             activeItems.Clear();
         }
 

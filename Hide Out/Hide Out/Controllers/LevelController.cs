@@ -30,7 +30,6 @@ namespace HideOut.Controllers
             if (itemController.numCoins <= 0)
             {
                 currentLevel++;
-                ClearLevel();
                 return InitializeLevel(currentLevel);
             }
             return 0; // continue level
@@ -39,14 +38,16 @@ namespace HideOut.Controllers
         public void ClearLevel()
         {
             npcController.npcs.Clear();
-            itemController.activeItems.Clear();
+            itemController.ClearItems();
             obstacleController.obstacles.Clear();
             tileController.ClearTiles();
         }
 
         public int InitializeLevel(int level)
         {
+            ClearLevel();
             currentLevel = level;
+            RecordLevel(level);
             string newFileName = PATH + level.ToString() + ".xml";
             if (File.Exists(newFileName))
             {
@@ -58,6 +59,11 @@ namespace HideOut.Controllers
             {
                 return 2; // last level, you win
             }
+        }
+
+        public void RecordLevel(int level)
+        {
+            System.IO.File.WriteAllText("Content\\Levels\\savestate.txt", level.ToString());
         }
     }
 }

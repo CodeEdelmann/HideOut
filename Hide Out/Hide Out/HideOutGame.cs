@@ -28,6 +28,7 @@ namespace HideOut
         public Screen currentScreen { get; set; }
         TitleScreen titleScreen;
         LevelScreen levelScreen;
+        public static bool LEVEL_INITIALIZED = false;
 
         public HideOutGame()
             : base()
@@ -54,6 +55,7 @@ namespace HideOut
 
             titleScreen.Initialize();
             levelScreen.Initialize();
+
             base.Initialize();
         }
 
@@ -93,13 +95,17 @@ namespace HideOut
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
             switch (currentScreen.Type)
             {
                 case "TitleScreen":
                     currentScreen = titleScreen;
                     break;
                 case "LevelScreen":
+                    if (!LEVEL_INITIALIZED)
+                    {
+                        levelScreen.InitializeLevel();
+                        LEVEL_INITIALIZED = true;
+                    }
                     currentScreen = levelScreen;
                     break;
             }

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace HideOut.Screens
 {
@@ -62,8 +63,10 @@ namespace HideOut.Screens
                 {
                     case 0:
                         Type = "LevelScreen";
+                        LevelScreen.CURRENT_LEVEL = 1;
                         break;
                     case 1:
+                        Type = "LevelScreen";
                         break;
                     case 2:
                         break;
@@ -113,6 +116,11 @@ namespace HideOut.Screens
                 spriteBatch.Draw(exit, new Rectangle(350, 300, 100, 50), Color.White);
 
             spriteBatch.End();
+        }
+
+        public bool SaveExists()
+        {
+            return File.Exists("Content\\Levels\\savestate.txt");
         }
     }
 }

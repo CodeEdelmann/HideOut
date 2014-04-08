@@ -18,7 +18,7 @@ namespace HideOut.Controllers
         public ObstacleController obstacleController { get; set; }
         public TileController tileController { get; set; }
 
-        int currentLevel;
+        public int currentLevel { get; set; }
 
         public LevelController()
         {

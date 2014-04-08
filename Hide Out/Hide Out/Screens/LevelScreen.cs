@@ -151,9 +151,11 @@ namespace HideOut.Screens
                         isPaused = false;
                     break;
                 case 1:
+                    CURRENT_LEVEL = levelController.currentLevel;
                     isPaused = true;
                     break;
                 case 2:
+                    CURRENT_LEVEL = levelController.currentLevel;
                     isPaused = true;
                     //TODO: show winning screen
                     Console.WriteLine("You win!  Good day!");

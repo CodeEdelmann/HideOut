@@ -69,6 +69,7 @@ namespace HideOut.Screens
                         Type = "LevelScreen";
                         break;
                     case 2:
+                        Type = "Exit";
                         break;
                 }
             }

@@ -57,6 +57,7 @@ namespace HideOut.Controllers
             }
             else
             {
+                RecordLevel(1);
                 return 2; // last level, you win
             }
         }

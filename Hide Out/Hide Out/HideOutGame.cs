@@ -108,6 +108,9 @@ namespace HideOut
                     }
                     currentScreen = levelScreen;
                     break;
+                case "Exit":
+                    Exit();
+                    break;
             }
 
             currentScreen.Update(gameTime);

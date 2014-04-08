@@ -35,7 +35,6 @@ namespace HideOut.Screens
         public static readonly int MAX_GAME_HEIGHT = 5000;
         public static int GAME_WIDTH = 1000;
         public static int GAME_HEIGHT = 1000;
-        public static int CURRENT_LEVEL = 1;
 
         public bool isPaused { get; set; }
         public static KeyboardState pauseState;
@@ -44,7 +43,6 @@ namespace HideOut.Screens
         public override void Initialize()
         {
             isPaused = false;
-            CURRENT_LEVEL = ReadLevel();
             this.InitializeControllers();
 
             xmlController.write_fname = "Content/Levels/save.xml";
@@ -56,8 +54,8 @@ namespace HideOut.Screens
 
         public void InitializeLevel()
         {
-            CURRENT_LEVEL = ReadLevel();
-            levelController.InitializeLevel(CURRENT_LEVEL);
+            int current_level = ReadLevel();
+            levelController.InitializeLevel(current_level);
         }
 
         public int ReadLevel()
@@ -154,13 +152,11 @@ namespace HideOut.Screens
                         isPaused = false;
                     break;
                 case 1:
-                    CURRENT_LEVEL = levelController.currentLevel;
                     isPaused = true;
                     displayController.displayLevel = true;
                     displayController.level = levelController.currentLevel;
                     break;
                 case 2:
-                    CURRENT_LEVEL = levelController.currentLevel;
                     isPaused = true;
                     //TODO: show winning screen
                     Console.WriteLine("You win!  Good day!");

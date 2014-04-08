@@ -44,7 +44,6 @@ namespace HideOut.Screens
         public override void Initialize()
         {
             CURRENT_LEVEL = ReadLevel();
-            Type = "LevelScreen";
             this.InitializeControllers();
 
             xmlController.write_fname = "Content/Levels/save.xml";
@@ -119,7 +118,11 @@ namespace HideOut.Screens
                     isPaused = false;
                     if (displayController.hasWon == true || displayController.hasLost == true)
                     {
-                        // TODO: quit game
+                        displayController.hasLost = false;
+                        displayController.hasWon = false;
+                        HideOutGame.LEVEL_INITIALIZED = false;
+                        Type = "TitleScreen";
+                        return;
                     }
                 }
                 else

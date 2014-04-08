@@ -99,6 +99,7 @@ namespace HideOut
             {
                 case "TitleScreen":
                     currentScreen = titleScreen;
+                    currentScreen.Type = "TitleScreen";
                     break;
                 case "LevelScreen":
                     if (!LEVEL_INITIALIZED)
@@ -107,6 +108,7 @@ namespace HideOut
                         LEVEL_INITIALIZED = true;
                     }
                     currentScreen = levelScreen;
+                    currentScreen.Type = "LevelScreen";
                     break;
                 case "Exit":
                     Exit();

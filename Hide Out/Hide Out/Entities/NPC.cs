@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace HideOut.Entities
 {
     public enum NPCType { Police, Bird, Squirrel, Child };
-    public enum NPCState { Patrol, Chase, Investigate };
+    public enum NPCState { PatrolLeft, PatrolRight, PatrolLeftBackwards, PatrolRightBackwards, Chase, Investigate };
 
     class NPC : Entity
     {
@@ -27,10 +27,10 @@ namespace HideOut.Entities
             visions = new List<Vision>();
         }
 
-        public void MoveForward(GameTime gameTime)
+        public void MoveForward(GameTime gameTime, float speedMod)
         {
             Vector2 normVec = Normalize(vision.viewDirection);
-            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod;
 
             Vision tempVis = vision;
             tempVis.parentLocation = this.worldRectangle;
@@ -42,10 +42,10 @@ namespace HideOut.Entities
             }
         }
 
-        public void MoveBackward(GameTime gameTime)
+        public void MoveBackward(GameTime gameTime, float speedMod)
         {
             Vector2 normVec = Normalize(vision.viewDirection);
-            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += -1 * normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds;
+            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += -1 * normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod;
             
             Vision tempVis = vision;
             tempVis.parentLocation = this.worldRectangle;
@@ -57,21 +57,81 @@ namespace HideOut.Entities
             }
         }
 
-        public void RotateLeft(GameTime gameTime) //positive to turn left, negative to turn right
+        public void MoveUp(GameTime gameTime, float speedMod)
         {
-            vision.Rotate(rotateSpeed * gameTime.ElapsedGameTime.Milliseconds);
-            foreach (Vision v in this.visions)
+            Vector2 normVec = new Vector2(0,-1);
+            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod;
+
+            Vision tempVis = vision;
+            tempVis.parentLocation = this.worldRectangle;
+            vision = tempVis;
+
+            for (int i = 0; i < this.visions.Count; i++)
             {
-                v.Rotate(rotateSpeed * gameTime.ElapsedGameTime.Milliseconds);
+                visions[i].parentLocation = this.worldRectangle;
             }
         }
 
-        public void RotateRight(GameTime gameTime) //positive to turn left, negative to turn right
+        public void MoveDown(GameTime gameTime, float speedMod)
         {
-            vision.Rotate(-1 * rotateSpeed * gameTime.ElapsedGameTime.Milliseconds);
+            Vector2 normVec = new Vector2(0, 1);
+            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod;
+
+            Vision tempVis = vision;
+            tempVis.parentLocation = this.worldRectangle;
+            vision = tempVis;
+
+            for (int i = 0; i < this.visions.Count; i++)
+            {
+                visions[i].parentLocation = this.worldRectangle;
+            }
+        }
+
+        public void MoveLeft(GameTime gameTime, float speedMod)
+        {
+            Vector2 normVec = new Vector2(-1, 0);
+            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod;
+
+            Vision tempVis = vision;
+            tempVis.parentLocation = this.worldRectangle;
+            vision = tempVis;
+
+            for (int i = 0; i < this.visions.Count; i++)
+            {
+                visions[i].parentLocation = this.worldRectangle;
+            }
+        }
+
+        public void MoveRight(GameTime gameTime, float speedMod)
+        {
+            Vector2 normVec = new Vector2(1, 0);
+            if (!Single.IsNaN(normVec.X) && !Single.IsNaN(normVec.Y)) position += normVec * moveSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod;
+
+            Vision tempVis = vision;
+            tempVis.parentLocation = this.worldRectangle;
+            vision = tempVis;
+
+            for (int i = 0; i < this.visions.Count; i++)
+            {
+                visions[i].parentLocation = this.worldRectangle;
+            }
+        }
+
+        public void RotateLeft(GameTime gameTime, float speedMod) //positive to turn left, negative to turn right
+        {
+            vision.Rotate(rotateSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod);
             foreach (Vision v in this.visions)
             {
-                v.Rotate(-1 * rotateSpeed * gameTime.ElapsedGameTime.Milliseconds);
+                v.Rotate(rotateSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod);
+            }
+        }
+
+        public void RotateRight(GameTime gameTime, float speedMod) //positive to turn left, negative to turn right
+        {
+            vision.Rotate(-1 * rotateSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod);
+            foreach (Vision v in this.visions)
+            {
+                v.Rotate(-1 * rotateSpeed * gameTime.ElapsedGameTime.Milliseconds * speedMod);
             }
         }
 

@@ -52,9 +52,9 @@ namespace HideOut.Controllers
                         npc.visions.Add(new Vision(npc.worldRectangle, viewDistance, viewWidth / 2, new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)), Color.Red));
                     }
                     npc.vision = new Vision(npc.worldRectangle, viewDistance, maxWidth / 2, new Vector2(1, 0), Color.Red);
-                    npc.rotateSpeed = .0006;
-                    npc.moveSpeed = 0.08f;
-                    npc.state = NPCState.Patrol;
+                    npc.rotateSpeed = .001;
+                    npc.moveSpeed = 0.1f;
+                    npc.state = NPCState.PatrolLeft;
                     break;
             }
             this.AddNPC(npc);
@@ -89,34 +89,172 @@ namespace HideOut.Controllers
             if (npc.CanSeePlayer(player, visibleObstacles)) return true;
             switch (npc.tag)
             {
+                    //npc.MoveForward(gameTime, 1.0f);
+                    //if(collisionController.IllegalMove(npc)) npc.MoveBackward(gameTime, 1.0f);
+                    //npc.RotateRight(gameTime, 1.0f);
                 case NPCType.Police:
                     npc.stateTime += gameTime.ElapsedGameTime.Milliseconds;
-                    switch (npc.state)
-                    {
-                        case NPCState.Patrol: //Currently homes in on the player
-                            double angleToPlayer = Math.Atan2(-1*((double)(player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))), 
+
+                    double angleToPlayer = Math.Atan2(-1*((double)(player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))), 
                                 ((double)(player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))));
 
-                            double facingAngle = Math.Atan2(-1*npc.vision.viewDirection.Y, npc.vision.viewDirection.X);
+                    double facingAngle = Math.Atan2(-1*npc.vision.viewDirection.Y, npc.vision.viewDirection.X);
 
-                            double turnToAngle = facingAngle - angleToPlayer;
+                    double turnToAngle = facingAngle - angleToPlayer;
 
-                            while (turnToAngle < -1 * MathHelper.Pi) turnToAngle += MathHelper.TwoPi;
-                            while (turnToAngle > MathHelper.Pi) turnToAngle -= MathHelper.TwoPi;
+                    while (turnToAngle < -1 * MathHelper.Pi) turnToAngle += MathHelper.TwoPi;
+                    while (turnToAngle > MathHelper.Pi) turnToAngle -= MathHelper.TwoPi;
 
-                            Console.WriteLine(angleToPlayer + " " + facingAngle + " " + turnToAngle);
-
-                            if (turnToAngle > 0) npc.RotateLeft(gameTime);
-                            else if (turnToAngle < 0) npc.RotateRight(gameTime);
-
-                            npc.MoveForward(gameTime);
-                            if(collisionController.IllegalMove(npc)) npc.MoveBackward(gameTime);
+                    switch (npc.state)
+                    {
+                        case NPCState.PatrolRight:
+                            npc.MoveForward(gameTime, 1.0f);
+                            if (collisionController.IllegalMove(npc))
+                            {
+                                npc.MoveBackward(gameTime, 1.0f);
+                                npc.state = NPCState.PatrolRightBackwards;
+                                npc.stateTime = 0;
+                            }
+                            else if (npc.stateTime > 3000)
+                            {
+                                npc.state = NPCState.PatrolLeft;
+                                npc.stateTime = 0;
+                            }
+                            else npc.RotateRight(gameTime, 1.0f);
 
                             break;
+
+                        case NPCState.PatrolLeft:
+                            npc.MoveForward(gameTime, 1.0f);
+                            if (collisionController.IllegalMove(npc))
+                            {
+                                npc.MoveBackward(gameTime, 1.0f);
+                                npc.state = NPCState.PatrolLeftBackwards;
+                                npc.stateTime = 0;
+                            }
+                            else if (npc.stateTime > 3000)
+                            {
+                                npc.state = NPCState.PatrolRight;
+                                npc.stateTime = 0;
+                            }
+                            else npc.RotateLeft(gameTime, 1.0f);
+
+                            break;
+
+                        case NPCState.PatrolLeftBackwards:
+                            npc.MoveBackward(gameTime, 1.0f);
+                            if (collisionController.IllegalMove(npc))
+                            {
+                                npc.MoveForward(gameTime, 1.0f);
+                                npc.state = NPCState.PatrolLeft;
+                                npc.stateTime = 0;
+                            }
+                            else if (npc.stateTime > 250)
+                            {
+                                npc.state = NPCState.PatrolLeft;
+                                npc.stateTime = 0;
+                            }
+                            else npc.RotateLeft(gameTime, 2.5f);
+
+                            break;
+
+                        case NPCState.PatrolRightBackwards:
+                            npc.MoveBackward(gameTime, 1.0f);
+                            if (collisionController.IllegalMove(npc))
+                            {
+                                npc.MoveForward(gameTime, 1.0f);
+                                npc.state = NPCState.PatrolRight;
+                                npc.stateTime = 0;
+                            }
+                            else if (npc.stateTime > 250)
+                            {
+                                npc.state = NPCState.PatrolRight;
+                                npc.stateTime = 0;
+                            }
+                            else npc.RotateRight(gameTime, 2.5f);
+
+                            break;
+
                         case NPCState.Chase:
+                            if (!player.isVisible)
+                            {
+                                npc.state = NPCState.PatrolLeft; //Randomize
+                                npc.stateTime = 0;
+                                break;
+                            }
+                            if (turnToAngle > 0) npc.RotateLeft(gameTime, 2.0f);
+                            else if (turnToAngle < 0) npc.RotateRight(gameTime, 2.0f);
+
+                            npc.MoveForward(gameTime, 2.0f);
+                            if (collisionController.IllegalMove(npc))
+                            {
+                                npc.MoveBackward(gameTime, 2.0f);
+                                if (turnToAngle > 0)
+                                {
+                                    npc.MoveUp(gameTime, 2.0f);
+                                    if (collisionController.IllegalMove(npc))
+                                    {
+                                        npc.MoveDown(gameTime, 2.0f);
+                                        if (Math.Abs(turnToAngle) < MathHelper.PiOver2)
+                                        {
+                                            npc.MoveRight(gameTime, 2.0f);
+                                            if (collisionController.IllegalMove(npc))
+                                            {
+                                                npc.MoveLeft(gameTime, 2.0f);
+                                                npc.state = NPCState.PatrolLeft; //Randomize
+                                                npc.stateTime = 0;
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (turnToAngle < 0)
+                                {
+                                    npc.MoveDown(gameTime, 2.0f);
+                                    if (collisionController.IllegalMove(npc))
+                                    {
+                                        npc.MoveUp(gameTime, 2.0f);
+                                        if (Math.Abs(turnToAngle) < MathHelper.PiOver2)
+                                        {
+                                            npc.MoveLeft(gameTime, 2.0f);
+                                            if (collisionController.IllegalMove(npc))
+                                            {
+                                                npc.MoveRight(gameTime, 2.0f);
+                                                npc.state = NPCState.PatrolLeft; //Randomize
+                                                npc.stateTime = 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             break;
                         case NPCState.Investigate:
+                            if (!player.isVisible || npc.vision.maxViewDistance / 10 < ((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)) +
+                                (player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
+                            {
+                                npc.state = NPCState.PatrolLeft; //Randomize
+                                npc.stateTime = 0;
+                                break;
+                            }
+                            if (Math.Abs(turnToAngle) < .001)
+                            {
+                                npc.MoveForward(gameTime, 0.5f);
+                            }
+                            else if (turnToAngle > 0) npc.RotateLeft(gameTime, 3.0f);
+                            else if (turnToAngle < 0) npc.RotateRight(gameTime, 3.0f);
                             break;
+                    }
+
+                    if (player.isVisible && npc.vision.maxViewDistance / 20 > ((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)) +
+                        (player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
+                    {
+                        npc.state = NPCState.Investigate;
+                        npc.stateTime = 0;
+                    }
+                    else if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                    {
+                        npc.state = NPCState.Chase;
+                        npc.stateTime = 0;
                     }
                     break;
             }

@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace HideOut.Entities
 {
     public enum NPCType { Police, Bird, Squirrel, Child };
+    public enum NPCState { Patrol, Chase, Investigate };
+
     class NPC : Entity
     {
         public Vision vision { get; set; }
@@ -16,6 +18,9 @@ namespace HideOut.Entities
         public float moveSpeed { get; set; }
         public double rotateSpeed { get; set; }
         public NPCType tag { get; set; }
+        public NPCState state { get; set; }
+        public int stateTime;
+
 
         public NPC() : base()
         {

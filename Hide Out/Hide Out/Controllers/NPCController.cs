@@ -36,6 +36,7 @@ namespace HideOut.Controllers
             NPC npc = new NPC();
             npc.tag = tag;
             npc.position = position;
+            npc.stateTime = 0;
             switch (tag)
             {
                 case NPCType.Police:
@@ -53,6 +54,7 @@ namespace HideOut.Controllers
                     npc.vision = new Vision(npc.worldRectangle, viewDistance, maxWidth / 2, new Vector2(1, 0), Color.Red);
                     npc.rotateSpeed = .0006;
                     npc.moveSpeed = 0.08f;
+                    npc.state = NPCState.Patrol;
                     break;
             }
             this.AddNPC(npc);
@@ -88,9 +90,34 @@ namespace HideOut.Controllers
             switch (npc.tag)
             {
                 case NPCType.Police:
-                    npc.MoveForward(gameTime);
-                    if(collisionController.IllegalMove(npc)) npc.MoveBackward(gameTime);
-                    npc.RotateRight(gameTime);
+                    npc.stateTime += gameTime.ElapsedGameTime.Milliseconds;
+                    switch (npc.state)
+                    {
+                        case NPCState.Patrol: //Currently homes in on the player
+                            double angleToPlayer = Math.Atan2(-1*((double)(player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))), 
+                                ((double)(player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))));
+
+                            double facingAngle = Math.Atan2(-1*npc.vision.viewDirection.Y, npc.vision.viewDirection.X);
+
+                            double turnToAngle = facingAngle - angleToPlayer;
+
+                            while (turnToAngle < -1 * MathHelper.Pi) turnToAngle += MathHelper.TwoPi;
+                            while (turnToAngle > MathHelper.Pi) turnToAngle -= MathHelper.TwoPi;
+
+                            Console.WriteLine(angleToPlayer + " " + facingAngle + " " + turnToAngle);
+
+                            if (turnToAngle > 0) npc.RotateLeft(gameTime);
+                            else if (turnToAngle < 0) npc.RotateRight(gameTime);
+
+                            npc.MoveForward(gameTime);
+                            if(collisionController.IllegalMove(npc)) npc.MoveBackward(gameTime);
+
+                            break;
+                        case NPCState.Chase:
+                            break;
+                        case NPCState.Investigate:
+                            break;
+                    }
                     break;
             }
             return false;

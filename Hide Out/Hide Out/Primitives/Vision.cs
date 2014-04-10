@@ -177,8 +177,8 @@ namespace HideOut.Primitives
         {
             double theta = GetTheta();
             Vector2 p1 = new Vector2(parentLocation.X + parentLocation.Width / 2, parentLocation.Y + parentLocation.Height / 2);
-            Vector2 p2 = new Vector2((float)(viewDistance * Math.Cos(theta + viewAngle)) + p1.X,
-                (float)(viewDistance * Math.Sin(theta + viewAngle)) + p1.Y);
+            Vector2 p2 = new Vector2((float)((viewDistance - 10) * Math.Cos(theta + viewAngle)) + p1.X,
+                (float)((viewDistance-10) * Math.Sin(theta + viewAngle)) + p1.Y);
 
             Rectangle rec = player.collisionRectangle;
             Vector2 v1 = new Vector2(rec.X, rec.Y);

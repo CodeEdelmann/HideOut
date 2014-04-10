@@ -81,7 +81,17 @@ namespace HideOut.Controllers
             activeItems.Remove(item);
             tileController.Remove(item);
             if (item.tag == ItemType.Coin)
-                numCoins--;
+                setNumCoins();
+        }
+
+        public void setNumCoins()
+        {
+            numCoins = 0;
+            foreach (Item i in activeItems)
+            {
+                if (i.tag == ItemType.Coin)
+                    numCoins++;
+            }
         }
 
         public void ClearItems()

@@ -137,6 +137,8 @@ namespace HideOut.Entities
 
         public bool CanSeePlayer(Player player, List<Obstacle> visibleObstacles)
         {
+            if (!player.isVisible)
+                return false;
             foreach(Vision v in this.visions)
             {
                 if (v.IntersectsWithPlayer(player, visibleObstacles))

@@ -19,7 +19,7 @@ namespace HideOut.Controllers
         public static int numVisions = 50;
         public static float maxWidth = .5f;
         public static float viewWidth = maxWidth / numVisions;
-        public static float viewDistance = 500.0f;
+        public static float viewDistance = 350.0f;
 
         private Texture2D policeTexture;
         private static readonly int SPRITE_SIZE = 50;
@@ -79,7 +79,7 @@ namespace HideOut.Controllers
             if (Math.Abs(diff) > Math.PI)
                 diff = Math.Abs(diff) - 2 * Math.PI;
 
-            if (Math.Abs(diff) < viewWidth + Math.PI)
+            if (Math.Abs(diff) < viewWidth + Math.PI / 2)
             {
                 if (distance2((Entity)npc, (Entity)obs) + 30000 < viewDistance * viewDistance)
                     return true;

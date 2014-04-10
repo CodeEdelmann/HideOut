@@ -110,7 +110,7 @@ namespace HideOut.Controllers
                 List<Obstacle> visibleObstacles = new List<Obstacle>();
                 foreach (Obstacle obs in obstacles)
                 {
-                    if(!obs.canSeeThrough) visibleObstacles.Add(obs);
+                    if(!obs.canSeeThrough && npc.CanSee(obs.worldRectangle)) visibleObstacles.Add(obs);
                 }
                 visibleObstacles = GetVisibleObstacles(npc, obstacles);
                 foreach (Vision vision in npc.visions)
@@ -162,8 +162,8 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.Chase;
                                 npc.stateTime = 0;
                             }
-                            else if (player.isVisible && npc.vision.maxViewDistance / 10 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
-                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            else if (player.isVisible && npc.vision.maxViewDistance / 4 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.Investigate;
                                 npc.stateTime = 0;
@@ -190,8 +190,8 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.Chase;
                                 npc.stateTime = 0;
                             }
-                            else if (player.isVisible && npc.vision.maxViewDistance / 10 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
-                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            else if (player.isVisible && npc.vision.maxViewDistance / 4 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.Investigate;
                                 npc.stateTime = 0;
@@ -218,8 +218,8 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.Chase;
                                 npc.stateTime = 0;
                             }
-                            else if (player.isVisible && npc.vision.maxViewDistance / 10 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
-                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            else if (player.isVisible && npc.vision.maxViewDistance / 4 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.Investigate;
                                 npc.stateTime = 0;
@@ -246,8 +246,8 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.Chase;
                                 npc.stateTime = 0;
                             }
-                            else if (player.isVisible && npc.vision.maxViewDistance / 10 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
-                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            else if (player.isVisible && npc.vision.maxViewDistance / 4 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.Investigate;
                                 npc.stateTime = 0;
@@ -268,8 +268,11 @@ namespace HideOut.Controllers
                                 npc.stateTime = 0;
                                 break;
                             }
-                            if (turnToAngle > 0) npc.RotateLeft(gameTime, 2.0f);
-                            else if (turnToAngle < 0) npc.RotateRight(gameTime, 2.0f);
+                            if (Math.Abs(turnToAngle) > .02)
+                            {
+                                if (turnToAngle > 0) npc.RotateLeft(gameTime, 2.0f);
+                                else if (turnToAngle < 0) npc.RotateRight(gameTime, 2.0f);
+                            }
 
                             npc.MoveForward(gameTime, 2.0f);
                             if (collisionController.IllegalMove(npc))
@@ -315,21 +318,16 @@ namespace HideOut.Controllers
 
                             break;
                         case NPCState.Investigate:
-                            if (!player.isVisible || npc.vision.maxViewDistance / 5 < Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
-                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            if (!player.isVisible || npc.vision.maxViewDistance / 2 < Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.PatrolLeft; //Randomize
                                 npc.stateTime = 0;
-                                break;
                             }
-                            if (Math.Abs(turnToAngle) < .02)
+                            else if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
                             {
-                                if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
-                                {
-                                    npc.state = NPCState.Chase;
-                                    npc.stateTime = 0;
-                                    break;
-                                }
+                                npc.state = NPCState.Chase;
+                                npc.stateTime = 0;
                             }
                             else if (turnToAngle > 0) npc.RotateLeft(gameTime, 3.0f);
                             else if (turnToAngle < 0) npc.RotateRight(gameTime, 3.0f);

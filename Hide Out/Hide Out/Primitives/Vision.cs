@@ -311,6 +311,19 @@ namespace HideOut.Primitives
                 return true;
             }
 
+            Vector2 t0 = new Vector2(viewTriangle[0].Position.X, viewTriangle[0].Position.Y);
+            Vector2 t1 = new Vector2(viewTriangle[1].Position.X, viewTriangle[1].Position.Y);
+            Vector2 t2 = new Vector2(viewTriangle[2].Position.X, viewTriangle[2].Position.Y);
+
+            Vector2 s0 = new Vector2(being.X, being.Y);
+            Vector2 s1 = new Vector2(being.X, being.Y + being.Height);
+            Vector2 s2 = new Vector2(being.X + being.Width, being.Y);
+            Vector2 s3 = new Vector2(being.X + being.Width, being.Y + being.Height);
+
+            if (Intersects(t0, t1, s0, s1).X > 0 || Intersects(t0, t1, s0, s2).X > 0 || Intersects(t0, t1, s1, s3).X > 0 || Intersects(t0, t1, s2, s3).X > 0 ||
+                Intersects(t1, t2, s0, s1).X > 0 || Intersects(t1, t2, s0, s2).X > 0 || Intersects(t1, t2, s1, s3).X > 0 || Intersects(t1, t2, s2, s3).X > 0 ||
+                Intersects(t0, t2, s0, s1).X > 0 || Intersects(t0, t2, s0, s2).X > 0 || Intersects(t0, t2, s1, s3).X > 0 || Intersects(t0, t2, s2, s3).X > 0) return true;
+
             return false;
         }
 

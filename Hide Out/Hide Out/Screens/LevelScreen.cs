@@ -57,8 +57,15 @@ namespace HideOut.Screens
 
         public void InitializeLevel()
         {
-            int current_level = ReadLevel();
-            levelController.InitializeLevel(current_level);
+            if (HideOutGame.LEVEL_DESIGN_MODE)
+            {
+                levelController.InitializeBlankLevel();
+            }
+            else
+            {
+                int current_level = ReadLevel();
+                levelController.InitializeLevel(current_level);
+            }
         }
 
         public int ReadLevel()
@@ -116,6 +123,13 @@ namespace HideOut.Screens
         }
         public override void Update(GameTime gameTime)
         {
+            if (HideOutGame.LEVEL_DESIGN_MODE)
+            {
+                playerController.Update(gameTime, mobile);
+                entityGenerationController.Update(gameTime);
+                xmlController.Update();
+                return;
+            }
             pauseState = Keyboard.GetState();
             if (isPaused)
             {
@@ -196,7 +210,6 @@ namespace HideOut.Screens
 
             itemController.Update(gameTime);
             obstacleController.Update(gameTime);
-            entityGenerationController.Update(gameTime);
             displayController.Update(gameTime);
             xmlController.Update();
         }
@@ -216,7 +229,8 @@ namespace HideOut.Screens
             basicEffect.VertexColorEnabled = true;
             gd.RasterizerState = RasterizerState.CullNone;
 
-            npcController.DrawFOVs(gd, basicEffect);
+            if(!HideOutGame.LEVEL_DESIGN_MODE)
+                npcController.DrawFOVs(gd, basicEffect);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();

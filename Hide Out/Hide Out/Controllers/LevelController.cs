@@ -43,6 +43,17 @@ namespace HideOut.Controllers
             tileController.ClearTiles();
         }
 
+        public void InitializeBlankLevel()
+        {
+            ClearLevel();
+            string fileName = PATH + "blank.xml";
+            if (File.Exists(fileName))
+            {
+                xmlController.read_fname = fileName;
+                xmlController.read();
+            }
+        }
+
         public int InitializeLevel(int level)
         {
             ClearLevel();

@@ -51,7 +51,7 @@ namespace HideOut.Controllers
                 if (keyboard.IsKeyDown(Keys.Left))
                 {
                     thePlayer.MoveLeft(gameTime);
-                    if (collisionController.IllegalMove(this.thePlayer))
+                    if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
                     {
                         thePlayer.MoveRight(gameTime);
                     }
@@ -59,7 +59,7 @@ namespace HideOut.Controllers
                 if (keyboard.IsKeyDown(Keys.Right))
                 {
                     thePlayer.MoveRight(gameTime);
-                    if (collisionController.IllegalMove(this.thePlayer))
+                    if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
                     {
                         thePlayer.MoveLeft(gameTime);
                     }
@@ -67,7 +67,7 @@ namespace HideOut.Controllers
                 if (keyboard.IsKeyDown(Keys.Up))
                 {
                     thePlayer.MoveUp(gameTime);
-                    if (collisionController.IllegalMove(this.thePlayer))
+                    if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
                     {
                         thePlayer.MoveDown(gameTime);
                     }
@@ -75,7 +75,7 @@ namespace HideOut.Controllers
                 if (keyboard.IsKeyDown(Keys.Down))
                 {
                     thePlayer.MoveDown(gameTime);
-                    if (collisionController.IllegalMove(this.thePlayer))
+                    if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
                     {
                         thePlayer.MoveUp(gameTime);
                     }
@@ -84,8 +84,11 @@ namespace HideOut.Controllers
                 List<Item> items = collisionController.GetCollidingItems(thePlayer);
                 foreach (Item i in items)
                 {
-                    this.PickupItem(i);
+                    if(!HideOutGame.LEVEL_DESIGN_MODE)
+                        this.PickupItem(i);
                 }
+                if (HideOutGame.LEVEL_DESIGN_MODE)
+                    thePlayer.isVisible = false;
 
                 if (collisionController.IsHidden(thePlayer))
                 {

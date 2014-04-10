@@ -4,21 +4,25 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using HideOut.Entities;
 
 
 namespace HideOut.Controllers
 {
     class EntityGenerationController
     {
+        Entity dragAndDropEntity;
         KeyboardState oldState;
         bool isListening;
         public ItemController itemController { get; set; }
         public NPCController npcController { get; set; }
         public ObstacleController obstacleController { get; set; }
+        MouseState oldMouseState;
 
         public EntityGenerationController()
         {
             oldState = Keyboard.GetState();
+            oldMouseState = Mouse.GetState();
             isListening = false;
         }
 
@@ -29,9 +33,112 @@ namespace HideOut.Controllers
             obstacleController = oc;
         }
 
+        public void UpdateDragAndDrop()
+        {
+            MouseState mouse = Mouse.GetState();
+            if (mouse.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton != ButtonState.Pressed)
+            {
+                Point p = new Point(mouse.X, mouse.Y);
+                Entity e = GetEntity(p);
+                if (e != null)
+                {
+                    dragAndDropEntity = e;
+                }
+            }
+            else if (mouse.LeftButton != ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Pressed)
+            {
+                dragAndDropEntity = null;
+            }
+            else if (mouse.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (dragAndDropEntity != null)
+                {
+                    int dx = mouse.X - oldMouseState.X;
+                    int dy = mouse.Y - oldMouseState.Y;
+                    dragAndDropEntity.position = dragAndDropEntity.position + new Vector2(dx, dy);
+                }
+            }
+            oldMouseState = mouse;
+        }
+
+        public Entity GetEntity(Point p)
+        {
+            foreach(Item i in itemController.activeItems)
+            {
+                if (i.screenRectangle.Contains(p))
+                    return i;
+            }
+            foreach (Obstacle i in obstacleController.obstacles)
+            {
+                if (i.screenRectangle.Contains(p))
+                    return i;
+            }
+            foreach (NPC i in npcController.npcs)
+            {
+                if (i.screenRectangle.Contains(p))
+                    return i;
+            }
+            return null;
+        }
+
+        public void DeleteEntity(MouseState mouseState)
+        {
+            int x = mouseState.X;
+            int y = mouseState.Y;
+            Point p = new Point(x, y);
+            List<Entity> toRemove = new List<Entity>();
+            foreach(Item i in itemController.activeItems)
+            {
+                if(i.screenRectangle.Contains(p))
+                {
+                    toRemove.Add(i);
+                }
+            }
+            foreach (Entity i in toRemove)
+            {
+                itemController.RemoveItem((Item)i);
+                return;
+            }
+
+            foreach (Obstacle i in obstacleController.obstacles)
+            {
+                if (i.screenRectangle.Contains(p))
+                {
+                    toRemove.Add(i);
+                }
+            }
+
+            foreach (Entity i in toRemove)
+            {
+                obstacleController.RemoveObstacle((Obstacle)i);
+                return;
+            }
+
+            foreach (NPC i in npcController.npcs)
+            {
+                if (i.screenRectangle.Contains(p))
+                {
+                    toRemove.Add(i);
+                }
+            }
+
+            foreach (Entity i in toRemove)
+            {
+                npcController.RemoveNPC((NPC)i);
+                return;
+            }
+
+        }
+
         public void Update(GameTime gameTime)
         {
+            UpdateDragAndDrop();
             KeyboardState newState = Keyboard.GetState();
+
+            if (newState.IsKeyDown(Keys.D) && !oldState.IsKeyDown(Keys.D))
+            {
+                DeleteEntity(Mouse.GetState());
+            }
 
             if (newState.IsKeyDown(Keys.M) && !oldState.IsKeyDown(Keys.M))
             {
@@ -40,15 +147,6 @@ namespace HideOut.Controllers
             if (isListening)
             {
                 MouseState mouseState = Mouse.GetState();
-
-
-
-              
-
-
-
-
-
 
                 if (newState.IsKeyDown(Keys.P) && !oldState.IsKeyDown(Keys.P))
                 {

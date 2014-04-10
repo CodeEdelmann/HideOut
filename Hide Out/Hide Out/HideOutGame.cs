@@ -30,6 +30,7 @@ namespace HideOut
         TitleScreen titleScreen;
         LevelScreen levelScreen;
         public static bool LEVEL_INITIALIZED = false;
+        public static readonly bool LEVEL_DESIGN_MODE = false;
 
         SoundEffect backgroundMusic;
 
@@ -54,7 +55,10 @@ namespace HideOut
 
             titleScreen = new TitleScreen();
             levelScreen = new LevelScreen();
-            currentScreen = titleScreen; // Choose starting screen;
+            if (LEVEL_DESIGN_MODE)
+                currentScreen = levelScreen;
+            else
+                currentScreen = titleScreen; // Choose starting screen;
 
             titleScreen.Initialize();
             levelScreen.Initialize();

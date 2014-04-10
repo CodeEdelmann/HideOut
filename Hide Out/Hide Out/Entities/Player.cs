@@ -62,7 +62,8 @@ namespace HideOut.Entities
         {
             //Current decrements hard coded in; can shift with testing and adapt for readonly constants
             this.decrement += gameTime.ElapsedGameTime.Milliseconds;
-
+            if (HideOutGame.LEVEL_DESIGN_MODE)
+                return true;
             if (this.currentSpeed > this.baseSpeed)
             {
                 this.speedDec += gameTime.ElapsedGameTime.Milliseconds;

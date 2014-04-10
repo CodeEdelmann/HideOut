@@ -18,12 +18,6 @@ namespace HideOut.Screens
         KeyboardState oldState;
 
         Texture2D exposition;
-        Texture2D startSelected;
-        Texture2D start;
-        Texture2D quitSelected;
-        Texture2D quit;
-        Texture2D resumeSelected;
-        Texture2D resume;
 
 
         int index;
@@ -50,14 +44,6 @@ namespace HideOut.Screens
             fontFile = FontLoader.Load(fontFilePath);
             fontTexture = cm.Load<Texture2D>("Fonts/font_0.png");
             fontRenderer = new FontRenderer(fontFile, fontTexture);
-
-
-             resume = cm.Load<Texture2D>("resume.png");
-            resumeSelected = cm.Load<Texture2D>("resume-selected.png");
-            quit = cm.Load<Texture2D>("quit.png");
-            quitSelected = cm.Load<Texture2D>("quit-selected.png");
-            start = cm.Load<Texture2D>("start.png");
-            startSelected = cm.Load<Texture2D>("start-selected.png");
             exposition = cm.Load<Texture2D>("exposition1.png");
 
             index = 0;
@@ -112,57 +98,38 @@ namespace HideOut.Screens
 
             bool draw_ng = true, draw_lg = true, draw_ex = true;
 
-
-
-             spriteBatch.Draw(startSelected, new Rectangle(350, 100, 100, 50), Color.White);
-            spriteBatch.Draw(resumeSelected, new Rectangle(350, 200, 100, 50), Color.White);
-            spriteBatch.Draw(quitSelected, new Rectangle(350, 300, 100, 50), Color.White);
-
             spriteBatch.Draw(exposition, new Rectangle(20, 20, 199, 172), Color.White);
 
 
             switch (index)
             {
                 case 0:
-                    //fontRenderer.DrawText(spriteBatch, 330, 200, "> New Game");
-                    spriteBatch.Draw(startSelected, new Rectangle(350, 100, 100, 50), Color.Green);
+                    fontRenderer.DrawText(spriteBatch, 330, 200, "> New Game");
                     draw_ng = false;
                     break;
                 case 1:
-                    //fontRenderer.DrawText(spriteBatch, 330, 300, "> Continue");
-                    spriteBatch.Draw(resumeSelected, new Rectangle(350, 200, 100, 50), Color.Green);
+                    fontRenderer.DrawText(spriteBatch, 330, 275, "> Continue");
                     draw_lg = false;
                     break;
                 case 2:
-                    // fontRenderer.DrawText(spriteBatch, 330, 400, "> Exit");
-                    spriteBatch.Draw(quitSelected, new Rectangle(350, 300, 100, 50), Color.Green);
+                    fontRenderer.DrawText(spriteBatch, 330, 350, "> Exit");
                     draw_ex = false;
                     break;
             }
-
-
-        
-
             
-       
-            /*
-            if (draw_ng) {
+            if (draw_ng)
+            {
                 fontRenderer.DrawText(spriteBatch, 350, 200, "New Game");
-
-                spriteBatch.Draw(start, new Rectangle(350, 100, 100, 50), Color.White);
             }
             if (draw_lg)
             {
-                fontRenderer.DrawText(spriteBatch, 350, 300, "Continue");
-
-                spriteBatch.Draw(resume, new Rectangle(350, 200, 100, 50), Color.White);
-                fontRenderer.DrawText(spriteBatch, 350, 400, "Exit");
-                if (draw_ex)
-                {
-                    spriteBatch.Draw(quit, new Rectangle(350, 300, 100, 50), Color.White);
-                }
+                fontRenderer.DrawText(spriteBatch, 350, 275, "Continue");
             }
-            */
+            if (draw_ex)
+            {
+                fontRenderer.DrawText(spriteBatch, 350, 350, "Exit");
+            }
+            
             spriteBatch.End();
         }
 

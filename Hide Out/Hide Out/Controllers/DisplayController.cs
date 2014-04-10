@@ -102,19 +102,6 @@ namespace HideOut.Controllers
          
             //sb.Draw(fontTexture, new Rectangle(xPosition, yPosition, 211, 40), sizingRectangle, Color.White);
 
- 
-
-
-
-          int  xPosition = 0;
-          int yPosition = 100;
-          int xSize = 8;
-          int ySize = 12;
-          int yOffset = 2;
-          int xOffset = 4;
-
-            int wid = 200;
-            int len = 200;
             int xPos = HideOutGame.SCREEN_WIDTH / 2;
             int yPos = HideOutGame.SCREEN_HEIGHT / 2;
             int offset = 30;

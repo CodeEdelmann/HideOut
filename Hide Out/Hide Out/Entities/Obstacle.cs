@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HideOut.Entities
 {
-    enum ObstacleType { Bush, Tree, Fountain, Pond, Trash };
+    enum ObstacleType { Bush, Tree, Fountain, Pond, Trash, Border };
     class Obstacle : Entity
     {
         public Boolean canOverlapWith { get; set; }

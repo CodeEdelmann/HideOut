@@ -75,6 +75,12 @@ namespace HideOut.Controllers
                     obstacle.canSeeThrough = true;
                     obstacle.rectangleBounds = new Point(TRASH_SPRITE_SIZE_X, TRASH_SPRITE_SIZE_Y);
                     break;
+                case ObstacleType.Border:
+                    obstacle.sprite = treeTexture;
+                    obstacle.canOverlapWith = false;
+                    obstacle.canSeeThrough = true;
+                    obstacle.rectangleBounds = new Point(TREE_SPRITE_SIZE_X, TREE_SPRITE_SIZE_Y);
+                    break;
             }
             this.AddObstacle(obstacle);
         }

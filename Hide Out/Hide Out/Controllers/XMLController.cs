@@ -92,6 +92,9 @@ namespace HideOut
                                     case "Tree":
                                         this.obstacleController.CreateObstacle(ObstacleType.Tree, new Vector2(xPos, yPos));
                                         break;
+                                    case "Border":
+                                        this.obstacleController.CreateObstacle(ObstacleType.Border, new Vector2(xPos, yPos));
+                                        break;
                                 }
                                 break;
                             case "item":
@@ -170,6 +173,9 @@ namespace HideOut
                             break;
                         case ObstacleType.Tree:
                             type = "Tree";
+                            break;
+                        case ObstacleType.Border:
+                            type = "Border";
                             break;
                     }
                     writer.WriteName(type);

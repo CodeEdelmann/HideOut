@@ -98,7 +98,7 @@ namespace HideOut.Controllers
             int len = 200;
             int xPos = HideOutGame.SCREEN_WIDTH / 2;
             int yPos = HideOutGame.SCREEN_HEIGHT / 2;
-            int offset = 25;
+            int offset = 30;
 
             if (displayLevel)
             {
@@ -108,7 +108,7 @@ namespace HideOut.Controllers
              if (hasLost)
              {
                  sb.Draw(loseGameTexture, new Rectangle(xPos - wid/2, yPos - len/2, wid, len), Color.White);
-                 fontRenderer.DrawText(sb, xPos - offset, 0, "You Lose...");
+                 fontRenderer.DrawText(sb, xPos - wid/2, yPos - len/2 - offset, "You Lose...");
                  // displayString("Game Over", xPos, yPos - offset, sb, backgroundColor);
              }
              else
@@ -116,7 +116,7 @@ namespace HideOut.Controllers
                  if (hasWon)
                  {
                      sb.Draw(winGameTexture, new Rectangle(xPos - wid/2, yPos - len/2, wid, len), Color.White);
-                     fontRenderer.DrawText(sb, xPos - offset, 0, "You Win!");
+                     fontRenderer.DrawText(sb, xPos - wid/2, yPos - len/2 - offset, "You Win!");
                      // displayString("Congratulations!", xPos, yPos - offset, sb, backgroundColor);
                  }
              }

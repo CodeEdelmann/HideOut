@@ -94,26 +94,26 @@ namespace HideOut.Screens
             switch (index)
             {
                 case 0:
-                    fontRenderer.DrawText(spriteBatch, 350, 100, "> New Game");
+                    fontRenderer.DrawText(spriteBatch, 330, 200, "> New Game");
                     draw_ng = false;
                     break;
                 case 1:
-                    fontRenderer.DrawText(spriteBatch, 350, 200, "> Load Game");
+                    fontRenderer.DrawText(spriteBatch, 330, 300, "> Continue");
                     draw_lg = false;
                     break;
                 case 2:
-                    fontRenderer.DrawText(spriteBatch, 350, 300, "> Exit");
+                    fontRenderer.DrawText(spriteBatch, 330, 400, "> Exit");
                     draw_ex = false;
                     break;
             }
             if (draw_ng)
-                fontRenderer.DrawText(spriteBatch, 350, 100, "New Game");
+                fontRenderer.DrawText(spriteBatch, 350, 200, "New Game");
 
             if (draw_lg)
-                fontRenderer.DrawText(spriteBatch, 350, 200, "Load Game");
+                fontRenderer.DrawText(spriteBatch, 350, 300, "Continue");
 
             if (draw_ex)
-                fontRenderer.DrawText(spriteBatch, 350, 300, "Exit");
+                fontRenderer.DrawText(spriteBatch, 350, 400, "Exit");
 
             spriteBatch.End();
         }

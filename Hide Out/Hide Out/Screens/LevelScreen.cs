@@ -133,19 +133,24 @@ namespace HideOut.Screens
             pauseState = Keyboard.GetState();
             if (isPaused)
             {
-                if (pauseState.IsKeyDown(Keys.Enter))
+                if ((pauseState.IsKeyDown(Keys.Left) || 
+                    pauseState.IsKeyDown(Keys.Right) || 
+                    pauseState.IsKeyDown(Keys.Up) || 
+                    pauseState.IsKeyDown(Keys.Down)) && !displayController.hasLost && !displayController.hasWon)
                 {
                     isPaused = false;
-                    displayController.displayLevel = false;
-                    if (displayController.hasWon == true || displayController.hasLost == true)
-                    {
-                        displayController.hasLost = false;
-                        displayController.hasWon = false;
-                        HideOutGame.LEVEL_INITIALIZED = false;
-                        Type = "TitleScreen";
-                        return;
-                    }
+                    displayController.displayLevel = false;           
                 }
+                else if (pauseState.IsKeyDown(Keys.Enter) && (displayController.hasWon == true || displayController.hasLost == true))
+                {
+                    isPaused = false;
+                    displayController.displayLevel = false;   
+                    displayController.hasLost = false;
+                    displayController.hasWon = false;
+                    HideOutGame.LEVEL_INITIALIZED = false;
+                    Type = "TitleScreen";
+                    return;
+                }   
                 else
                     return;
             }

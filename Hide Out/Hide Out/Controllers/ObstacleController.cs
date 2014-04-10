@@ -136,6 +136,9 @@ namespace HideOut.Controllers
                     case ObstacleType.Trash:
                         obstacle.sprite = trashTexture;
                         break;
+                    case ObstacleType.Border:
+                        obstacle.sprite = treeTexture;
+                        break;
                 }
             }
         }

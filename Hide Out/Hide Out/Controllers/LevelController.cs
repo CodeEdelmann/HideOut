@@ -46,7 +46,7 @@ namespace HideOut.Controllers
         public void InitializeBlankLevel()
         {
             ClearLevel();
-            string fileName = PATH + "blank.xml";
+            string fileName = PATH + "blank" + HideOutGame.LEVEL_DESIGN_SIZE + ".xml";
             if (File.Exists(fileName))
             {
                 xmlController.read_fname = fileName;

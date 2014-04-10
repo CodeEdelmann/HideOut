@@ -44,7 +44,7 @@ namespace HideOut.Controllers
                 case NPCType.PoliceB:
                     npc.sprite = policeTexture;
                     npc.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
-                    int numVisions = 100;
+                    int numVisions = 50;
                     float maxWidth = .5f;
                     float viewWidth = maxWidth / numVisions;
                     float viewDistance = 500.0f;

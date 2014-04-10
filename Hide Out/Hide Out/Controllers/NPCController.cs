@@ -121,6 +121,17 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.PatrolRightBackwards;
                                 npc.stateTime = 0;
                             }
+                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                            {
+                                npc.state = NPCState.Chase;
+                                npc.stateTime = 0;
+                            }
+                            else if (player.isVisible && npc.vision.maxViewDistance / 10 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            {
+                                npc.state = NPCState.Investigate;
+                                npc.stateTime = 0;
+                            }
                             else if (npc.stateTime > 3000)
                             {
                                 npc.state = NPCState.PatrolLeft;
@@ -136,6 +147,17 @@ namespace HideOut.Controllers
                             {
                                 npc.MoveBackward(gameTime, 1.0f);
                                 npc.state = NPCState.PatrolLeftBackwards;
+                                npc.stateTime = 0;
+                            }
+                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                            {
+                                npc.state = NPCState.Chase;
+                                npc.stateTime = 0;
+                            }
+                            else if (player.isVisible && npc.vision.maxViewDistance / 10 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            {
+                                npc.state = NPCState.Investigate;
                                 npc.stateTime = 0;
                             }
                             else if (npc.stateTime > 3000)
@@ -155,6 +177,17 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.PatrolLeft;
                                 npc.stateTime = 0;
                             }
+                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                            {
+                                npc.state = NPCState.Chase;
+                                npc.stateTime = 0;
+                            }
+                            else if (player.isVisible && npc.vision.maxViewDistance / 10 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            {
+                                npc.state = NPCState.Investigate;
+                                npc.stateTime = 0;
+                            }
                             else if (npc.stateTime > 250)
                             {
                                 npc.state = NPCState.PatrolLeft;
@@ -170,6 +203,17 @@ namespace HideOut.Controllers
                             {
                                 npc.MoveForward(gameTime, 1.0f);
                                 npc.state = NPCState.PatrolRight;
+                                npc.stateTime = 0;
+                            }
+                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                            {
+                                npc.state = NPCState.Chase;
+                                npc.stateTime = 0;
+                            }
+                            else if (player.isVisible && npc.vision.maxViewDistance / 10 > Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
+                            {
+                                npc.state = NPCState.Investigate;
                                 npc.stateTime = 0;
                             }
                             else if (npc.stateTime > 250)
@@ -235,33 +279,27 @@ namespace HideOut.Controllers
 
                             break;
                         case NPCState.Investigate:
-                            if (!player.isVisible || npc.vision.maxViewDistance / 10 < ((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)) +
-                                (player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
+                            if (!player.isVisible || npc.vision.maxViewDistance / 5 < Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2)))))
                             {
                                 npc.state = NPCState.PatrolLeft; //Randomize
                                 npc.stateTime = 0;
                                 break;
                             }
-                            if (Math.Abs(turnToAngle) < .001)
+                            if (Math.Abs(turnToAngle) < .02)
                             {
-                                npc.MoveForward(gameTime, 0.5f);
+                                if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                                {
+                                    npc.state = NPCState.Chase;
+                                    npc.stateTime = 0;
+                                    break;
+                                }
                             }
                             else if (turnToAngle > 0) npc.RotateLeft(gameTime, 3.0f);
                             else if (turnToAngle < 0) npc.RotateRight(gameTime, 3.0f);
                             break;
                     }
 
-                    if (player.isVisible && npc.vision.maxViewDistance / 20 > ((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)) +
-                        (player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
-                    {
-                        npc.state = NPCState.Investigate;
-                        npc.stateTime = 0;
-                    }
-                    else if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
-                    {
-                        npc.state = NPCState.Chase;
-                        npc.stateTime = 0;
-                    }
                     break;
             }
             return false;

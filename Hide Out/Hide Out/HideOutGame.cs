@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using HideOut.Entities;
 using HideOut.Controllers;
 using HideOut.Screens;
+using Microsoft.Xna.Framework.Audio;
 #endregion
 
 namespace HideOut
@@ -29,6 +30,8 @@ namespace HideOut
         TitleScreen titleScreen;
         LevelScreen levelScreen;
         public static bool LEVEL_INITIALIZED = false;
+
+        SoundEffect backgroundMusic;
 
         public HideOutGame()
             : base()
@@ -57,6 +60,9 @@ namespace HideOut
             levelScreen.Initialize();
 
             base.Initialize();
+
+
+
         }
 
         /// <summary>
@@ -67,6 +73,9 @@ namespace HideOut
         {
             titleScreen.LoadContent(GraphicsDevice, Content);
             levelScreen.LoadContent(GraphicsDevice, Content);
+            //  http://www.newgrounds.com/audio/listen/564520
+            backgroundMusic = Content.Load<SoundEffect>("ambience.wav");
+            backgroundMusic.Play();
             base.LoadContent();
         }
 

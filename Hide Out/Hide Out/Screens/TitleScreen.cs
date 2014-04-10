@@ -17,6 +17,7 @@ namespace HideOut.Screens
         SpriteBatch spriteBatch;
         KeyboardState oldState;
 
+        Texture2D exposition;
         Texture2D startSelected;
         Texture2D start;
         Texture2D quitSelected;
@@ -57,6 +58,7 @@ namespace HideOut.Screens
             quitSelected = cm.Load<Texture2D>("quit-selected.png");
             start = cm.Load<Texture2D>("start.png");
             startSelected = cm.Load<Texture2D>("start-selected.png");
+            exposition = cm.Load<Texture2D>("exposition1.png");
 
             index = 0;
         }
@@ -115,6 +117,8 @@ namespace HideOut.Screens
              spriteBatch.Draw(startSelected, new Rectangle(350, 100, 100, 50), Color.White);
             spriteBatch.Draw(resumeSelected, new Rectangle(350, 200, 100, 50), Color.White);
             spriteBatch.Draw(quitSelected, new Rectangle(350, 300, 100, 50), Color.White);
+
+            spriteBatch.Draw(exposition, new Rectangle(20, 20, 199, 172), Color.White);
 
 
             switch (index)

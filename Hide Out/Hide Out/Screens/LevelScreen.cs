@@ -11,11 +11,14 @@ using Microsoft.Xna.Framework.GamerServices;
 using HideOut.Controllers;
 using HideOut.Entities;
 using System.IO;
+using Microsoft.Xna.Framework.Audio;
 
 namespace HideOut.Screens
 {
     class LevelScreen : Screen
     {
+        SoundEffect victorySound;
+        SoundEffect failureSound;
         DisplayController displayController;
         SpriteBatch spriteBatch;
         PlayerController playerController;
@@ -87,8 +90,11 @@ namespace HideOut.Screens
 
             //testing for text display
 
+            // http://www.newgrounds.com/audio/listen/568885
+            victorySound = cm.Load<SoundEffect>("victory.wav");
 
-
+            // http://www.newgrounds.com/audio/listen/135985
+            failureSound = cm.Load<SoundEffect>("failure.wav");
 
             // TODO: use this.Content to load your game content here
             displayController.LoadContent(cm);
@@ -142,6 +148,7 @@ namespace HideOut.Screens
                 isPaused = true;
                 //TODO: show losing screen
                 Console.WriteLine("You lose!  Good day!");
+                failureSound.Play();
                 displayController.hasLost = true;//Exit();
             }
 
@@ -170,6 +177,7 @@ namespace HideOut.Screens
                     isPaused = true;
                     //TODO: show winning screen
                     Console.WriteLine("You win!  Good day!");
+                    victorySound.Play();
                     try
                     {
                         File.Delete("Content\\Levels\\savestate.txt");

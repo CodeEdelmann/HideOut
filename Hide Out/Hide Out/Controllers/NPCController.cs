@@ -16,6 +16,10 @@ namespace HideOut.Controllers
         public List<NPC> npcs { get; set; }
         public TileController tileController { get; set; }
         public CollisionController collisionController { get; set; }
+        public static int numVisions = 50;
+        public static float maxWidth = .5f;
+        public static float viewWidth = maxWidth / numVisions;
+        public static float viewDistance = 500.0f;
 
         private Texture2D policeTexture;
         private static readonly int SPRITE_SIZE = 50;
@@ -44,10 +48,7 @@ namespace HideOut.Controllers
                 case NPCType.PoliceB:
                     npc.sprite = policeTexture;
                     npc.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
-                    int numVisions = 50;
-                    float maxWidth = .5f;
-                    float viewWidth = maxWidth / numVisions;
-                    float viewDistance = 500.0f;
+
                     for (int i = 0; i < numVisions; i++)
                     {
                         float angle = (i - numVisions/2) * viewWidth;
@@ -68,6 +69,40 @@ namespace HideOut.Controllers
             tileController.Remove(npc);
         }
 
+        public bool CanSee(NPC npc, Obstacle obs)
+        {
+            Vector2 viewDir = npc.visions[numVisions/2].viewDirection;
+            double angle1 = 2 * Math.PI + Math.Atan2(-1*(double)viewDir.Y, (double)viewDir.X);
+            Vector2 obsDir = obs.position - npc.position;
+            double angle2 = 2 * Math.PI + Math.Atan2(-1*(double)obsDir.Y, (double) obsDir.X);
+            double diff = angle1 - angle2;
+            if (Math.Abs(diff) > Math.PI)
+                diff = Math.Abs(diff) - 2 * Math.PI;
+
+            if (Math.Abs(diff) < viewWidth + Math.PI)
+            {
+                if (distance2((Entity)npc, (Entity)obs) + 30000 < viewDistance * viewDistance)
+                    return true;
+            }
+            return false;
+        }
+
+        public double distance2(Entity a, Entity b)
+        {
+            return (a.position.X - b.position.X) * (a.position.X - b.position.X) + (a.position.Y - b.position.Y) * (a.position.Y - b.position.Y);
+        }
+
+        public List<Obstacle> GetVisibleObstacles(NPC npc, List<Obstacle> obstacles)
+        {
+            List<Obstacle> visibleObstacles = new List<Obstacle>();
+            foreach (Obstacle obs in obstacles)
+            {
+               if(!obs.canSeeThrough && CanSee(npc, obs))
+                   visibleObstacles.Add(obs);
+            }
+            return visibleObstacles;
+        }
+
         public bool Update(Player player, List<Obstacle> obstacles, GameTime gameTime)
         {
             foreach (NPC npc in this.npcs)
@@ -77,6 +112,7 @@ namespace HideOut.Controllers
                 {
                     if(!obs.canSeeThrough) visibleObstacles.Add(obs);
                 }
+                visibleObstacles = GetVisibleObstacles(npc, obstacles);
                 foreach (Vision vision in npc.visions)
                 {
                     vision.Update(visibleObstacles);

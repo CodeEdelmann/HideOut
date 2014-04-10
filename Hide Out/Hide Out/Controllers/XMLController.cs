@@ -48,6 +48,7 @@ namespace HideOut
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
+                        string name = reader.Name;
                         while (reader.MoveToNextAttribute())
                         {
                             switch (reader.Name)
@@ -60,7 +61,7 @@ namespace HideOut
                                     break;
                             }
                         }
-                        switch (reader.Name)
+                        switch (name)
                         {
                             case "world":
                                 LevelScreen.GAME_WIDTH = xPos;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<world X="800" Y="800">
+<world X="1000" Y="1000">
   <player X="500" Y="700"></player>
 
   <npc X="700" Y="500">PoliceA</npc>

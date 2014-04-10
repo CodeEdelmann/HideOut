@@ -69,7 +69,7 @@ namespace HideOut.Controllers
             List<Obstacle> nearbyObstacles = tileController.GetNearbyObstacles(p.worldRectangle);
             foreach(Obstacle i in nearbyObstacles)
             {
-                if(i.canOverlapWith && i.worldRectangle.Contains(p.worldRectangle))
+                if(i.canOverlapWith && i.worldRectangle.Contains(p.collisionRectangle))
                 {
                     return true;
                 }

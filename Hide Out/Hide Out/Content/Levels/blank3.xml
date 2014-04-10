@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="2000" Y="2000">
-  <player X="427" Y="610"></player>
+  <player X="911" Y="610"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -22,31 +22,84 @@
   <obstacle X="583" Y="-4">Border</obstacle>
   <obstacle X="825" Y="-5">Border</obstacle>
   <obstacle X="908" Y="-3">Border</obstacle>
-  <obstacle X="914" Y="67">Border</obstacle>
-  <obstacle X="915" Y="137">Border</obstacle>
-  <obstacle X="913" Y="208">Border</obstacle>
-  <obstacle X="914" Y="278">Border</obstacle>
-  <obstacle X="914" Y="348">Border</obstacle>
-  <obstacle X="916" Y="418">Border</obstacle>
-  <obstacle X="916" Y="486">Border</obstacle>
-  <obstacle X="915" Y="556">Border</obstacle>
-  <obstacle X="916" Y="626">Border</obstacle>
-  <obstacle X="915" Y="696">Border</obstacle>
-  <obstacle X="913" Y="767">Border</obstacle>
-  <obstacle X="915" Y="837">Border</obstacle>
-  <obstacle X="831" Y="926">Border</obstacle>
-  <obstacle X="916" Y="907">Border</obstacle>
-  <obstacle X="668" Y="922">Border</obstacle>
-  <obstacle X="502" Y="922">Border</obstacle>
-  <obstacle X="587" Y="923">Border</obstacle>
-  <obstacle X="748" Y="924">Border</obstacle>
-  <obstacle X="419" Y="920">Border</obstacle>
-  <obstacle X="336" Y="920">Border</obstacle>
-  <obstacle X="253" Y="922">Border</obstacle>
-  <obstacle X="168" Y="920">Border</obstacle>
-  <obstacle X="86" Y="922">Border</obstacle>
+  <obstacle X="993" Y="-3">Border</obstacle>
+  <obstacle X="1077" Y="-4">Border</obstacle>
+  <obstacle X="1159" Y="-6">Border</obstacle>
+  <obstacle X="1242" Y="-8">Border</obstacle>
+  <obstacle X="1326" Y="-7">Border</obstacle>
+  <obstacle X="1411" Y="-7">Border</obstacle>
+  <obstacle X="1497" Y="-8">Border</obstacle>
   <obstacle X="-5" Y="922">Border</obstacle>
   <obstacle X="-3" Y="708">Border</obstacle>
   <obstacle X="-3" Y="777">Border</obstacle>
   <obstacle X="-3" Y="849">Border</obstacle>
+  <obstacle X="1583" Y="-5">Border</obstacle>
+  <obstacle X="1667" Y="-6">Border</obstacle>
+  <obstacle X="1752" Y="-5">Border</obstacle>
+  <obstacle X="1913" Y="-4">Border</obstacle>
+  <obstacle X="1911" Y="67">Border</obstacle>
+  <obstacle X="1837" Y="-4">Border</obstacle>
+  <obstacle X="1911" Y="137">Border</obstacle>
+  <obstacle X="1910" Y="208">Border</obstacle>
+  <obstacle X="1912" Y="347">Border</obstacle>
+  <obstacle X="1911" Y="277">Border</obstacle>
+  <obstacle X="1911" Y="416">Border</obstacle>
+  <obstacle X="1913" Y="487">Border</obstacle>
+  <obstacle X="1911" Y="558">Border</obstacle>
+  <obstacle X="1910" Y="629">Border</obstacle>
+  <obstacle X="1909" Y="700">Border</obstacle>
+  <obstacle X="1909" Y="771">Border</obstacle>
+  <obstacle X="1906" Y="841">Border</obstacle>
+  <obstacle X="1907" Y="913">Border</obstacle>
+  <obstacle X="1910" Y="985">Border</obstacle>
+  <obstacle X="1913" Y="1057">Border</obstacle>
+  <obstacle X="1915" Y="1129">Border</obstacle>
+  <obstacle X="1914" Y="1199">Border</obstacle>
+  <obstacle X="1911" Y="1270">Border</obstacle>
+  <obstacle X="1910" Y="1342">Border</obstacle>
+  <obstacle X="1909" Y="1414">Border</obstacle>
+  <obstacle X="1910" Y="1484">Border</obstacle>
+  <obstacle X="1910" Y="1555">Border</obstacle>
+  <obstacle X="1911" Y="1627">Border</obstacle>
+  <obstacle X="1911" Y="1698">Border</obstacle>
+  <obstacle X="1911" Y="1770">Border</obstacle>
+  <obstacle X="1911" Y="1844">Border</obstacle>
+  <obstacle X="1913" Y="1917">Border</obstacle>
+  <obstacle X="1828" Y="1918">Border</obstacle>
+  <obstacle X="1743" Y="1919">Border</obstacle>
+  <obstacle X="1661" Y="1920">Border</obstacle>
+  <obstacle X="1576" Y="1922">Border</obstacle>
+  <obstacle X="1492" Y="1921">Border</obstacle>
+  <obstacle X="1408" Y="1921">Border</obstacle>
+  <obstacle X="1324" Y="1922">Border</obstacle>
+  <obstacle X="1087" Y="1924">Border</obstacle>
+  <obstacle X="1245" Y="1925">Border</obstacle>
+  <obstacle X="1001" Y="1924">Border</obstacle>
+  <obstacle X="917" Y="1920">Border</obstacle>
+  <obstacle X="836" Y="1919">Border</obstacle>
+  <obstacle X="751" Y="1918">Border</obstacle>
+  <obstacle X="672" Y="1923">Border</obstacle>
+  <obstacle X="1169" Y="1926">Border</obstacle>
+  <obstacle X="-7" Y="1065">Border</obstacle>
+  <obstacle X="-5" Y="994">Border</obstacle>
+  <obstacle X="-8" Y="1136">Border</obstacle>
+  <obstacle X="-7" Y="1279">Border</obstacle>
+  <obstacle X="-6" Y="1208">Border</obstacle>
+  <obstacle X="-7" Y="1346">Border</obstacle>
+  <obstacle X="-5" Y="1419">Border</obstacle>
+  <obstacle X="-5" Y="1489">Border</obstacle>
+  <obstacle X="-5" Y="1560">Border</obstacle>
+  <obstacle X="-5" Y="1630">Border</obstacle>
+  <obstacle X="-8" Y="1701">Border</obstacle>
+  <obstacle X="-6" Y="1771">Border</obstacle>
+  <obstacle X="-6" Y="1841">Border</obstacle>
+  <obstacle X="-4" Y="1911">Border</obstacle>
+  <obstacle X="77" Y="1926">Border</obstacle>
+  <obstacle X="154" Y="1923">Border</obstacle>
+  <obstacle X="236" Y="1925">Border</obstacle>
+  <obstacle X="320" Y="1925">Border</obstacle>
+  <obstacle X="403" Y="1924">Border</obstacle>
+  <obstacle X="484" Y="1926">Border</obstacle>
+  <obstacle X="553" Y="1925">Border</obstacle>
+  <obstacle X="619" Y="1926">Border</obstacle>
 </world>

@@ -16,6 +16,14 @@ namespace HideOut.Screens
         SpriteBatch spriteBatch;
         KeyboardState oldState;
 
+        Texture2D startSelected;
+        Texture2D start;
+        Texture2D quitSelected;
+        Texture2D quit;
+        Texture2D resumeSelected;
+        Texture2D resume;
+
+
         Texture2D newGame;
         Texture2D loadGame;
         Texture2D exit;
@@ -44,6 +52,15 @@ namespace HideOut.Screens
             newGameSelected = cm.Load<Texture2D>("green.png");
             loadGameSelected = cm.Load<Texture2D>("green.png");
             exitSelected = cm.Load<Texture2D>("green.png");
+
+
+             resume = cm.Load<Texture2D>("resume.png");
+            resumeSelected = cm.Load<Texture2D>("resume-selected.png");
+            quit = cm.Load<Texture2D>("quit.png");
+            quitSelected = cm.Load<Texture2D>("quit-selected.png");
+            start = cm.Load<Texture2D>("start.png");
+            startSelected = cm.Load<Texture2D>("start-selected.png");
+
             index = 0;
         }
         public override void Update(GameTime gameTime)
@@ -98,24 +115,34 @@ namespace HideOut.Screens
             {
                 case 0:
                     spriteBatch.Draw(newGameSelected, new Rectangle(350, 100, 100, 50), Color.White);
+                    spriteBatch.Draw(startSelected, new Rectangle(350, 100, 100, 50), Color.White);
                     draw_ng = false;
                     break;
                 case 1:
                     spriteBatch.Draw(loadGameSelected, new Rectangle(350, 200, 100, 50), Color.White);
+                    spriteBatch.Draw(resumeSelected, new Rectangle(350, 200, 100, 50), Color.White);
                     draw_lg = false;
                     break;
                 case 2:
                     spriteBatch.Draw(exitSelected, new Rectangle(350, 300, 100, 50), Color.White);
+                    spriteBatch.Draw(quitSelected, new Rectangle(350, 300, 100, 50), Color.White);
                     draw_ex = false;
                     break;
             }
             if (draw_ng)
+            {
                 spriteBatch.Draw(newGame, new Rectangle(350, 100, 100, 50), Color.White);
+                spriteBatch.Draw(start, new Rectangle(350, 100, 100, 50), Color.White);
+            }
             if (draw_lg)
+            {
                 spriteBatch.Draw(loadGame, new Rectangle(350, 200, 100, 50), Color.White);
-            if (draw_ex)
+                spriteBatch.Draw(resume, new Rectangle(350, 200, 100, 50), Color.White);
+            }
+                if (draw_ex) {
                 spriteBatch.Draw(exit, new Rectangle(350, 300, 100, 50), Color.White);
-
+                spriteBatch.Draw(quit, new Rectangle(350, 300, 100, 50), Color.White);
+            }
             spriteBatch.End();
         }
 

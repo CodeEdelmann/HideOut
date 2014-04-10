@@ -109,7 +109,47 @@ namespace HideOut.Controllers
 
             if (displayLevel)
             {
+                //xPos += 400;
+                //yPos -= 100;
+
+                xPos -= 200;
+                yPos -= 70;
+
+
                 displayString("Level " + this.level.ToString(), xPos, yPos - offset, sb, backgroundColor);
+                switch (level)
+                {
+
+                    case 1:
+                        {
+                            displayString("Collect all the coins to pass each level", 0, 400 - offset, sb, backgroundColor);
+                            
+                            
+                        }
+                        break;
+
+                    case 2:
+                        {
+                            displayString("Your food and thirst reduce over time", 0, 400 - offset, sb, backgroundColor);
+                            displayString("Water fountains restore thirst", 00, 420 - offset, sb, backgroundColor);
+                            displayString("Apples restore health", 0, 440 - offset, sb, backgroundColor);
+                            displayString("Press ENTER to start", 0, 460 - offset, sb, backgroundColor);
+                        }
+                        break;
+
+                    case 3:
+                        {
+                            displayString("Do not let the police catch you", 0, 400 - offset, sb, backgroundColor);
+                            displayString("Hide inside bushes or inside other obstacles", 00, 420 - offset, sb, backgroundColor);
+                            displayString("to avoid them", 0, 440 - offset, sb, backgroundColor);
+
+                            displayString("Candy bars with also give you a speed boost", 0, 480 - offset, sb, backgroundColor);
+                            
+                        }
+                        break;
+                        
+                
+                }
             }
              if (hasLost)
              {

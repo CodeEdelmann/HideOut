@@ -145,11 +145,21 @@ namespace HideOut.Screens
                 displayController.hasLost = true;//Exit();
             }
 
+            displayController.level = levelController.currentLevel;
             switch (levelController.Update())
             {
                 case 0:
+                    //isPaused = true;
+                    displayController.displayLevel = true;
+                    /*
                     if (pauseState.IsKeyDown(Keys.Enter))
+                    {
                         isPaused = false;
+                    }
+                    else
+                    {
+                        isPaused = true;
+                    } */
                     break;
                 case 1:
                     isPaused = true;

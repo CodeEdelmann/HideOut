@@ -114,8 +114,11 @@ namespace HideOut
                             case "npc":
                                 switch (type)
                                 {
-                                    case "Police":
-                                        this.npcController.CreateNPC(NPCType.Police, new Vector2(xPos, yPos));
+                                    case "PoliceA":
+                                        this.npcController.CreateNPC(NPCType.PoliceA, new Vector2(xPos, yPos));
+                                        break;
+                                    case "PoliceB":
+                                        this.npcController.CreateNPC(NPCType.PoliceB, new Vector2(xPos, yPos));
                                         break;
                                     case "Bird":
                                         this.npcController.CreateNPC(NPCType.Bird, new Vector2(xPos, yPos));
@@ -212,9 +215,12 @@ namespace HideOut
                         case NPCType.Child:
                             type = "Child";
                             break;
-                        case NPCType.Police:
-                            type = "Police";
+                        case NPCType.PoliceA:
+                            type = "PoliceA";
                             break;
+                        case NPCType.PoliceB:
+                            type = "PoliceB";
+                            break;                     
                         case NPCType.Squirrel:
                             type = "Squirrel";
                             break;

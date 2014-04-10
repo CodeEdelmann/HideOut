@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<world X="1000" Y="1000">
-  <player X="900" Y="900"></player>
-  <npc X="500" Y="500">Police</npc>
-  <item X="100" Y="100">Coin</item>
-  <item X="200" Y="200">Coin</item>
+<world X="800" Y="800">
+  <player X="500" Y="500"></player>
+  <obstacle X="50" Y="50">Bush</obstacle>
+  <obstacle X="500" Y="100">Fountain</obstacle>
+  <obstacle X="100" Y="300">Pond</obstacle>
+  <obstacle X="400" Y="300">Tree</obstacle>
+  <item X="60" Y="60">Apple</item>
+  <item X="600" Y="200">CandyBar</item>
   <item X="800" Y="800">Coin</item>
+  <item X="200" Y="250">Coin</item>
+  <npc X="200" Y="200">PoliceB</npc>
 </world>

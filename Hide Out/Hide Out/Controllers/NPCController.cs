@@ -39,7 +39,9 @@ namespace HideOut.Controllers
             npc.stateTime = 0;
             switch (tag)
             {
-                case NPCType.Police:
+                case NPCType.PoliceA:
+                    //lack of break here is intentional!  We want both police managed the same way here
+                case NPCType.PoliceB:
                     npc.sprite = policeTexture;
                     npc.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
                     int numVisions = 100;
@@ -89,10 +91,14 @@ namespace HideOut.Controllers
             if (npc.CanSeePlayer(player, visibleObstacles)) return true;
             switch (npc.tag)
             {
-                    //npc.MoveForward(gameTime, 1.0f);
-                    //if(collisionController.IllegalMove(npc)) npc.MoveBackward(gameTime, 1.0f);
-                    //npc.RotateRight(gameTime, 1.0f);
-                case NPCType.Police:
+                case NPCType.PoliceA:
+                    {
+                        npc.MoveForward(gameTime, 1.0f);
+                        if(collisionController.IllegalMove(npc)) npc.MoveBackward(gameTime, 1.0f);
+                        npc.RotateRight(gameTime, 1.0f);
+                    }
+                    break;
+                case NPCType.PoliceB:
                     npc.stateTime += gameTime.ElapsedGameTime.Milliseconds;
 
                     double angleToPlayer = Math.Atan2(-1*((double)(player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2))), 
@@ -295,8 +301,11 @@ namespace HideOut.Controllers
             {
                 switch (npc.tag)
                 {
-                    case NPCType.Police: 
+                    case NPCType.PoliceA: 
                         npc.sprite = policeTexture; 
+                        break;
+                    case NPCType.PoliceB:
+                        npc.sprite = policeTexture;
                         break;
                 }
             }

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HideOut.Entities
 {
-    public enum NPCType { Police, Bird, Squirrel, Child };
+    public enum NPCType { PoliceA, PoliceB, Bird, Squirrel, Child };
     public enum NPCState { PatrolLeft, PatrolRight, PatrolLeftBackwards, PatrolRightBackwards, Chase, Investigate };
 
     class NPC : Entity

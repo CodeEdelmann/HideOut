@@ -150,6 +150,11 @@ namespace HideOut.Controllers
 
                 if (newState.IsKeyDown(Keys.P) && !oldState.IsKeyDown(Keys.P))
                 {
+                    npcController.CreateNPC(Entities.NPCType.PoliceA, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
+                    isListening = false;
+                }
+                if (newState.IsKeyDown(Keys.L) && !oldState.IsKeyDown(Keys.L))
+                {
                     npcController.CreateNPC(Entities.NPCType.PoliceB, new Vector2(mouseState.X + HideOutGame.SCREEN_OFFSET_X, mouseState.Y + HideOutGame.SCREEN_OFFSET_Y));
                     isListening = false;
                 }

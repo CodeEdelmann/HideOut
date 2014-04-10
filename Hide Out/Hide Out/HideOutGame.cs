@@ -30,7 +30,7 @@ namespace HideOut
         TitleScreen titleScreen;
         LevelScreen levelScreen;
         public static bool LEVEL_INITIALIZED = false;
-        public static readonly bool LEVEL_DESIGN_MODE = true;
+        public static readonly bool LEVEL_DESIGN_MODE = false;
         public static readonly int LEVEL_DESIGN_SIZE = 2; //1 is 1000x1000, 2 is 1500x1500, 3 is 2000x2000
 
         SoundEffect backgroundMusic;

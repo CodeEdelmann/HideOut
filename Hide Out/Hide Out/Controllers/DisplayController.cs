@@ -121,17 +121,14 @@ namespace HideOut.Controllers
                     case 1:
                         {
                             displayString("Collect all the coins to pass each level", 0, 400 - offset, sb, backgroundColor);
-                            
-                            
                         }
                         break;
 
                     case 2:
                         {
-                            displayString("Your food and thirst reduce over time", 0, 400 - offset, sb, backgroundColor);
-                            displayString("Water fountains restore thirst", 00, 430 - offset, sb, backgroundColor);
-                            displayString("Apples restore health", 0, 460 - offset, sb, backgroundColor);
-                            displayString("Press ENTER to start", 0, 490 - offset, sb, backgroundColor);
+                            displayString("Your food and thirst reduce over time", 0, 430 - offset, sb, backgroundColor);
+                            displayString("Water fountains restore thirst", 0, 460 - offset, sb, backgroundColor);
+                            displayString("Apples restore health", 0, 490 - offset, sb, backgroundColor);
                         }
                         break;
 

@@ -41,6 +41,7 @@ namespace HideOut.Screens
 
         public bool isPaused { get; set; }
         public static KeyboardState pauseState;
+        public KeyboardState oldState = Keyboard.GetState();
         bool mobile = true;
 
         public override void Initialize()
@@ -114,8 +115,6 @@ namespace HideOut.Screens
             basicEffect = new BasicEffect(gd);
             basicEffect.VertexColorEnabled = true;
             basicEffect.LightingEnabled = false;
-
-
             //displayController.addDisplay(10, 100, "Hello world 1");
 
 
@@ -133,10 +132,10 @@ namespace HideOut.Screens
             pauseState = Keyboard.GetState();
             if (isPaused)
             {
-                if ((pauseState.IsKeyDown(Keys.Left) || 
-                    pauseState.IsKeyDown(Keys.Right) || 
-                    pauseState.IsKeyDown(Keys.Up) || 
-                    pauseState.IsKeyDown(Keys.Down)) && !displayController.hasLost && !displayController.hasWon)
+                if (((pauseState.IsKeyDown(Keys.Left) && !oldState.IsKeyDown(Keys.Left))|| 
+                    (pauseState.IsKeyDown(Keys.Right) && !oldState.IsKeyDown(Keys.Right))|| 
+                    (pauseState.IsKeyDown(Keys.Up) && !oldState.IsKeyDown(Keys.Up))|| 
+                    (pauseState.IsKeyDown(Keys.Down) && !oldState.IsKeyDown(Keys.Down))) && !displayController.hasLost && !displayController.hasWon)
                 {
                     isPaused = false;
                     displayController.displayLevel = false;           
@@ -144,16 +143,21 @@ namespace HideOut.Screens
                 else if (pauseState.IsKeyDown(Keys.Enter) && (displayController.hasWon == true || displayController.hasLost == true))
                 {
                     isPaused = false;
-                    displayController.displayLevel = false;   
+                    displayController.displayLevel = false;
                     displayController.hasLost = false;
                     displayController.hasWon = false;
                     HideOutGame.LEVEL_INITIALIZED = false;
                     Type = "TitleScreen";
                     return;
-                }   
+                }
                 else
+                {
+                    oldState = pauseState;
                     return;
+                }
             }
+            oldState = pauseState;
+
             //Console.WriteLine("Time: " + gameTime.ElapsedGameTime.TotalMilliseconds);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))

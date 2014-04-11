@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="1000" Y="1000">
-  <player X="114" Y="859"></player>
+  <player X="114" Y="863"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -70,6 +70,8 @@
   <item X="291" Y="275">Coin</item>
   <item X="750" Y="268">Coin</item>
   <item X="525" Y="463">Coin</item>
+  <item X="205" Y="819">CandyBar</item>
+  <item X="846" Y="106">CandyBar</item>
   <npc X="382" Y="230">PoliceB</npc>
   <npc X="645" Y="229">PoliceB</npc>
   <npc X="627" Y="614">PoliceB</npc>

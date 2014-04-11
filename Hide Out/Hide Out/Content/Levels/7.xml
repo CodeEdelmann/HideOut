@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="2000" Y="2000">
-  <player X="166" Y="115"></player>
+  <player X="238" Y="124"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -75,10 +75,10 @@
   <obstacle X="1087" Y="1924">Border</obstacle>
   <obstacle X="1245" Y="1925">Border</obstacle>
   <obstacle X="1001" Y="1924">Border</obstacle>
-  <obstacle X="917" Y="1920">Border</obstacle>
-  <obstacle X="836" Y="1919">Border</obstacle>
-  <obstacle X="751" Y="1918">Border</obstacle>
-  <obstacle X="672" Y="1923">Border</obstacle>
+  <obstacle X="917" Y="1925">Border</obstacle>
+  <obstacle X="835" Y="1925">Border</obstacle>
+  <obstacle X="755" Y="1925">Border</obstacle>
+  <obstacle X="680" Y="1929">Border</obstacle>
   <obstacle X="1169" Y="1926">Border</obstacle>
   <obstacle X="-7" Y="1065">Border</obstacle>
   <obstacle X="-5" Y="994">Border</obstacle>
@@ -160,7 +160,7 @@
   <obstacle X="894" Y="864">Tree</obstacle>
   <obstacle X="979" Y="866">Tree</obstacle>
   <obstacle X="1063" Y="867">Tree</obstacle>
-  <obstacle X="1149" Y="865">Tree</obstacle>
+  <obstacle X="1142" Y="865">Tree</obstacle>
   <obstacle X="1332" Y="862">Tree</obstacle>
   <obstacle X="1414" Y="859">Tree</obstacle>
   <obstacle X="1496" Y="856">Tree</obstacle>
@@ -175,15 +175,15 @@
   <obstacle X="1497" Y="1493">Tree</obstacle>
   <obstacle X="1500" Y="1567">Tree</obstacle>
   <obstacle X="1498" Y="1640">Tree</obstacle>
-  <obstacle X="1410" Y="1645">Tree</obstacle>
-  <obstacle X="1318" Y="1648">Tree</obstacle>
-  <obstacle X="1232" Y="1648">Tree</obstacle>
-  <obstacle X="1060" Y="1654">Tree</obstacle>
-  <obstacle X="1147" Y="1653">Tree</obstacle>
-  <obstacle X="972" Y="1657">Tree</obstacle>
-  <obstacle X="691" Y="1654">Tree</obstacle>
-  <obstacle X="771" Y="1655">Tree</obstacle>
-  <obstacle X="605" Y="1650">Tree</obstacle>
+  <obstacle X="1418" Y="1647">Tree</obstacle>
+  <obstacle X="1333" Y="1648">Tree</obstacle>
+  <obstacle X="1250" Y="1648">Tree</obstacle>
+  <obstacle X="1090" Y="1660">Tree</obstacle>
+  <obstacle X="1170" Y="1654">Tree</obstacle>
+  <obstacle X="1003" Y="1659">Tree</obstacle>
+  <obstacle X="667" Y="1654">Tree</obstacle>
+  <obstacle X="748" Y="1654">Tree</obstacle>
+  <obstacle X="586" Y="1655">Tree</obstacle>
   <obstacle X="283" Y="944">Tree</obstacle>
   <obstacle X="279" Y="1016">Tree</obstacle>
   <obstacle X="274" Y="1087">Tree</obstacle>
@@ -195,11 +195,11 @@
   <obstacle X="269" Y="1517">Tree</obstacle>
   <obstacle X="269" Y="1587">Tree</obstacle>
   <obstacle X="268" Y="1658">Tree</obstacle>
-  <obstacle X="354" Y="1655">Tree</obstacle>
-  <obstacle X="441" Y="1654">Tree</obstacle>
-  <obstacle X="521" Y="1654">Tree</obstacle>
-  <obstacle X="768" Y="1592">Bush</obstacle>
-  <obstacle X="968" Y="1588">Bush</obstacle>
+  <obstacle X="347" Y="1655">Tree</obstacle>
+  <obstacle X="429" Y="1654">Tree</obstacle>
+  <obstacle X="509" Y="1654">Tree</obstacle>
+  <obstacle X="739" Y="1594">Bush</obstacle>
+  <obstacle X="1000" Y="1595">Bush</obstacle>
   <obstacle X="862" Y="1289">Pond</obstacle>
   <obstacle X="1355" Y="962">Fountain</obstacle>
   <obstacle X="1402" Y="937">Bush</obstacle>

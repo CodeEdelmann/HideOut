@@ -105,7 +105,8 @@ namespace HideOut.Controllers
         {
             foreach (Obstacle obstacle in this.obstacles)
             {
-                sb.Draw(obstacle.sprite, obstacle.screenRectangle, Color.White);
+                if(obstacle.OnScreen())
+                    sb.Draw(obstacle.sprite, obstacle.screenRectangle, Color.White);
             }
         }
 

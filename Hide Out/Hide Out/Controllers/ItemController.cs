@@ -114,7 +114,8 @@ namespace HideOut.Controllers
         {
             foreach (Item item in this.activeItems)
             {
-                sb.Draw(item.sprite, item.screenRectangle, Color.White);
+                if(item.OnScreen())
+                    sb.Draw(item.sprite, item.screenRectangle, Color.White);
             }
         }
 

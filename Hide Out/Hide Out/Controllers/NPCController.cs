@@ -359,7 +359,8 @@ namespace HideOut.Controllers
         {
             foreach (NPC npc in this.npcs)
             {
-                sb.Draw(npc.sprite, npc.screenRectangle, Color.White);
+                if(npc.OnScreen())
+                    sb.Draw(npc.sprite, npc.screenRectangle, Color.White);
             }
         }
 

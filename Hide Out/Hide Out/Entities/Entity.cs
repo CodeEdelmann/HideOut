@@ -48,6 +48,13 @@ namespace HideOut.Entities
             tiles = new List<Tile>();
         }
 
+        public bool OnScreen()
+        {
+            return this.screenRectangle.X + this.screenRectangle.Width > 0 &&
+                this.screenRectangle.Y + this.screenRectangle.Height > 0 &&
+                this.screenRectangle.X <= HideOutGame.SCREEN_WIDTH &&
+                this.screenRectangle.Y <= HideOutGame.SCREEN_HEIGHT;
+        }
         public override string ToString()
         {
             return base.ToString() +

@@ -36,6 +36,8 @@ namespace HideOut.Controllers
         public bool hasWon = false;
         public bool displayLevel = false;
         public int level = 1;
+        public static readonly int MaxDisplayStatCount = 50;
+        public int displayStatCount = MaxDisplayStatCount;
 
         FontFile fontFile;
         Texture2D fontTexture;
@@ -55,13 +57,9 @@ namespace HideOut.Controllers
         public DisplayController()
         {
 
-        }
-
-       
+        }      
             //thePlayer.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
            
-      
-
         public void Update(GameTime gameTime)
         {
    
@@ -70,14 +68,19 @@ namespace HideOut.Controllers
 
         public void drawStats(int hunger, int thirst, SpriteBatch sb)
         {
+            displayStatCount--;
+            if (displayStatCount < 0)
+                displayStatCount = MaxDisplayStatCount;
             for (int i = 0; i < hunger; i++)
             {
-                sb.Draw(hungerTexture, new Rectangle(20 * i, 0, 20, 20), Color.White);
+                if (hunger > 3 || displayStatCount < MaxDisplayStatCount / 2)
+                    sb.Draw(hungerTexture, new Rectangle(20 * i, 0, 20, 20), Color.White);
             }
 
             for (int i = 0; i < thirst; i++)
             {
-                sb.Draw(thirstTexture, new Rectangle(20 * i, 25, 20, 20), Color.White);
+                if (thirst > 3 || displayStatCount < MaxDisplayStatCount / 2)
+                    sb.Draw(thirstTexture, new Rectangle(20 * i, 25, 20, 20), Color.White);
             }
 
 
@@ -135,10 +138,9 @@ namespace HideOut.Controllers
                     case 3:
                         {
                             displayString("Do not let the police catch you", 0, 400 - offset, sb, backgroundColor);
-                            displayString("Hide inside bushes or inside other obstacles", 00, 430 - offset, sb, backgroundColor);
+                            displayString("Hide inside bushes or behind trees", 00, 430 - offset, sb, backgroundColor);
                             displayString("to avoid them", 0, 460 - offset, sb, backgroundColor);
-
-                            displayString("Candy bars with also give you a speed boost", 0, 490 - offset, sb, backgroundColor);
+                            displayString("Candy bars give you a speed boost", 0, 490 - offset, sb, backgroundColor);
                             
                         }
                         break;
@@ -158,7 +160,7 @@ namespace HideOut.Controllers
                  {
                      //sb.Draw(winGameTexture, new Rectangle(xPos - wid/2, yPos - len/2, wid, len), Color.White);
                      //fontRenderer.DrawText(sb, xPos - wid/2, yPos - len/2 - offset, "You Win!");
-                      displayString("Congratulations!", xPos, yPos - offset, sb, backgroundColor);
+                      displayString("You Win! Congradulations", xPos, yPos - offset, sb, backgroundColor);
                  }
              }
 

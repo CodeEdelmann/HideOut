@@ -157,7 +157,9 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.PatrolRightBackwards;
                                 npc.stateTime = 0;
                             }
-                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible && npc.vision.maxViewDistance * 1.1 >
+                                Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.Chase;
                                 npc.stateTime = 0;
@@ -185,7 +187,9 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.PatrolLeftBackwards;
                                 npc.stateTime = 0;
                             }
-                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible && npc.vision.maxViewDistance * 1.1 >
+                                Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.Chase;
                                 npc.stateTime = 0;
@@ -213,7 +217,9 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.PatrolLeft;
                                 npc.stateTime = 0;
                             }
-                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible && npc.vision.maxViewDistance * 1.1 >
+                                Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.Chase;
                                 npc.stateTime = 0;
@@ -241,7 +247,9 @@ namespace HideOut.Controllers
                                 npc.state = NPCState.PatrolRight;
                                 npc.stateTime = 0;
                             }
-                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible)
+                            if (Math.Abs(turnToAngle) < npc.vision.viewAngle / 2 && visibleObstacles.Count == 0 && player.isVisible && npc.vision.maxViewDistance * 1.1 > 
+                                Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.Chase;
                                 npc.stateTime = 0;
@@ -262,13 +270,14 @@ namespace HideOut.Controllers
                             break;
 
                         case NPCState.Chase:
-                            if (!player.isVisible)
+                            if (!player.isVisible || npc.vision.maxViewDistance*1.3 < Math.Abs(((player.worldRectangle.Y + (player.worldRectangle.Height / 2)) - (npc.worldRectangle.Y + (npc.worldRectangle.Height / 2)))) +
+                                Math.Abs((player.worldRectangle.X + (player.worldRectangle.Width / 2)) - (npc.worldRectangle.X + (npc.worldRectangle.Width / 2))))
                             {
                                 npc.state = NPCState.PatrolLeft; //Randomize
                                 npc.stateTime = 0;
                                 break;
                             }
-                            if (Math.Abs(turnToAngle) > .02)
+                            if (Math.Abs(turnToAngle) > .05)
                             {
                                 if (turnToAngle > 0) npc.RotateLeft(gameTime, 2.0f);
                                 else if (turnToAngle < 0) npc.RotateRight(gameTime, 2.0f);
@@ -278,42 +287,45 @@ namespace HideOut.Controllers
                             if (collisionController.IllegalMove(npc))
                             {
                                 npc.MoveBackward(gameTime, 2.0f);
-                                if (turnToAngle > 0)
-                                {
-                                    npc.MoveUp(gameTime, 2.0f);
-                                    if (collisionController.IllegalMove(npc))
-                                    {
-                                        npc.MoveDown(gameTime, 2.0f);
-                                        if (Math.Abs(turnToAngle) < MathHelper.PiOver2)
-                                        {
-                                            npc.MoveRight(gameTime, 2.0f);
-                                            if (collisionController.IllegalMove(npc))
-                                            {
-                                                npc.MoveLeft(gameTime, 2.0f);
-                                                npc.state = NPCState.PatrolLeft; //Randomize
-                                                npc.stateTime = 0;
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (turnToAngle < 0)
-                                {
-                                    npc.MoveDown(gameTime, 2.0f);
-                                    if (collisionController.IllegalMove(npc))
-                                    {
-                                        npc.MoveUp(gameTime, 2.0f);
-                                        if (Math.Abs(turnToAngle) < MathHelper.PiOver2)
-                                        {
-                                            npc.MoveLeft(gameTime, 2.0f);
-                                            if (collisionController.IllegalMove(npc))
-                                            {
-                                                npc.MoveRight(gameTime, 2.0f);
-                                                npc.state = NPCState.PatrolLeft; //Randomize
-                                                npc.stateTime = 0;
-                                            }
-                                        }
-                                    }
-                                }
+                                npc.MoveRight(gameTime, 2.0f);
+                                npc.state = NPCState.PatrolLeft; //Randomize
+                                npc.stateTime = 0;
+                                //if (turnToAngle > 0)
+                                //{
+                                //    npc.MoveUp(gameTime, 2.0f);
+                                //    if (collisionController.IllegalMove(npc))
+                                //    {
+                                //        npc.MoveDown(gameTime, 2.0f);
+                                //        if (Math.Abs(turnToAngle) < MathHelper.PiOver2)
+                                //        {
+                                //            npc.MoveRight(gameTime, 2.0f);
+                                //            if (collisionController.IllegalMove(npc))
+                                //            {
+                                //                npc.MoveLeft(gameTime, 2.0f);
+                                //                npc.state = NPCState.PatrolLeft; //Randomize
+                                //                npc.stateTime = 0;
+                                //            }
+                                //        }
+                                //    }
+                                //}
+                                //else if (turnToAngle < 0)
+                                //{
+                                //    npc.MoveDown(gameTime, 2.0f);
+                                //    if (collisionController.IllegalMove(npc))
+                                //    {
+                                //        npc.MoveUp(gameTime, 2.0f);
+                                //        if (Math.Abs(turnToAngle) < MathHelper.PiOver2)
+                                //        {
+                                //            npc.MoveLeft(gameTime, 2.0f);
+                                //            if (collisionController.IllegalMove(npc))
+                                //            {
+                                //                npc.MoveRight(gameTime, 2.0f);
+                                //                npc.state = NPCState.PatrolLeft; //Randomize
+                                //                npc.stateTime = 0;
+                                //            }
+                                //        }
+                                //    }
+                                //}
                             }
 
                             break;

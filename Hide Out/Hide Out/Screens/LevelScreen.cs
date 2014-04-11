@@ -32,6 +32,8 @@ namespace HideOut.Screens
         XMLController xmlController;
         BasicEffect basicEffect;
 
+        Texture2D bgTexture;
+
         public static readonly bool CHEAT_MODE = false;
 
         public static readonly int MAX_GAME_WIDTH = 5000;
@@ -110,6 +112,8 @@ namespace HideOut.Screens
             obstacleController.LoadContent(cm);
             playerController.LoadContent(cm);
             itemController.LoadContent(cm);
+
+            bgTexture = cm.Load<Texture2D>("bg.png");
 
             //Initialization for basicEffect
             basicEffect = new BasicEffect(gd);
@@ -242,7 +246,8 @@ namespace HideOut.Screens
                 npcController.DrawFOVs(gd, basicEffect);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, null, null);
+            spriteBatch.Draw(bgTexture, new Rectangle(0 - HideOutGame.SCREEN_OFFSET_X, 0 - HideOutGame.SCREEN_OFFSET_Y, GAME_WIDTH, GAME_HEIGHT), new Rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT), Color.Green);
             obstacleController.Draw(spriteBatch);
             itemController.Draw(spriteBatch);
             npcController.Draw(spriteBatch);

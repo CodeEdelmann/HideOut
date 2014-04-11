@@ -21,8 +21,8 @@ namespace HideOut
     public class HideOutGame : Game
     {
         GraphicsDeviceManager graphics;
-        public static readonly int SCREEN_WIDTH = 800;
-        public static readonly int SCREEN_HEIGHT = 500;
+        public static readonly int SCREEN_WIDTH = 1000;
+        public static readonly int SCREEN_HEIGHT = 600;
         public static int SCREEN_OFFSET_X = 0;
         public static int SCREEN_OFFSET_Y = 0;
 

@@ -104,30 +104,30 @@ namespace HideOut.Screens
             switch (index)
             {
                 case 0:
-                    fontRenderer.DrawText(spriteBatch, 330, 200, "> Continue");
+                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2, "> Continue");
                     draw_ng = false;
                     break;
                 case 1:
-                    fontRenderer.DrawText(spriteBatch, 330, 275, "> New Game");
+                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2 + 75, "> New Game");
                     draw_lg = false;
                     break;
                 case 2:
-                    fontRenderer.DrawText(spriteBatch, 330, 350, "> Exit");
+                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2 + 150, "> Exit");
                     draw_ex = false;
                     break;
             }
             
             if (draw_ng)
             {
-                fontRenderer.DrawText(spriteBatch, 350, 200, "Continue");
+                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2, "Continue");
             }
             if (draw_lg)
             {
-                fontRenderer.DrawText(spriteBatch, 350, 275, "New Game");
+                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 75, "New Game");
             }
             if (draw_ex)
             {
-                fontRenderer.DrawText(spriteBatch, 350, 350, "Exit");
+                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 150, "Exit");
             }
             
             spriteBatch.End();

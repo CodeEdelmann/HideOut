@@ -64,11 +64,11 @@ namespace HideOut.Screens
             {
                 switch (index)
                 {
-                    case 0:
+                    case 1:
                         Type = "LevelScreen";
                         System.IO.File.WriteAllText("Content\\Levels\\savestate.txt", "1");
                         break;
-                    case 1:
+                    case 0:
                         Type = "LevelScreen";
                         break;
                     case 2:
@@ -104,11 +104,11 @@ namespace HideOut.Screens
             switch (index)
             {
                 case 0:
-                    fontRenderer.DrawText(spriteBatch, 330, 200, "> New Game");
+                    fontRenderer.DrawText(spriteBatch, 330, 200, "> Continue");
                     draw_ng = false;
                     break;
                 case 1:
-                    fontRenderer.DrawText(spriteBatch, 330, 275, "> Continue");
+                    fontRenderer.DrawText(spriteBatch, 330, 275, "> New Game");
                     draw_lg = false;
                     break;
                 case 2:
@@ -119,11 +119,11 @@ namespace HideOut.Screens
             
             if (draw_ng)
             {
-                fontRenderer.DrawText(spriteBatch, 350, 200, "New Game");
+                fontRenderer.DrawText(spriteBatch, 350, 200, "Continue");
             }
             if (draw_lg)
             {
-                fontRenderer.DrawText(spriteBatch, 350, 275, "Continue");
+                fontRenderer.DrawText(spriteBatch, 350, 275, "New Game");
             }
             if (draw_ex)
             {

@@ -114,8 +114,8 @@ namespace HideOut.Controllers
                 //fontRenderer.DrawText(sb, xPos - offset, yPos - offset, "Level " + this.level.ToString());
                  displayString("Level " + this.level.ToString(), 0, 50, sb, backgroundColor);
 
-                xPos -= 200;
-                yPos -= 70;
+                // xPos -= 200;
+                // yPos -= 70;
 
                 
                 switch (level)
@@ -152,7 +152,7 @@ namespace HideOut.Controllers
              {
                  //sb.Draw(loseGameTexture, new Rectangle(xPos - wid/2, yPos - len/2, wid, len), Color.White);
                  //fontRenderer.DrawText(sb, xPos - wid/2, yPos - len/2 - offset, "You Lose...");
-                  displayString("Game Over", xPos, yPos - offset, sb, backgroundColor);
+                  displayString("Game Over", xPos - offset, yPos, sb, backgroundColor);
              }
              else
              {
@@ -160,7 +160,7 @@ namespace HideOut.Controllers
                  {
                      //sb.Draw(winGameTexture, new Rectangle(xPos - wid/2, yPos - len/2, wid, len), Color.White);
                      //fontRenderer.DrawText(sb, xPos - wid/2, yPos - len/2 - offset, "You Win!");
-                      displayString("You Win! Congratulations", xPos, yPos - offset, sb, backgroundColor);
+                      displayString("You Win! Congratulations", xPos - offset, yPos, sb, backgroundColor);
                  }
              }
 

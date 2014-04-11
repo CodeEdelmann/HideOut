@@ -22,7 +22,7 @@ namespace HideOut.Controllers
         public static float viewDistance = 350.0f;
 
         private Texture2D policeTexture;
-        private static readonly int SPRITE_SIZE = 50;
+        public static readonly int SPRITE_SIZE = 50;
 
         public NPCController()
         {

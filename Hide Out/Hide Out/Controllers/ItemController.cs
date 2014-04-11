@@ -58,7 +58,7 @@ namespace HideOut.Controllers
                     break;
                 case ItemType.CandyBar:
                     item.sprite = candyBarTexture;
-                    item.speedValue = 10;
+                    item.speedValue = 7;
                     item.rectangleBounds = new Point(CANDY_BAR_SPRITE_SIZE_X, CANDY_BAR_SPRITE_SIZE_Y);
                     break;
                 case ItemType.Apple:

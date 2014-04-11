@@ -81,7 +81,7 @@ namespace HideOut.Controllers
 
             if (Math.Abs(diff) < viewWidth + Math.PI / 2)
             {
-                if (distance2((Entity)npc, (Entity)obs) + 30000 < viewDistance * viewDistance)
+                if (distance2((Entity)npc, (Entity)obs) < viewDistance * viewDistance + 30000)
                     return true;
             }
             return false;

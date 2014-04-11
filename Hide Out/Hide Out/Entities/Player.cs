@@ -37,25 +37,25 @@ namespace HideOut.Entities
 
         }
 
-        public void MoveRight(GameTime gameTime)
+        public void MoveRight(GameTime gameTime, double multiplier)
         {
-            
-            this.position += new Vector2(this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
+
+            this.position += new Vector2((float)multiplier * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
         }
 
-        public void MoveLeft(GameTime gameTime)
+        public void MoveLeft(GameTime gameTime, double multiplier)
         {
-            this.position += new Vector2(-1 * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
+            this.position += new Vector2(-1 * (float)multiplier * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
         }
 
-        public void MoveUp(GameTime gameTime)
+        public void MoveUp(GameTime gameTime, double multiplier)
         {
-            this.position += new Vector2(0, -1 * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
+            this.position += new Vector2(0, -1 * (float)multiplier * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 
-        public void MoveDown(GameTime gameTime)
+        public void MoveDown(GameTime gameTime, double multiplier)
         {
-            this.position += new Vector2(0, this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
+            this.position += new Vector2(0, (float)multiplier * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 
         public bool UpdateState(GameTime gameTime)

@@ -11,7 +11,8 @@ namespace HideOut.Entities
     {
         public static readonly float PLAYER_HITBOX_SCALE = 0.6F;
         float modd = 16.6666F;
-        private int decrement = 0;
+        private int foodDec = 0;
+        private int waterDec = 0;
         private int speedDec = 0;
         public int currentSpeed { get; set; }
         public int baseSpeed { get; set; }
@@ -61,7 +62,9 @@ namespace HideOut.Entities
         public bool UpdateState(GameTime gameTime)
         {
             //Current decrements hard coded in; can shift with testing and adapt for readonly constants
-            this.decrement += gameTime.ElapsedGameTime.Milliseconds;
+            this.foodDec += gameTime.ElapsedGameTime.Milliseconds;
+            this.waterDec += gameTime.ElapsedGameTime.Milliseconds;
+
             if (HideOutGame.LEVEL_DESIGN_MODE)
                 return true;
             if (this.currentSpeed > this.baseSpeed)
@@ -74,17 +77,26 @@ namespace HideOut.Entities
                 }
             }
 
-            if (this.decrement >= 5000)
+            if (this.foodDec >= 6000)
             {
-                this.currentThirst--;
                 this.currentHunger--;
                 //Console.Write("Current GameTime: " + gameTime.ElapsedGameTime.Seconds + " Thirst: " + this.currentThirst + " Hunger: " + this.currentHunger);
-                if (this.currentHunger == 0 || this.currentThirst == 0)
+                if (this.currentHunger == 0)
                 {
                   //  Console.Write("out of thirst/stamina!");
                     return true;
                 }
-                this.decrement = 0;
+                this.foodDec = 0;
+            }
+
+            if (this.waterDec >= 4000)
+            {
+                this.currentThirst--;
+                if (this.currentThirst == 0)
+                {
+                    return true;
+                }
+                this.waterDec = 0;
             }
             return false;
 

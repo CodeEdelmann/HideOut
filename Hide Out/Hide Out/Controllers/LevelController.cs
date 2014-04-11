@@ -46,11 +46,22 @@ namespace HideOut.Controllers
         public void InitializeBlankLevel()
         {
             ClearLevel();
-            string fileName = PATH + "blank" + HideOutGame.LEVEL_DESIGN_SIZE + ".xml";
-            if (File.Exists(fileName))
+            string fileName1 = PATH + HideOutGame.LEVEL_TO_EDIT;
+            string fileName2 = PATH + "blank" + HideOutGame.LEVEL_DESIGN_SIZE + ".xml";
+
+            if (File.Exists(fileName1))
             {
-                xmlController.read_fname = fileName;
+                xmlController.read_fname = fileName1;
+                xmlController.write_fname = fileName1;
                 xmlController.read();
+            }
+            else
+            {
+                if (File.Exists(fileName2))
+                {
+                    xmlController.read_fname = fileName2;
+                    xmlController.read();
+                }
             }
         }
 

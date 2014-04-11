@@ -160,7 +160,7 @@ namespace HideOut.Controllers
                  {
                      //sb.Draw(winGameTexture, new Rectangle(xPos - wid/2, yPos - len/2, wid, len), Color.White);
                      //fontRenderer.DrawText(sb, xPos - wid/2, yPos - len/2 - offset, "You Win!");
-                      displayString("You Win! Congradulations", xPos, yPos - offset, sb, backgroundColor);
+                      displayString("You Win! Congratulations", xPos, yPos - offset, sb, backgroundColor);
                  }
              }
 

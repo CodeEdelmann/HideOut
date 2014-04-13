@@ -16,7 +16,7 @@ namespace HideOut.Controllers
         public List<NPC> npcs { get; set; }
         public TileController tileController { get; set; }
         public CollisionController collisionController { get; set; }
-        public static int numVisions = 50;
+        public static int numVisions = 30;
         public static float maxWidth = .5f;
         public static float viewWidth = maxWidth / numVisions;
         public static float viewDistance = 350.0f;
@@ -107,17 +107,20 @@ namespace HideOut.Controllers
         {
             foreach (NPC npc in this.npcs)
             {
-                List<Obstacle> visibleObstacles = new List<Obstacle>();
-                foreach (Obstacle obs in obstacles)
+                if (npc.OnScreen() || npc.VisionOnScreen())
                 {
-                    if(!obs.canSeeThrough && npc.CanSee(obs.worldRectangle)) visibleObstacles.Add(obs);
+                    List<Obstacle> visibleObstacles = new List<Obstacle>();
+                    foreach (Obstacle obs in obstacles)
+                    {
+                        if (!obs.canSeeThrough && npc.CanSee(obs.worldRectangle)) visibleObstacles.Add(obs);
+                    }
+                    //visibleObstacles = GetVisibleObstacles(npc, obstacles);
+                    foreach (Vision vision in npc.visions)
+                    {
+                        vision.Update(visibleObstacles);
+                    }
+                    if (UpdateNPC(npc, player, visibleObstacles, gameTime)) return true;
                 }
-                visibleObstacles = GetVisibleObstacles(npc, obstacles);
-                foreach (Vision vision in npc.visions)
-                {
-                    vision.Update(visibleObstacles);
-                }
-                if(UpdateNPC(npc, player, visibleObstacles, gameTime)) return true;
             }
             return false;
         }
@@ -355,15 +358,19 @@ namespace HideOut.Controllers
         {
             foreach (NPC npc in this.npcs)
             {
-                foreach (EffectPass pass in bs.CurrentTechnique.Passes)
+                if (npc.OnScreen() || npc.VisionOnScreen())
                 {
-                    foreach(Vision v in npc.visions){
-                        pass.Apply();
-                        gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, v.GetFieldOfViewTriangleToDraw(), 0, 1);
+                    foreach (EffectPass pass in bs.CurrentTechnique.Passes)
+                    {
+                        foreach (Vision v in npc.visions)
+                        {
+                            pass.Apply();
+                            gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, v.GetFieldOfViewTriangleToDraw(), 0, 1);
+                        }
+                        //pass.Apply();
+                        //gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangleToDraw(), 0, 1);
                     }
-                    //pass.Apply();
-                    //gd.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, npc.vision.GetFieldOfViewTriangleToDraw(), 0, 1);
-                }            
+                }
             }
         }
 

@@ -31,7 +31,7 @@ namespace HideOut
         LevelScreen levelScreen;
         public static bool LEVEL_INITIALIZED = false;
         public static readonly bool LEVEL_DESIGN_MODE = false;
-        public static readonly string LEVEL_TO_EDIT = ""; //set this to the file name in Content/Levels (i.e. "3.xml") 
+        public static readonly string LEVEL_TO_EDIT = "9.xml"; //set this to the file name in Content/Levels (i.e. "3.xml") 
                                                             //Saving will write to that file in the debug folder (you still have to copy it over)
                                                             //Leaving this blank will open a blank screen based no the next variable
         public static readonly int LEVEL_DESIGN_SIZE = 1; //1 is 1000x1000, 2 is 1500x1500, 3 is 2000x2000
@@ -83,7 +83,7 @@ namespace HideOut
             levelScreen.LoadContent(GraphicsDevice, Content);
             //  http://www.newgrounds.com/audio/listen/564520
             backgroundMusic = Content.Load<SoundEffect>("ambience.wav");
-            backgroundMusic.Play();
+            //backgroundMusic.Play();
             base.LoadContent();
         }
 

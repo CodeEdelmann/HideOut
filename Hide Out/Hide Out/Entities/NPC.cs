@@ -152,6 +152,11 @@ namespace HideOut.Entities
             return vision.CanSee(rect);
         }
 
+        public bool VisionOnScreen()
+        {
+            return vision.OnScreen();
+        }
+
         private Vector2 Normalize(Vector2 v)
         {
             float distance = Distance(v, new Vector2(0, 0));

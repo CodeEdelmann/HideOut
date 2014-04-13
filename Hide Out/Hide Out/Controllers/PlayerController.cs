@@ -16,7 +16,7 @@ namespace HideOut.Controllers
         public Player thePlayer;
         private Texture2D playerTexture;
         public static readonly int SPRITE_SIZE = 50;
-        private int fountainSpeed = 1000;
+        private int fountainSpeed = 500;
         public CollisionController collisionController { set; get; }
         public ItemController itemController { get; set; }
         public static readonly int COLLISION_STEP_AMOUNT = 4;
@@ -33,9 +33,9 @@ namespace HideOut.Controllers
             thePlayer.currentSpeed = 5;
             thePlayer.baseSpeed = 5;
             thePlayer.currentThirst = 10;
-            thePlayer.maxThirst = 10;
+            thePlayer.maxThirst = 15;
             thePlayer.currentHunger = 10;
-            thePlayer.maxHunger = 10;
+            thePlayer.maxHunger = 15;
             thePlayer.position = position;
             thePlayer.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             thePlayer.sprite = playerTexture;

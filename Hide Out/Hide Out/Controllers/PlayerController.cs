@@ -20,6 +20,7 @@ namespace HideOut.Controllers
         public CollisionController collisionController { set; get; }
         public ItemController itemController { get; set; }
         public static readonly int COLLISION_STEP_AMOUNT = 4;
+        public static readonly int COLLISION_DELTA = 3;
 
         public PlayerController()
         {
@@ -41,6 +42,30 @@ namespace HideOut.Controllers
             thePlayer.sprite = playerTexture;
         }
 
+        public bool FindLegalPositionHorizontally()
+        {
+            thePlayer.position += new Vector2(COLLISION_DELTA, 0);
+            if(!collisionController.IllegalMove(this.thePlayer))
+                return true;
+            thePlayer.position += new Vector2(COLLISION_DELTA * -2, 0);
+            if (!collisionController.IllegalMove(this.thePlayer))
+                return true;
+            thePlayer.position += new Vector2(COLLISION_DELTA, 0);
+            return false;
+        }
+
+        public bool FindLegalPositionVertically()
+        {
+            thePlayer.position += new Vector2(0, COLLISION_DELTA);
+            if (!collisionController.IllegalMove(this.thePlayer))
+                return true;
+            thePlayer.position += new Vector2(0, COLLISION_DELTA * -2);
+            if (!collisionController.IllegalMove(this.thePlayer))
+                return true;
+            thePlayer.position += new Vector2(0, COLLISION_DELTA);
+            return false;
+        }
+
         public bool Update(GameTime gameTime, bool mobile)
         {
             bool retVal = thePlayer.UpdateState(gameTime);
@@ -56,12 +81,15 @@ namespace HideOut.Controllers
                     thePlayer.MoveLeft(gameTime, 1); 
                     if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
                     {
-                        for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
+                        if (!FindLegalPositionVertically())
                         {
-                            if (collisionController.IllegalMove(this.thePlayer))
-                                thePlayer.MoveRight(gameTime, 1 / Math.Pow(2, i));
-                            else
-                                thePlayer.MoveLeft(gameTime, 1 / Math.Pow(2, i));
+                            for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
+                            {
+                                if (collisionController.IllegalMove(this.thePlayer))
+                                    thePlayer.MoveRight(gameTime, 1 / Math.Pow(2, i));
+                                else
+                                    thePlayer.MoveLeft(gameTime, 1 / Math.Pow(2, i));
+                            }
                         }
                     }
                     if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
@@ -75,12 +103,15 @@ namespace HideOut.Controllers
                     thePlayer.MoveRight(gameTime, 1);
                     if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
                     {
-                        for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
+                        if (!FindLegalPositionVertically())
                         {
-                            if (collisionController.IllegalMove(this.thePlayer))
-                                thePlayer.MoveLeft(gameTime, 1 / Math.Pow(2, i));
-                            else
-                                thePlayer.MoveRight(gameTime, 1 / Math.Pow(2, i));
+                            for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
+                            {
+                                if (collisionController.IllegalMove(this.thePlayer))
+                                    thePlayer.MoveLeft(gameTime, 1 / Math.Pow(2, i));
+                                else
+                                    thePlayer.MoveRight(gameTime, 1 / Math.Pow(2, i));
+                            }
                         }
                     }
                     if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
@@ -94,12 +125,15 @@ namespace HideOut.Controllers
                     thePlayer.MoveUp(gameTime, 1);
                     if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
                     {
-                        for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
+                        if (!FindLegalPositionHorizontally())
                         {
-                            if (collisionController.IllegalMove(this.thePlayer))
-                                thePlayer.MoveDown(gameTime, 1 / Math.Pow(2, i));
-                            else
-                                thePlayer.MoveUp(gameTime, 1 / Math.Pow(2, i));
+                            for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
+                            {
+                                if (collisionController.IllegalMove(this.thePlayer))
+                                    thePlayer.MoveDown(gameTime, 1 / Math.Pow(2, i));
+                                else
+                                    thePlayer.MoveUp(gameTime, 1 / Math.Pow(2, i));
+                            }
                         }
                     }
                     if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
@@ -113,12 +147,15 @@ namespace HideOut.Controllers
                     thePlayer.MoveDown(gameTime, 1);
                     if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))
                     {
-                        for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
+                        if (!FindLegalPositionHorizontally())
                         {
-                            if (collisionController.IllegalMove(this.thePlayer))
-                                thePlayer.MoveUp(gameTime, 1 / Math.Pow(2, i));
-                            else
-                                thePlayer.MoveDown(gameTime, 1 / Math.Pow(2, i));
+                            for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
+                            {
+                                if (collisionController.IllegalMove(this.thePlayer))
+                                    thePlayer.MoveUp(gameTime, 1 / Math.Pow(2, i));
+                                else
+                                    thePlayer.MoveDown(gameTime, 1 / Math.Pow(2, i));
+                            }
                         }
                     }
                     if (!HideOutGame.LEVEL_DESIGN_MODE && collisionController.IllegalMove(this.thePlayer))

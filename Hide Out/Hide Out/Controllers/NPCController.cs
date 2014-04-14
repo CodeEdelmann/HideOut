@@ -17,9 +17,9 @@ namespace HideOut.Controllers
         public TileController tileController { get; set; }
         public CollisionController collisionController { get; set; }
         public static int numVisions = 30;
-        public static float maxWidth = .5f;
+        public static float maxWidth = (float) Math.PI / 4;
         public static float viewWidth = maxWidth / numVisions;
-        public static float viewDistance = 350.0f;
+        public static float viewDistance = 400.0f;
 
         private Texture2D policeTexture;
         public static readonly int SPRITE_SIZE = 50;

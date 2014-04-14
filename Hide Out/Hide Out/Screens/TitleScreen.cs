@@ -100,6 +100,7 @@ namespace HideOut.Screens
                     case 1:
                         Type = "LevelScreen";
                         System.IO.File.WriteAllText("Content\\Levels\\savestate.txt", "1");
+                        index = 0;
                         break;
                     case 0:
                         Type = "LevelScreen";

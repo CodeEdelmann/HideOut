@@ -42,7 +42,12 @@ namespace HideOut.Entities
 
         public void UpdateSpriteData(GameTime gameTime)
         {
-            if (this.direction == this.previousDirection)
+            UpdateSpriteData(gameTime, this.direction);
+        }
+
+        public void UpdateSpriteData(GameTime gameTime, Direction direction)
+        {
+            if (direction == this.previousDirection)
             {
                 directionIndexDec -= gameTime.ElapsedGameTime.Milliseconds;
                 if (directionIndexDec <= 0)
@@ -56,7 +61,7 @@ namespace HideOut.Entities
                 directionIndex = 0;
                 directionIndexDec = Player.maxIndexDec;
             }
-            this.previousDirection = this.direction;
+            this.previousDirection = direction;
         }
         
         public NPC() : base()

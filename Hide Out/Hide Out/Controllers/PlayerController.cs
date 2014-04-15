@@ -23,7 +23,7 @@ namespace HideOut.Controllers
         public static readonly int COLLISION_STEP_AMOUNT = 4;
         public static readonly int COLLISION_DELTA = 3;
 
-        private Dictionary<Entities.Direction, List<Texture2D>> textures;
+        public static Dictionary<Entities.Direction, List<Texture2D>> textures;
 
         public PlayerController()
         {

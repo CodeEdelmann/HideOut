@@ -21,6 +21,10 @@ namespace HideOut.Entities
         public int currentHunger { get; set; }
         public int maxHunger { get; set; }
         public bool isVisible { get; set; }
+        public Entities.Direction direction { get; set; }
+        public int directionIndex { get; set; } //this determines which sprite to draw
+        public int directionIndexDec { get; set; }
+        public static readonly int maxIndexDec = 150;
 
         public Rectangle collisionRectangle
         {
@@ -38,24 +42,70 @@ namespace HideOut.Entities
 
         }
 
+        public void UpdateSpriteData(GameTime gameTime, Direction movementDirection)
+        {
+            if (this.direction == movementDirection)
+            {
+                directionIndexDec -= gameTime.ElapsedGameTime.Milliseconds;
+                if (directionIndexDec <= 0)
+                {
+                    directionIndexDec = maxIndexDec;
+                    directionIndex++;
+                }
+            }
+            else
+            {
+                this.direction = movementDirection;
+                directionIndex = 0;
+                directionIndexDec = maxIndexDec;
+            }
+        }
+
         public void MoveRight(GameTime gameTime, double multiplier)
         {
+            this.MoveRight(gameTime, multiplier, true);
+        }
 
+        public void MoveRight(GameTime gameTime, double multiplier, bool updateSpriteData)
+        {
+            if(updateSpriteData)
+                UpdateSpriteData(gameTime, Direction.Right);
             this.position += new Vector2((float)multiplier * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
         }
 
         public void MoveLeft(GameTime gameTime, double multiplier)
         {
+            this.MoveLeft(gameTime, multiplier, true);
+        }
+
+        public void MoveLeft(GameTime gameTime, double multiplier, bool updateSpriteData)
+        {
+            if(updateSpriteData)
+                UpdateSpriteData(gameTime, Direction.Left);
             this.position += new Vector2(-1 * (float)multiplier * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds, 0);
         }
 
         public void MoveUp(GameTime gameTime, double multiplier)
         {
+            this.MoveUp(gameTime, multiplier, true);
+        }
+
+        public void MoveUp(GameTime gameTime, double multiplier, bool updateSpriteData)
+        {
+            if(updateSpriteData)
+                UpdateSpriteData(gameTime, Direction.Up);
             this.position += new Vector2(0, -1 * (float)multiplier * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 
         public void MoveDown(GameTime gameTime, double multiplier)
         {
+            this.MoveDown(gameTime, multiplier, true);
+        }
+
+        public void MoveDown(GameTime gameTime, double multiplier, bool updateSpriteData)
+        {
+            if(updateSpriteData)
+                UpdateSpriteData(gameTime, Direction.Down);
             this.position += new Vector2(0, (float)multiplier * this.currentSpeed / modd * gameTime.ElapsedGameTime.Milliseconds);
         }
 

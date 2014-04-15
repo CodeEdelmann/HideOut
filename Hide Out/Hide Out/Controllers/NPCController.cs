@@ -20,6 +20,7 @@ namespace HideOut.Controllers
         public static float maxWidth = (float) Math.PI / 4;
         public static float viewWidth = maxWidth / numVisions;
         public static float viewDistance = 400.0f;
+        public static Dictionary<Entities.Direction, List<Texture2D>> textures;
 
         private Texture2D policeTexture;
         public static readonly int SPRITE_SIZE = 50;
@@ -27,6 +28,11 @@ namespace HideOut.Controllers
         public NPCController()
         {
             npcs = new List<NPC>();
+            textures = new Dictionary<Entities.Direction, List<Texture2D>>();
+            textures[Entities.Direction.Down] = new List<Texture2D>();
+            textures[Entities.Direction.Up] = new List<Texture2D>();
+            textures[Entities.Direction.Right] = new List<Texture2D>();
+            textures[Entities.Direction.Left] = new List<Texture2D>();
         }
 
         public void AddNPC(NPC npc)
@@ -109,6 +115,8 @@ namespace HideOut.Controllers
             {
                 if (npc.OnScreen() || npc.VisionOnScreen())
                 {
+                    npc.UpdateSpriteData(gameTime);
+
                     List<Obstacle> visibleObstacles = new List<Obstacle>();
                     foreach (Obstacle obs in obstacles)
                     {
@@ -378,8 +386,11 @@ namespace HideOut.Controllers
         {
             foreach (NPC npc in this.npcs)
             {
-                if(npc.OnScreen())
-                    sb.Draw(npc.sprite, npc.screenRectangle, Color.White);
+                if (npc.OnScreen())
+                {
+                    int len = textures[npc.direction].Count;
+                    sb.Draw(textures[npc.direction][npc.directionIndex % len], npc.screenRectangle, Color.White);
+                }
             }
         }
 
@@ -388,6 +399,15 @@ namespace HideOut.Controllers
             //Start by loading all textures
             policeTexture = cm.Load<Texture2D>("police"); 
             
+            foreach (Direction d in textures.Keys)
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    string fname = "Movement/police " + d.ToString() + i.ToString() + ".png";
+                    textures[d].Add(cm.Load<Texture2D>(fname.ToLower()));
+                }
+            }
+
             //Then assign textures to NPCs depending on their tag
             foreach (NPC npc in this.npcs)
             {

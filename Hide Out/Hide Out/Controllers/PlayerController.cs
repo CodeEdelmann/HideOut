@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using HideOut.Entities;
 
 namespace HideOut.Controllers
 {
@@ -22,9 +23,15 @@ namespace HideOut.Controllers
         public static readonly int COLLISION_STEP_AMOUNT = 4;
         public static readonly int COLLISION_DELTA = 3;
 
+        private Dictionary<Entities.Direction, List<Texture2D>> textures;
+
         public PlayerController()
         {
-
+            textures = new Dictionary<Entities.Direction, List<Texture2D>>();
+            textures[Entities.Direction.Down] = new List<Texture2D>();
+            textures[Entities.Direction.Up] = new List<Texture2D>();
+            textures[Entities.Direction.Right] = new List<Texture2D>();
+            textures[Entities.Direction.Left] = new List<Texture2D>();
         }
 
         public void CreatePlayer(Vector2 position)
@@ -40,6 +47,7 @@ namespace HideOut.Controllers
             thePlayer.position = position;
             thePlayer.rectangleBounds = new Point(SPRITE_SIZE, SPRITE_SIZE);
             thePlayer.sprite = playerTexture;
+            thePlayer.direction = Entities.Direction.Down;
         }
 
         public bool FindLegalPositionHorizontally()
@@ -86,9 +94,9 @@ namespace HideOut.Controllers
                             for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
                             {
                                 if (collisionController.IllegalMove(this.thePlayer))
-                                    thePlayer.MoveRight(gameTime, 1 / Math.Pow(2, i));
+                                    thePlayer.MoveRight(gameTime, 1 / Math.Pow(2, i), false);
                                 else
-                                    thePlayer.MoveLeft(gameTime, 1 / Math.Pow(2, i));
+                                    thePlayer.MoveLeft(gameTime, 1 / Math.Pow(2, i), false);
                             }
                         }
                     }
@@ -108,9 +116,9 @@ namespace HideOut.Controllers
                             for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
                             {
                                 if (collisionController.IllegalMove(this.thePlayer))
-                                    thePlayer.MoveLeft(gameTime, 1 / Math.Pow(2, i));
+                                    thePlayer.MoveLeft(gameTime, 1 / Math.Pow(2, i), false);
                                 else
-                                    thePlayer.MoveRight(gameTime, 1 / Math.Pow(2, i));
+                                    thePlayer.MoveRight(gameTime, 1 / Math.Pow(2, i), false);
                             }
                         }
                     }
@@ -130,9 +138,9 @@ namespace HideOut.Controllers
                             for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
                             {
                                 if (collisionController.IllegalMove(this.thePlayer))
-                                    thePlayer.MoveDown(gameTime, 1 / Math.Pow(2, i));
+                                    thePlayer.MoveDown(gameTime, 1 / Math.Pow(2, i), false);
                                 else
-                                    thePlayer.MoveUp(gameTime, 1 / Math.Pow(2, i));
+                                    thePlayer.MoveUp(gameTime, 1 / Math.Pow(2, i), false);
                             }
                         }
                     }
@@ -152,9 +160,9 @@ namespace HideOut.Controllers
                             for (int i = 1; i <= COLLISION_STEP_AMOUNT; i++)
                             {
                                 if (collisionController.IllegalMove(this.thePlayer))
-                                    thePlayer.MoveUp(gameTime, 1 / Math.Pow(2, i));
+                                    thePlayer.MoveUp(gameTime, 1 / Math.Pow(2, i), false);
                                 else
-                                    thePlayer.MoveDown(gameTime, 1 / Math.Pow(2, i));
+                                    thePlayer.MoveDown(gameTime, 1 / Math.Pow(2, i), false);
                             }
                         }
                     }
@@ -232,7 +240,9 @@ namespace HideOut.Controllers
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(thePlayer.sprite, thePlayer.screenRectangle, Color.White);
+            int numTextures = textures[thePlayer.direction].Count;
+            Texture2D spriteToDraw = textures[thePlayer.direction][thePlayer.directionIndex % numTextures];
+            sb.Draw(spriteToDraw, thePlayer.screenRectangle, Color.White);
 
             //Rectangle source = new Rectangle(0, 0, 50, 50);
 
@@ -245,6 +255,15 @@ namespace HideOut.Controllers
         {
             //Start by loading all textures
             playerTexture = cm.Load<Texture2D>("player.png");
+
+            foreach(Direction d in textures.Keys)
+            {
+                for(int i = 1; i <=3; i++)
+                {
+                    string fname = "Movement/human " + d.ToString() + i.ToString() + ".png";
+                    textures[d].Add(cm.Load<Texture2D>(fname.ToLower()));
+                }
+            }
 
             //Then assign textures to NPCs depending on their tag
             thePlayer.sprite = playerTexture; 

@@ -9,6 +9,8 @@ using HideOut.Primitives;
 
 namespace HideOut.Entities
 {
+    enum Direction { Left, Right, Down, Up };
+
     abstract class Entity
     {
         public static readonly float HITBOX_SCALE = 0.9F;

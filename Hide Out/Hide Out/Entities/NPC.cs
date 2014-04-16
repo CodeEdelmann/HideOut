@@ -21,7 +21,49 @@ namespace HideOut.Entities
         public NPCState state { get; set; }
         public int stateTime;
 
+        public Direction previousDirection { get; set; }
+        public int directionIndex { get; set; }
+        public int directionIndexDec { get; set; }
 
+        public Direction direction {
+            get
+            {
+                double theta = Math.Atan2(visions[visions.Count/2].viewDirection.Y, -1 * visions[visions.Count/2].viewDirection.X) + Math.PI;
+                if (theta <= Math.PI / 4 || theta > 7 * Math.PI / 4)
+                    return Direction.Right;
+                else if (theta > Math.PI / 4 && theta <= 3 * Math.PI / 4)
+                    return Direction.Up;
+                else if (theta > 3 * Math.PI / 4 && theta <= 5 * Math.PI / 4)
+                    return Direction.Left;
+                else
+                    return Direction.Down;
+            }
+        }
+
+        public void UpdateSpriteData(GameTime gameTime)
+        {
+            UpdateSpriteData(gameTime, this.direction);
+        }
+
+        public void UpdateSpriteData(GameTime gameTime, Direction direction)
+        {
+            if (direction == this.previousDirection)
+            {
+                directionIndexDec -= gameTime.ElapsedGameTime.Milliseconds;
+                if (directionIndexDec <= 0)
+                {
+                    directionIndexDec = Player.maxIndexDec;
+                    directionIndex++;
+                }
+            }
+            else
+            {
+                directionIndex = 0;
+                directionIndexDec = Player.maxIndexDec;
+            }
+            this.previousDirection = direction;
+        }
+        
         public NPC() : base()
         {
             visions = new List<Vision>();

@@ -21,9 +21,9 @@ namespace HideOut.Screens
 
         Texture2D exposition;
 
-        Entity player;
-        Entity police1;
-        Entity police2;
+        Player player;
+        NPC police1;
+        NPC police2;
 
         Texture2D playerTexture;
         Texture2D npcTexture;
@@ -74,9 +74,12 @@ namespace HideOut.Screens
         public override void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
-            player.position += new Vector2(4, 0);
-            police1.position += new Vector2(4, 0);
-            police2.position += new Vector2(4, 0);
+            player.position += new Vector2(3, 0);
+            police1.position += new Vector2(3, 0);
+            police2.position += new Vector2(3, 0);
+            player.UpdateSpriteData(gameTime, Direction.Right);
+            police1.UpdateSpriteData(gameTime, Direction.Right);
+            police2.UpdateSpriteData(gameTime, Direction.Right);
 
             if (player.position.X > HideOutGame.SCREEN_WIDTH)
                 player.position = new Vector2(0, player.position.Y);
@@ -100,6 +103,7 @@ namespace HideOut.Screens
                     case 1:
                         Type = "LevelScreen";
                         System.IO.File.WriteAllText("Content\\Levels\\savestate.txt", "1");
+                        index = 0;
                         break;
                     case 0:
                         Type = "LevelScreen";
@@ -134,10 +138,14 @@ namespace HideOut.Screens
             spriteBatch.Draw(exposition, new Rectangle(20, 20, 199, 172), Color.White);
 
             //draw player and police
-            spriteBatch.Draw(npcTexture, police1.worldRectangle, Color.White);
-            spriteBatch.Draw(npcTexture, police2.worldRectangle, Color.White);
+            int len = NPCController.textures[Direction.Right].Count;
+            spriteBatch.Draw(NPCController.textures[Direction.Right][police1.directionIndex % len], police1.worldRectangle, Color.White);
+            spriteBatch.Draw(NPCController.textures[Direction.Right][police2.directionIndex % len], police2.worldRectangle, Color.White);
 
-            spriteBatch.Draw(playerTexture, player.worldRectangle, Color.White);
+            int numTextures = PlayerController.textures[player.direction].Count;
+            Texture2D spriteToDraw = PlayerController.textures[player.direction][player.directionIndex % numTextures];
+
+            spriteBatch.Draw(spriteToDraw, player.worldRectangle, Color.White);
 
 
             switch (index)

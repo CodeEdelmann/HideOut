@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="2000" Y="2000">
-  <player X="108" Y="95"></player>
+  <player X="117" Y="90"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -359,18 +359,15 @@
   <item X="1461" Y="990">Coin</item>
   <item X="1293" Y="1439">Apple</item>
   <item X="1660" Y="1699">Coin</item>
-  <npc X="549" Y="311">PoliceA</npc>
-  <npc X="921" Y="579">PoliceA</npc>
-  <npc X="1481" Y="504">PoliceA</npc>
-  <npc X="1462" Y="279">PoliceA</npc>
-  <npc X="1473" Y="700">PoliceA</npc>
-  <npc X="789" Y="1709">PoliceA</npc>
-  <npc X="1087" Y="1702">PoliceA</npc>
-  <npc X="1425" Y="1693">PoliceA</npc>
-  <npc X="368" Y="1095">PoliceA</npc>
-  <npc X="1376" Y="1693">PoliceA</npc>
-  <npc X="1130" Y="1700">PoliceA</npc>
-  <npc X="830" Y="1709">PoliceA</npc>
-  <npc X="783" Y="579">PoliceA</npc>
-  <npc X="848" Y="697">PoliceA</npc>
+  <npc X="549" Y="311">PoliceB</npc>
+  <npc X="1462" Y="279">PoliceB</npc>
+  <npc X="1473" Y="700">PoliceB</npc>
+  <npc X="789" Y="1709">PoliceB</npc>
+  <npc X="1087" Y="1702">PoliceB</npc>
+  <npc X="1425" Y="1693">PoliceB</npc>
+  <npc X="368" Y="1095">PoliceB</npc>
+  <npc X="1376" Y="1693">PoliceB</npc>
+  <npc X="1130" Y="1700">PoliceB</npc>
+  <npc X="830" Y="1709">PoliceB</npc>
+  <npc X="846" Y="669">PoliceB</npc>
 </world>

@@ -163,6 +163,11 @@
     <Content Include="Content\Levels\blank3.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Levels\Ryan10.xml" />
+    <Content Include="Content\Levels\Ryan11.xml" />
+    <Content Include="Content\Levels\Ryan12.xml" />
+    <Content Include="Content\Levels\Ryan13.xml" />
+    <Content Include="Content\Levels\sydney-new.xml" />
     <Content Include="Content\LOGO.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

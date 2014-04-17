@@ -38,8 +38,6 @@ namespace HideOut
                                                             //Leaving this blank will open a blank screen based no the next variable
         public static readonly int LEVEL_DESIGN_SIZE = 1; //1 is 1000x1000, 2 is 1500x1500, 3 is 2000x2000
 
-        SoundEffect backgroundMusic;
-
         public HideOutGame()
             : base()
         {

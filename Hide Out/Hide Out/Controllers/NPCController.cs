@@ -23,6 +23,9 @@ namespace HideOut.Controllers
         public static Dictionary<Entities.Direction, List<Texture2D>> textures;
 
         private Texture2D policeTexture;
+
+
+        private Texture2D exclamation;
         public static readonly int SPRITE_SIZE = 50;
 
         public NPCController()
@@ -390,6 +393,11 @@ namespace HideOut.Controllers
                 {
                     int len = textures[npc.direction].Count;
                     sb.Draw(textures[npc.direction][npc.directionIndex % len], npc.screenRectangle, Color.White);
+
+                    if (npc.state == NPCState.Investigate)
+                    {
+                        sb.Draw(exclamation, new Rectangle(npc.screenRectangle.X + 21, npc.screenRectangle.Y - 26, 8, 22), Color.White);
+                    }
                 }
             }
         }
@@ -397,8 +405,9 @@ namespace HideOut.Controllers
         public void LoadContent(ContentManager cm)
         {
             //Start by loading all textures
-            policeTexture = cm.Load<Texture2D>("police"); 
-            
+            policeTexture = cm.Load<Texture2D>("police");
+            exclamation = cm.Load<Texture2D>("heard"); 
+
             foreach (Direction d in textures.Keys)
             {
                 for (int i = 1; i <= 3; i++)

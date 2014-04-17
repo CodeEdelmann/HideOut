@@ -19,10 +19,11 @@ namespace HideOut.Screens
     {
         enum soundMode { game, victory, failure };
         bool gameSoundOn = true;
-        int musicLoopCounter = 0;
+        int musicLoopCounter = -1;
         SoundEffect victorySound;
         SoundEffect failureSound;
         SoundEffect gameSound;
+        SoundEffectInstance mainMusic;
         DisplayController displayController;
         SpriteBatch spriteBatch;
         PlayerController playerController;
@@ -57,6 +58,7 @@ namespace HideOut.Screens
 
             xmlController.write_fname = "Content/Levels/save.xml";
             InitializeLevel();
+            //mainMusic.Resume();
             // var fontFilePath = Path.Combine(Content.RootDirectory, "CourierNew32.fnt");
             // var fontFile = FontLoader.Load(fontFilePath);
             // var fontTexture = Content.Load<Texture2D>("CourierNew32_0.png");
@@ -112,6 +114,12 @@ namespace HideOut.Screens
 
             gameSound = cm.Load<SoundEffect>("ambience.wav");
 
+
+            mainMusic = gameSound.CreateInstance();
+
+            mainMusic.IsLooped = true;
+
+            //mainMusic
             // TODO: use this.Content to load your game content here
             //.LoadContent(GraphicsDevice, Content);
             displayController.LoadContent(cm);
@@ -134,7 +142,25 @@ namespace HideOut.Screens
         public override void Update(GameTime gameTime)
         {
             
-
+            mainMusic.Play();
+            musicLoopCounter = musicLoopCounter - gameTime.ElapsedGameTime.Milliseconds;
+            if (musicLoopCounter < 0)
+            {
+                mainMusic.Resume();
+            }
+           
+            /*
+            if (musicLoopCounter < 0)
+            {
+                gameSound.Dispose();
+                gameSound.Play();
+                musicLoopCounter = 2000;// gameSound.Duration.Milliseconds;
+            }
+            else
+            {
+                musicLoopCounter = musicLoopCounter - gameTime.ElapsedGameTime.Milliseconds;
+            }
+            */
             if (HideOutGame.LEVEL_DESIGN_MODE)
             {
                 playerController.Update(gameTime, mobile);
@@ -161,6 +187,7 @@ namespace HideOut.Screens
                     displayController.hasWon = false;
                     HideOutGame.LEVEL_INITIALIZED = false;
                     Type = "TitleScreen";
+                    
                     //gameSoundOn = true;
                     //gameSound.Dispose();
                     //gameSound.Play();
@@ -182,7 +209,7 @@ namespace HideOut.Screens
 
                 
                     gameSound.Dispose();
-                    gameSound.Play();
+                    //gameSound.Play();
                     musicLoopCounter = 2000;// +gameSound.Duration.Milliseconds;
                 
                 
@@ -202,11 +229,14 @@ namespace HideOut.Screens
                 Console.WriteLine("You lose!  Good day!");
                // gameSound.Dispose
                //failureSound.Player();
-                gameSoundOn = false;
-                gameSound.Dispose();
+                //gameSoundOn = false;
+                //gameSound.Dispose();
+                //failureSound.Play();
+                //musicLoopCounter = failureSound.Duration.Milliseconds;
+                //Console.WriteLine("Duration: " + failureSound.Duration.Milliseconds
+                mainMusic.Pause();
                 failureSound.Play();
                 musicLoopCounter = failureSound.Duration.Milliseconds;
-                //Console.WriteLine("Duration: " + failureSound.Duration.Milliseconds
 
                 //failureSound.Duration
                 displayController.hasLost = true;//Exit();
@@ -238,9 +268,10 @@ namespace HideOut.Screens
                     //TODO: show winning screen
                     gameSoundOn = false;
                     Console.WriteLine("You win!  Good day!");
-                                    gameSound.Dispose();
+                    mainMusic.Pause();
                 victorySound.Play();
                 musicLoopCounter = victorySound.Duration.Milliseconds;
+                //musicLoopCounter = victorySound.Duration.Milliseconds;
 
                    
                     try
@@ -258,7 +289,7 @@ namespace HideOut.Screens
                 gameSoundOn = false;
                 Console.WriteLine("You lose!  Good day!");
                 gameSound.Dispose();
-                failureSound.Play();
+                //failureSound.Play();
                 musicLoopCounter = failureSound.Duration.Milliseconds;
 
                 displayController.hasLost = true;

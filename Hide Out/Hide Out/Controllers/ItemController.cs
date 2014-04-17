@@ -6,13 +6,17 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using Microsoft.Xna.Framework.Audio;
 using HideOut.Entities;
 
 namespace HideOut.Controllers
 {
     class ItemController
     {
+        SoundEffect munch;
+        SoundEffect slurp;
+        SoundEffect clink = null;
+
         public List<Item> activeItems { get; set; }
         public TileController tileController { get; set; }
         private Texture2D waterBottleTexture;
@@ -55,21 +59,29 @@ namespace HideOut.Controllers
                     item.sprite = waterBottleTexture;
                     item.waterValue = 5;
                     item.rectangleBounds = new Point(WATER_BOTTLE_SPRITE_SIZE_X, WATER_BOTTLE_SPRITE_SIZE_Y);
+                    slurp.Play();
                     break;
                 case ItemType.CandyBar:
                     item.sprite = candyBarTexture;
                     item.speedValue = 7;
                     item.rectangleBounds = new Point(CANDY_BAR_SPRITE_SIZE_X, CANDY_BAR_SPRITE_SIZE_Y);
+                    munch.Play();
                     break;
                 case ItemType.Apple:
                     item.sprite = appleTexture;
                     item.foodValue = 5;
                     item.rectangleBounds = new Point(APPLE_SPRITE_SIZE_X, APPLE_SPRITE_SIZE_Y);
+                    munch.Play();
                     break;
                 case ItemType.Coin:
                     item.sprite = coinTexture;
                     numCoins++;
                     item.rectangleBounds = new Point(COIN_SPRITE_SIZE_X, COIN_SPRITE_SIZE_Y);
+                    try
+                    {
+                        clink.Play();
+                    }
+                    catch (Exception e) { }
                     break;
             }
 
@@ -125,6 +137,11 @@ namespace HideOut.Controllers
             candyBarTexture = cm.Load<Texture2D>("candybar.png");  
             appleTexture = cm.Load<Texture2D>("apple.png");
             coinTexture = cm.Load<Texture2D>("coin.png");
+
+            munch = cm.Load<SoundEffect>("hunger.wav");
+            slurp = cm.Load<SoundEffect>("thirst.wav");
+            clink = cm.Load<SoundEffect>("coin.wav");
+
 
             foreach (Item item in this.activeItems)
             {

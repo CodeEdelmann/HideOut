@@ -13,6 +13,8 @@ using HideOut.Screens;
 using Microsoft.Xna.Framework.Audio;
 #endregion
 
+
+
 namespace HideOut
 {
     /// <summary>
@@ -81,9 +83,10 @@ namespace HideOut
         {
             titleScreen.LoadContent(GraphicsDevice, Content);
             levelScreen.LoadContent(GraphicsDevice, Content);
+
             //  http://www.newgrounds.com/audio/listen/564520
-            backgroundMusic = Content.Load<SoundEffect>("ambience.wav");
-            backgroundMusic.Play();
+            //backgroundMusic = Content.Load<SoundEffect>("ambience.wav");
+            //backgroundMusic.Play();
             base.LoadContent();
         }
 

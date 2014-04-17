@@ -17,8 +17,12 @@ namespace HideOut.Screens
 {
     class LevelScreen : Screen
     {
+        enum soundMode { game, victory, failure };
+        bool gameSoundOn = true;
+        int musicLoopCounter = 0;
         SoundEffect victorySound;
         SoundEffect failureSound;
+        SoundEffect gameSound;
         DisplayController displayController;
         SpriteBatch spriteBatch;
         PlayerController playerController;
@@ -104,9 +108,12 @@ namespace HideOut.Screens
             victorySound = cm.Load<SoundEffect>("victory.wav");
 
             // http://www.newgrounds.com/audio/listen/135985
-            failureSound = cm.Load<SoundEffect>("failure.wav");
+            failureSound = cm.Load<SoundEffect>("police.wav");//failure.wav");
+
+            gameSound = cm.Load<SoundEffect>("ambience.wav");
 
             // TODO: use this.Content to load your game content here
+            //.LoadContent(GraphicsDevice, Content);
             displayController.LoadContent(cm);
             npcController.LoadContent(cm);
             obstacleController.LoadContent(cm);
@@ -126,6 +133,8 @@ namespace HideOut.Screens
         }
         public override void Update(GameTime gameTime)
         {
+            
+
             if (HideOutGame.LEVEL_DESIGN_MODE)
             {
                 playerController.Update(gameTime, mobile);
@@ -152,6 +161,10 @@ namespace HideOut.Screens
                     displayController.hasWon = false;
                     HideOutGame.LEVEL_INITIALIZED = false;
                     Type = "TitleScreen";
+                    //gameSoundOn = true;
+                    //gameSound.Dispose();
+                    //gameSound.Play();
+                 
                     return;
                 }
                 else
@@ -162,6 +175,18 @@ namespace HideOut.Screens
             }
             oldState = pauseState;
 
+
+            //musicLoopCounter -= gameTime.ElapsedGameTime.Milliseconds;
+            //musicLoopCounter = musicLoopCounter - gameTime.ElapsedGameTime.Milliseconds;
+            if (gameSoundOn && ((musicLoopCounter == 0) || (gameSound.IsDisposed))) {
+
+                
+                    gameSound.Dispose();
+                    gameSound.Play();
+                    musicLoopCounter = 2000;// +gameSound.Duration.Milliseconds;
+                
+                
+            }
             //Console.WriteLine("Time: " + gameTime.ElapsedGameTime.TotalMilliseconds);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -175,7 +200,15 @@ namespace HideOut.Screens
                 isPaused = true;
                 //TODO: show losing screen
                 Console.WriteLine("You lose!  Good day!");
+               // gameSound.Dispose
+               //failureSound.Player();
+                gameSoundOn = false;
+                gameSound.Dispose();
                 failureSound.Play();
+                musicLoopCounter = failureSound.Duration.Milliseconds;
+                //Console.WriteLine("Duration: " + failureSound.Duration.Milliseconds
+
+                //failureSound.Duration
                 displayController.hasLost = true;//Exit();
             }
 
@@ -203,8 +236,13 @@ namespace HideOut.Screens
                 case 2:
                     isPaused = true;
                     //TODO: show winning screen
+                    gameSoundOn = false;
                     Console.WriteLine("You win!  Good day!");
-                    victorySound.Play();
+                                    gameSound.Dispose();
+                victorySound.Play();
+                musicLoopCounter = victorySound.Duration.Milliseconds;
+
+                   
                     try
                     {
                         File.Delete("Content\\Levels\\savestate.txt");
@@ -217,7 +255,12 @@ namespace HideOut.Screens
             if (playerController.Update(gameTime, mobile))
             {
                 isPaused = true;
+                gameSoundOn = false;
                 Console.WriteLine("You lose!  Good day!");
+                gameSound.Dispose();
+                failureSound.Play();
+                musicLoopCounter = failureSound.Duration.Milliseconds;
+
                 displayController.hasLost = true;
             }
 

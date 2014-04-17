@@ -72,8 +72,8 @@
   <item X="525" Y="463">Coin</item>
   <item X="205" Y="819">CandyBar</item>
   <item X="846" Y="106">CandyBar</item>
-  <npc X="382" Y="230">PoliceB</npc>
+  <npc X="382" Y="230">PoliceA</npc>
   <npc X="645" Y="229">PoliceB</npc>
-  <npc X="627" Y="614">PoliceB</npc>
+  <npc X="627" Y="614">PoliceA</npc>
   <npc X="386" Y="613">PoliceB</npc>
 </world>

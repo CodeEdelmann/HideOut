@@ -123,25 +123,15 @@ namespace HideOut.Controllers
 
                     case 1:
                         {
-                            displayString("Collect all the coins to pass each level", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb, backgroundColor);
+                            displayString("Collect all the coins to pass each level", 0, HideOutGame.SCREEN_HEIGHT - 40 - offset, sb, backgroundColor);
+                            displayString("Don't let your hunger or thirst hit zero!", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb, backgroundColor);
                         }
                         break;
 
                     case 2:
                         {
-                            displayString("Your food and thirst reduce over time", 0, HideOutGame.SCREEN_HEIGHT - 70 - offset, sb, backgroundColor);
-                            displayString("Water fountains restore thirst", 0, HideOutGame.SCREEN_HEIGHT - 40 - offset, sb, backgroundColor);
-                            displayString("Apples restore health", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb, backgroundColor);
-                        }
-                        break;
-
-                    case 3:
-                        {
-                            displayString("Do not let the police catch you", 0, HideOutGame.SCREEN_HEIGHT - 100 - offset, sb, backgroundColor);
+                            displayString("Do not let the police catch you!", 0, HideOutGame.SCREEN_HEIGHT - 100 - offset, sb, backgroundColor);
                             displayString("Hide inside bushes or behind trees", 0, HideOutGame.SCREEN_HEIGHT - 70 - offset, sb, backgroundColor);
-                            displayString("to avoid them", 0, HideOutGame.SCREEN_HEIGHT - 40 -offset, sb, backgroundColor);
-                            displayString("Candy bars give you a speed boost", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb, backgroundColor);
-                            
                         }
                         break;
                         

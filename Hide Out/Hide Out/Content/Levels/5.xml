@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="1000" Y="1000">
-  <player X="114" Y="863"></player>
+  <player X="109" Y="858"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -50,8 +50,6 @@
   <obstacle X="-3" Y="777">Border</obstacle>
   <obstacle X="-3" Y="849">Border</obstacle>
   <obstacle X="500" Y="172">Tree</obstacle>
-  <obstacle X="493" Y="355">Tree</obstacle>
-  <obstacle X="494" Y="508">Tree</obstacle>
   <obstacle X="497" Y="688">Tree</obstacle>
   <obstacle X="258" Y="171">Tree</obstacle>
   <obstacle X="263" Y="354">Tree</obstacle>
@@ -65,6 +63,8 @@
   <obstacle X="94" Y="850">Bush</obstacle>
   <obstacle X="94" Y="74">Bush</obstacle>
   <obstacle X="811" Y="74">Bush</obstacle>
+  <obstacle X="492" Y="518">Bush</obstacle>
+  <obstacle X="494" Y="353">Bush</obstacle>
   <item X="276" Y="648">Coin</item>
   <item X="751" Y="631">Coin</item>
   <item X="291" Y="275">Coin</item>

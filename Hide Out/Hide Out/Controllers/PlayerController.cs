@@ -9,11 +9,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using HideOut.Entities;
+using Microsoft.Xna.Framework.Audio;
 
 namespace HideOut.Controllers
 {
     class PlayerController
     {
+
+        SoundEffect munch;
+        SoundEffect slurp;
+        SoundEffect clink;
+
         public Player thePlayer;
         private Texture2D playerTexture;
         public static readonly int SPRITE_SIZE = 50;
@@ -201,6 +207,7 @@ namespace HideOut.Controllers
                         fountainSpeed = 1000;
                     }
                     obstacleController.TurnFountainOn(nearFountain);
+                    slurp.Play();
                 }
                 else
                 {
@@ -231,15 +238,25 @@ namespace HideOut.Controllers
                 case ItemType.WaterBottle:
                     thePlayer.currentThirst += item.waterValue;
                     if (thePlayer.currentThirst > thePlayer.maxThirst)
+                    {
                         thePlayer.currentThirst = thePlayer.maxThirst;
+                        slurp.Play();
+                    }
                     break;
                 case ItemType.CandyBar:
                     thePlayer.currentSpeed += item.speedValue;
+                    munch.Play();
                     break;
                 case ItemType.Apple:
                     thePlayer.currentHunger += item.foodValue;
                     if (thePlayer.currentHunger > thePlayer.maxHunger)
+                    {
                         thePlayer.currentHunger = thePlayer.maxHunger;
+                        munch.Play();
+                    }
+                    break;
+                case ItemType.Coin:
+                   clink.Play();
                     break;
             }
             itemController.RemoveItem(item);
@@ -273,7 +290,13 @@ namespace HideOut.Controllers
             }
 
             //Then assign textures to NPCs depending on their tag
-            thePlayer.sprite = playerTexture; 
+            thePlayer.sprite = playerTexture;
+
+            munch = cm.Load<SoundEffect>("hunger.wav");
+            slurp = cm.Load<SoundEffect>("thirst.wav");
+            clink = cm.Load<SoundEffect>("coin.wav");
+
+
             
         }
 

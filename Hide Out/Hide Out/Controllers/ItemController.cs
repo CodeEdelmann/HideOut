@@ -77,11 +77,11 @@ namespace HideOut.Controllers
                     item.sprite = coinTexture;
                     numCoins++;
                     item.rectangleBounds = new Point(COIN_SPRITE_SIZE_X, COIN_SPRITE_SIZE_Y);
-                    try
-                    {
-                        clink.Play();
-                    }
-                    catch (Exception e) { }
+                    //try
+                    //{
+                        //clink.Play();
+                    //}
+                    //catch (Exception e) { }
                     break;
             }
 

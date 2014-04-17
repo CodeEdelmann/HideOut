@@ -41,8 +41,6 @@ namespace HideOut.Controllers
         Texture2D fontTexture;
         FontRenderer fontRenderer;
 
-        private Color backgroundColor = Color.CornflowerBlue;
-
         public void lose()
         {
             hasLost = true;
@@ -86,7 +84,7 @@ namespace HideOut.Controllers
 
         // displayString("Game Over", xPos, yPos - offset, sb, backgroundColor);
 
-        private void displayString(String text, int xx, int yy, SpriteBatch sb, Color bc)
+        private void displayString(String text, int xx, int yy, SpriteBatch sb)
         {
 
             fontRenderer.DrawText(sb, xx, yy, text);
@@ -110,7 +108,7 @@ namespace HideOut.Controllers
             if (displayLevel)
             {
                 //fontRenderer.DrawText(sb, xPos - offset, yPos - offset, "Level " + this.level.ToString());
-                 displayString("Level " + this.level.ToString(), 0, 50, sb, backgroundColor);
+                 displayString("Level " + this.level.ToString(), 0, 50, sb);
 
                 // xPos -= 200;
                 // yPos -= 70;
@@ -121,24 +119,24 @@ namespace HideOut.Controllers
 
                     case 1:
                         {
-                            displayString("Collect all the coins to pass each level", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb, backgroundColor);
+                            displayString("Collect all the coins to pass each level", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb);
                         }
                         break;
 
                     case 2:
                         {
-                            displayString("Your food and thirst reduce over time", 0, HideOutGame.SCREEN_HEIGHT - 70 - offset, sb, backgroundColor);
-                            displayString("Water fountains restore thirst", 0, HideOutGame.SCREEN_HEIGHT - 40 - offset, sb, backgroundColor);
-                            displayString("Apples restore health", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb, backgroundColor);
+                            displayString("Your food and thirst reduce over time", 0, HideOutGame.SCREEN_HEIGHT - 70 - offset, sb);
+                            displayString("Water fountains restore thirst", 0, HideOutGame.SCREEN_HEIGHT - 40 - offset, sb);
+                            displayString("Apples restore health", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb);
                         }
                         break;
 
                     case 3:
                         {
-                            displayString("Do not let the police catch you", 0, HideOutGame.SCREEN_HEIGHT - 100 - offset, sb, backgroundColor);
-                            displayString("Hide inside bushes or behind trees", 0, HideOutGame.SCREEN_HEIGHT - 70 - offset, sb, backgroundColor);
-                            displayString("to avoid them", 0, HideOutGame.SCREEN_HEIGHT - 40 -offset, sb, backgroundColor);
-                            displayString("Candy bars give you a speed boost", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb, backgroundColor);
+                            displayString("Do not let the police catch you", 0, HideOutGame.SCREEN_HEIGHT - 100 - offset, sb);
+                            displayString("Hide inside bushes or behind trees", 0, HideOutGame.SCREEN_HEIGHT - 70 - offset, sb);
+                            displayString("to avoid them", 0, HideOutGame.SCREEN_HEIGHT - 40 -offset, sb);
+                            displayString("Candy bars give you a speed boost", 0, HideOutGame.SCREEN_HEIGHT - 10 - offset, sb);
                             
                         }
                         break;
@@ -150,7 +148,7 @@ namespace HideOut.Controllers
              {
                  //sb.Draw(loseGameTexture, new Rectangle(xPos - wid/2, yPos - len/2, wid, len), Color.White);
                  //fontRenderer.DrawText(sb, xPos - wid/2, yPos - len/2 - offset, "You Lose...");
-                  displayString("Game Over", xPos - offset, yPos, sb, backgroundColor);
+                  displayString("Game Over", xPos - offset, yPos, sb);
              }
              else
              {
@@ -158,7 +156,7 @@ namespace HideOut.Controllers
                  {
                      //sb.Draw(winGameTexture, new Rectangle(xPos - wid/2, yPos - len/2, wid, len), Color.White);
                      //fontRenderer.DrawText(sb, xPos - wid/2, yPos - len/2 - offset, "You Win!");
-                      displayString("You Win! Congratulations", xPos - offset, yPos, sb, backgroundColor);
+                      displayString("You Win! Congratulations", xPos - offset, yPos, sb);
                  }
              }
 

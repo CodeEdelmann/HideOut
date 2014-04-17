@@ -179,20 +179,33 @@ namespace HideOut.Screens
                     isPaused = false;
                     displayController.displayLevel = false;           
                 }
-                else if (pauseState.IsKeyDown(Keys.Enter) && (displayController.hasWon == true || displayController.hasLost == true))
+                else if (pauseState.IsKeyDown(Keys.Enter))
                 {
-                    isPaused = false;
-                    displayController.displayLevel = false;
-                    displayController.hasLost = false;
-                    displayController.hasWon = false;
-                    HideOutGame.LEVEL_INITIALIZED = false;
-                    Type = "TitleScreen";
+                    if (displayController.hasLost == true)
+                    {
+                        isPaused = false;
+                        displayController.displayLevel = false;
+                        displayController.hasLost = false;
+                        displayController.hasWon = false;
+                        HideOutGame.LEVEL_INITIALIZED = false;
+                        Type = "TitleScreen";
                     
-                    //gameSoundOn = true;
-                    //gameSound.Dispose();
-                    //gameSound.Play();
+                        //gameSoundOn = true;
+                        //gameSound.Dispose();
+                        //gameSound.Play();
                  
-                    return;
+                        return;
+                    }
+                    else if (displayController.hasWon == true)
+                    {
+                        isPaused = false;
+                        displayController.displayLevel = false;
+                        displayController.hasLost = false;
+                        displayController.hasWon = false;
+                        HideOutGame.LEVEL_INITIALIZED = false;
+                        EndScreen.oldState = pauseState;
+                        Type = "EndScreen";
+                    }
                 }
                 else
                 {

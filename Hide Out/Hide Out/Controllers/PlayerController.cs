@@ -205,9 +205,10 @@ namespace HideOut.Controllers
                     {
                         thePlayer.currentThirst++;
                         fountainSpeed = 1000;
+                        slurp.Play();
                     }
                     obstacleController.TurnFountainOn(nearFountain);
-                    slurp.Play();
+                    
                 }
                 else
                 {

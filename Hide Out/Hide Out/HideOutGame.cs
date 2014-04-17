@@ -31,6 +31,7 @@ namespace HideOut
         public Screen currentScreen { get; set; }
         TitleScreen titleScreen;
         LevelScreen levelScreen;
+        EndScreen endScreen;
         public static bool LEVEL_INITIALIZED = false;
         public static readonly bool LEVEL_DESIGN_MODE = false;
         public static readonly string LEVEL_TO_EDIT = "3.xml"; //set this to the file name in Content/Levels (i.e. "3.xml") 
@@ -59,6 +60,7 @@ namespace HideOut
 
             titleScreen = new TitleScreen();
             levelScreen = new LevelScreen();
+            endScreen = new EndScreen();
             if (LEVEL_DESIGN_MODE)
                 currentScreen = levelScreen;
             else
@@ -66,6 +68,7 @@ namespace HideOut
 
             titleScreen.Initialize();
             levelScreen.Initialize();
+            endScreen.Initialize();
 
             base.Initialize();
 
@@ -81,6 +84,7 @@ namespace HideOut
         {
             titleScreen.LoadContent(GraphicsDevice, Content);
             levelScreen.LoadContent(GraphicsDevice, Content);
+            endScreen.LoadContent(GraphicsDevice, Content);
 
             //  http://www.newgrounds.com/audio/listen/564520
             //backgroundMusic = Content.Load<SoundEffect>("ambience.wav");
@@ -127,6 +131,10 @@ namespace HideOut
                     }
                     currentScreen = levelScreen;
                     currentScreen.Type = "LevelScreen";
+                    break;
+                case "EndScreen":
+                    currentScreen = endScreen;
+                    currentScreen.Type = "EndScreen";
                     break;
                 case "Exit":
                     Exit();

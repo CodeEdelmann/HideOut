@@ -65,6 +65,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\XMLController.cs" />
+    <Compile Include="Screens\EndScreen.cs" />
     <Compile Include="Screens\LevelScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\TitleScreen.cs" />

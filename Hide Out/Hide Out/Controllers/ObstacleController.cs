@@ -17,7 +17,8 @@ namespace HideOut.Controllers
 
         private Texture2D bushTexture;
         private Texture2D treeTexture;
-        private Texture2D fountainTexture;
+        private Texture2D fountainTextureOn;
+        private Texture2D fountainTextureOff;
         private Texture2D pondTexture;
         private Texture2D trashTexture;
         private static readonly int BUSH_SPRITE_SIZE_X = 100;
@@ -58,7 +59,7 @@ namespace HideOut.Controllers
                     obstacle.rectangleBounds = new Point(TREE_SPRITE_SIZE_X, TREE_SPRITE_SIZE_Y);
                     break;
                 case ObstacleType.Fountain:
-                    obstacle.sprite = fountainTexture;
+                    obstacle.sprite = fountainTextureOff;
                     obstacle.canOverlapWith = false;
                     obstacle.canSeeThrough = true;
                     obstacle.rectangleBounds = new Point(FOUNTAIN_SPRITE_SIZE_X, FOUNTAIN_SPRITE_SIZE_Y);
@@ -110,11 +111,28 @@ namespace HideOut.Controllers
             }
         }
 
+        public void TurnFountainOn(Obstacle fountain)
+        {
+            fountain.sprite = fountainTextureOn;
+        }
+
+        public void TurnFountainsOff()
+        {
+            foreach (Obstacle obs in obstacles)
+            {
+                if (obs.tag == ObstacleType.Fountain)
+                {
+                    obs.sprite = fountainTextureOff;
+                }
+            }
+        }
+
         public void LoadContent(ContentManager cm)
         {
             bushTexture = cm.Load<Texture2D>("bush.png");
             treeTexture = cm.Load<Texture2D>("trees.png");
-            fountainTexture = cm.Load<Texture2D>("waterFountain.png");
+            fountainTextureOn = cm.Load<Texture2D>("waterFountain.png");
+            fountainTextureOff = cm.Load<Texture2D>("fountain nowater.png");
             pondTexture = cm.Load<Texture2D>("pond.png");
             trashTexture = cm.Load<Texture2D>("trashCan.png");
             
@@ -129,7 +147,7 @@ namespace HideOut.Controllers
                         obstacle.sprite = treeTexture;
                         break;
                     case ObstacleType.Fountain:
-                        obstacle.sprite = fountainTexture;
+                        obstacle.sprite = fountainTextureOff;
                         break;
                     case ObstacleType.Pond:
                         obstacle.sprite = pondTexture;

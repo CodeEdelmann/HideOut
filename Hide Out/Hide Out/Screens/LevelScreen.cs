@@ -306,6 +306,7 @@ namespace HideOut.Screens
             //set player controller
             playerController.itemController = itemController;
             playerController.collisionController = collisionController;
+            playerController.obstacleController = obstacleController;
 
             //set level controller
             levelController.itemController = itemController;

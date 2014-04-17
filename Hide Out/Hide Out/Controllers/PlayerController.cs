@@ -19,6 +19,7 @@ namespace HideOut.Controllers
         public static readonly int SPRITE_SIZE = 50;
         private int fountainSpeed = 500;
         public CollisionController collisionController { set; get; }
+        public ObstacleController obstacleController { set; get; }
         public ItemController itemController { get; set; }
         public static readonly int COLLISION_STEP_AMOUNT = 4;
         public static readonly int COLLISION_DELTA = 3;
@@ -190,7 +191,8 @@ namespace HideOut.Controllers
                     thePlayer.isVisible = true;
                 }
 
-                if (collisionController.NearFountain(thePlayer) && thePlayer.currentThirst < thePlayer.maxThirst)
+                Obstacle nearFountain = collisionController.NearFountain(thePlayer);
+                if (nearFountain != null && thePlayer.currentThirst < thePlayer.maxThirst)
                 {
                     fountainSpeed -= gameTime.ElapsedGameTime.Milliseconds;
                     if (fountainSpeed <= 0)
@@ -198,6 +200,11 @@ namespace HideOut.Controllers
                         thePlayer.currentThirst++;
                         fountainSpeed = 1000;
                     }
+                    obstacleController.TurnFountainOn(nearFountain);
+                }
+                else
+                {
+                    obstacleController.TurnFountainsOff();
                 }
             }
 

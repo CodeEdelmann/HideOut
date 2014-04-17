@@ -19,8 +19,6 @@ namespace HideOut.Screens
         SpriteBatch spriteBatch;
         KeyboardState oldState;
 
-        Texture2D exposition;
-
         Player player;
         NPC police1;
         NPC police2;
@@ -29,6 +27,7 @@ namespace HideOut.Screens
         Texture2D npcTexture;
 
         Texture2D logo;
+        Texture2D bgTexture;
 
         int index;
         readonly int MENU_LEN = 3;
@@ -67,10 +66,10 @@ namespace HideOut.Screens
             fontFile = FontLoader.Load(fontFilePath);
             fontTexture = cm.Load<Texture2D>("Fonts/font_0.png");
             fontRenderer = new FontRenderer(fontFile, fontTexture);
-            exposition = cm.Load<Texture2D>("exposition1.png");
             playerTexture = cm.Load<Texture2D>("player.png");
             npcTexture = cm.Load<Texture2D>("police.png");
             logo = cm.Load<Texture2D>("LOGO.png");
+            bgTexture = cm.Load<Texture2D>("bg.png");
             index = 0;
         }
         
@@ -120,7 +119,7 @@ namespace HideOut.Screens
         }
         public override void Draw(GraphicsDevice gd)
         {
-            gd.Clear(Color.CornflowerBlue);
+            gd.Clear(Color.White);
 
             //This block of code is a necessary ritual for the FOVs.  Just leave it be.
             gd.BlendState = BlendState.Opaque;
@@ -134,13 +133,14 @@ namespace HideOut.Screens
             basicEffect.VertexColorEnabled = true;
             gd.RasterizerState = RasterizerState.CullNone;
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, null, null);
+            spriteBatch.Draw(bgTexture, new Rectangle(0, 0, HideOutGame.SCREEN_WIDTH, HideOutGame.SCREEN_HEIGHT), new Rectangle(0, 0, HideOutGame.SCREEN_WIDTH, HideOutGame.SCREEN_WIDTH), Color.Green);
 
             bool draw_ng = true, draw_lg = true, draw_ex = true;
 
             //spriteBatch.Draw(exposition, new Rectangle(20, 20, 199, 172), Color.White);
 
-            spriteBatch.Draw(logo, new Rectangle(100, 30, 100 + 643, 30 + 414), Color.White);
+            spriteBatch.Draw(logo, new Rectangle(240, 30, (int)(643 * .8), (int)(414 * .8)), Color.White);
 
             //draw player and police
             int len = NPCController.textures[Direction.Right].Count;
@@ -156,30 +156,30 @@ namespace HideOut.Screens
             switch (index)
             {
                 case 0:
-                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2, "> Continue");
+                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2 + 80, "> Continue");
                     draw_ng = false;
                     break;
                 case 1:
-                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2 + 75, "> New Game");
+                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2 + 130, "> New Game");
                     draw_lg = false;
                     break;
                 case 2:
-                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2 + 150, "> Exit");
+                    fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 70, HideOutGame.SCREEN_HEIGHT / 2 + 180, "> Exit");
                     draw_ex = false;
                     break;
             }
             
             if (draw_ng)
             {
-                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2, "Continue");
+                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 80, "Continue");
             }
             if (draw_lg)
             {
-                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 75, "New Game");
+                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 130, "New Game");
             }
             if (draw_ex)
             {
-                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 150, "Exit");
+                fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 180, "Exit");
             }
             
             spriteBatch.End();

@@ -27,10 +27,8 @@ namespace HideOut.Controllers
        //  public static readonly int SPRITE_SIZE = 50;
         List<Display> displays;
             
-        private Texture2D loseGameTexture;
         private Texture2D hungerTexture;
         private Texture2D thirstTexture;
-        private Texture2D winGameTexture;
         Rectangle sizingRectangle;
         public bool hasLost = false;
         public bool hasWon = false;
@@ -247,11 +245,6 @@ namespace HideOut.Controllers
             //Start by loading all textures
             //playerTexture = cm.Load<Texture2D>("player.png");
             // fontTexture = cm.Load<Texture2D>("basicFont.png");
-
-            winGameTexture = cm.Load<Texture2D>("victory.png");
-
-           loseGameTexture = cm.Load<Texture2D>("gameOver.png");
-
 
            thirstTexture = cm.Load<Texture2D>("waterBottle.png");
 

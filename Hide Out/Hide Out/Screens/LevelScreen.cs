@@ -271,7 +271,7 @@ namespace HideOut.Screens
         }
         public override void Draw(GraphicsDevice gd)
         {
-            gd.Clear(Color.CornflowerBlue);
+            gd.Clear(Color.White);
 
             //This block of code is a necessary ritual for the FOVs.  Just leave it be.
             gd.BlendState = BlendState.Opaque;

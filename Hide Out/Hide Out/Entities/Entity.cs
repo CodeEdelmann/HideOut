@@ -52,10 +52,10 @@ namespace HideOut.Entities
 
         public bool OnScreen()
         {
-            return this.screenRectangle.X + this.screenRectangle.Width > 0 &&
-                this.screenRectangle.Y + this.screenRectangle.Height > 0 &&
-                this.screenRectangle.X <= HideOutGame.SCREEN_WIDTH &&
-                this.screenRectangle.Y <= HideOutGame.SCREEN_HEIGHT;
+            return this.screenRectangle.X + this.screenRectangle.Width > -100 &&
+                this.screenRectangle.Y + this.screenRectangle.Height > -100 &&
+                this.screenRectangle.X <= HideOutGame.SCREEN_WIDTH + 100 &&
+                this.screenRectangle.Y <= HideOutGame.SCREEN_HEIGHT + 100;
         }
         public override string ToString()
         {

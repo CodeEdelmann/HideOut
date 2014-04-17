@@ -59,19 +59,19 @@ namespace HideOut.Controllers
                     item.sprite = waterBottleTexture;
                     item.waterValue = 5;
                     item.rectangleBounds = new Point(WATER_BOTTLE_SPRITE_SIZE_X, WATER_BOTTLE_SPRITE_SIZE_Y);
-                    slurp.Play();
+                    //slurp.Play();
                     break;
                 case ItemType.CandyBar:
                     item.sprite = candyBarTexture;
                     item.speedValue = 7;
                     item.rectangleBounds = new Point(CANDY_BAR_SPRITE_SIZE_X, CANDY_BAR_SPRITE_SIZE_Y);
-                    munch.Play();
+                    //munch.Play();
                     break;
                 case ItemType.Apple:
                     item.sprite = appleTexture;
                     item.foodValue = 5;
                     item.rectangleBounds = new Point(APPLE_SPRITE_SIZE_X, APPLE_SPRITE_SIZE_Y);
-                    munch.Play();
+                    //munch.Play();
                     break;
                 case ItemType.Coin:
                     item.sprite = coinTexture;

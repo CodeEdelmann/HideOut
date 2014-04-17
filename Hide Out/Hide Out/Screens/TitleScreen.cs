@@ -28,6 +28,8 @@ namespace HideOut.Screens
         Texture2D playerTexture;
         Texture2D npcTexture;
 
+        Texture2D logo;
+
         int index;
         readonly int MENU_LEN = 3;
 
@@ -68,6 +70,7 @@ namespace HideOut.Screens
             exposition = cm.Load<Texture2D>("exposition1.png");
             playerTexture = cm.Load<Texture2D>("player.png");
             npcTexture = cm.Load<Texture2D>("police.png");
+            logo = cm.Load<Texture2D>("LOGO.png");
             index = 0;
         }
         
@@ -135,7 +138,9 @@ namespace HideOut.Screens
 
             bool draw_ng = true, draw_lg = true, draw_ex = true;
 
-            spriteBatch.Draw(exposition, new Rectangle(20, 20, 199, 172), Color.White);
+            //spriteBatch.Draw(exposition, new Rectangle(20, 20, 199, 172), Color.White);
+
+            spriteBatch.Draw(logo, new Rectangle(100, 30, 100 + 643, 30 + 414), Color.White);
 
             //draw player and police
             int len = NPCController.textures[Direction.Right].Count;

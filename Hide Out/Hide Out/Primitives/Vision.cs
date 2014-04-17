@@ -66,8 +66,8 @@ namespace HideOut.Primitives
             VertexPositionColor[] fieldOfVIsion = GetFieldOfViewTriangle();
             foreach (VertexPositionColor v in fieldOfVIsion)
             {
-                if (v.Position.X > HideOutGame.SCREEN_OFFSET_X && v.Position.X < HideOutGame.SCREEN_OFFSET_X + HideOutGame.SCREEN_WIDTH &&
-                    v.Position.Y > HideOutGame.SCREEN_OFFSET_Y && v.Position.Y < HideOutGame.SCREEN_OFFSET_Y + HideOutGame.SCREEN_HEIGHT)
+                if (v.Position.X > HideOutGame.SCREEN_OFFSET_X - 100 && v.Position.X < HideOutGame.SCREEN_OFFSET_X + HideOutGame.SCREEN_WIDTH + 100 &&
+                    v.Position.Y > HideOutGame.SCREEN_OFFSET_Y - 100 && v.Position.Y < HideOutGame.SCREEN_OFFSET_Y + HideOutGame.SCREEN_HEIGHT + 100)
                     return true;
             }
             return false;

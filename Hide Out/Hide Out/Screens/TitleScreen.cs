@@ -158,7 +158,7 @@ namespace HideOut.Screens
             spriteBatch.Draw(NPCController.textures[Direction.Right][police2.directionIndex % len], police2.worldRectangle, Color.White);
 
             int numTextures = PlayerController.textures[player.direction].Count;
-            Texture2D spriteToDraw = PlayerController.textures[player.direction][player.directionIndex % numTextures];
+            Texture2D spriteToDraw = PlayerController.textures[player.direction][player.directionIndices[player.direction] % numTextures];
 
             spriteBatch.Draw(spriteToDraw, player.worldRectangle, Color.White);
 

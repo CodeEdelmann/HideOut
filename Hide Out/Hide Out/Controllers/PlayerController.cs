@@ -244,7 +244,7 @@ namespace HideOut.Controllers
                     }
                     break;
                 case ItemType.CandyBar:
-                    thePlayer.currentSpeed += item.speedValue;
+                    thePlayer.currentSpeed = thePlayer.baseSpeed + item.speedValue;
                     munch.Play();
                     break;
                 case ItemType.Apple:

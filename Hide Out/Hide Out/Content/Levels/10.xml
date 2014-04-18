@@ -1,1 +1,403 @@
-﻿<?xml version="1.0" encoding="utf-8"?><world X="1000" Y="1000"><player X="220" Y="110"></player><obstacle X="3" Y="-2">Border</obstacle><obstacle X="0" Y="211">Border</obstacle><obstacle X="88" Y="-4">Border</obstacle><obstacle X="2" Y="71">Border</obstacle><obstacle X="3" Y="283">Border</obstacle><obstacle X="2" Y="142">Border</obstacle><obstacle X="-3" Y="638">Border</obstacle><obstacle X="-1" Y="566">Border</obstacle><obstacle X="337" Y="-5">Border</obstacle><obstacle X="2" Y="356">Border</obstacle><obstacle X="2" Y="425">Border</obstacle><obstacle X="1" Y="496">Border</obstacle><obstacle X="253" Y="-4">Border</obstacle><obstacle X="171" Y="-5">Border</obstacle><obstacle X="663" Y="-3">Border</obstacle><obstacle X="744" Y="-3">Border</obstacle><obstacle X="421" Y="-2">Border</obstacle><obstacle X="501" Y="-3">Border</obstacle><obstacle X="583" Y="-4">Border</obstacle><obstacle X="825" Y="-5">Border</obstacle><obstacle X="908" Y="-3">Border</obstacle><obstacle X="914" Y="67">Border</obstacle><obstacle X="915" Y="137">Border</obstacle><obstacle X="913" Y="208">Border</obstacle><obstacle X="914" Y="278">Border</obstacle><obstacle X="914" Y="348">Border</obstacle><obstacle X="916" Y="418">Border</obstacle><obstacle X="916" Y="486">Border</obstacle><obstacle X="915" Y="556">Border</obstacle><obstacle X="916" Y="626">Border</obstacle><obstacle X="915" Y="696">Border</obstacle><obstacle X="913" Y="767">Border</obstacle><obstacle X="915" Y="837">Border</obstacle><obstacle X="831" Y="926">Border</obstacle><obstacle X="916" Y="907">Border</obstacle><obstacle X="668" Y="922">Border</obstacle><obstacle X="502" Y="922">Border</obstacle><obstacle X="587" Y="923">Border</obstacle><obstacle X="748" Y="924">Border</obstacle><obstacle X="419" Y="920">Border</obstacle><obstacle X="336" Y="920">Border</obstacle><obstacle X="252" Y="921">Border</obstacle><obstacle X="168" Y="920">Border</obstacle><obstacle X="86" Y="922">Border</obstacle><obstacle X="-5" Y="922">Border</obstacle><obstacle X="-3" Y="708">Border</obstacle><obstacle X="-3" Y="777">Border</obstacle><obstacle X="-3" Y="849">Border</obstacle><obstacle X="172" Y="163">Bush</obstacle><obstacle X="255" Y="172">Bush</obstacle><obstacle X="194" Y="217">Bush</obstacle><obstacle X="335" Y="169">Bush</obstacle><obstacle X="273" Y="215">Bush</obstacle><obstacle X="349" Y="213">Bush</obstacle><obstacle X="753" Y="218">Bush</obstacle><obstacle X="698" Y="308">Bush</obstacle><obstacle X="671" Y="218">Bush</obstacle><obstacle X="412" Y="167">Bush</obstacle><obstacle X="431" Y="208">Bush</obstacle><obstacle X="493" Y="164">Bush</obstacle><obstacle X="578" Y="167">Bush</obstacle><obstacle X="603" Y="211">Bush</obstacle><obstacle X="656" Y="168">Bush</obstacle><obstacle X="573" Y="349">Bush</obstacle><obstacle X="542" Y="396">Bush</obstacle><obstacle X="602" Y="397">Bush</obstacle><obstacle X="639" Y="268">Bush</obstacle><obstacle X="616" Y="313">Bush</obstacle><obstacle X="652" Y="349">Bush</obstacle><obstacle X="717" Y="261">Bush</obstacle><obstacle X="736" Y="169">Bush</obstacle><obstacle X="513" Y="205">Bush</obstacle><obstacle X="578" Y="446">Bush</obstacle><obstacle X="464" Y="481">Bush</obstacle><obstacle X="536" Y="494">Bush</obstacle><obstacle X="407" Y="555">Bush</obstacle><obstacle X="488" Y="564">Bush</obstacle><obstacle X="448" Y="614">Bush</obstacle><obstacle X="512" Y="532">Bush</obstacle><obstacle X="431" Y="518">Bush</obstacle><obstacle X="509" Y="440">Bush</obstacle><obstacle X="389" Y="710">Bush</obstacle><obstacle X="321" Y="710">Bush</obstacle><obstacle X="427" Y="664">Bush</obstacle><obstacle X="378" Y="612">Bush</obstacle><obstacle X="353" Y="660">Bush</obstacle><obstacle X="403" Y="766">Bush</obstacle><obstacle X="350" Y="762">Bush</obstacle><obstacle X="286" Y="763">Bush</obstacle><obstacle X="555" Y="771">Bush</obstacle><obstacle X="480" Y="763">Bush</obstacle><obstacle X="465" Y="725">Bush</obstacle><obstacle X="539" Y="723">Bush</obstacle><obstacle X="634" Y="770">Bush</obstacle><obstacle X="621" Y="724">Bush</obstacle><obstacle X="718" Y="767">Bush</obstacle><obstacle X="690" Y="721">Bush</obstacle><obstacle X="761" Y="724">Bush</obstacle><obstacle X="108" Y="435">Fountain</obstacle><item X="508" Y="331">Coin</item><item X="251" Y="382">Coin</item><item X="558" Y="118">Coin</item><item X="794" Y="567">Coin</item><item X="238" Y="714">Coin</item><item X="453" Y="879">Coin</item><item X="864" Y="874">Coin</item><item X="130" Y="118">Coin</item><item X="110" Y="287">Apple</item><item X="885" Y="598">Apple</item><item X="100" Y="741">Apple</item><npc X="168" Y="839">PoliceA</npc><npc X="289" Y="565">PoliceA</npc><npc X="695" Y="627">PoliceA</npc><npc X="421" Y="373">PoliceA</npc><npc X="323" Y="119">PoliceA</npc><npc X="784" Y="103">PoliceA</npc><npc X="805" Y="414">PoliceA</npc></world>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<world Y="2000" X="2000">
+
+  <player Y="200" X="200"></player>
+
+  <obstacle Y="-2" X="3">Border</obstacle>
+
+  <obstacle Y="211" X="0">Border</obstacle>
+
+  <obstacle Y="-4" X="88">Border</obstacle>
+
+  <obstacle Y="71" X="2">Border</obstacle>
+
+  <obstacle Y="283" X="3">Border</obstacle>
+
+  <obstacle Y="142" X="2">Border</obstacle>
+
+  <obstacle Y="638" X="-3">Border</obstacle>
+
+  <obstacle Y="566" X="-1">Border</obstacle>
+
+  <obstacle Y="-5" X="337">Border</obstacle>
+
+  <obstacle Y="356" X="2">Border</obstacle>
+
+  <obstacle Y="425" X="2">Border</obstacle>
+
+  <obstacle Y="496" X="1">Border</obstacle>
+
+  <obstacle Y="-4" X="253">Border</obstacle>
+
+  <obstacle Y="-5" X="171">Border</obstacle>
+
+  <obstacle Y="-3" X="663">Border</obstacle>
+
+  <obstacle Y="-3" X="744">Border</obstacle>
+
+  <obstacle Y="-2" X="421">Border</obstacle>
+
+  <obstacle Y="-3" X="501">Border</obstacle>
+
+  <obstacle Y="-4" X="583">Border</obstacle>
+
+  <obstacle Y="-5" X="825">Border</obstacle>
+
+  <obstacle Y="-3" X="908">Border</obstacle>
+
+  <obstacle Y="-3" X="993">Border</obstacle>
+
+  <obstacle Y="-4" X="1077">Border</obstacle>
+
+  <obstacle Y="-6" X="1159">Border</obstacle>
+
+  <obstacle Y="-8" X="1242">Border</obstacle>
+
+  <obstacle Y="-7" X="1326">Border</obstacle>
+
+  <obstacle Y="-7" X="1411">Border</obstacle>
+
+  <obstacle Y="-8" X="1497">Border</obstacle>
+
+  <obstacle Y="922" X="-5">Border</obstacle>
+
+  <obstacle Y="708" X="-3">Border</obstacle>
+
+  <obstacle Y="777" X="-3">Border</obstacle>
+
+  <obstacle Y="849" X="-3">Border</obstacle>
+
+  <obstacle Y="-5" X="1583">Border</obstacle>
+
+  <obstacle Y="-6" X="1667">Border</obstacle>
+
+  <obstacle Y="-5" X="1752">Border</obstacle>
+
+  <obstacle Y="-4" X="1913">Border</obstacle>
+
+  <obstacle Y="67" X="1911">Border</obstacle>
+
+  <obstacle Y="-4" X="1837">Border</obstacle>
+
+  <obstacle Y="137" X="1911">Border</obstacle>
+
+  <obstacle Y="208" X="1910">Border</obstacle>
+
+  <obstacle Y="347" X="1912">Border</obstacle>
+
+  <obstacle Y="277" X="1911">Border</obstacle>
+
+  <obstacle Y="416" X="1911">Border</obstacle>
+
+  <obstacle Y="487" X="1913">Border</obstacle>
+
+  <obstacle Y="558" X="1911">Border</obstacle>
+
+  <obstacle Y="629" X="1910">Border</obstacle>
+
+  <obstacle Y="700" X="1909">Border</obstacle>
+
+  <obstacle Y="771" X="1909">Border</obstacle>
+
+  <obstacle Y="841" X="1906">Border</obstacle>
+
+  <obstacle Y="913" X="1907">Border</obstacle>
+
+  <obstacle Y="985" X="1910">Border</obstacle>
+
+  <obstacle Y="1057" X="1913">Border</obstacle>
+
+  <obstacle Y="1129" X="1915">Border</obstacle>
+
+  <obstacle Y="1199" X="1914">Border</obstacle>
+
+  <obstacle Y="1270" X="1911">Border</obstacle>
+
+  <obstacle Y="1342" X="1910">Border</obstacle>
+
+  <obstacle Y="1414" X="1909">Border</obstacle>
+
+  <obstacle Y="1484" X="1910">Border</obstacle>
+
+  <obstacle Y="1555" X="1910">Border</obstacle>
+
+  <obstacle Y="1627" X="1911">Border</obstacle>
+
+  <obstacle Y="1698" X="1911">Border</obstacle>
+
+  <obstacle Y="1770" X="1911">Border</obstacle>
+
+  <obstacle Y="1844" X="1911">Border</obstacle>
+
+  <obstacle Y="1917" X="1913">Border</obstacle>
+
+  <obstacle Y="1918" X="1828">Border</obstacle>
+
+  <obstacle Y="1919" X="1743">Border</obstacle>
+
+  <obstacle Y="1920" X="1661">Border</obstacle>
+
+  <obstacle Y="1922" X="1576">Border</obstacle>
+
+  <obstacle Y="1921" X="1492">Border</obstacle>
+
+  <obstacle Y="1921" X="1408">Border</obstacle>
+
+  <obstacle Y="1922" X="1324">Border</obstacle>
+
+  <obstacle Y="1924" X="1087">Border</obstacle>
+
+  <obstacle Y="1925" X="1245">Border</obstacle>
+
+  <obstacle Y="1924" X="1001">Border</obstacle>
+
+  <obstacle Y="1920" X="917">Border</obstacle>
+
+  <obstacle Y="1919" X="836">Border</obstacle>
+
+  <obstacle Y="1918" X="751">Border</obstacle>
+
+  <obstacle Y="1923" X="672">Border</obstacle>
+
+  <obstacle Y="1926" X="1169">Border</obstacle>
+
+  <obstacle Y="1065" X="-7">Border</obstacle>
+
+  <obstacle Y="994" X="-5">Border</obstacle>
+
+  <obstacle Y="1136" X="-8">Border</obstacle>
+
+  <obstacle Y="1279" X="-7">Border</obstacle>
+
+  <obstacle Y="1208" X="-6">Border</obstacle>
+
+  <obstacle Y="1346" X="-7">Border</obstacle>
+
+  <obstacle Y="1419" X="-5">Border</obstacle>
+
+  <obstacle Y="1489" X="-5">Border</obstacle>
+
+  <obstacle Y="1560" X="-5">Border</obstacle>
+
+  <obstacle Y="1630" X="-5">Border</obstacle>
+
+  <obstacle Y="1701" X="-8">Border</obstacle>
+
+  <obstacle Y="1771" X="-6">Border</obstacle>
+
+  <obstacle Y="1841" X="-6">Border</obstacle>
+
+  <obstacle Y="1911" X="-4">Border</obstacle>
+
+  <obstacle Y="1926" X="77">Border</obstacle>
+
+  <obstacle Y="1923" X="154">Border</obstacle>
+
+  <obstacle Y="1925" X="236">Border</obstacle>
+
+  <obstacle Y="1925" X="320">Border</obstacle>
+
+  <obstacle Y="1924" X="403">Border</obstacle>
+
+  <obstacle Y="1926" X="484">Border</obstacle>
+
+  <obstacle Y="1925" X="553">Border</obstacle>
+
+  <obstacle Y="1926" X="619">Border</obstacle>
+
+  <obstacle Y="286" X="337">Tree</obstacle>
+
+  <obstacle Y="143" X="338">Tree</obstacle>
+
+  <obstacle Y="292" X="171">Tree</obstacle>
+
+  <obstacle Y="216" X="338">Tree</obstacle>
+
+  <obstacle Y="289" X="254">Tree</obstacle>
+
+  <obstacle Y="280" X="1667">Tree</obstacle>
+
+  <obstacle Y="281" X="1749">Tree</obstacle>
+
+  <obstacle Y="280" X="1585">Tree</obstacle>
+
+  <obstacle Y="140" X="1585">Tree</obstacle>
+
+  <obstacle Y="211" X="1585">Tree</obstacle>
+
+  <obstacle Y="1629" X="1578">Tree</obstacle>
+
+  <obstacle Y="1626" X="1743">Tree</obstacle>
+
+  <obstacle Y="1699" X="1578">Tree</obstacle>
+
+  <obstacle Y="1769" X="1580">Tree</obstacle>
+
+  <obstacle Y="1627" X="1660">Tree</obstacle>
+
+  <obstacle Y="1630" X="305">Tree</obstacle>
+
+  <obstacle Y="1629" X="228">Tree</obstacle>
+
+  <obstacle Y="1698" X="307">Tree</obstacle>
+
+  <obstacle Y="1767" X="306">Tree</obstacle>
+
+  <obstacle Y="1628" X="149">Tree</obstacle>
+
+  <obstacle Y="704" X="692">Tree</obstacle>
+
+  <obstacle Y="702" X="772">Tree</obstacle>
+
+  <obstacle Y="704" X="613">Tree</obstacle>
+
+  <obstacle Y="703" X="848">Tree</obstacle>
+
+  <obstacle Y="704" X="926">Tree</obstacle>
+
+  <obstacle Y="703" X="1076">Tree</obstacle>
+
+  <obstacle Y="704" X="535">Tree</obstacle>
+
+  <obstacle Y="704" X="1444">Tree</obstacle>
+
+  <obstacle Y="1224" X="1445">Tree</obstacle>
+
+  <obstacle Y="1226" X="535">Tree</obstacle>
+
+  <obstacle Y="706" X="1215">Tree</obstacle>
+
+  <obstacle Y="705" X="1149">Tree</obstacle>
+
+  <obstacle Y="704" X="1293">Tree</obstacle>
+
+  <obstacle Y="710" X="1371">Tree</obstacle>
+
+  <obstacle Y="768" X="538">Tree</obstacle>
+
+  <obstacle Y="900" X="543">Tree</obstacle>
+
+  <obstacle Y="834" X="539">Tree</obstacle>
+
+  <obstacle Y="1037" X="540">Tree</obstacle>
+
+  <obstacle Y="1103" X="540">Tree</obstacle>
+
+  <obstacle Y="1163" X="537">Tree</obstacle>
+
+  <obstacle Y="771" X="1446">Tree</obstacle>
+
+  <obstacle Y="837" X="1446">Tree</obstacle>
+
+  <obstacle Y="904" X="1443">Tree</obstacle>
+
+  <obstacle Y="1038" X="1445">Tree</obstacle>
+
+  <obstacle Y="1105" X="1443">Tree</obstacle>
+
+  <obstacle Y="1166" X="1441">Tree</obstacle>
+
+  <obstacle Y="1228" X="610">Tree</obstacle>
+
+  <obstacle Y="1226" X="682">Tree</obstacle>
+
+  <obstacle Y="1225" X="756">Tree</obstacle>
+
+  <obstacle Y="1228" X="833">Tree</obstacle>
+
+  <obstacle Y="1229" X="907">Tree</obstacle>
+
+  <obstacle Y="1233" X="1060">Tree</obstacle>
+
+  <obstacle Y="1229" X="1213">Tree</obstacle>
+
+  <obstacle Y="1230" X="1140">Tree</obstacle>
+
+  <obstacle Y="1227" X="1293">Tree</obstacle>
+
+  <obstacle Y="1229" X="1369">Tree</obstacle>
+
+  <obstacle Y="972" X="536">Bush</obstacle>
+
+  <obstacle Y="712" X="992">Bush</obstacle>
+
+  <obstacle Y="971" X="1445">Bush</obstacle>
+
+  <obstacle Y="1236" X="982">Bush</obstacle>
+
+  <obstacle Y="986" X="104">Fountain</obstacle>
+
+  <obstacle Y="976" X="1868">Fountain</obstacle>
+
+  <obstacle Y="1573" X="970">Pond</obstacle>
+
+  <obstacle Y="347" X="978">Pond</obstacle>
+
+  <obstacle Y="965" X="964">Pond</obstacle>
+
+  <item Y="811" X="1414">Coin</item>
+
+  <item Y="1194" X="1416">Coin</item>
+
+  <item Y="1199" X="641">Coin</item>
+
+  <item Y="796" X="637">Coin</item>
+
+  <item Y="931" X="1025">Coin</item>
+
+  <item Y="988" X="929">Coin</item>
+
+  <item Y="984" X="1117">Coin</item>
+
+  <item Y="1061" X="1026">Coin</item>
+
+  <item Y="1717" X="271">Coin</item>
+
+  <item Y="256" X="307">Coin</item>
+
+  <item Y="249" X="1682">Coin</item>
+
+  <item Y="1716" X="1681">Coin</item>
+
+  <item Y="1886" X="1876">Apple</item>
+
+  <item Y="88" X="1888">WaterBottle</item>
+
+  <item Y="82" X="104">Apple</item>
+
+  <item Y="1893" X="96">WaterBottle</item>
+
+  <item Y="88" X="997">Apple</item>
+
+  <item Y="90" X="1079">Apple</item>
+
+  <item Y="1903" X="1007">Apple</item>
+
+  <item Y="1907" X="1079">Apple</item>
+
+  <npc Y="980" X="1190">PoliceB</npc>
+
+  <npc Y="983" X="861">PoliceB</npc>
+
+  <npc Y="421" X="458">PoliceA</npc>
+
+  <npc Y="407" X="1536">PoliceA</npc>
+
+  <npc Y="1335" X="1527">PoliceA</npc>
+
+  <npc Y="1354" X="501">PoliceA</npc>
+
+  <npc Y="1723" X="137">PoliceA</npc>
+
+  <npc Y="88" X="1709">PoliceA</npc>
+
+  <npc Y="1442" X="1016">PoliceB</npc>
+
+  <npc Y="977" X="1774">PoliceB</npc>
+
+  <npc Y="547" X="1026">PoliceB</npc>
+
+  <npc Y="985" X="302">PoliceB</npc>
+
+</world>

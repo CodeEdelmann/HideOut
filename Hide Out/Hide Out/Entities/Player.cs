@@ -127,7 +127,7 @@ namespace HideOut.Entities
                 }
             }
 
-            if (this.foodDec >= 6000)
+            if (this.foodDec >= 5000)
             {
                 this.currentHunger--;
                 //Console.Write("Current GameTime: " + gameTime.ElapsedGameTime.Seconds + " Thirst: " + this.currentThirst + " Hunger: " + this.currentHunger);

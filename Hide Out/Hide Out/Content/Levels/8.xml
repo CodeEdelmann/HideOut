@@ -149,10 +149,10 @@
   <item X="1177" Y="773">Apple</item>
   <item X="817" Y="903">Apple</item>
   <item X="711" Y="901">Apple</item>
-  <npc X="330" Y="1215">PoliceA</npc>
-  <npc X="457" Y="108">PoliceA</npc>
-  <npc X="475" Y="517">PoliceA</npc>
-  <npc X="1293" Y="1297">PoliceA</npc>
-  <npc X="1277" Y="85">PoliceA</npc>
-  <npc X="771" Y="227">PoliceA</npc>
+  <npc X="330" Y="1215">PoliceB</npc>
+  <npc X="457" Y="108">PoliceB</npc>
+  <npc X="475" Y="517">PoliceB</npc>
+  <npc X="1293" Y="1297">PoliceB</npc>
+  <npc X="1277" Y="85">PoliceB</npc>
+  <npc X="771" Y="227">PoliceB</npc>
 </world>

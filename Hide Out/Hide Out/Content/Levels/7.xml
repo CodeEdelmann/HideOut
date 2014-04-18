@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="2000" Y="2000">
-  <player X="238" Y="124"></player>
+  <player X="209" Y="138"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -227,4 +227,8 @@
   <npc X="1427" Y="120">PoliceB</npc>
   <npc X="506" Y="1147">PoliceB</npc>
   <npc X="1383" Y="1429">PoliceB</npc>
+  <npc X="769" Y="531">PoliceB</npc>
+  <npc X="1076" Y="498">PoliceB</npc>
+  <npc X="485" Y="1560">PoliceB</npc>
+  <npc X="1095" Y="1034">PoliceB</npc>
 </world>

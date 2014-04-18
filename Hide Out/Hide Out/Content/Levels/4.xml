@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="1000" Y="1000">
-  <player X="100" Y="100"></player>
+  <player X="177" Y="149"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -37,10 +37,10 @@
   <obstacle X="831" Y="926">Border</obstacle>
   <obstacle X="916" Y="907">Border</obstacle>
   <obstacle X="668" Y="922">Border</obstacle>
-  <obstacle X="506" Y="927">Border</obstacle>
+  <obstacle X="502" Y="922">Border</obstacle>
   <obstacle X="587" Y="923">Border</obstacle>
   <obstacle X="748" Y="924">Border</obstacle>
-  <obstacle X="415" Y="923">Border</obstacle>
+  <obstacle X="419" Y="920">Border</obstacle>
   <obstacle X="336" Y="920">Border</obstacle>
   <obstacle X="253" Y="922">Border</obstacle>
   <obstacle X="168" Y="920">Border</obstacle>
@@ -49,59 +49,51 @@
   <obstacle X="-3" Y="708">Border</obstacle>
   <obstacle X="-3" Y="777">Border</obstacle>
   <obstacle X="-3" Y="849">Border</obstacle>
-  <obstacle X="183" Y="145">Pond</obstacle>
-  <obstacle X="301" Y="148">Pond</obstacle>
-  <obstacle X="419" Y="150">Pond</obstacle>
-  <obstacle X="539" Y="154">Pond</obstacle>
-  <obstacle X="657" Y="155">Pond</obstacle>
-  <obstacle X="689" Y="207">Pond</obstacle>
-  <obstacle X="689" Y="259">Pond</obstacle>
-  <obstacle X="687" Y="318">Pond</obstacle>
-  <obstacle X="691" Y="380">Pond</obstacle>
-  <obstacle X="685" Y="439">Pond</obstacle>
-  <obstacle X="686" Y="493">Pond</obstacle>
-  <obstacle X="689" Y="541">Pond</obstacle>
-  <obstacle X="689" Y="603">Pond</obstacle>
-  <obstacle X="696" Y="663">Pond</obstacle>
-  <obstacle X="690" Y="731">Pond</obstacle>
-  <obstacle X="677" Y="791">Pond</obstacle>
-  <obstacle X="559" Y="798">Pond</obstacle>
-  <obstacle X="426" Y="790">Pond</obstacle>
-  <obstacle X="156" Y="637">Pond</obstacle>
-  <obstacle X="150" Y="751">Pond</obstacle>
-  <obstacle X="144" Y="696">Pond</obstacle>
-  <obstacle X="320" Y="797">Pond</obstacle>
-  <obstacle X="204" Y="796">Pond</obstacle>
-  <obstacle X="164" Y="581">Pond</obstacle>
-  <obstacle X="167" Y="523">Pond</obstacle>
-  <obstacle X="173" Y="471">Pond</obstacle>
-  <obstacle X="165" Y="421">Pond</obstacle>
-  <obstacle X="165" Y="283">Pond</obstacle>
-  <obstacle X="170" Y="353">Pond</obstacle>
-  <obstacle X="297" Y="283">Pond</obstacle>
-  <obstacle X="418" Y="289">Pond</obstacle>
-  <obstacle X="493" Y="308">Pond</obstacle>
-  <obstacle X="480" Y="374">Pond</obstacle>
-  <obstacle X="492" Y="433">Pond</obstacle>
-  <obstacle X="485" Y="495">Pond</obstacle>
-  <obstacle X="488" Y="556">Pond</obstacle>
-  <obstacle X="477" Y="617">Pond</obstacle>
-  <obstacle X="430" Y="671">Pond</obstacle>
-  <obstacle X="452" Y="872">Bush</obstacle>
-  <obstacle X="826" Y="533">Bush</obstacle>
-  <obstacle X="447" Y="748">Bush</obstacle>
-  <obstacle X="613" Y="628">Bush</obstacle>
-  <obstacle X="622" Y="305">Bush</obstacle>
-  <obstacle X="240" Y="224">Bush</obstacle>
-  <obstacle X="82" Y="551">Bush</obstacle>
-  <obstacle X="234" Y="83">Bush</obstacle>
-  <obstacle X="818" Y="85">Bush</obstacle>
-  <item X="647" Y="514">Coin</item>
-  <item X="370" Y="691">Coin</item>
-  <item X="607" Y="762">Coin</item>
-  <item X="410" Y="261">Coin</item>
-  <item X="141" Y="883">Coin</item>
-  <item X="859" Y="881">Coin</item>
-  <npc X="405" Y="492">PoliceA</npc>
-  <npc X="385" Y="476">PoliceA</npc>
+  <obstacle X="260" Y="235">Bush</obstacle>
+  <obstacle X="362" Y="152">Bush</obstacle>
+  <obstacle X="462" Y="243">Bush</obstacle>
+  <obstacle X="563" Y="334">Bush</obstacle>
+  <obstacle X="168" Y="322">Bush</obstacle>
+  <obstacle X="481" Y="438">Bush</obstacle>
+  <obstacle X="362" Y="525">Bush</obstacle>
+  <obstacle X="248" Y="440">Bush</obstacle>
+  <obstacle X="460" Y="614">Bush</obstacle>
+  <obstacle X="685" Y="434">Bush</obstacle>
+  <obstacle X="779" Y="526">Bush</obstacle>
+  <obstacle X="709" Y="642">Bush</obstacle>
+  <obstacle X="586" Y="726">Bush</obstacle>
+  <obstacle X="676" Y="246">Bush</obstacle>
+  <obstacle X="787" Y="156">Bush</obstacle>
+  <obstacle X="258" Y="618">Bush</obstacle>
+  <obstacle X="161" Y="712">Bush</obstacle>
+  <obstacle X="261" Y="816">Bush</obstacle>
+  <obstacle X="487" Y="815">Bush</obstacle>
+  <obstacle X="155" Y="140">Bush</obstacle>
+  <obstacle X="576" Y="146">Bush</obstacle>
+  <item X="497" Y="267">Coin</item>
+  <item X="720" Y="458">Coin</item>
+  <item X="711" Y="270">Coin</item>
+  <item X="825" Y="184">Coin</item>
+  <item X="811" Y="548">Coin</item>
+  <item X="521" Y="470">Coin</item>
+  <item X="594" Y="358">Apple</item>
+  <item X="285" Y="464">Coin</item>
+  <item X="298" Y="261">Coin</item>
+  <item X="201" Y="346">Apple</item>
+  <item X="404" Y="179">WaterBottle</item>
+  <item X="750" Y="668">Coin</item>
+  <item X="495" Y="641">Coin</item>
+  <item X="293" Y="642">Coin</item>
+  <item X="297" Y="842">Coin</item>
+  <item X="521" Y="841">Coin</item>
+  <item X="620" Y="754">Apple</item>
+  <item X="194" Y="737">Apple</item>
+  <item X="401" Y="551">WaterBottle</item>
+  <item X="612" Y="173">Coin</item>
+  <npc X="389" Y="360">PoliceA</npc>
+  <npc X="611" Y="553">PoliceA</npc>
+  <npc X="825" Y="349">PoliceA</npc>
+  <npc X="387" Y="722">PoliceA</npc>
+  <npc X="785" Y="782">PoliceA</npc>
+  <npc X="150" Y="530">PoliceA</npc>
 </world>

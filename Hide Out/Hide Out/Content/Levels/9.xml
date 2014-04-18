@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="2000" Y="2000">
-  <player X="117" Y="90"></player>
+  <player X="116" Y="90"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -148,10 +148,10 @@
   <obstacle X="431" Y="926">Tree</obstacle>
   <obstacle X="433" Y="800">Tree</obstacle>
   <obstacle X="639" Y="930">Tree</obstacle>
-  <obstacle X="438" Y="860">Tree</obstacle>
+  <obstacle X="432" Y="860">Tree</obstacle>
   <obstacle X="339" Y="933">Bush</obstacle>
-  <obstacle X="432" Y="989">Tree</obstacle>
-  <obstacle X="436" Y="1052">Tree</obstacle>
+  <obstacle X="430" Y="987">Tree</obstacle>
+  <obstacle X="432" Y="1053">Tree</obstacle>
   <obstacle X="431" Y="1113">Tree</obstacle>
   <obstacle X="180" Y="1238">Tree</obstacle>
   <obstacle X="178" Y="1112">Tree</obstacle>
@@ -359,6 +359,7 @@
   <item X="1461" Y="990">Coin</item>
   <item X="1293" Y="1439">Apple</item>
   <item X="1660" Y="1699">Coin</item>
+  <item X="769" Y="1214">Coin</item>
   <npc X="549" Y="311">PoliceB</npc>
   <npc X="1462" Y="279">PoliceB</npc>
   <npc X="1473" Y="700">PoliceB</npc>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="1000" Y="1000">
-  <player X="100" Y="90"></player>
+  <player X="100" Y="94"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -57,19 +57,19 @@
   <obstacle X="689" Y="207">Pond</obstacle>
   <obstacle X="689" Y="259">Pond</obstacle>
   <obstacle X="687" Y="318">Pond</obstacle>
-  <obstacle X="691" Y="380">Pond</obstacle>
+  <obstacle X="685" Y="380">Pond</obstacle>
   <obstacle X="685" Y="439">Pond</obstacle>
-  <obstacle X="686" Y="493">Pond</obstacle>
-  <obstacle X="689" Y="541">Pond</obstacle>
-  <obstacle X="689" Y="603">Pond</obstacle>
-  <obstacle X="696" Y="663">Pond</obstacle>
-  <obstacle X="690" Y="731">Pond</obstacle>
+  <obstacle X="683" Y="491">Pond</obstacle>
+  <obstacle X="682" Y="544">Pond</obstacle>
+  <obstacle X="682" Y="602">Pond</obstacle>
+  <obstacle X="682" Y="664">Pond</obstacle>
+  <obstacle X="682" Y="732">Pond</obstacle>
   <obstacle X="677" Y="791">Pond</obstacle>
   <obstacle X="559" Y="798">Pond</obstacle>
   <obstacle X="430" Y="799">Pond</obstacle>
-  <obstacle X="156" Y="637">Pond</obstacle>
-  <obstacle X="150" Y="751">Pond</obstacle>
-  <obstacle X="144" Y="696">Pond</obstacle>
+  <obstacle X="160" Y="637">Pond</obstacle>
+  <obstacle X="158" Y="752">Pond</obstacle>
+  <obstacle X="155" Y="695">Pond</obstacle>
   <obstacle X="320" Y="797">Pond</obstacle>
   <obstacle X="204" Y="796">Pond</obstacle>
   <obstacle X="164" Y="581">Pond</obstacle>

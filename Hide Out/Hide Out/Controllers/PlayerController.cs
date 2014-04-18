@@ -237,10 +237,10 @@ namespace HideOut.Controllers
             {
                 case ItemType.WaterBottle:
                     thePlayer.currentThirst += item.waterValue;
+                    slurp.Play();
                     if (thePlayer.currentThirst > thePlayer.maxThirst)
                     {
                         thePlayer.currentThirst = thePlayer.maxThirst;
-                        slurp.Play();
                     }
                     break;
                 case ItemType.CandyBar:
@@ -249,10 +249,10 @@ namespace HideOut.Controllers
                     break;
                 case ItemType.Apple:
                     thePlayer.currentHunger += item.foodValue;
+                    munch.Play();
                     if (thePlayer.currentHunger > thePlayer.maxHunger)
                     {
                         thePlayer.currentHunger = thePlayer.maxHunger;
-                        munch.Play();
                     }
                     break;
                 case ItemType.Coin:

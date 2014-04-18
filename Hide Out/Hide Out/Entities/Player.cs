@@ -25,6 +25,8 @@ namespace HideOut.Entities
         public int directionIndex { get; set; } //this determines which sprite to draw
         public int directionIndexDec { get; set; }
         public static readonly int maxIndexDec = 150;
+        public Dictionary<Entities.Direction, int> directionIndices;
+
 
         public Rectangle collisionRectangle
         {
@@ -39,26 +41,24 @@ namespace HideOut.Entities
 
         public Player() : base()
         {
-
+            directionIndices = new Dictionary<Direction, int>();
+            directionIndices.Add(Direction.Down, 0);
+            directionIndices.Add(Direction.Up, 0);
+            directionIndices.Add(Direction.Left, 0);
+            directionIndices.Add(Direction.Right, 0);
         }
 
         public void UpdateSpriteData(GameTime gameTime, Direction movementDirection)
         {
-            if (this.direction == movementDirection)
+            directionIndexDec -= gameTime.ElapsedGameTime.Milliseconds;
+            if (directionIndexDec <= 0)
             {
-                directionIndexDec -= gameTime.ElapsedGameTime.Milliseconds;
-                if (directionIndexDec <= 0)
-                {
-                    directionIndexDec = maxIndexDec;
-                    directionIndex++;
-                }
-            }
-            else
-            {
-                this.direction = movementDirection;
-                directionIndex = 0;
                 directionIndexDec = maxIndexDec;
+                directionIndices[movementDirection]++;
             }
+            this.direction = movementDirection;
+            directionIndex = 0;
+            //directionIndexDec = maxIndexDec;
         }
 
         public void MoveRight(GameTime gameTime, double multiplier)

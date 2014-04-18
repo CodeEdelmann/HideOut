@@ -265,7 +265,7 @@ namespace HideOut.Controllers
         public void Draw(SpriteBatch sb)
         {
             int numTextures = textures[thePlayer.direction].Count;
-            Texture2D spriteToDraw = textures[thePlayer.direction][thePlayer.directionIndex % numTextures];
+            Texture2D spriteToDraw = textures[thePlayer.direction][thePlayer.directionIndices[thePlayer.direction] % numTextures];
             sb.Draw(spriteToDraw, thePlayer.screenRectangle, Color.White);
 
             //Rectangle source = new Rectangle(0, 0, 50, 50);

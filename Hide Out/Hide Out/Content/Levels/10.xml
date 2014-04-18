@@ -168,35 +168,5 @@
   <obstacle X="978" Y="347">Pond</obstacle>
   <obstacle X="964" Y="965">Pond</obstacle>
   <item X="1414" Y="811">Coin</item>
-  <item X="1416" Y="1194">Coin</item>
-  <item X="641" Y="1199">Coin</item>
-  <item X="637" Y="796">Coin</item>
-  <item X="1025" Y="931">Coin</item>
-  <item X="929" Y="988">Coin</item>
-  <item X="1117" Y="984">Coin</item>
-  <item X="1026" Y="1061">Coin</item>
-  <item X="271" Y="1717">Coin</item>
-  <item X="307" Y="256">Coin</item>
-  <item X="1682" Y="249">Coin</item>
-  <item X="1681" Y="1716">Coin</item>
-  <item X="1876" Y="1886">Apple</item>
-  <item X="1888" Y="88">WaterBottle</item>
-  <item X="104" Y="82">Apple</item>
-  <item X="96" Y="1893">WaterBottle</item>
-  <item X="997" Y="88">Apple</item>
-  <item X="1079" Y="90">Apple</item>
-  <item X="1007" Y="1903">Apple</item>
-  <item X="1079" Y="1907">Apple</item>
-  <npc X="1190" Y="980">PoliceB</npc>
-  <npc X="861" Y="983">PoliceB</npc>
-  <npc X="458" Y="421">PoliceA</npc>
-  <npc X="1536" Y="407">PoliceA</npc>
-  <npc X="1527" Y="1335">PoliceA</npc>
-  <npc X="501" Y="1354">PoliceA</npc>
-  <npc X="137" Y="1723">PoliceA</npc>
-  <npc X="1709" Y="88">PoliceA</npc>
-  <npc X="1016" Y="1442">PoliceB</npc>
-  <npc X="1774" Y="977">PoliceB</npc>
-  <npc X="1026" Y="547">PoliceB</npc>
-  <npc X="302" Y="985">PoliceB</npc>
+
 </world>

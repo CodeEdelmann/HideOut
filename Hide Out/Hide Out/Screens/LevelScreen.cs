@@ -39,7 +39,7 @@ namespace HideOut.Screens
 
         Texture2D bgTexture;
 
-        public static readonly bool CHEAT_MODE = true;
+        public static readonly bool CHEAT_MODE = false;
 
         public static readonly int MAX_GAME_WIDTH = 5000;
         public static readonly int MAX_GAME_HEIGHT = 5000;

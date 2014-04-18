@@ -57,7 +57,7 @@ namespace HideOut.Controllers
             {
                 case ItemType.WaterBottle:
                     item.sprite = waterBottleTexture;
-                    item.waterValue = 4;
+                    item.waterValue = 5;
                     item.rectangleBounds = new Point(WATER_BOTTLE_SPRITE_SIZE_X, WATER_BOTTLE_SPRITE_SIZE_Y);
                     //slurp.Play();
                     break;

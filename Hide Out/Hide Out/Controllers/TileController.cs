@@ -103,38 +103,47 @@ namespace HideOut.Controllers
 
         public List<Item> GetNearbyItems(Rectangle rectangle)
         {
-            List<Item> retVal = new List<Item>();
+            HashSet<Item> retVal = new HashSet<Item>();
             List<Tile> tiles = this.GetNearbyTiles(rectangle);
 
             foreach (Tile tile in tiles)
             {
-                retVal.AddRange(tile.items);
+                foreach (Item i in tile.items)
+                {
+                    retVal.Add(i);
+                }
             }
-            return retVal;
+            return retVal.ToList<Item>();
         }
 
         public List<Obstacle> GetNearbyObstacles(Rectangle rectangle)
         {
-            List<Obstacle> retVal = new List<Obstacle>();
+            HashSet<Obstacle> retVal = new HashSet<Obstacle>();
             List<Tile> tiles = this.GetNearbyTiles(rectangle);
 
             foreach (Tile tile in tiles)
             {
-                retVal.AddRange(tile.obstacles);
+                foreach (Obstacle i in tile.obstacles)
+                {
+                    retVal.Add(i);
+                }
             }
-            return retVal;
+            return retVal.ToList<Obstacle>();
         }
 
         public List<NPC> GetNearbyNPCs(Rectangle rectangle)
         {
-            List<NPC> retVal = new List<NPC>();
+            HashSet<NPC> retVal = new HashSet<NPC>();
             List<Tile> tiles = this.GetNearbyTiles(rectangle);
 
             foreach (Tile tile in tiles)
             {
-                retVal.AddRange(tile.npcs);
+                foreach (NPC i in tile.npcs)
+                {
+                    retVal.Add(i);
+                }
             }
-            return retVal;
+            return retVal.ToList<NPC>();
         }
 
         public void Remove(Entity e)

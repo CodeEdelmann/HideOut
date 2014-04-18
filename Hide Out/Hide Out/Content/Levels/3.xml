@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <world X="1000" Y="1000">
-  <player X="100" Y="100"></player>
+  <player X="100" Y="90"></player>
   <obstacle X="3" Y="-2">Border</obstacle>
   <obstacle X="0" Y="211">Border</obstacle>
   <obstacle X="88" Y="-4">Border</obstacle>
@@ -66,7 +66,7 @@
   <obstacle X="690" Y="731">Pond</obstacle>
   <obstacle X="677" Y="791">Pond</obstacle>
   <obstacle X="559" Y="798">Pond</obstacle>
-  <obstacle X="426" Y="790">Pond</obstacle>
+  <obstacle X="430" Y="799">Pond</obstacle>
   <obstacle X="156" Y="637">Pond</obstacle>
   <obstacle X="150" Y="751">Pond</obstacle>
   <obstacle X="144" Y="696">Pond</obstacle>

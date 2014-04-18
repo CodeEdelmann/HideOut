@@ -15,6 +15,7 @@ namespace HideOut.Screens
 {
     public class TitleScreen : Screen
     {
+        //int musicSelection = 0;
         BasicEffect basicEffect;
         SpriteBatch spriteBatch;
         KeyboardState oldState;
@@ -54,6 +55,13 @@ namespace HideOut.Screens
             player.rectangleBounds = new Point(PlayerController.SPRITE_SIZE, PlayerController.SPRITE_SIZE);
 
         }
+
+        public int musicType()
+        {
+            return musicSelection;
+        }
+
+
         public override void LoadContent(GraphicsDevice gd, ContentManager cm)
         {
             //Initialization for basicEffect
@@ -72,7 +80,7 @@ namespace HideOut.Screens
             bgTexture = cm.Load<Texture2D>("bg.png");
             index = 0;
         }
-        
+
         public override void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
@@ -106,9 +114,11 @@ namespace HideOut.Screens
                         Type = "LevelScreen";
                         System.IO.File.WriteAllText("Content\\Levels\\savestate.txt", "1");
                         index = 0;
+                        musicSelection = 0;
                         break;
                     case 0:
                         Type = "LevelScreen";
+                        musicSelection = 0;
                         break;
                     case 2:
                         Type = "Exit";
@@ -168,7 +178,7 @@ namespace HideOut.Screens
                     draw_ex = false;
                     break;
             }
-            
+
             if (draw_ng)
             {
                 fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 80, "Continue");
@@ -181,7 +191,7 @@ namespace HideOut.Screens
             {
                 fontRenderer.DrawText(spriteBatch, HideOutGame.SCREEN_WIDTH / 2 - 50, HideOutGame.SCREEN_HEIGHT / 2 + 180, "Exit");
             }
-            
+
             spriteBatch.End();
         }
 

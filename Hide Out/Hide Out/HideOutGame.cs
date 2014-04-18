@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using HideOut.Entities;
 using HideOut.Controllers;
 using HideOut.Screens;
+
 using Microsoft.Xna.Framework.Audio;
 #endregion
 
@@ -27,6 +28,13 @@ namespace HideOut
         public static readonly int SCREEN_HEIGHT = 600;
         public static int SCREEN_OFFSET_X = 0;
         public static int SCREEN_OFFSET_Y = 0;
+
+        SoundEffect victorySound;
+        SoundEffect failureSound;
+        SoundEffect gameSound;
+        SoundEffectInstance mainMusic;
+        SoundEffectInstance victoryMusic;
+        SoundEffectInstance failureMusic;
 
         public Screen currentScreen { get; set; }
         TitleScreen titleScreen;
@@ -89,6 +97,24 @@ namespace HideOut
             //  http://www.newgrounds.com/audio/listen/564520
             //backgroundMusic = Content.Load<SoundEffect>("ambience.wav");
             //backgroundMusic.Play();
+
+            // http://www.newgrounds.com/audio/listen/568885
+            victorySound = Content.Load<SoundEffect>("victory.wav");
+
+            // http://www.newgrounds.com/audio/listen/135985
+            failureSound = Content.Load<SoundEffect>("police.wav");//failure.wav");
+
+            gameSound = Content.Load<SoundEffect>("ambience.wav");
+
+
+            mainMusic = gameSound.CreateInstance();
+
+            victoryMusic = victorySound.CreateInstance();
+            failureMusic = failureSound.CreateInstance();
+
+            mainMusic.IsLooped = true;
+
+
             base.LoadContent();
         }
 
@@ -117,11 +143,13 @@ namespace HideOut
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            int musicReference = 0;// currentScreen.musicType();
             switch (currentScreen.Type)
             {
                 case "TitleScreen":
                     currentScreen = titleScreen;
                     currentScreen.Type = "TitleScreen";
+                    musicReference = currentScreen.musicSelection;
                     break;
                 case "LevelScreen":
                     if (!LEVEL_INITIALIZED)
@@ -131,17 +159,48 @@ namespace HideOut
                     }
                     currentScreen = levelScreen;
                     currentScreen.Type = "LevelScreen";
+                    musicReference = currentScreen.musicSelection;
                     break;
                 case "EndScreen":
                     currentScreen = endScreen;
                     currentScreen.Type = "EndScreen";
+                    musicReference = currentScreen.musicSelection;
                     break;
                 case "Exit":
                     Exit();
                     break;
             }
 
+            Console.WriteLine("Music type is: " + musicReference);
+            switch (musicReference)
+            {
+                case 0:
+                     victoryMusic.Stop();
+                    failureMusic.Stop();
+                    mainMusic.Play();
+                    //mainMusic.Resume();
+                   
+                    break;
+                case 1:
+                  
+                    mainMusic.Stop();
+                    victoryMusic.Stop();
+                    failureMusic.Play();
+                    break;
+
+                case 2:
+                    mainMusic.Stop();
+                    failureMusic.Stop();
+                    victoryMusic.Play();
+                    break;
+
+
+                default:
+                    break;
+            }
+
             currentScreen.Update(gameTime);
+           
             base.Update(gameTime);
         }
 

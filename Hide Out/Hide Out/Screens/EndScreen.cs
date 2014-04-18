@@ -58,6 +58,7 @@ namespace HideOut.Screens
             }
 
             oldState = newState;
+            musicSelection = 2;
         }
         public override void Draw(GraphicsDevice gd)
         {
